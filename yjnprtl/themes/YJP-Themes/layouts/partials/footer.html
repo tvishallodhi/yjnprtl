@@ -1,0 +1,15 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-links-grid">
+      <ul class="footer-menu">
+        {{ range .Site.Menus.footer }}
+          <li class="footer-item"><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+        <li class="footer-item"><a href="/sitemap.xml">Sitemap</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright-notice">&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

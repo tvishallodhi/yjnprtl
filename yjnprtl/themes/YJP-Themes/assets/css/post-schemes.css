@@ -1,0 +1,19 @@
+.post--schemes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.post--schemes .meta-section {
+  border: 1px solid var(--border-color);
+  border-left: 4px solid #1a73e8;
+  padding: 12px;
+  background-color: var(--bg-secondary);
+}
+
+.post--schemes .meta-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}

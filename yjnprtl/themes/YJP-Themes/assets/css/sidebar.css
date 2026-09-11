@@ -1,0 +1,554 @@
+/* ============================================================
+   LAYOUT WRAPPER
+   ============================================================ */
+
+.site-wrapper {
+    width: 100%;
+    min-height: calc(100vh - var(--tot-nav-offset));
+
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+
+    box-sizing: border-box;
+}
+.sidebar-scroll-wrapper {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    width: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+
+    -webkit-overflow-scrolling: touch;
+
+    box-sizing: border-box;
+}
+
+.sidebar-scroll-wrapper::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.sidebar-scroll-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ============================================================
+   LEFT SIDEBAR
+   ============================================================ */
+
+.left-sidebar {
+    position: fixed;
+
+    top: var(--tot-nav-offset);
+    left: 0;
+
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+
+    height: calc(100vh - var(--tot-nav-offset));
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--bg-surface);
+
+    border-right: 1px solid var(--border-color);
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    z-index: 20;
+
+    transition:
+        width 0.2s ease,
+        min-width 0.2s ease;
+}
+
+
+/* ============================================================
+   SIDEBAR SCROLL AREA
+   ============================================================ */
+
+/*
+   IMPORTANT:
+   Sirf ye area scroll hoga.
+   Social bar scroll nahi hoga.
+*/
+
+.left-sidebar-scroll {
+    flex: 1 1 auto;
+
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+.left-sidebar-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.left-sidebar-scroll::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.left-sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+/* ============================================================
+   SIDEBAR HEADER
+   ============================================================ */
+
+.sidebar-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 14px;
+
+    border-bottom: 1px solid var(--border-color);
+
+    position: sticky;
+
+    top: 0;
+
+    background-color: var(--bg-surface);
+
+    z-index: 2;
+}
+
+.sidebar-title {
+    font-size: 0.85rem;
+
+    text-transform: uppercase;
+
+    color: var(--text-muted);
+
+    font-weight: 600;
+}
+
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+
+    font-size: 1.15rem;
+    line-height: 1;
+
+    color: var(--text-main);
+
+    padding: 2px 6px;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   SIDEBAR TREE
+   ============================================================ */
+
+.sidebar-nav-tree {
+    list-style: none;
+
+    padding: 8px 0;
+    margin: 0;
+}
+
+.sidebar-node-label-wrap {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+.sidebar-node-link {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 14px;
+
+    width: 100%;
+
+    color: var(--text-main);
+
+    text-decoration: none;
+
+    font-size: 0.95rem;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    box-sizing: border-box;
+}
+
+.sidebar-node-link.is-current-page {
+    font-weight: 700;
+
+    background-color: var(--bg-secondary);
+
+    border-left: 4px solid var(--primary-color);
+}
+
+.sidebar-expand-btn {
+    background: none;
+    border: none;
+
+    padding: 8px 14px;
+
+    color: var(--text-muted);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.sidebar-expand-btn .expand-indicator {
+    display: inline-block;
+
+    transition: transform 0.2s ease;
+
+    font-weight: bold;
+}
+
+.sidebar-expand-btn[aria-expanded="true"]
+.expand-indicator {
+    transform: rotate(90deg);
+}
+
+
+/* ============================================================
+   SUB TREE
+   ============================================================ */
+
+.sidebar-sub-tree {
+    list-style: none;
+
+    background-color: var(--bg-secondary);
+
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-sub-tree.is-collapsed {
+    display: none;
+}
+
+.sidebar-sub-link {
+    display: block;
+
+    padding: 6px 14px 6px 38px;
+
+    font-size: 0.9rem;
+
+    color: var(--text-main);
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.sidebar-sub-link.is-current-page {
+    font-weight: 700;
+
+    color: var(--primary-color);
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+
+.main-content-area {
+    margin-left: var(--sidebar-width);
+
+    width: calc(100% - var(--sidebar-width));
+
+    min-width: 0;
+
+    box-sizing: border-box;
+
+    transition:
+        margin-left 0.2s ease,
+        width 0.2s ease;
+}
+
+
+/* ============================================================
+   MINIMIZED SIDEBAR
+   ============================================================ */
+
+body.sidebar-is-minimized .left-sidebar {
+    width: var(--sidebar-width-minimized);
+
+    min-width: var(--sidebar-width-minimized);
+}
+
+body.sidebar-is-minimized .main-content-area {
+    margin-left: var(--sidebar-width-minimized);
+
+    width: calc(100% - var(--sidebar-width-minimized));
+}
+
+
+/* ============================================================
+   MINIMIZED ELEMENTS
+   ============================================================ */
+
+body.sidebar-is-minimized .sidebar-title,
+body.sidebar-is-minimized .sidebar-text,
+body.sidebar-is-minimized .sidebar-expand-btn,
+body.sidebar-is-minimized .sidebar-sub-tree {
+    display: none !important;
+}
+
+body.sidebar-is-minimized .sidebar-node {
+    position: relative;
+}
+
+
+/* ============================================================
+   HOVER PANEL
+   ============================================================ */
+
+body.sidebar-is-minimized
+.sidebar-node:hover
+.sidebar-hover-panel,
+
+body.sidebar-is-minimized
+.sidebar-node:focus-within
+.sidebar-hover-panel {
+
+    display: block;
+
+    position: fixed;
+
+    left: var(--sidebar-width-minimized);
+
+    width: 230px;
+
+    background-color: var(--bg-surface);
+
+    border: 1px solid var(--border-color);
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+
+    z-index: 10000;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+}
+
+.sidebar-hover-panel {
+    display: none;
+}
+
+.hover-panel-title {
+    font-weight: 600;
+
+    padding-bottom: 6px;
+
+    border-bottom: 1px solid var(--border-color);
+
+    margin-bottom: 6px;
+}
+
+.hover-panel-links {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+.hover-panel-links a {
+    display: block;
+
+    padding: 4px 0;
+
+    font-size: 0.85rem;
+}
+
+
+/* ============================================================
+   FIXED SOCIAL BAR
+   ============================================================ */
+
+/*
+   Ye sidebar ke bottom me fixed rahega.
+   Ye scroll ke andar nahi jayega.
+*/
+
+.sidebar-social-bar {
+    flex: 0 0 auto;
+
+    position: relative;
+
+    left: auto;
+    bottom: auto;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 8px 6px;
+
+    background-color: var(--bg-surface);
+
+    border-top: 1px solid var(--border-color);
+
+    box-sizing: border-box;
+
+    z-index: 30;
+}
+
+
+/* ============================================================
+   SOCIAL LINK
+   ============================================================ */
+
+.sidebar-social-link {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    color: #fff;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.sidebar-social-link:hover {
+    transform: translateY(-2px);
+
+    opacity: 0.85;
+}
+
+.sidebar-social-link:focus-visible {
+    outline: 2px solid var(--primary-color);
+
+    outline-offset: 2px;
+}
+
+
+/* ============================================================
+   SOCIAL COLORS
+   ============================================================ */
+
+.sidebar-social-link.whatsapp {
+    background: #25D366;
+}
+
+.sidebar-social-link.telegram {
+    background: #229ED9;
+}
+
+.sidebar-social-link.facebook {
+    background: #1877F2;
+}
+
+.sidebar-social-link.instagram {
+    background: #E4405F;
+}
+
+.sidebar-social-link.youtube {
+    background: #FF0000;
+}
+
+
+/* ============================================================
+   MINIMIZED SIDEBAR SOCIAL
+   ============================================================ */
+
+body.sidebar-is-minimized .sidebar-social-bar {
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 8px 4px;
+}
+
+body.sidebar-is-minimized .sidebar-social-link {
+    width: 34px;
+    height: 34px;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    .sidebar-social-bar {
+        gap: 5px;
+
+        padding: 7px 5px;
+    }
+
+    .sidebar-social-link {
+        width: 32px;
+        height: 32px;
+
+        flex-basis: 32px;
+
+        font-size: 16px;
+    }
+}

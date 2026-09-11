@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ or .Params.lang .Site.Params.defaultLanguage }}" data-theme="system">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body class="site-body">
+  <a class="skip-link visually-hidden-focusable" href="#main-content">Skip to content</a>
+  
+  {{ partial "header.html" . }}
+  {{ partial "top-menu.html" . }}
+
+  <div class="site-wrapper">
+
+    <!-- LEFT SIDEBAR -->
+    {{ partial "left-sidebar.html" . }}
+
+    <!-- MAIN CONTENT -->
+    <div class="site-main-col">
+
+        <main
+            id="main-content"
+            class="main-content-area"
+            tabindex="-1">
+
+            {{ block "main" . }}
+            {{ end }}
+
+        </main>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    {{ partial "right-sidebar.html" . }}
+
+</div>
+
+<!-- MOBILE DRAWER -->
+{{ partial "mobile-drawer.html" . }}
+  {{ partial "footer.html" . }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>

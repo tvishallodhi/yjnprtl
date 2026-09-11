@@ -1,0 +1,118 @@
+{{- $pages := where site.RegularPages "Draft" "!=" true -}}
+{{- $searchablePages := slice -}}
+
+{{- range $pages -}}
+
+  {{- if not (in (slice "search" "offline" "404") .Type) -}}
+
+    {{/* =====================================================
+         CONTENT
+         ===================================================== */}}
+
+    {{- $plainContent := .Plain
+      | replaceRE "[\\r\\n\\t]+" " "
+      | replaceRE "\\s{2,}" " "
+      | truncate 350
+    -}}
+
+
+    {{/* =====================================================
+         KEYWORDS
+         ===================================================== */}}
+
+    {{- $keywords := slice -}}
+
+    {{- with .Params.keywords -}}
+      {{- if reflect.IsSlice . -}}
+        {{- range . -}}
+          {{- $keywords = $keywords | append (printf "%v" .) -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $keywords = $keywords | append (printf "%v" .) -}}
+      {{- end -}}
+    {{- end -}}
+
+
+    {{/* =====================================================
+         ALIASES
+         ===================================================== */}}
+
+    {{- $aliases := slice -}}
+
+    {{- with .Params.aliases -}}
+      {{- if reflect.IsSlice . -}}
+        {{- range . -}}
+          {{- $aliases = $aliases | append (printf "%v" .) -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $aliases = $aliases | append (printf "%v" .) -}}
+      {{- end -}}
+    {{- end -}}
+
+
+    {{/* =====================================================
+         TAGS
+         ===================================================== */}}
+
+    {{- $tags := slice -}}
+
+    {{- with .GetTerms "tags" -}}
+      {{- range . -}}
+        {{- $tags = $tags | append .LinkTitle -}}
+      {{- end -}}
+    {{- end -}}
+
+
+    {{/* =====================================================
+         CATEGORIES
+         ===================================================== */}}
+
+    {{- $categories := slice -}}
+
+    {{- with .GetTerms "categories" -}}
+      {{- range . -}}
+        {{- $categories = $categories | append .LinkTitle -}}
+      {{- end -}}
+    {{- end -}}
+
+
+    {{/* =====================================================
+         DESCRIPTION
+         ===================================================== */}}
+
+    {{- $description := .Description | default (.Summary | plainify | truncate 160) -}}
+
+
+    {{/* =====================================================
+         SEARCH ITEM
+         ===================================================== */}}
+
+    {{- $item := dict
+      "title" (.Title | default "")
+      "url" .RelPermalink
+      "description" $description
+      "content" $plainContent
+      "keywords" $keywords
+      "tags" $tags
+      "categories" $categories
+      "aliases" $aliases
+      "date" (.Date.Format "2006-01-02")
+    -}}
+
+
+    {{/* =====================================================
+         ADD TO SEARCH INDEX
+         ===================================================== */}}
+
+    {{- $searchablePages = $searchablePages | append $item -}}
+
+  {{- end -}}
+
+{{- end -}}
+
+
+{{/* =========================================================
+     OUTPUT JSON
+     ========================================================= */}}
+
+{{- $searchablePages | jsonify -}}

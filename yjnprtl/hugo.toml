@@ -1,0 +1,130 @@
+baseURL = "https://example.com/"
+title = "YojanaPortal"
+theme = "YJP-Themes"
+defaultContentLanguage = "en"
+enableRobotsTXT = true
+[pagination]
+  pagerSize = 10
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+section = ["HTML", "RSS"]
+taxonomy = ["HTML", "RSS"]
+term = ["HTML", "RSS"]
+page = ["HTML"]
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  description = "Lightweight, language-aware portal framework."
+  defaultSidebarIcon = "↪️"
+  defaultLanguage = "hi"
+  logo = "/images/logo.svg"
+
+# Primary Horizontal Scrollable Menu
+[[menus.main]]
+  identifier = "home"
+  name = "Home"
+  url = "/"
+  weight = 10
+  [menus.main.params]
+    lang = ""
+
+[[menus.main]]
+  identifier = "ssc"
+  name = "SSC"
+  url = "/ssc/"
+  weight = 20
+  [menus.main.params]
+    lang = ""
+
+[[menus.main]]
+  identifier = "banking"
+  name = "Banking"
+  url = "/banking/"
+  weight = 30
+  [menus.main.params]
+    lang = ""
+
+[[menus.main]]
+  identifier = "teaching"
+  name = "Teaching"
+  url = "/teaching/"
+  weight = 40
+  [menus.main.params]
+    lang = ""
+
+[[menus.main]]
+  identifier = "admit-card"
+  name = "Admit Card"
+  url = "/admit-card/"
+  weight = 50
+  [menus.main.params]
+    lang = ""
+
+[[menus.main]]
+  identifier = "results"
+  name = "Results"
+  url = "/results/"
+  weight = 60
+  [menus.main.params]
+    lang = ""
+
+[[menus.main]]
+  identifier = "answer-key"
+  name = "Answer Key"
+  url = "/answer-key/"
+  weight = 70
+  [menus.main.params]
+    lang = ""
+
+[[menus.main]]
+  identifier = "news"
+  name = "News"
+  url = "/news/"
+  weight = 80
+  [menus.main.params]
+    lang = ""
+
+# Footer Menu Items
+[[menus.footer]]
+  name = "About"
+  url = "/pages/about/"
+  weight = 10
+
+[[menus.footer]]
+  name = "Contact"
+  url = "/pages/contact/"
+  weight = 20
+
+[[menus.footer]]
+  name = "Privacy Policy"
+  url = "/pages/privacy-policy/"
+  weight = 30
+
+[[menus.footer]]
+  name = "Terms & Conditions"
+  url = "/pages/terms-and-conditions/"
+  weight = 40
+
+[[menus.footer]]
+  name = "Disclaimer"
+  url = "/pages/disclaimer/"
+  weight = 50
+
+[[menus.footer]]
+  name = "DMCA"
+  url = "/pages/dmca/"
+  weight = 60
+
+[[menus.footer]]
+  name = "Cookie Policy"
+  url = "/pages/cookie-policy/"
+  weight = 70
+
+[[menus.footer]]
+  name = "Advertising Policy"
+  url = "/pages/advertising-policy/"
+  weight = 80

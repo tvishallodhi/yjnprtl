@@ -1,0 +1,23 @@
+<div class="nav-controls">
+  <!-- Language Switcher -->
+  <div class="lang-switcher" id="langSwitcherContainer">
+    <button type="button" class="ctrl-btn lang-btn" id="langSwitchBtn" aria-label="Switch Language" aria-haspopup="true" aria-expanded="false">
+      <span class="lang-current-label">HI / EN</span>
+      <span class="chevron" aria-hidden="true">▾</span>
+    </button>
+    <div class="lang-dropdown" id="langDropdown" role="menu">
+      <button type="button" class="lang-option-btn" data-set-lang="hi" role="menuitem">हिंदी (HI)</button>
+      <button type="button" class="lang-option-btn" data-set-lang="en" role="menuitem">English (EN)</button>
+    </div>
+
+    {{ if .Params.translationKey }}
+      {{ $currKey := .Params.translationKey }}
+      {{ $currLang := .Params.lang }}
+      {{ range where .Site.RegularPages "Params.translationkey" $currKey }}
+        {{ if ne .Params.lang $currLang }}
+          <link rel="alternate" hreflang="{{ .Params.lang }}" href="{{ .RelPermalink }}" id="translationPairLink" data-target-lang="{{ .Params.lang }}">
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+

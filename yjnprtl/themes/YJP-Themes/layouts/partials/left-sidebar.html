@@ -1,0 +1,211 @@
+<aside class="left-sidebar" id="desktopSidebar" aria-label="Sections Navigation">
+  <div class="sidebar-header">
+    <span class="sidebar-title">Sections</span>
+
+    <button
+      type="button"
+      class="sidebar-toggle-btn"
+      id="sidebarCollapseToggle"
+      aria-label="Minimize or maximize sidebar"
+      title="Minimize sidebar">
+      <span class="toggle-icon">−</span>
+    </button>
+  </div>
+
+  <nav class="sidebar-scroll-wrapper">
+    <ul class="sidebar-nav-tree">
+
+      {{ range .Site.Sections }}
+
+        {{/* Safe section name */}}
+        {{ $name := .Params.name | default .Title }}
+
+        {{ with .File }}
+          {{ if not $name }}
+            {{ $name = .ContentBaseName }}
+          {{ end }}
+        {{ end }}
+
+        {{/* Icon */}}
+        {{ $icon := .Params.icon | default $.Site.Params.defaultSidebarIcon }}
+
+        {{/* Active section */}}
+        {{ $isSectionActive := in $.RelPermalink .RelPermalink }}
+
+        <li
+          class="sidebar-node{{ if $isSectionActive }} is-active-node{{ end }}"
+          data-lang="{{ .Params.lang | default "" }}">
+
+          <div class="sidebar-node-label-wrap">
+
+            <a
+              href="{{ .RelPermalink }}"
+              class="sidebar-node-link{{ if eq $.RelPermalink .RelPermalink }} is-current-page{{ end }}">
+
+              <span class="sidebar-icon">{{ $icon }}</span>
+              <span class="sidebar-text">{{ $name }}</span>
+
+            </a>
+
+            {{ if .Pages }}
+
+              <button
+                type="button"
+                class="sidebar-expand-btn"
+                aria-expanded="{{ if $isSectionActive }}true{{ else }}false{{ end }}"
+                aria-label="Expand {{ $name }} submenu">
+
+                <span class="expand-indicator">›</span>
+
+              </button>
+
+            {{ end }}
+
+          </div>
+
+
+          {{ if .Pages }}
+
+            <ul class="sidebar-sub-tree{{ if not $isSectionActive }} is-collapsed{{ end }}">
+
+              {{ range .Pages }}
+
+                {{ $subName := .Params.name | default .Title }}
+
+                {{ with .File }}
+                  {{ if not $subName }}
+                    {{ $subName = .ContentBaseName }}
+                  {{ end }}
+                {{ end }}
+
+                <li
+                  class="sidebar-sub-node"
+                  data-lang="{{ .Params.lang | default "" }}">
+
+                  <a
+                    href="{{ .RelPermalink }}"
+                    class="sidebar-sub-link{{ if eq $.RelPermalink .RelPermalink }} is-current-page{{ end }}">
+
+                    <span class="sidebar-sub-text">
+                      {{ $subName }}
+                    </span>
+
+                  </a>
+
+                </li>
+
+              {{ end }}
+
+            </ul>
+
+
+            <!-- Hover floating overlay panel for minimized mode -->
+
+            <div
+              class="sidebar-hover-panel"
+              role="region"
+              aria-label="{{ $name }}">
+
+              <div class="hover-panel-title">
+                {{ $icon }} {{ $name }}
+              </div>
+
+              <ul class="hover-panel-links">
+
+                <li>
+                  <a href="{{ .RelPermalink }}">
+                    {{ $name }} Main
+                  </a>
+                </li>
+
+                {{ range .Pages }}
+
+                  {{ $subName := .Params.name | default .Title }}
+
+                  {{ with .File }}
+                    {{ if not $subName }}
+                      {{ $subName = .ContentBaseName }}
+                    {{ end }}
+                  {{ end }}
+
+                  <li data-lang="{{ .Params.lang | default "" }}">
+
+                    <a href="{{ .RelPermalink }}">
+                      {{ $subName }}
+                    </a>
+
+                  </li>
+
+                {{ end }}
+
+              </ul>
+
+            </div>
+
+          {{ end }}
+
+        </li>
+
+      {{ end }}
+
+    </ul>
+  </nav>
+
+    <!-- ============================================================
+       FIXED SOCIAL LINKS
+       ============================================================ -->
+
+  <div class="sidebar-social-bar" aria-label="Social Media Links">
+
+    <a
+      href="https://wa.me/YOUR_NUMBER"
+      class="sidebar-social-link whatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="WhatsApp"
+      title="WhatsApp">
+      <span>☘</span>
+    </a>
+
+    <a
+      href="https://t.me/YOUR_USERNAME"
+      class="sidebar-social-link telegram"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Telegram"
+      title="Telegram">
+      <span>✈</span>
+    </a>
+
+    <a
+      href="https://www.facebook.com/YOUR_PAGE"
+      class="sidebar-social-link facebook"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Facebook"
+      title="Facebook">
+      <span>f</span>
+    </a>
+
+    <a
+      href="https://www.instagram.com/YOUR_USERNAME"
+      class="sidebar-social-link instagram"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Instagram"
+      title="Instagram">
+      <span>◎</span>
+    </a>
+
+    <a
+      href="https://www.youtube.com/@YOUR_CHANNEL"
+      class="sidebar-social-link youtube"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="YouTube"
+      title="YouTube">
+      <span>▶</span>
+    </a>
+
+  </div>
+</aside>

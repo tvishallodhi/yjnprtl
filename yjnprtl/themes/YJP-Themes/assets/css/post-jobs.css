@@ -1,0 +1,19 @@
+.post--jobs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.post--jobs .meta-section {
+  border: 1px solid var(--border-color);
+  border-left: 4px solid #34a853;
+  padding: 12px;
+  background-color: var(--bg-secondary);
+}
+
+.post--jobs .meta-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

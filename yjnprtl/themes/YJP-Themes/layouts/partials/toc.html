@@ -1,0 +1,10 @@
+{{ if gt (len .TableOfContents) 32 }}
+<aside class="toc-container" aria-label="Table of contents">
+  <details class="toc-details" open>
+    <summary class="toc-heading">Table of Contents</summary>
+    <div class="toc-body">
+      {{ .TableOfContents }}
+    </div>
+  </details>
+</aside>
+{{ end }}

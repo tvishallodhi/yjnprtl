@@ -1,0 +1,20 @@
+<nav class="breadcrumb-container" aria-label="Breadcrumb">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item"><a href="{{ .Site.BaseURL }}">Home</a></li>
+    {{ template "breadcrumb-ancestors" (dict "p1" . "p2" .Parent) }}
+  </ol>
+</nav>
+
+{{ define "breadcrumb-ancestors" }}
+  {{ if .p2 }}
+    {{ template "breadcrumb-ancestors" (dict "p1" .p1 "p2" .p2.Parent) }}
+    <li class="breadcrumb-item">
+      <a href="{{ .p2.RelPermalink }}">{{ .p2.Params.name | default .p2.Title }}</a>
+    </li>
+  {{ end }}
+  {{ if eq .p1 .p2 }}
+    <li class="breadcrumb-item active" aria-current="page">
+      <span>{{ .p1.Params.name | default .p1.Title }}</span>
+    </li>
+  {{ end }}
+{{ end }}

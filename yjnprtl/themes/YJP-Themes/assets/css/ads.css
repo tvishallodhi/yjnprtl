@@ -1,0 +1,90 @@
+:root {
+    --right-sidebar-width: 300px;
+}
+
+
+/* ============================================================
+   RIGHT SIDEBAR
+   ============================================================ */
+
+.right-sidebar {
+    display: flex !important;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+    width: var(--right-sidebar-width);
+
+    min-width: var(--right-sidebar-width);
+
+    flex-shrink: 0;
+
+    position: sticky;
+
+    top: var(--tot-nav-offset);
+
+    height: calc(100vh - var(--tot-nav-offset));
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    padding: 20px 16px;
+
+    background-color: var(--bg-surface);
+
+    border-left: 1px solid var(--border-color);
+
+    box-sizing: border-box;
+
+    z-index: 10;
+}
+
+img.sticky {
+  position: sticky;
+  top: 0;
+  width: 200px;
+}
+/* ============================================================
+   AD
+   ============================================================ */
+
+.ad-wrapper {
+    width: 100%;
+
+    display: block;
+}
+
+.ad-container {
+    width: 100%;
+}
+
+.ad-placeholder-box {
+    width: 100%;
+
+    min-height: 250px;
+
+    border: 1px dashed var(--border-color);
+
+    background-color: var(--bg-secondary);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 4px;
+
+    box-sizing: border-box;
+}
+
+.ad-label {
+    font-size: 0.75rem;
+
+    color: var(--text-muted);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}

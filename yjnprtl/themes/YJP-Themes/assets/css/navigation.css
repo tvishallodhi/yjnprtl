@@ -1,0 +1,184 @@
+:root {
+    --nav-bar-height: 44px;
+    --tot-nav-offset: calc(
+        var(--header-height) + var(--nav-bar-height)
+    );
+}
+
+
+/* ============================================================
+   NAVIGATION BAR
+   ============================================================ */
+
+.nav-bar-strip {
+    position: fixed;
+
+    top: var(--header-height);
+    left: 0;
+
+    width: 100%;
+    height: var(--nav-bar-height);
+
+    z-index: 999;
+
+    background-color: var(--bg-secondary);
+
+    border-bottom: 1px solid var(--border-color);
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   NAV CONTAINER
+   ============================================================ */
+
+.nav-bar-container {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   HAMBURGER
+   ============================================================ */
+
+.nav-hamburger-btn {
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    background: none;
+    border: none;
+
+    border-right: 1px solid var(--border-color);
+
+    color: var(--text-main);
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.hamburger-bar {
+    display: block;
+
+    width: 18px;
+    height: 2px;
+
+    background-color: currentColor;
+
+    border-radius: 1px;
+}
+
+
+/* ============================================================
+   SCROLLABLE NAV
+   ============================================================ */
+
+.nav-scrollable-track {
+    display: flex;
+
+    flex: 1 1 auto;
+
+    min-width: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    white-space: nowrap;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-scrollable-track::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* ============================================================
+   NAV LIST
+   ============================================================ */
+
+.nav-list {
+    display: flex;
+
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+
+    flex-shrink: 0;
+}
+
+
+/* ============================================================
+   NAV LINK
+   ============================================================ */
+
+.nav-link {
+    display: block;
+
+    padding: 0 16px;
+
+    line-height: var(--nav-bar-height);
+
+    color: var(--text-main);
+
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    border-bottom: 2px solid transparent;
+
+    box-sizing: border-box;
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+    color: var(--primary-color);
+
+    border-bottom-color: var(--primary-color);
+}
+
+
+@media (max-width: 992px) {
+
+    .nav-link {
+        padding: 0 14px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .nav-hamburger-btn {
+        width: 44px;
+    }
+
+    .nav-link {
+        padding: 0 12px;
+        font-size: 0.88rem;
+    }
+}

@@ -1,0 +1,16 @@
+<header class="primary-header">
+  <div class="header-container">
+    <div class="header-branding">
+      <a href="{{ .Site.BaseURL }}" class="brand-link" aria-label="{{ .Site.Title }}">
+        <img src="{{ .Site.Params.logo }}" alt="" class="site-logo" width="32" height="32">
+        <span class="site-title-text">{{ .Site.Title }}</span>
+      </a>
+    </div>
+
+    <div class="header-actions">
+      {{ partial "search.html" . }}
+      {{ partial "language-switcher.html" . }}
+      {{ partial "theme-switcher.html" . }}
+    </div>
+  </div>
+</header>

@@ -1,0 +1,102 @@
+{{ define "main" }}
+<div class="search-page-container">
+  <!-- Top Search Bar Section -->
+  <header class="search-page-header">
+    <h1 class="search-page-title">Search</h1>
+    <div class="search-page-bar">
+      {{ partial "search-box.html" . }}
+    </div>
+    <div id="searchStats" class="search-stats" aria-live="polite" style="display: none;"></div>
+  </header>
+
+  <!-- 2-Column Responsive Layout: Left = Results + Recent, Right = Latest Updates -->
+  <div class="search-layout-grid">
+    
+    <!-- LEFT COLUMN: Search Results & Recently Viewed -->
+    <main class="search-main-column">
+      
+      <!-- 1. Search Results Container -->
+      <section class="search-results-section" id="searchResultsSection">
+        
+        <!-- Empty State with Clickable Suggestion Chips -->
+        <div id="searchEmptyPrompt" class="search-empty-prompt">
+          <div class="empty-icon">🔍</div>
+          <h3>Type to search jobs, schemes & articles</h3>
+          <p>Or click one of the popular topics below to search instantly:</p>
+          
+          <div class="popular-suggestions" id="popularSuggestions">
+            <button type="button" class="suggestion-chip" data-search="Railway">🚆 Railway</button>
+            <button type="button" class="suggestion-chip" data-search="SSC CHSL">📑 SSC CHSL</button>
+            <button type="button" class="suggestion-chip" data-search="Sarkari Yojana">🏛️ Sarkari Yojana</button>
+            <button type="button" class="suggestion-chip" data-search="Admit Card">🎫 Admit Card</button>
+            <button type="button" class="suggestion-chip" data-search="Police Bharti">👮 Police Bharti</button>
+            <button type="button" class="suggestion-chip" data-search="10th 12th Pass">🎓 10th/12th Pass</button>
+          </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="searchLoadingIndicator" class="search-loading-state" style="display: none;">
+          <span class="search-spinner" aria-hidden="true"></span> Searching index...
+        </div>
+
+        <!-- Dynamic Results Cards Container -->
+        <div id="searchResultsList" class="search-results-list" role="feed"></div>
+
+        <!-- Load More Button -->
+        <div id="searchLoadMoreWrapper" class="search-load-more-wrapper" style="display: none;">
+          <button type="button" id="searchLoadMoreBtn" class="search-load-more-btn">
+            Load More Results
+          </button>
+        </div>
+      </section>
+
+      <!-- 2. RECENTLY VIEWED (Result Box ke theek niche) -->
+      <section class="search-panel recently-viewed-panel" id="recentlyViewedSection" style="display: none;">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <span class="panel-icon">🕒</span> Recently Viewed
+          </h2>
+          <button type="button" id="clearRecentBtn" class="clear-recent-btn" title="Clear History">Clear All</button>
+        </div>
+        <!-- बिना गिनती के, व्यू आइकन वाली लिस्ट -->
+        <ul id="recentlyViewedList" class="recent-posts-list"></ul>
+      </section>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR: Latest Updates (20 Posts with Trending Badge) -->
+    <aside class="search-sidebar-column">
+      <section class="search-panel latest-posts-panel" aria-labelledby="latestUpdatesHeading">
+        <div class="panel-header">
+          <h2 id="latestUpdatesHeading" class="panel-title">
+            <span class="panel-icon">🔥</span> Latest Updates
+          </h2>
+        </div>
+        <!-- गिनती हटाकर सिर्फ Trending icon दिया गया है -->
+        <ul class="latest-posts-list">
+          {{- $latest := first 20 (where site.RegularPages "Draft" "!=" true).ByDate.Reverse -}}
+          {{- range $latest -}}
+          <li class="latest-post-item">
+            <span class="trending-badge" title="Trending / Latest">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 23c-4.97 0-9-4.03-9-9 0-4.04 2.82-7.5 6.78-8.62.48-.14.94.22.94.72v.22c0 .32-.2.6-.5.71C7.81 7.91 6 10.66 6 14c0 3.31 2.69 6 6 6s6-2.69 6-6c0-1.84-.83-3.49-2.14-4.6-.26-.22-.36-.58-.24-.89.12-.31.42-.51.75-.51h.11c3.19.82 5.52 3.73 5.52 7 0 4.97-4.03 9-9 9zm2.5-12.5c-.83 0-1.5-.67-1.5-1.5 0-.58.33-1.08.81-1.33.39-.2.53-.68.32-1.07-.15-.28-.43-.45-.73-.45-.06 0-.13.01-.19.03C11.58 6.71 10.5 8.23 10.5 10c0 1.93 1.57 3.5 3.5 3.5.94 0 1.8-.38 2.43-1 .24-.24.27-.61.08-.88-.19-.28-.56-.37-.88-.23-.52.23-1.07.11-1.13.11z"/>
+              </svg>
+            </span>
+            <a href="{{ .RelPermalink }}" class="post-link track-post-click" data-title="{{ .Title }}">
+              {{ .Title }}
+            </a>
+          </li>
+          {{- end -}}
+        </ul>
+      </section>
+    </aside>
+
+  </div>
+</div>
+
+{{ $searchCSS := resources.Get "css/pages/search.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $searchCSS.RelPermalink }}">
+
+{{ $searchJS := resources.Get "js/pages/search.js" | minify | fingerprint }}
+<script src="{{ $searchJS.RelPermalink }}" defer></script>
+{{ end }}

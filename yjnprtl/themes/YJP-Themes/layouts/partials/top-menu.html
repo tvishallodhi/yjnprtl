@@ -1,0 +1,21 @@
+<nav class="nav-bar-strip" aria-label="Secondary Horizontal Navigation">
+  <div class="nav-bar-container">
+    <button type="button" class="nav-hamburger-btn" id="menuToggleBtn" aria-label="Toggle Navigation Menu" aria-controls="mobileSidebarDrawer" aria-expanded="false">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+    
+    <div class="nav-scrollable-track" id="horizontalNavTrack">
+      <ul class="nav-list">
+        {{ range .Site.Menus.main }}
+          <li class="nav-item" data-lang="{{ .Params.lang | default "" }}">
+            <a href="{{ .URL }}" class="nav-link{{ if $.IsMenuCurrent "main" . }} is-active{{ end }}">
+              {{ .Name }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</nav>

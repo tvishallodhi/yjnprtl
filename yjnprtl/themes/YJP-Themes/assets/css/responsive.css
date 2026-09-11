@@ -1,0 +1,541 @@
+/* ============================================================
+   RESPONSIVE.CSS
+   ============================================================ */
+
+
+/* ============================================================
+   DEFAULT
+   ============================================================ */
+
+.mobile-drawer,
+.mobile-drawer-overlay {
+    display: none;
+}
+
+
+/* ============================================================
+   TABLET / MOBILE
+   ============================================================ */
+
+@media (max-width: 992px) {
+
+    /* --------------------------------------------------------
+       MAIN PAGE WRAPPER
+       -------------------------------------------------------- */
+
+    .site-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        width: 100% !important;
+        max-width: 100% !important;
+
+        min-height: auto;
+
+        margin: 0;
+        padding: 0;
+
+        box-sizing: border-box;
+    }
+
+
+    /* --------------------------------------------------------
+       LEFT DESKTOP SIDEBAR
+       -------------------------------------------------------- */
+
+    .left-sidebar {
+        display: none !important;
+
+        width: 0 !important;
+        min-width: 0 !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    /* --------------------------------------------------------
+       MAIN COLUMN
+       -------------------------------------------------------- */
+
+    .site-main-col {
+        display: flex;
+        flex-direction: column;
+
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        box-sizing: border-box;
+    }
+
+
+    /* --------------------------------------------------------
+       MAIN CONTENT
+       -------------------------------------------------------- */
+
+    .main-content-area {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        padding: 16px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* --------------------------------------------------------
+       RIGHT SIDEBAR
+       -------------------------------------------------------- */
+
+    .right-sidebar {
+        position: static;
+
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        flex: none;
+
+        height: auto;
+        max-height: none;
+
+        overflow: visible;
+
+        margin: 0 !important;
+
+        border-left: none;
+
+        border-top: 1px solid var(--border-color);
+
+        padding: 20px 16px;
+
+        background-color: var(--bg-secondary);
+
+        gap: 16px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* --------------------------------------------------------
+       ADS
+       -------------------------------------------------------- */
+
+    .ad-wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .ad-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .ad-placeholder-box {
+        width: 100%;
+        min-height: 100px;
+    }
+
+
+    /* --------------------------------------------------------
+       CONTENT ELEMENTS
+       -------------------------------------------------------- */
+
+    .card-grid,
+    .category-grid {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .post--admission,
+    .post--jobs,
+    .post--schemes,
+    .post--howto {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+    /* --------------------------------------------------------
+       OVERLAY
+       -------------------------------------------------------- */
+
+    .mobile-drawer-overlay {
+        display: block;
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100vw;
+        height: 100vh;
+
+        background: rgba(0, 0, 0, 0.4);
+
+        z-index: 2000;
+
+        opacity: 0;
+        visibility: hidden;
+
+        transition:
+            opacity 0.2s ease,
+            visibility 0.2s ease;
+
+        box-sizing: border-box;
+    }
+
+
+    .mobile-drawer-overlay.is-active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    /* --------------------------------------------------------
+       DRAWER
+       -------------------------------------------------------- */
+
+    .mobile-drawer {
+        display: block;
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 280px;
+        max-width: 85vw;
+
+        height: 100vh;
+
+        background-color: var(--bg-surface);
+
+        z-index: 2001;
+
+        transform: translateX(-100%);
+
+        transition:
+            transform 0.25s ease-in-out;
+
+        box-shadow:
+            2px 0 8px rgba(0, 0, 0, 0.15);
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+    }
+
+
+    .mobile-drawer.is-active {
+        transform: translateX(0);
+    }
+
+
+    /* --------------------------------------------------------
+       DRAWER HEADER
+       -------------------------------------------------------- */
+
+    .drawer-header {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+        height: 60px;
+
+        padding: 16px;
+
+        border-bottom: 1px solid var(--border-color);
+
+        box-sizing: border-box;
+    }
+
+
+    /* --------------------------------------------------------
+       DRAWER CLOSE BUTTON
+       -------------------------------------------------------- */
+
+    .drawer-close-btn {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        width: 36px;
+        height: 36px;
+
+        padding: 0;
+
+        background: none;
+        border: none;
+
+        font-size: 1.25rem;
+
+        color: var(--text-main);
+
+        cursor: pointer;
+    }
+
+
+    /* --------------------------------------------------------
+       DRAWER SCROLL
+       -------------------------------------------------------- */
+
+    .drawer-scroll-container {
+        width: 100%;
+        height: calc(100vh - 60px);
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        padding: 16px;
+
+        box-sizing: border-box;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    /* --------------------------------------------------------
+       DRAWER LIST
+       -------------------------------------------------------- */
+
+    .drawer-nav-list,
+    .drawer-sub-list {
+        list-style: none;
+
+        width: 100%;
+
+        margin: 0;
+        padding: 0;
+    }
+
+
+    /* --------------------------------------------------------
+       DRAWER LINKS
+       -------------------------------------------------------- */
+
+    .drawer-link {
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        width: 100%;
+
+        padding: 8px 0;
+
+        color: var(--text-main);
+
+        text-decoration: none;
+
+        box-sizing: border-box;
+    }
+
+
+    .drawer-sub-link {
+        display: block;
+
+        width: 100%;
+
+        padding: 8px 0 8px 24px;
+
+        color: var(--text-muted);
+
+        text-decoration: none;
+
+        box-sizing: border-box;
+    }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    /* --------------------------------------------------------
+       PAGE WRAPPER
+       -------------------------------------------------------- */
+
+    .site-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    /* --------------------------------------------------------
+       MAIN COLUMN
+       -------------------------------------------------------- */
+
+    .site-main-col {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    /* --------------------------------------------------------
+       MAIN CONTENT — FULL WIDTH
+       -------------------------------------------------------- */
+
+    .main-content-area {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        padding: 12px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* --------------------------------------------------------
+       RIGHT SIDEBAR
+       -------------------------------------------------------- */
+
+    .right-sidebar {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        margin: 0 !important;
+
+        padding: 16px 12px;
+
+        box-sizing: border-box;
+    }
+
+
+    /* --------------------------------------------------------
+       CARDS / GRIDS
+       -------------------------------------------------------- */
+
+    .card-grid {
+        grid-template-columns: 1fr;
+
+        width: 100%;
+    }
+
+
+    .content-card {
+        width: 100%;
+        max-width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
+    /* --------------------------------------------------------
+       POST SECTIONS
+       -------------------------------------------------------- */
+
+    .post--admission,
+    .post--jobs {
+        grid-template-columns: 1fr;
+
+        width: 100%;
+    }
+
+
+    .post--howto {
+        width: 100%;
+    }
+
+
+    /* --------------------------------------------------------
+       ADS
+       -------------------------------------------------------- */
+
+    .ad-wrapper,
+    .ad-container,
+    .ad-placeholder-box {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    /* --------------------------------------------------------
+       MOBILE DRAWER
+       -------------------------------------------------------- */
+
+    .mobile-drawer {
+        width: min(280px, 85vw);
+        max-width: 85vw;
+    }
+}
+
+
+/* ============================================================
+   EXTRA SMALL DEVICES
+   ============================================================ */
+
+@media (max-width: 400px) {
+
+    .main-content-area {
+        padding: 10px;
+    }
+
+    .right-sidebar {
+        padding: 14px 10px;
+    }
+
+    .drawer-scroll-container {
+        padding: 14px;
+    }
+}
+
+
+/* ============================================================
+   PREVENT HORIZONTAL OVERFLOW
+   ============================================================ */
+
+@media (max-width: 992px) {
+
+    .site-wrapper,
+    .site-main-col,
+    .main-content-area,
+    .right-sidebar {
+        overflow-x: hidden;
+    }
+
+    img,
+    iframe,
+    video,
+    table {
+        max-width: 100%;
+    }
+
+    iframe,
+    video {
+        width: 100%;
+    }
+}

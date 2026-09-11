@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ if .IsPage }}Article{{ else }}WebSite{{ end }}",
+  "name": "{{ .Title }}",
+  "url": "{{ .Permalink }}",
+  "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"
+}
+</script>
+
+<link rel="icon" href="{{ .Site.Params.logo }}" type="image/svg+xml">
+
+{{ $css := resources.Match "css/*.css" | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+<!-- Integration of CSS & JS via Hugo Assets Pipeline -->
+{{ $searchCSS := resources.Get "css/search.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $searchCSS.RelPermalink }}">
+
+{{ $searchJS := resources.Get "js/search.js" | minify | fingerprint }}
+<script src="{{ $searchJS.RelPermalink }}" defer></script>
+
+<!-- Prevent Dark Theme FOUC -->
+<script>
+  (function() {
+    const savedTheme = localStorage.getItem('site_theme') || 'system';
+    let target = savedTheme;
+    if (savedTheme === 'system') {
+      target = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', target);
+    document.documentElement.setAttribute('data-color-mode', savedTheme);
+  })();
+</script>

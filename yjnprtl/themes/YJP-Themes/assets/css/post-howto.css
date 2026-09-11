@@ -1,0 +1,27 @@
+.post--howto {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.howto-steps-scaffold {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.howto-step-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}

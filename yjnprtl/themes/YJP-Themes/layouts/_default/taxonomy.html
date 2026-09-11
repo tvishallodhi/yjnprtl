@@ -1,0 +1,14 @@
+{{ define "main" }}
+<div class="taxonomy-wrapper">
+  {{ partial "breadcrumbs.html" . }}
+  <h1 class="taxonomy-title">{{ .Title }}</h1>
+  <div class="card-grid">
+    {{ range .Pages }}
+      <article class="content-card" data-lang="{{ .Params.lang | default "" }}">
+        <h2 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p class="card-desc">{{ .Description }}</p>
+      </article>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

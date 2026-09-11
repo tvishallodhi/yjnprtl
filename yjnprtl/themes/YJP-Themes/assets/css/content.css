@@ -1,0 +1,151 @@
+/* ============================================================
+   MAIN CONTENT COLUMN
+   ============================================================ */
+
+.site-main-col {
+    flex: 1 1 auto;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
+
+.main-content-area {
+    margin-top: var(--tot-nav-offset);
+
+    flex: 1 0 auto;
+
+    width: 100%;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   CARD GRID
+   ============================================================ */
+
+.card-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 16px;
+
+    margin: 16px 0;
+}
+
+
+/* ============================================================
+   CONTENT CARD
+   ============================================================ */
+
+.content-card {
+    border: 1px solid var(--border-color);
+
+    border-radius: 6px;
+
+    padding: 16px;
+
+    background-color: var(--bg-surface);
+
+    box-sizing: border-box;
+}
+
+
+/* ============================================================
+   CATEGORY GRID
+   ============================================================ */
+
+.category-grid {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin: 16px 0;
+}
+
+
+/* ============================================================
+   CATEGORY CHIP
+   ============================================================ */
+
+.category-chip {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    background-color: var(--bg-secondary);
+
+    border: 1px solid var(--border-color);
+
+    color: var(--text-main);
+
+    text-decoration: none;
+}
+
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+
+.breadcrumb-list {
+    display: flex;
+
+    list-style: none;
+
+    gap: 8px;
+
+    font-size: 0.85rem;
+
+    margin: 0 0 16px;
+
+    padding: 0;
+
+    color: var(--text-muted);
+}
+
+.breadcrumb-item::after {
+    content: "/";
+
+    margin-left: 8px;
+}
+
+.breadcrumb-item:last-child::after {
+    display: none;
+}
+
+
+/* ============================================================
+   POST NAVIGATION
+   ============================================================ */
+
+.post-navigation-pair {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 32px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid var(--border-color);
+}

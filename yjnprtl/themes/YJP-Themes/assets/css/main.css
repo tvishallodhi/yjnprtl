@@ -1,0 +1,36 @@
+/* Core Assembly Engine */
+@import "variables.css";
+@import "base.css";
+@import "header.css";
+@import "navigation.css";
+@import "sidebar.css";
+@import "content.css";
+@import "pages/search.css";
+@import "post-schemes.css";
+@import "post-jobs.css";
+@import "post-admission.css";
+@import "post-howto.css";
+@import "ads.css";
+@import "footer.css";
+@import "responsive.css";
+
+/* Interactive Language Display Classes */
+body[data-lang-selected="hi"] [data-lang="en"],
+body[data-lang-selected="en"] [data-lang="hi"] {
+  display: none !important;
+}
+
+/* Accessibility Focus States */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

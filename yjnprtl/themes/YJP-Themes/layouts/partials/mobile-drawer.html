@@ -1,0 +1,95 @@
+<div class="mobile-drawer-overlay" id="mobileOverlay" tabindex="-1"></div>
+
+<aside
+  class="mobile-drawer"
+  id="mobileSidebarDrawer"
+  aria-label="Mobile Navigation"
+  aria-hidden="true">
+
+  <div class="drawer-header">
+    <span class="drawer-title">Navigation</span>
+
+    <button
+      type="button"
+      class="drawer-close-btn"
+      id="drawerCloseBtn"
+      aria-label="Close navigation drawer">
+      ✕
+    </button>
+  </div>
+
+  <div class="drawer-scroll-container">
+
+    <ul class="drawer-nav-list">
+
+      {{ range .Site.Sections }}
+
+        {{/* Safe section name */}}
+        {{ $name := .Params.name | default .Title }}
+
+        {{ with .File }}
+          {{ if not $name }}
+            {{ $name = .ContentBaseName }}
+          {{ end }}
+        {{ end }}
+
+        {{/* Section icon */}}
+        {{ $icon := .Params.icon | default $.Site.Params.defaultSidebarIcon }}
+
+        <li
+          class="drawer-nav-item"
+          data-lang="{{ .Params.lang | default "" }}">
+
+          <a
+            href="{{ .RelPermalink }}"
+            class="drawer-link{{ if in $.RelPermalink .RelPermalink }} is-active{{ end }}">
+
+            <span class="drawer-icon">{{ $icon }}</span>
+            <span class="drawer-text">{{ $name }}</span>
+
+          </a>
+
+          {{ if .Pages }}
+
+            <ul class="drawer-sub-list">
+
+              {{ range .Pages }}
+
+                {{/* Safe sub-page name */}}
+                {{ $subName := .Params.name | default .Title }}
+
+                {{ with .File }}
+                  {{ if not $subName }}
+                    {{ $subName = .ContentBaseName }}
+                  {{ end }}
+                {{ end }}
+
+                <li
+                  class="drawer-sub-item"
+                  data-lang="{{ .Params.lang | default "" }}">
+
+                  <a
+                    href="{{ .RelPermalink }}"
+                    class="drawer-sub-link{{ if eq $.RelPermalink .RelPermalink }} is-current{{ end }}">
+
+                    {{ $subName }}
+
+                  </a>
+
+                </li>
+
+              {{ end }}
+
+            </ul>
+
+          {{ end }}
+
+        </li>
+
+      {{ end }}
+
+    </ul>
+
+  </div>
+
+</aside>

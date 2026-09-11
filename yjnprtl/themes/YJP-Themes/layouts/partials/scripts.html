@@ -1,0 +1,10 @@
+{{ $theme := resources.Get "js/theme.js" }}
+{{ $lang := resources.Get "js/language.js" }}
+{{ $sidebar := resources.Get "js/sidebar.js" }}
+{{ $mobile := resources.Get "js/mobile-menu.js" }}
+{{ $search := resources.Get "js/search.js" }}
+{{ $searchpages := resources.Get "js/search.js" }}
+{{ $main := resources.Get "js/main.js" }}
+
+{{ $jsBundle := slice $theme $lang $sidebar $mobile $search $main | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint }}
+<script src="{{ $jsBundle.RelPermalink }}" integrity="{{ $jsBundle.Data.Integrity }}" defer></script>

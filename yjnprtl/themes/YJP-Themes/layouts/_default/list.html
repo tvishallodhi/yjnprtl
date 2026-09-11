@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="section-list-view">
+  {{ partial "breadcrumbs.html" . }}
+
+  <header class="list-header">
+    <h1 class="list-title">{{ .Params.name | default .Title }}</h1>
+    {{ with .Description }}<p class="list-description">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="card-grid">
+    {{ range .Paginator.Pages }}
+      <article class="content-card" data-lang="{{ .Params.lang | default "" }}">
+        <h2 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p class="card-desc">{{ .Description }}</p>
+      </article>
+    {{ end }}
+  </div>
+
+  {{ partial "pagination.html" . }}
+</div>
+{{ end }}

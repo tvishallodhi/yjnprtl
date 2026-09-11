@@ -1,0 +1,63 @@
+{{ define "main" }}
+<div class="homepage-layout">
+  <!-- Hero Section -->
+  <section class="hero-region" aria-label="Hero Section">
+    <div class="hero-inner">
+      <h1 class="hero-title">{{ .Site.Title }}</h1>
+      <p class="hero-tagline">{{ .Site.Params.description }}</p>
+    </div>
+  </section>
+
+  <!-- Featured Section -->
+  <section class="featured-region" aria-label="Featured">
+    <h2 class="section-title">Featured Updates</h2>
+    <div class="card-grid">
+      {{ range first 6 (where .Site.RegularPages "Params.featured" true) }}
+        <article class="content-card" data-lang="{{ .Params.lang | default "" }}">
+          <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="card-desc">{{ .Description }}</p>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-region" aria-label="Categories">
+    <h2 class="section-title">Browse Sections</h2>
+    <div class="category-grid">
+      {{ range .Site.Sections }}
+        <a href="{{ .RelPermalink }}" class="category-chip" data-lang="{{ .Params.lang | default "" }}">
+          <span class="category-chip-icon">{{ .Params.icon | default $.Site.Params.defaultSidebarIcon }}</span>
+          <span class="category-chip-label">{{ .Params.name | default .Title }}</span>
+        </a>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- Latest Posts -->
+  <section class="latest-region" aria-label="Latest Posts">
+    <h2 class="section-title">Latest Content</h2>
+    <div class="card-grid">
+      {{ range first 10 .Site.RegularPages }}
+        <article class="content-card" data-lang="{{ .Params.lang | default "" }}">
+          <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="card-desc">{{ .Description }}</p>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- Popular Content -->
+  <section class="popular-region" aria-label="Popular Updates">
+    <h2 class="section-title">Popular Notices</h2>
+    <div class="card-grid">
+      {{ range first 6 (where .Site.RegularPages "Params.popular" true) }}
+        <article class="content-card" data-lang="{{ .Params.lang | default "" }}">
+          <h3 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="card-desc">{{ .Description }}</p>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+</div>
+{{ end }}
