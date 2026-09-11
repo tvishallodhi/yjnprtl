@@ -1,17 +1,19 @@
 baseURL = "https://example.com/"
 title = "YojanaPortal"
 theme = "YJP-Themes"
+
 defaultContentLanguage = "en"
 enableRobotsTXT = true
+
 [pagination]
   pagerSize = 10
 
 [outputs]
-home = ["HTML", "RSS", "JSON"]
-section = ["HTML", "RSS"]
-taxonomy = ["HTML", "RSS"]
-term = ["HTML", "RSS"]
-page = ["HTML"]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+  page = ["HTML"]
 
 [taxonomies]
   category = "categories"
@@ -23,12 +25,15 @@ page = ["HTML"]
   defaultLanguage = "hi"
   logo = "/images/logo.svg"
 
+
 # Primary Horizontal Scrollable Menu
+
 [[menus.main]]
   identifier = "home"
   name = "Home"
   url = "/"
   weight = 10
+
   [menus.main.params]
     lang = ""
 
@@ -37,6 +42,7 @@ page = ["HTML"]
   name = "SSC"
   url = "/ssc/"
   weight = 20
+
   [menus.main.params]
     lang = ""
 
@@ -45,6 +51,7 @@ page = ["HTML"]
   name = "Banking"
   url = "/banking/"
   weight = 30
+
   [menus.main.params]
     lang = ""
 
@@ -53,6 +60,7 @@ page = ["HTML"]
   name = "Teaching"
   url = "/teaching/"
   weight = 40
+
   [menus.main.params]
     lang = ""
 
@@ -61,6 +69,7 @@ page = ["HTML"]
   name = "Admit Card"
   url = "/admit-card/"
   weight = 50
+
   [menus.main.params]
     lang = ""
 
@@ -69,6 +78,7 @@ page = ["HTML"]
   name = "Results"
   url = "/results/"
   weight = 60
+
   [menus.main.params]
     lang = ""
 
@@ -77,6 +87,7 @@ page = ["HTML"]
   name = "Answer Key"
   url = "/answer-key/"
   weight = 70
+
   [menus.main.params]
     lang = ""
 
@@ -85,10 +96,13 @@ page = ["HTML"]
   name = "News"
   url = "/news/"
   weight = 80
+
   [menus.main.params]
     lang = ""
 
+
 # Footer Menu Items
+
 [[menus.footer]]
   name = "About"
   url = "/pages/about/"
