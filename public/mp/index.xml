@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>मध्य प्रदेश on YojanaPortal</title>
+    <link>https://example.com/mp/</link>
+    <description>Recent content in मध्य प्रदेश on YojanaPortal</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 09 Sep 2026 19:30:54 +0530</lastBuildDate>
+    <atom:link href="https://example.com/mp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kalyani Sahayata Yojana Mp</title>
+      <link>https://example.com/mp/kalyani-sahayata-yojana-mp/</link>
+      <pubDate>Wed, 09 Sep 2026 19:30:54 +0530</pubDate>
+      <guid>https://example.com/mp/kalyani-sahayata-yojana-mp/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
