@@ -1,0 +1,23 @@
+{{ with .Params.cssStyles }}
+  {{ $styles := cond (reflect.IsSlice .) . (slice .) }}
+
+  {{ range $styles }}
+    {{/* 1. Full URL (http:// या https://) */}}
+    {{ if or (hasPrefix . "http://") (hasPrefix . "https://") }}
+      <link rel="stylesheet" href="{{ . | safeURL }}">
+
+    {{/* 2. Root / Static File (जो '/' से शुरू होती है, jaise '/file.css') */}}
+    {{ else if hasPrefix . "/" }}
+      <link rel="stylesheet" href="{{ . | relURL }}">
+
+    {{/* 3. Hugo Assets File (assets/ folder ke liye - Minify & Fingerprint) */}}
+    {{ else }}
+      {{ with resources.Get . }}
+        {{ $css := . | resources.Minify | resources.Fingerprint }}
+        <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+      {{ else }}
+        {{ warnf "CSS resource '%s' assets/ folder me nahi mila!" . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

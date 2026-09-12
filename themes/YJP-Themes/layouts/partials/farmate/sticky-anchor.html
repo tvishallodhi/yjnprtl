@@ -1,0 +1,40 @@
+{{/* STEP 1: Define Navigation Items */}}
+{{ $navItems := slice
+  (dict "key" "Whatis"       "label" "संक्षिप्त जानकारी")
+  (dict "key" "objective"    "label" "🎯 उद्देश्य")
+  (dict "key" "impdates"     "label" "📅 तारीख")
+  (dict "key" "benefits"     "label" "💰 लाभ")
+  (dict "key" "eligibility"  "label" "🧍 पात्रता")
+  (dict "key" "documents"    "label" "📄 डॉक्युमेंट्स")
+  (dict "key" "how_to"       "label" "📝 आवेदन जानकारी")
+  (dict "key" "faqs"         "label" "❓ FAQs")
+  (dict "key" "content"      "label" "📋 जानकारी")
+  (dict "key" "links"        "label" "🔗 महत्वपूर्ण लिंक")
+}}
+
+{{/* STEP 2: Filter Active Items (Single Pass) */}}
+{{ $activeLinks := slice }}
+{{ range $navItems }}
+  {{ $exists := false }}
+  {{ if eq .key "content" }}
+    {{/* .Content ke liye alag check */}}
+    {{ if $.Content }}{{ $exists = true }}{{ end }}
+  {{ else }}
+    {{ if index $.Params .key }}{{ $exists = true }}{{ end }}
+  {{ end }}
+
+  {{ if $exists }}
+    {{ $activeLinks = $activeLinks | append . }}
+  {{ end }}
+{{ end }}
+
+{{/* STEP 3: Render Nav only if active items exist */}}
+{{ if gt (len $activeLinks) 0 }}
+<nav class="sticky-anchor" aria-label="Table of Contents">
+  <div class="sticky-anchor-track">
+    {{ range $activeLinks }}
+      <a href="#{{ .key }}" class="anchor-link">{{ .label }}</a>
+    {{ end }}
+  </div>
+</nav>
+{{ end }}

@@ -1,0 +1,18 @@
+{{/* 
+  Usage: {{ partial "farmate/render-content.html" (dict "data" .Params.fieldName) }} 
+*/}}
+{{ $data := .data }}
+
+{{ if $data }}
+  {{ $items := cond (reflect.IsSlice $data) $data (slice $data) }}
+
+  {{ range $items }}
+    {{ $match := findRESubmatch `^(.*?)(?:\+{3}|/{3}|:{3}|[:ः])(.*)$` . }}
+    {{ if $match }}
+      {{ $item := index $match 0 }}
+      <p><b>{{ index $item 1 | strings.TrimSpace | safeHTML }}</b>: {{ index $item 2 | strings.TrimSpace | safeHTML }}</p>
+    {{ else }}
+      <p>{{ . | strings.TrimSpace | safeHTML }}</p>
+    {{ end }}
+  {{ end }}
+{{ end }}

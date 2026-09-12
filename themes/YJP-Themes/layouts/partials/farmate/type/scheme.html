@@ -1,0 +1,129 @@
+{{ partial "farmate/sticky-anchor.html" . }}
+
+<div class="yp-container">
+  <div class="post-card">
+    
+    {{/* Scheme Title & Department */}}
+    <section class="scheme-box">
+      {{ with .Params.Department }}
+        <div class="department-badge">{{ . }}</div>
+      {{ end }}
+
+      {{ if or .Params.SchemeName .Params.state }}
+        <div class="scheme-title">
+          {{ with .Params.SchemeName }}{{ . }}{{ end }}
+          {{ if and .Params.SchemeName .Params.state }}
+            <span class="separator"> - </span>
+          {{ end }}
+          {{ with .Params.state }}
+            <span class="state-name">{{ . }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
+    </section>
+
+    {{/* 1. Whatis Section (Paragraphs) */}}
+    {{ if .Params.Whatis }}
+      <div class="section" id="Whatis">
+        <h2>🔸<strong>{{ .Params.YojnaName }} क्या है ?</strong></h2>
+        {{ partial "farmate/render-content.html" (dict "data" .Params.Whatis) }}
+      </div>
+    {{ end }}
+
+    {{/* 2. Objective Section (Paragraphs) */}}
+    {{ if .Params.objective }}
+      <div class="section" id="objective">
+        <h3>🔸{{ .Params.YojnaName }} का उद्देश्य (Objective)</h3>
+        {{ partial "farmate/render-content.html" (dict "data" .Params.objective) }}
+      </div>
+    {{ end }}
+
+    {{/* 3. Important Dates (List) */}}
+    {{ if .Params.impdates }}
+      <div class="section" id="impdates">
+        <h3>🔸{{ .Params.YojnaName }} महत्वपूर्ण तिथियाँ (Important Dates)</h3>
+        {{ partial "farmate/render-list.html" (dict "data" .Params.impdates) }}
+      </div>
+    {{ end }}
+
+
+    {{/* 4. Eligibility (List) */}}
+    {{ if .Params.eligibility }}
+      <div class="section" id="eligibility">
+        <h3>🔸{{ .Params.YojnaName }} हेतु पात्रता (Eligibility)</h3>
+        {{ partial "farmate/render-list.html" (dict "data" .Params.eligibility) }}
+      </div>
+    {{ end }}
+
+    {{/* 5. Benefits (List) */}}
+    {{ if .Params.benefits }}
+      <div class="section" id="benefits">
+        <h3>🔸{{ .Params.YojnaName }} से लाभ (Benefits)</h3>
+        {{ partial "farmate/render-list.html" (dict "data" .Params.benefits) }}
+      </div>
+    {{ end }}
+
+    {{/* 6. Documents (List) */}}
+    {{ if .Params.documents }}
+      <div class="section" id="documents">
+        <h3>🔸{{ .Params.YojnaName }} के लिए आवश्यक दस्तावेज़ (Required Documents)</h3>
+        {{ partial "farmate/render-list.html" (dict "data" .Params.documents) }}
+      </div>
+    {{ end }}
+
+    {{/* 7. How to Apply (Online / Offline / Steps) */}}
+    {{ if or .Params.how_to .Params.apply_online .Params.apply_offline .Params.how_to_offline }}
+      <div class="section" id="how_to">
+        <h3>🔸{{ .Params.YojnaName }} के लिए आवेदन प्रक्रिया (How to Apply)</h3>
+        {{ if .Params.how_to }}
+          {{ partial "farmate/render-list.html" (dict "data" .Params.how_to "ordered" true) }}
+        {{ end }}
+        {{ if .Params.apply_online }}
+          {{ partial "farmate/parts/scheme/how_to.html" . }}
+        {{ end }}
+        {{ if .Params.apply_offline }}
+          {{ partial "farmate/parts/scheme/how_to_offline.html" . }}
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{/* 8. Conclusion */}}
+    {{ if .Params.conclusion }}
+      <div class="section" id="conclusion">
+        <h3>🔚{{ .Params.YojnaName }} का निष्कर्ष (Conclusion)</h3>
+       {{ partial "farmate/render-list.html" (dict "data" .Params.benefits) }}
+      </div>
+    {{ end }}
+
+    {{/* 9. FAQs */}}
+    {{ if .Params.faqs }}
+      <div class="faqs" id="faqs">
+        <b>🙋‍♀️ अक्सर पूछे जाने वाले प्रश्न - {{ .Params.YojnaName }}</b>
+        <div class="faq">
+          {{ partial "farmate/summary-faqs.html" . }}
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* Main Post Content */}}
+    <div class="content" id="content">
+      {{ .Content }}
+    </div>
+
+
+    {{/* Links Table */}}
+    {{ if .Params.links }}
+      <div class="yp-table-wrapper" id="links">
+        {{ partial "farmate/link-table.html" . }}
+      </div>
+    {{ end }}
+
+    {{ partial "farmate/imageBanner.html" . }}
+
+    {{/* Important Note Notice */}}
+    {{ if .Params.impnote }}
+      <p class="notice">{{ .Params.impnote | safeHTML }}</p>
+    {{ end }}
+
+  </div>
+</div>

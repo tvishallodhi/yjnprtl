@@ -1,0 +1,30 @@
+{{ with .Params.faqs }}
+<div class="faq-container">
+  {{ range . }}
+    {{/* '~~~', '///', ':::', '+++' sabhi ko support karne ke liye regex */}}
+    {{ $match := findRESubmatch `^(.*?)(?:~{3}|/{3}|:{3}|\+{3})(.*)$` . }}
+
+    <details class="faq-item">
+      {{ if $match }}
+        {{ $item := index $match 0 }}
+        {{ $rawQuestion := index $item 1 | strings.TrimSpace }}
+        {{/* Agar question me pehle se ? hai to duplicate na bane */}}
+        {{ $cleanQuestion := strings.TrimRight "?" $rawQuestion }}
+
+        <summary class="faq-summary">
+          <span class="faq-icon">❓</span>
+          <span class="faq-question">{{ $cleanQuestion | safeHTML }}?</span>
+        </summary>
+        <div class="faq-answer">
+          <p>{{ index $item 2 | strings.TrimSpace | safeHTML }}</p>
+        </div>
+      {{ else }}
+        <summary class="faq-summary">
+          <span class="faq-icon">❓</span>
+          <span class="faq-question">{{ . | strings.TrimSpace | safeHTML }}</span>
+        </summary>
+      {{ end }}
+    </details>
+  {{ end }}
+</div>
+{{ end }}

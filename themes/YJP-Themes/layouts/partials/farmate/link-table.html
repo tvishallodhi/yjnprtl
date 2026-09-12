@@ -1,0 +1,32 @@
+{{ with .Params.links.item }}
+<table class="yp-table">
+  <thead>
+    <tr>
+      <th scope="col">Important Links</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range . }}
+      <tr>
+        <td>{{ .title | safeHTML }}</td>
+        <td>
+          {{ with .actions }}
+            {{ range $index, $act := . }}
+              {{ if gt $index 0 }}<span class="link-separator"> | </span>{{ end }}
+              <a href="{{ $act.url | safeURL }}" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 title="Go to {{ $act.name }}'s external page">
+                {{ $act.name }}
+              </a>
+            {{ end }}
+          {{ else }}
+            <span>—</span>
+          {{ end }}
+        </td>
+      </tr>
+    {{ end }}
+  </tbody>
+</table>
+{{ end }}

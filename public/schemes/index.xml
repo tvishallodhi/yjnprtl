@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Schemes on YojanaPortal</title>
+    <link>http://localhost:1313/schemes/</link>
+    <description>Recent content in Schemes on YojanaPortal</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Jul 2026 15:46:43 +0530</lastBuildDate>
+    <atom:link href="http://localhost:1313/schemes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Farmer Registry | Kisan ID Apply Online</title>
+      <link>http://localhost:1313/farmer-registry/</link>
+      <pubDate>Mon, 27 Jul 2026 15:46:43 +0530</pubDate>
+      <guid>http://localhost:1313/farmer-registry/</guid>
+      <description>Farmer ID भारत सरकार की डिजिटल एग्रीकल्चर मिशन (AgriStack) के अंतर्गत जारी की जाने वाली एक यूनिक डिजिटल पहचान है। इसका उद्देश्य किसानों का सत्यापित डिजिटल रिकॉर्ड तैयार करना तथा उन्हें सरकारी योजनाओं, कृषि सब्सिडी, किसान क्रेडिट कार्ड (KCC), फसल बीमा और अन्य कृषि सेवाओं का लाभ आसानी से उपलब्ध कराना है। Farmer ID आधार एवं भूमि रिकॉर्ड से जुड़ी होती है और इसका पंजीकरण राज्य सरकारों के माध्यम से चरणबद्ध तरीके से किया जा रहा है।</description>
+    </item>
+  </channel>
+</rss>

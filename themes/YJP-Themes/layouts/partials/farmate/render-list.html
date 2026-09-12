@@ -1,0 +1,25 @@
+{{/* 
+  Usage: 
+  Bullet list:  {{ partial "farmate/render-list.html" (dict "data" .Params.fieldName) }}
+  Numbered list: {{ partial "farmate/render-list.html" (dict "data" .Params.fieldName "ordered" true) }}
+*/}}
+{{ $data := .data }}
+{{ $isOrdered := default false .ordered }}
+
+{{ if $data }}
+  {{ $items := cond (reflect.IsSlice $data) $data (slice $data) }}
+
+  {{ if $isOrdered }}<ol class="scheme-list ordered-list">{{ else }}<ul class="scheme-list unordered-list">{{ end }}
+    {{ range $items }}
+      {{ $match := findRESubmatch `^(.*?)(?:\+{3}|/{3}|:{3}|[:ः])(.*)$` . }}
+      <li>
+        {{ if $match }}
+          {{ $item := index $match 0 }}
+          <b>{{ index $item 1 | strings.TrimSpace | safeHTML }}</b>: {{ index $item 2 | strings.TrimSpace | safeHTML }}
+        {{ else }}
+          {{ . | strings.TrimSpace | safeHTML }}
+        {{ end }}
+      </li>
+    {{ end }}
+  {{ if $isOrdered }}</ol>{{ else }}</ul>{{ end }}
+{{ end }}

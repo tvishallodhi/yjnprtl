@@ -1,0 +1,40 @@
+{{ with .Params.imageBanner }}
+  {{ $img := "" }}
+  {{ $isRemote := or (hasPrefix . "http://") (hasPrefix . "https://") }}
+
+  {{ if $isRemote }}
+    {{/* Hugo v0.141.0+ try block remote download ke liye */}}
+    {{ with try (resources.GetRemote .) }}
+      {{ with .Err }}
+        {{/* Download fail hone par console me warn karega, build crash nahi hoga */}}
+        {{ warnf "%s" . }}
+      {{ else }}
+        {{ $img = .Value }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ $img = resources.Get . }}
+  {{ end }}
+
+  <div class="image-banner-wrapper" id="image-banner">
+    {{ if $img }}
+      {{ $webp := $img.Process "resize 600x webp q85" }}
+      <img src="{{ $webp.RelPermalink }}" 
+           width="{{ $webp.Width }}" 
+           height="{{ $webp.Height }}" 
+           loading="lazy" 
+           decoding="async" 
+           referrerpolicy="no-referrer"
+           alt="{{ $.Title }} | www.YojnaPortal.com"
+           style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+    {{ else }}
+      {{/* Fallback: Static folder ya direct URL */}}
+      <img src="{{ . | safeURL }}" 
+           loading="lazy" 
+           decoding="async" 
+           referrerpolicy="no-referrer"
+           alt="{{ $.Title }} | www.YojnaPortal.com"
+           style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+    {{ end }}
+  </div>
+{{ end }}

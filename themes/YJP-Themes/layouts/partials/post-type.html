@@ -1,14 +1,7 @@
 {{ $type := .Type | default .Params.type | default "default" }}
 <div class="post-type-structural-frame post--{{ $type }}">
-  {{ if eq $type "schemes" }}
-    <div class="meta-section schemes-overview"><div class="meta-title">Overview</div><div class="meta-content">{{ .Params.overview }}</div></div>
-    <div class="meta-section schemes-eligibility"><div class="meta-title">Eligibility</div><div class="meta-content">{{ .Params.eligibility }}</div></div>
-    <div class="meta-section schemes-benefits"><div class="meta-title">Benefits</div><div class="meta-content">{{ .Params.benefits }}</div></div>
-    <div class="meta-section schemes-dates"><div class="meta-title">Important Dates</div><div class="meta-content">{{ .Params.dates }}</div></div>
-    <div class="meta-section schemes-documents"><div class="meta-title">Required Documents</div><div class="meta-content">{{ .Params.documents }}</div></div>
-    <div class="meta-section schemes-apply"><div class="meta-title">Application Information</div><div class="meta-content">{{ .Params.application_info }}</div></div>
-    <div class="meta-section schemes-links"><div class="meta-title">Important Links</div><div class="meta-content">{{ .Params.links }}</div></div>
-
+  {{ if eq $type "Scheme" }}
+       {{ partial "farmate/type/scheme.html" . }}
   {{ else if eq $type "jobs" }}
     <div class="meta-section job-org"><div class="meta-title">Organization</div><div class="meta-content">{{ .Params.organization }}</div></div>
     <div class="meta-section job-post"><div class="meta-title">Post Title</div><div class="meta-content">{{ .Params.post_title }}</div></div>
