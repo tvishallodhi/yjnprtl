@@ -86,6 +86,9 @@ body {
   margin-bottom: 24px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--border-color);
+
+
+  
 }
 
 .section:last-of-type {
@@ -94,11 +97,19 @@ body {
 
 .section h2, 
 .section h3 {
-  color: var(--text-main);
+    border-radius: 8px;
+    padding: 5px 5px;
+    
+    /* Soft Shadow */
+    box-shadow: var(--box-shadow);
+
+    
+  color: var(--heading);
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 6px;
+  font-weight: 700;
 }
 
 .section h2 {
@@ -326,8 +337,8 @@ html {
   position: sticky;
   top: var(--tot-nav-offset, 0px);
   z-index: 995;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
+  background-color:var(--bg-primary);
+  border-bottom: 1px solid var(--primary);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   width: 100%;
   display: flex;
@@ -358,19 +369,20 @@ html {
   align-items: center;
   padding: 6px 14px;
   font-size: 13.5px;
-  font-weight: 500;
-  color: #4a5568;
+  font-weight: 700;
+   color: var(--primary-color);
   text-decoration: none;
-  background-color: #f1f5f9;
+  background-color: var(--primary);
   border-radius: 9999px;
+  box-shadow: var(--box-shadow);
   border: 1px solid #e2e8f0;
   flex-shrink: 0;
   transition: all 0.2s ease;
 }
 
 .anchor-link:hover {
-  background-color: #e2e8f0;
-  color: #0f172a;
+  background-color:  var(--primary);
+  color: var(--heading);
 }
 
 .anchor-link.active {
@@ -411,7 +423,7 @@ html {
 
 /* Target Section Offset */
 [id] {
-  scroll-margin-top: calc(var(--tot-nav-offset, 0px) + 50px);
+  scroll-margin-top: calc(var(--tot-nav-offset, 0px) + 60px);
 }
 /* =========================================================
    9. MOBILE RESPONSIVENESS
@@ -461,5 +473,4 @@ html {
   right: 0;
   width: 100%;
   z-index: 999;
-  background-color: #ffffff;
 }

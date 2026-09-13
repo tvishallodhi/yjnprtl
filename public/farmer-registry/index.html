@@ -34,7 +34,7 @@
 <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
 
 
-<link rel="stylesheet" href="/css/bundle.min.f37f96357090ccc472c4297392ff74e4c4ee6f191a70d78c80d755f0711c4640.css" integrity="sha256-83&#43;WNXCQzMRyxClzkv905MTubxkacNeMgNdV8HEcRkA=">
+<link rel="stylesheet" href="/css/bundle.min.105bcf9dd9b643f020d8821bcde13653bb58f05a957650dd2acfb13aa3241e5d.css" integrity="sha256-EFvPndm2Q/Ag2IIbzeE2U7tY8FqVdlDdKs&#43;xOqMkHl0=">
 
 
 
@@ -65,7 +65,7 @@
     
       
         
-        <link rel="stylesheet" href="/css/posts/scheme.min.07975a11864ef43be2ea427b6891bde83cd2f4d4d57c42aa7205154781b1d2fc.css" integrity="sha256-B5daEYZO9Dvi6kJ7aJG96DzS9NTVfEKqcgUVR4Gx0vw=" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/posts/scheme.min.32fe04e84d70fbb56e2b62daa84f13703b49f0b55142f92975a9161acefddda4.css" integrity="sha256-Mv4E6E1w&#43;7VuK2LaqE8TcDtJ8LVRQvkpdakWGs793aQ=" crossorigin="anonymous">
       
     
   
@@ -1693,7 +1693,29 @@
 </nav>
 
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("stickyTrack");
+  const leftBtn = document.getElementById("scrollLeftBtn");
+  const rightBtn = document.getElementById("scrollRightBtn");
 
+  if (!track || !leftBtn || !rightBtn) return;
+
+  const updateArrows = () => {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    leftBtn.hidden = track.scrollLeft <= 5;
+    rightBtn.hidden = maxScroll <= 5 || track.scrollLeft >= maxScroll - 5;
+  };
+
+  leftBtn.addEventListener("click", () => track.scrollBy({ left: -200, behavior: "smooth" }));
+  rightBtn.addEventListener("click", () => track.scrollBy({ left: 200, behavior: "smooth" }));
+
+  track.addEventListener("scroll", updateArrows);
+  window.addEventListener("resize", updateArrows);
+
+  updateArrows();
+});
+</script>
 
 <div class="yp-container">
   <div class="post-card">
@@ -1719,7 +1741,7 @@
 
     
     
-      <div class="section" id="Whatis">
+      <div class="section" id="whatis">
         <h2>🔸<strong>Farmer ID / Farmer Registry / किसान आईडी क्या है ?</strong></h2>
         
 
