@@ -11,8 +11,11 @@ html, body {
   background-color: var(--bg-primary);
   color: var(--text-main);
   line-height: 1.5;
-  overflow-x: hidden;
+   overflow: visible !important;
+  overflow-x: clip !important; 
 }
+
+
 
 .visually-hidden-focusable:not(:focus):not(:focus-within) {
   position: absolute;

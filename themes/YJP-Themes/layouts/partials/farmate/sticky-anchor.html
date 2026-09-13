@@ -1,6 +1,6 @@
 {{/* STEP 1: Define Navigation Items */}}
 {{ $navItems := slice
-  (dict "key" "Whatis"       "label" "संक्षिप्त जानकारी")
+  (dict "key" "whatis"       "label" "संक्षिप्त जानकारी")
   (dict "key" "objective"    "label" "🎯 उद्देश्य")
   (dict "key" "impdates"     "label" "📅 तारीख")
   (dict "key" "benefits"     "label" "💰 लाभ")
@@ -12,29 +12,45 @@
   (dict "key" "links"        "label" "🔗 महत्वपूर्ण लिंक")
 }}
 
-{{/* STEP 2: Filter Active Items (Single Pass) */}}
+{{/* STEP 2: Filter Active Items using 'with' / proper emptiness checks */}}
 {{ $activeLinks := slice }}
-{{ range $navItems }}
-  {{ $exists := false }}
-  {{ if eq .key "content" }}
-    {{/* .Content ke liye alag check */}}
-    {{ if $.Content }}{{ $exists = true }}{{ end }}
-  {{ else }}
-    {{ if index $.Params .key }}{{ $exists = true }}{{ end }}
-  {{ end }}
 
-  {{ if $exists }}
-    {{ $activeLinks = $activeLinks | append . }}
+{{ range $navItems }}
+  {{ $key := .key }}
+  {{ $item := . }}
+
+  {{ if eq $key "content" }}
+    {{/* Markdown body content check */}}
+    {{ with $.Content }}
+      {{ $activeLinks = $activeLinks | append $item }}
+    {{ end }}
+  {{ else }}
+    {{/* Front-matter param check (checks lowercase and existence with 'with') */}}
+    {{ with (index $.Params (lower $key)) }}
+      {{/* Agar param empty string, empty slice ya false nahi hai to hi add hoga */}}
+      {{ if . }}
+        {{ $activeLinks = $activeLinks | append $item }}
+      {{ end }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
-{{/* STEP 3: Render Nav only if active items exist */}}
+{{/* STEP 3: Render Nav with Left/Right Scroll Arrows */}}
 {{ if gt (len $activeLinks) 0 }}
 <nav class="sticky-anchor" aria-label="Table of Contents">
-  <div class="sticky-anchor-track">
+  <button type="button" class="nav-arrow nav-arrow-left" id="scrollLeftBtn" aria-label="Scroll left" hidden>
+    &#10094;
+  </button>
+
+  <div class="sticky-anchor-track" id="stickyTrack">
     {{ range $activeLinks }}
       <a href="#{{ .key }}" class="anchor-link">{{ .label }}</a>
     {{ end }}
   </div>
+
+  <button type="button" class="nav-arrow nav-arrow-right" id="scrollRightBtn" aria-label="Scroll right" hidden>
+    &#10095;
+  </button>
 </nav>
 {{ end }}
+
