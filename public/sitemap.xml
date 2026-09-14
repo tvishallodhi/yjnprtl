@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/jobs/</loc>
+    <lastmod>2026-09-14T09:52:43+05:30</lastmod>
+  </url><url>
     <loc>http://localhost:1313/mp/kalyani-sahayata-yojana-mp/</loc>
     <lastmod>2026-09-09T19:30:54+05:30</lastmod>
   </url><url>
@@ -56,8 +59,6 @@
     <loc>http://localhost:1313/pages/disclaimer/</loc>
   </url><url>
     <loc>http://localhost:1313/pages/dmca/</loc>
-  </url><url>
-    <loc>http://localhost:1313/jobs/</loc>
   </url><url>
     <loc>http://localhost:1313/pages/</loc>
   </url><url>

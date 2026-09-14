@@ -2,18 +2,8 @@
 <div class="post-type-structural-frame post--{{ $type }}">
   {{ if eq $type "Scheme" }}
        {{ partial "farmate/type/scheme.html" . }}
-  {{ else if eq $type "jobs" }}
-    <div class="meta-section job-org"><div class="meta-title">Organization</div><div class="meta-content">{{ .Params.organization }}</div></div>
-    <div class="meta-section job-post"><div class="meta-title">Post Title</div><div class="meta-content">{{ .Params.post_title }}</div></div>
-    <div class="meta-section job-dates"><div class="meta-title">Important Dates</div><div class="meta-content">{{ .Params.dates }}</div></div>
-    <div class="meta-section job-vacancy"><div class="meta-title">Vacancy</div><div class="meta-content">{{ .Params.vacancy }}</div></div>
-    <div class="meta-section job-eligibility"><div class="meta-title">Eligibility</div><div class="meta-content">{{ .Params.eligibility }}</div></div>
-    <div class="meta-section job-age"><div class="meta-title">Age Limit</div><div class="meta-content">{{ .Params.age_limit }}</div></div>
-    <div class="meta-section job-fee"><div class="meta-title">Application Fee</div><div class="meta-content">{{ .Params.application_fee }}</div></div>
-    <div class="meta-section job-selection"><div class="meta-title">Selection Process</div><div class="meta-content">{{ .Params.selection_process }}</div></div>
-    <div class="meta-section job-salary"><div class="meta-title">Salary / Pay Scale</div><div class="meta-content">{{ .Params.salary }}</div></div>
-    <div class="meta-section job-links"><div class="meta-title">Important Links</div><div class="meta-content">{{ .Params.links }}</div></div>
-
+  {{ else if eq $type "Recruitment" }}
+     {{ partial "farmate/type/Recruitment.html" . }}
   {{ else if eq $type "admission" }}
     <div class="meta-section adm-overview"><div class="meta-title">Admission Overview</div><div class="meta-content">{{ .Params.overview }}</div></div>
     <div class="meta-section adm-dates"><div class="meta-title">Important Dates</div><div class="meta-content">{{ .Params.dates }}</div></div>

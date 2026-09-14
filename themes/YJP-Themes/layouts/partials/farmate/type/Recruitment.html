@@ -1,0 +1,425 @@
+<article class="job-container">
+
+  <!-- Title / H1 -->
+ 
+    <p class="post-meta">
+      <strong>Post Date:</strong> {{ .Params.notificationdate }} | 
+      <strong>Category:</strong> {{ .Params.category }} | 
+      <strong>State:</strong> {{ .Params.State }}
+    </p>
+ 
+
+  <!-- Quick Info Highlights Box -->
+  <div class="summary-card">
+    <span class="badge-status">Active Notification</span>
+    <h2>{{ .Params.recruitment }}</h2>
+    <p class="dept-name"><strong>Department:</strong> {{ .Params.Department }}</p>
+    <p class="advt-no"><strong>Advt No:</strong> {{ .Params.Notification }}</p>
+
+    <div class="grid-cards">
+      <div class="card-item">
+        <span class="label">Total Vacancies</span>
+        <span class="val">{{ .Params.totalPost }} Posts</span>
+      </div>
+      <div class="card-item">
+        <span class="label">Job Location</span>
+        <span class="val">{{ .Params.State }}</span>
+      </div>
+      <div class="card-item">
+        <span class="label">Gender Eligible</span>
+        <span class="val">{{ .Params.candidates }}</span>
+      </div>
+      <div class="card-item">
+        <span class="label">Application Mode</span>
+        <span class="val">Online</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Short Summary -->
+  {{ with .Params.shortinfo }}
+  <section class="section-block">
+    <h2>Short Information</h2>
+    {{ range . }}
+      <p>{{ . }}</p>
+    {{ end }}
+  </section>
+  {{ end }}
+
+  <!-- Important Dates & Application Fee (Side-by-Side) -->
+  <div class="two-col-grid">
+    
+    <!-- Dates Section -->
+    <div class="col-box">
+      <h2>Important Dates</h2>
+      <ul class="clean-list">
+        {{ range .Params.impdates }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+
+    <!-- Application Fees Section -->
+    <div class="col-box">
+      <h2>Application Fee</h2>
+      <ul class="clean-list fee-list">
+        {{ range .Params.applyfees }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Age Limit -->
+  <section class="section-block">
+    <h2>Age Limit</h2>
+    <div class="age-wrapper">
+      <ul class="clean-list">
+        {{ range .Params.age_limit }}
+          <li><strong>{{ . }}</strong></li>
+        {{ end }}
+      </ul>
+      <p class="note-text"><em>Age relaxation applicable as per official state rules.</em></p>
+    </div>
+  </section>
+
+  <!-- Vacancy & Eligibility Details -->
+  <section class="section-block">
+    <h2>Vacancy &amp; Qualification Details</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Post Name</th>
+            <th>Total Posts</th>
+            <th>Eligibility Criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>{{ .Params.PostName }}</strong></td>
+            <td><strong>{{ .Params.totalPost }}</strong></td>
+            <td>
+              <p>{{ .Params.eligibility }}</p>
+              <ul>
+                {{ range .Params.qualification }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Category-wise Post Distribution -->
+  {{ with .Params.castewise }}
+  <section class="section-block">
+    <h2>Post-Wise / Category-Wise Vacancy Distribution</h2>
+    <ul class="grid-list">
+      {{ range . }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  <!-- Physical Standards -->
+  {{ with .Params.physical }}
+  <section class="section-block">
+    <h2>Physical Standards &amp; Test (PMT / PET)</h2>
+    <ul class="clean-list">
+      {{ range . }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  <!-- Documents Required -->
+  {{ with .Params.documents }}
+  <section class="section-block">
+    <h2>Documents Required</h2>
+    <ul class="checklist">
+      {{ range . }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  <!-- How to Apply -->
+  {{ with .Params.how_to }}
+  <section class="section-block">
+    <h2>How to Apply Online</h2>
+    <ol class="steps-list">
+      {{ range . }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ol>
+  </section>
+  {{ end }}
+
+  <!-- Important Links CTA -->
+  <section class="section-block">
+    <h2>Important Links</h2>
+    <div class="action-buttons">
+      <a href="{{ .Params.OfficialSource }}" target="_blank" rel="noopener noreferrer" class="btn btn-apply">Apply Online</a>
+      <a href="{{ .Params.OfficialSource }}" target="_blank" rel="noopener noreferrer" class="btn btn-notify">Official Notification</a>
+      <a href="{{ .Params.OfficialSource }}" target="_blank" rel="noopener noreferrer" class="btn btn-portal">Official Website</a>
+      <span class="btn btn-disabled">Admit Card</span>
+      <span class="btn btn-disabled">{{ .Params.ResultName }}</span>
+    </div>
+  </section>
+
+  <!-- FAQs Accordion -->
+  {{ with .Params.faqs }}
+  <section class="section-block">
+    <h2>Frequently Asked Questions (FAQs)</h2>
+    <div class="faq-accordion">
+      {{ range . }}
+      <details>
+        <summary>{{ . }}</summary>
+        <p>Please refer to the official notification rulebook on {{ $.Params.OfficialSource }} for detailed guidelines.</p>
+      </details>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- Content Fallback (Markdown body text agar ho toh) -->
+  {{ if .Content }}
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+  {{ end }}
+
+  <!-- Disclaimer Box -->
+  <aside class="disclaimer">
+    <strong>Disclaimer:</strong> यह जानकारी केवल सूचनात्मक उद्देश्यों के लिए है। आवेदन करने से पहले अभ्यर्थी आधिकारिक पोर्टल ({{ .Params.OfficialSource }}) पर जाकर मूल विज्ञापन एवं नियमपुस्तिका (Rulebook) का मिलान अवश्य कर लें।
+  </aside>
+
+</article>
+
+<style>
+    .job-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+.breadcrumb a {
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.post-title {
+  font-size: 1.8rem;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.post-meta {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 24px;
+}
+
+.badge-status {
+  background: #15803d;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-weight: bold;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.card-item {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-item .label {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.card-item .val {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #0f172a;
+}
+
+.section-block {
+  margin: 28px 0;
+}
+
+.section-block h2 {
+  font-size: 1.3rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  color: #0f172a;
+}
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.col-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.col-box h2 {
+  font-size: 1.15rem;
+  border-bottom: 2px solid #cbd5e1;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+
+.clean-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.clean-list li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #cbd5e1;
+  font-size: 0.93rem;
+}
+
+.clean-list li:last-child {
+  border-bottom: none;
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+
+.checklist li {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+
+.checklist li::before {
+  content: "✔ ";
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.steps-list {
+  padding-left: 20px;
+}
+
+.steps-list li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+th {
+  background: #f1f5f9;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-apply { background: #2563eb; color: #fff; }
+.btn-notify { background: #0f172a; color: #fff; }
+.btn-portal { background: #fff; color: #1e293b; border: 1px solid #cbd5e1; }
+.btn-disabled { background: #e2e8f0; color: #64748b; cursor: not-allowed; }
+
+.faq-accordion details {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.faq-accordion summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.disclaimer {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: #92400e;
+  margin-top: 30px;
+  border-radius: 0 6px 6px 0;
+}
+</style>
