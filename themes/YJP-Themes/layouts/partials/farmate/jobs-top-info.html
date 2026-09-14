@@ -1,0 +1,58 @@
+<div class="topinfo">
+  <!-- Name of Post -->
+  <div class="info-row">
+    <div class="info-label">Name of Post:</div>
+    <div class="info-value post-title">
+      {{ with .Params.seo_title }}{{ . }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+    </div>
+  </div>
+
+  <!-- Post Date / Update -->
+  <div class="info-row">
+    <div class="info-label">Post Date / Update:</div>
+    <div class="info-value">
+      <b>{{ .Date | time.Format "02/01/2006 | 03:04 PM" }}</b>
+    </div>
+  </div>
+
+  <!-- Whats New -->
+  {{ with .Params.WhatsNew }}
+  <div class="info-row">
+    <div class="info-label">Whats New:</div>
+    <div class="info-value">
+      {{ partial "farmate/parts/jobsupdate/whatsnew" . }}
+    </div>
+  </div>
+  {{ end }}
+
+  <!-- Short Information -->
+  <div class="info-row">
+    <div class="info-label">Short Information:</div>
+    <div class="info-value">
+      <a href="{{ .Params.OfficialSource }}" target="_blank" class="dept-link">
+        {{ .Params.department }}
+      </a> has released an 
+      <span class="tooltip">Official Notification 
+        <span class="tooltiptext">{{ .Params.Notification }}</span>
+      </span> 
+      of <b>{{ .Params.postName }}</b>. The application process will be open from 
+      <b>{{ with .Params.begindate }}{{ . | time.Format "02 Jan" }}{{ end }}</b> to 
+      <b>{{ with .Params.lastdate }}{{ . | time.Format "02 Jan 2006" }}{{ end }}</b>. 
+      Candidates must meet the required eligibility criteria including <b>{{ .Params.qualified }}</b>. 
+      As per the official notification, <b>{{ .Params.postdetails }}</b>. Interested candidates are advised to check the important dates and ensure they apply before the last date. For complete information, download the official notification and apply online using the links provided below.
+    </div>
+  </div>
+
+  <!-- Notification -->
+  {{ if .Params.Notification }}
+  <div class="info-row">
+    <div class="info-label">Notification:</div>
+    <div class="info-value">
+      <span class="notification-text">{{ .Params.Notification | default "N/A" }}</span>
+      {{ with .Params.notificationdate }}
+        <span>(Dated: {{ . | time.Format "02 January 2006" }})</span>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>

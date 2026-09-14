@@ -1,0 +1,23 @@
+{{- $text := . | default "" -}}
+
+{{- if $text -}}
+  {{- /* 1. Bullet point add karein <li> ke aage */ -}}
+  {{- $text = replaceRE "(?i)<li[^>]*>" "• " $text -}}
+
+  {{- /* 2. </li> aur har tarah ke <br>, <br/>, <br /> ko separator banayein */ -}}
+  {{- $text = replaceRE "(?i)</li>|<br\\s*/?>" " | " $text -}}
+
+  {{- /* 3. Baaki bache HTML tags (ul, ol, p vagera) saaf karein */ -}}
+  {{- $text = $text | plainify -}}
+
+  {{- /* 4. Extra spaces aur newline ko single space banayein */ -}}
+  {{- $text = replaceRE "\\s+" " " $text -}}
+
+  {{- /* 5. Duplicate separators (||) hatayein */ -}}
+  {{- $text = replaceRE "(\\s*\\|\\s*)+" " | " $text -}}
+
+  {{- /* 6. Shuru aur aakhir ke pipe (|) aur space trim karein */ -}}
+  {{- $text = replaceRE "^(\\s*\\|\\s*)+|(\\s*\\|\\s*)+$" "" $text -}}
+
+  {{- $text | safeHTML -}}
+{{- end -}}

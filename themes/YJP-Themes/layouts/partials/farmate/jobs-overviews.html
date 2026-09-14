@@ -1,0 +1,57 @@
+{{/* 1. Data Definition with default empty keys */}}
+{{ $rows := slice
+  (dict "icon" "📰" "label" "Post Name"     "val" .Params.postName                          "type" "text" "class" "text-green bold")
+  (dict "icon" "🔖" "label" "Vacancy"       "val" .Params.totalPost                         "type" "text" "class" "")
+  (dict "icon" "📍" "label" "Domicile"      "val" .Params.Domicile                          "type" "text" "class" "")
+  (dict "icon" "🎓" "label" "Qualification" "val" .Params.Eligibility                       "type" "text" "class" "")
+  (dict "icon" "👥" "label" "Candidates"    "val" .Params.candidates                        "type" "text" "class" "")
+  (dict "icon" "👨🏼‍🎓" "label" "Age Limit"    "val" .Params.age_limit                         "type" "age"  "class" "")
+  (dict "icon" "📅" "label" "Apply Date"    "val" (or .Params.lastdate .Params.begindate)   "type" "date" "class" "text-red bold")
+  (dict "icon" "🏬" "label" "Department"    "val" .Params.OfficialSource                    "type" "link" "class" "")
+}}
+
+{{/* 2. Safe Card Render Loop */}}
+<div class="yp-card">
+  <div class="yp-header">
+    <div class="yp-col-title">Highlight</div>
+    <div class="yp-col-title">Overviews</div>
+  </div>
+
+  <div class="yp-body">
+    {{ range $rows }}
+      {{/* Sirf tabhi render hoga agar val exist karti ho */}}
+      {{ if .val }}
+      <div class="yp-row">
+        <div class="yp-label">{{ .icon }} {{ .label }}</div>
+        <div class="yp-value{{ with .class }} {{ . }}{{ end }}">
+
+          {{/* Case 1: Age Limit Array */}}
+          {{ if eq .type "age" }}
+            {{ range $idx, $item := .val }}
+              {{ if $idx }}<span class="separator">|</span>{{ end }}
+              {{ partial "imp-codes/cleanlist.html" $item | safeHTML }}
+            {{ end }}
+
+          {{/* Case 2: Date Range */}}
+          {{ else if eq .type "date" }}
+            {{ with $.Params.begindate }}{{ . | time.Format "02 Jan" }}{{ end }}
+            {{ if and $.Params.begindate $.Params.lastdate }} to {{ end }}
+            {{ with $.Params.lastdate }}{{ . | time.Format "02 Jan 2006" }}{{ end }}
+
+          {{/* Case 3: External URL Link */}}
+          {{ else if eq .type "link" }}
+            <a href="{{ .val | safeURL }}" target="_blank" rel="noopener noreferrer">
+              {{ $.Params.department | default "Official Website" }}
+            </a>
+
+          {{/* Case 4: Default Text / HTML */}}
+          {{ else }}
+            {{ .val | safeHTML }}
+          {{ end }}
+
+        </div>
+      </div>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>

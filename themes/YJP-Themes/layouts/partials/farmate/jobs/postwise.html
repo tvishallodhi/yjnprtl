@@ -1,0 +1,60 @@
+<section class="section-block">
+  <h2>Vacancy &amp; Qualification Details</h2>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Post Name</th>
+          <th>Total Posts</th>
+          <th>Eligibility Criteria</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {{ $totalPosts := 0 }}
+
+        {{ range .Params.postswise }}
+          {{ $groupRows := len .posts }}
+          {{ $eligibility := .eligibility }}
+          {{ $qualification := .qualification }}
+
+          {{ range $index, $post := .posts }}
+            {{ $count := cast.ToInt $post.total }}
+            {{ $totalPosts = add $totalPosts $count }}
+
+            <tr>
+              <td><strong>{{ $post.name }}</strong></td>
+              <td><strong>{{ $post.total }}</strong></td>
+
+              {{/* Pehli row me rowspan lagana hai baaki rows me skip karna hai */}}
+              {{ if eq $index 0 }}
+                <td rowspan="{{ $groupRows }}" class="merged-cell">
+                  {{ with $eligibility }}
+                    <p>{{ . | safeHTML }}</p>
+                  {{ end }}
+
+                  {{ with $qualification }}
+                    <ul class="clean-list">
+                      {{ range . }}
+                        <li>{{ . | safeHTML }}</li>
+                      {{ end }}
+                    </ul>
+                  {{ end }}
+                </td>
+              {{ end }}
+            </tr>
+          {{ end }}
+        {{ end }}
+      </tbody>
+
+      <tfoot>
+        <tr class="total-row">
+          <td><strong>Total</strong></td>
+          <td><strong>{{ $totalPosts }}</strong></td>
+          <td><strong>All Posts</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>

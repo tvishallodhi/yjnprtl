@@ -1,14 +1,9 @@
 <article class="job-container">
 
   <!-- Title / H1 -->
- 
-    <p class="post-meta">
-      <strong>Post Date:</strong> {{ .Params.notificationdate }} | 
-      <strong>Category:</strong> {{ .Params.category }} | 
-      <strong>State:</strong> {{ .Params.State }}
-    </p>
- 
+ {{ partial "farmate/jobs-top-info.html" . }}
 
+ 
   <!-- Quick Info Highlights Box -->
   <div class="summary-card">
     <span class="badge-status">Active Notification</span>
@@ -35,7 +30,7 @@
       </div>
     </div>
   </div>
-
+ {{ partial "farmate/jobs-overviews.html" . }}
   <!-- Short Summary -->
   {{ with .Params.shortinfo }}
   <section class="section-block">
@@ -85,35 +80,7 @@
   </section>
 
   <!-- Vacancy & Eligibility Details -->
-  <section class="section-block">
-    <h2>Vacancy &amp; Qualification Details</h2>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th>Post Name</th>
-            <th>Total Posts</th>
-            <th>Eligibility Criteria</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>{{ .Params.PostName }}</strong></td>
-            <td><strong>{{ .Params.totalPost }}</strong></td>
-            <td>
-              <p>{{ .Params.eligibility }}</p>
-              <ul>
-                {{ range .Params.qualification }}
-                  <li>{{ . }}</li>
-                {{ end }}
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
+ {{ partial "farmate/jobs/postwise.html" . }}
   <!-- Category-wise Post Distribution -->
   {{ with .Params.castewise }}
   <section class="section-block">
@@ -204,6 +171,173 @@
 </article>
 
 <style>
+/* =========Job top info ===============*/
+.topinfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.info-row {
+  display: flex;
+  gap: 16px;
+}
+
+.info-label {
+  width: 180px;
+  flex-shrink: 0;
+  font-weight: 600;
+  color: #334155;
+}
+
+.info-value {
+  flex: 1;
+  color: #1e293b;
+  line-height: 1.5;
+}
+
+.post-title {
+  font-weight: bold;
+  color: #000;
+}
+
+.dept-link {
+  color: #006d09;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.notification-text {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* Mobile responsive layout */
+@media (max-width: 640px) {
+  .info-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .info-label {
+    width: 100%;
+  }
+}
+/* ========= overviews=============*/
+.text-green { color: #15803d; }
+.text-red { color: #dc2626; }
+.separator { color: #dc2626; margin: 0 4px; font-weight: bold; }
+
+/* Table Style */
+.yp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.yp-table th, .yp-table td {
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+}
+.yp-table th {
+  background: #f8fafc;
+  font-weight: 600;
+}
+
+/* Div Card Style */
+.yp-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+.yp-header {
+  display: flex;
+  background: #f8fafc;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 10px 14px;
+}
+.yp-row {
+  display: flex;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.yp-row:last-child {
+  border-bottom: none;
+}
+.yp-col-title:first-child, .yp-label {
+  width: 200px;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+.yp-col-title:last-child, .yp-value {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .yp-header { display: none; }
+  .yp-row { flex-direction: column; gap: 4px; }
+  .yp-label { width: 100%; }
+}
+/*============Post wise==============*/
+/* Container Scroll Wrapper */
+.section-block .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1rem 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+/* Scoped Table */
+.section-block table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+/* Scoped Table Cells */
+.section-block table th,
+.section-block table td {
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+/* Scoped Header */
+.section-block table thead th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+/* Merged Cell for Rowspan */
+.section-block table td.merged-cell {
+  vertical-align: middle;
+  background-color: #fafafa;
+}
+
+/* Scoped Footer / Total Row */
+.section-block .total-row {
+  background-color: #f1f5f9;
+  font-weight: bold;
+}
+
+/* Scoped Qualification List */
+.section-block .clean-list {
+  margin: 4px 0 0 0;
+  padding-left: 18px;
+  line-height: 1.5;
+}
+/*==============postwise==============*/
+
     .job-container {
   max-width: 960px;
   margin: 0 auto;
@@ -213,27 +347,7 @@
   line-height: 1.6;
 }
 
-.breadcrumb {
-  font-size: 0.85rem;
-  color: #64748b;
-  margin-bottom: 12px;
-}
-.breadcrumb a {
-  color: #1d4ed8;
-  text-decoration: none;
-}
 
-.post-title {
-  font-size: 1.8rem;
-  color: #0f172a;
-  margin-bottom: 6px;
-}
-
-.post-meta {
-  font-size: 0.88rem;
-  color: #64748b;
-  margin-bottom: 20px;
-}
 
 .summary-card {
   background: #f8fafc;
