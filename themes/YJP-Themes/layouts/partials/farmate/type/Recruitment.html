@@ -132,13 +132,12 @@
   <!-- Important Links CTA -->
   <section class="section-block">
     <h2>Important Links</h2>
-    <div class="action-buttons">
-      <a href="{{ .Params.OfficialSource }}" target="_blank" rel="noopener noreferrer" class="btn btn-apply">Apply Online</a>
-      <a href="{{ .Params.OfficialSource }}" target="_blank" rel="noopener noreferrer" class="btn btn-notify">Official Notification</a>
-      <a href="{{ .Params.OfficialSource }}" target="_blank" rel="noopener noreferrer" class="btn btn-portal">Official Website</a>
-      <span class="btn btn-disabled">Admit Card</span>
-      <span class="btn btn-disabled">{{ .Params.ResultName }}</span>
-    </div>
+       {{/* Links Table */}}
+    {{ if .Params.links }}
+      <div class="yp-table-wrapper" id="links">
+        {{ partial "farmate/link-table.html" . }}
+      </div>
+    {{ end }}
   </section>
 
   <!-- FAQs Accordion -->
