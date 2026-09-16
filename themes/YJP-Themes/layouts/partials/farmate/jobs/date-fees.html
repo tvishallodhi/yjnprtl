@@ -1,0 +1,22 @@
+<!-- Important Dates & Application Fee (Side-by-Side) -->
+  <div class="two-col-grid">
+    
+    <!-- Dates Section -->
+    <div class="col-box">
+      <h2>Important Dates</h2>
+      <ul class="clean-list">
+        {{ range .Params.impdates }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+    <!-- Application Fees Section -->
+    <div class="col-box">
+      <h2>Application Fee</h2>
+      <ul class="clean-list fee-list">
+        {{ range .Params.applyfees }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>

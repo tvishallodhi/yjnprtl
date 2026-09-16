@@ -1,0 +1,30 @@
+{{ with .Params.impdates }}
+<div class="impdates">
+  <ul>
+  {{ range . }}
+  {{ $step1 := replace . ":" "//" }}
+  {{ $step2 := replace $step1 "ः" "//" }}
+   {{ $clean := replace $step2 "-" "//" }}
+  {{ $parts := split $clean "//" }}
+
+      {{ if eq (len $parts) 2 }}
+        {{ $label := trim (index $parts 0) " " }}
+        {{ $date := trim (index $parts 1) " " }}
+
+        {{ if or (in $label "अंतिम तिथि") (in $label "Lastdate")  (in $label "Last Date") }}
+          <li>{{ $label }} :  <b style="color: red;">{{ $date }}</b></li>
+        {{ else if or (in $label "प्रारंभ") (in $label "Begin") (in $label "Start")  }}
+          <li>{{ $label }} :  <b style="color: green;">{{ $date }}</b></li>
+          {{ else if or (in $label "Correction") (in $label "Update")  (in $label "सुधार") }}
+          <li>{{ $label }} :  <b style="color: blue;">{{ $date }}</b></li>
+        {{ else }}
+          <li>{{ $label }} :  <b>{{ $date }}</b></li>
+        {{ end }}
+
+      {{ else }}
+        <li>{{ . }}</li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</div>
+{{ end }}

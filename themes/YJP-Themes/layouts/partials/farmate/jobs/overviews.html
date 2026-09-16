@@ -1,0 +1,28 @@
+{{ with .Params.Overviews }}
+<div class="table-scroll section-block" id="Overviews">
+    
+  <table class="yp-table">
+    <caption> <h2>  -- Summary /Overview --</h2></caption>
+    <tbody>
+      {{ range . }}
+        {{/* Colon ya Hindi Visarga se split karega */}}
+        {{ $parts := split (replaceRE `\s*[:ः]\s*` "@@" .) "@@" }}
+
+        {{ if ge (len $parts) 2 }}
+          {{ $label := trim (index $parts 0) " " }}
+          {{ $val := trim (index $parts 1) " " }}
+          <tr>
+            <td class="yp-label"><strong>{{ $label }}</strong></td>
+            <td class="yp-value">{{ $val }}</td>
+          </tr>
+        {{ else }}
+          {{/* Agar kisi line me colon na ho to full-width row */}}
+          <tr>
+            <td colspan="2" class="yp-value">{{ . }}</td>
+          </tr>
+        {{ end }}
+      {{ end }}
+    </tbody>
+  </table>
+</div>
+{{ end }}
