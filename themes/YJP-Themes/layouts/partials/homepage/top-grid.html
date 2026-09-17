@@ -1,0 +1,63 @@
+{{ $colors := slice "#f8dbb4" "#e9c3f8" "#fbfcc4" "#befccc" "#f8bcb4" "#bec9fc" "#b4f0f8" "#b4f8d3" "#f8b4de" "#ffa4ff" }}
+{{ $today := now.Format "2006-01-02" }}
+
+{{/* Step 1: Active and Valid Date Filter */}}
+{{ $filteredPages := where site.RegularPages "Params.activedate" "ge" $today }}
+{{ $hasDate := where $filteredPages "Date" "!=" nil }}
+
+{{/* Step 2: Separate Groups */}}
+{{ $pinnedFirst := sort (where $hasDate "Params.pin" "==" "first") "Date" "desc" }}
+{{ $pinnedLast  := sort (where $hasDate "Params.pin" "==" "last") "Date" "desc" }}
+{{ $normal      := sort (where (where $hasDate "Params.pin" "!=" "first") "Params.pin" "!=" "last") "Date" "desc" }}
+
+{{/* Step 3: Exact 12 Slots Calculation */}}
+{{/* First pin hamesha slot 1 lega (agar available ho) */}}
+{{ $firstSlot := first 1 $pinnedFirst }}
+
+{{/* Last pin hamesha slot 12 ke liye lock rahega (agar available ho) */}}
+{{ $lastSlot := first 1 $pinnedLast }}
+
+{{/* Middle slots count: 12 - (firstSlot + lastSlot) */}}
+{{ $middleCount := sub 12 (add (len $firstSlot) (len $lastSlot)) }}
+{{ $middleSlots := first $middleCount $normal }}
+
+{{/* Step 4: Strict Merge [Slot 1 -> Middle 10 -> Slot 12] */}}
+{{ $finalList := slice }}
+{{ range $firstSlot }}
+  {{ $finalList = $finalList | append . }}
+{{ end }}
+{{ range $middleSlots }}
+  {{ $finalList = $finalList | append . }}
+{{ end }}
+{{ range $lastSlot }}
+  {{ $finalList = $finalList | append . }}
+{{ end }}
+
+<div class="post-grid">
+  {{ range $index, $element := $finalList }}
+    {{ $randColor := index $colors (mod $index (len $colors)) }}
+    <a href="{{ $element.Permalink }}" class="post-link">
+      <div class="post-box" style="background-color: {{ $randColor }};">
+        
+        {{ if eq ($element.Date.Format "2006-01-02") $today }}
+          <img src="/gif/new.gif" alt="New" class="new-icon" />
+        {{ end }}
+
+        <span class="post-title">
+          {{ $element.Params.RecommendName | default $element.Title }}
+        </span>
+
+        {{ if or (eq $element.Params.pin "first") (eq $element.Params.pin "last") }}
+          <span class="pin-icon" title="Pinned">📌</span>
+        {{ end }}
+
+      </div>
+    </a>
+  {{ end }}
+</div>
+{{ $gridstyles := slice "css/home/grid.css"  "css/home/recommed.css" }}
+{{ range $gridstyles }}
+  {{ with resources.Get . | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+  {{ end }}
+{{ end }}

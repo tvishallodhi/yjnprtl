@@ -1,0 +1,122 @@
+{{/* 1. Define Each Grid Config Individually to Prevent Hugo Parser Bracket Issues */}}
+{{ $schemesGrid := dict
+  "id" "schemes-grid"
+  "title" "Schemes"
+  "filters" (dict "post_type" "schemes")
+  "exclude" (slice "admitcard" "results")
+  "limit" 6
+  "button" "View all schemes →"
+  "url" "/schemes/"
+}}
+
+{{ $latestJobsGrid := dict
+  "id" "latest-jobs-grid"
+  "title" "Latest Jobs"
+  "filters" (dict "post_type" "latest-jobs")
+  "exclude" (slice "admitcard" "results")
+  "limit" 6
+  "button" "View More jobs →"
+  "url" "/latest-jobs/"
+}}
+
+{{ $admitCardGrid := dict
+  "id" "admit-card-grid"
+  "title" "Admit Card"
+  "filters" (dict "post_type" "latest-jobs" "admitcard" "yes")
+  "exclude" (slice "results")
+  "limit" 6
+  "button" "View All Admit Cards →"
+  "url" "/admit-card/"
+}}
+
+{{ $resultsGrid := dict
+  "id" "results-grid"
+  "title" "Results"
+  "filters" (dict "post_type" "latest-jobs" "results" "yes")
+  "exclude" (slice)
+  "limit" 6
+  "button" "View All Results →"
+  "url" "/results/"
+}}
+
+{{ $quickLinksGrid := dict
+  "id" "quick-links-grid"
+  "title" "Quick Links"
+  "filters" (dict "important" "yes")
+  "exclude" (slice)
+  "limit" 6
+  "button" "View More Useful Link →"
+  "url" "/important-links/"
+}}
+
+{{ $grids := slice $schemesGrid $latestJobsGrid $admitCardGrid $resultsGrid $quickLinksGrid }}
+{{ $allPages := site.RegularPages.ByDate.Reverse }}
+
+<section class="top-grid">
+  {{ range $grid := $grids }}
+    {{ $filteredPosts := slice }}
+
+    {{ range $page := $allPages }}
+      {{ $params := $page.Params }}
+      {{ $isExcluded := false }}
+
+      {{/* Dynamic Exclusion Checking: param == 'yes' */}}
+      {{ range $excludeKey := $grid.exclude }}
+        {{ $paramVal := lower (printf "%v" (index $params $excludeKey)) }}
+        {{ if eq $paramVal "yes" }}
+          {{ $isExcluded = true }}
+        {{ end }}
+      {{ end }}
+
+      {{ if not $isExcluded }}
+        {{ $matchesAllFilters := true }}
+        {{/* Dynamic AND Matching for Filters */}}
+        {{ range $filterKey, $expectedVal := $grid.filters }}
+          {{ $actualVal := lower (printf "%v" (index $params $filterKey)) }}
+          {{ if ne $actualVal (lower (printf "%v" $expectedVal)) }}
+            {{ $matchesAllFilters = false }}
+          {{ end }}
+        {{ end }}
+
+        {{ if $matchesAllFilters }}
+          {{ $filteredPosts = $filteredPosts | append $page }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Pin Ordering: Pin First, then Normal Latest */}}
+    {{ $pinned := slice }}
+    {{ $normal := slice }}
+    {{ range $filteredPosts }}
+      {{ if eq (lower (printf "%v" .Params.pin)) "first" }}
+        {{ $pinned = $pinned | append . }}
+      {{ else }}
+        {{ $normal = $normal | append . }}
+      {{ end }}
+    {{ end }}
+
+    {{ $orderedPosts := $pinned | append $normal }}
+    {{ $finalPosts := first $grid.limit $orderedPosts }}
+
+    {{/* Render Grid Only When Posts Exist */}}
+    {{ if gt (len $finalPosts) 0 }}
+      <div id="{{ $grid.id }}" class="top-grid-column">
+        <div class="grid-heading">
+          <h2>{{ $grid.title }}</h2>
+        </div>
+
+        <div class="grid-posts">
+          {{ range $finalPosts }}
+            {{ partial "homepage/grid-card.html" . }}
+          {{ end }}
+        </div>
+
+        <div class="grid-footer">
+          <a href="{{ $grid.url | relURL }}" class="view-more">
+            {{ $grid.button }}
+          </a>
+        </div>
+      </div>
+    {{ end }}
+  {{ end }}
+</section>

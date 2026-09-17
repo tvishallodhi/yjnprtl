@@ -1,0 +1,19 @@
+{{ $isPinned := eq (lower (printf "%v" .Params.pin)) "first" }}
+{{ $isHighlighted := eq (lower (printf "%v" .Params.highlight)) "yes" }}
+{{ $today := now.Format "2006-01-02" }}
+{{ $postDate := .Date.Format "2006-01-02" }}
+{{ $isNew := eq $today $postDate }}
+
+<div class="grid-post{{ if $isHighlighted }} grid-post-highlight{{ end }}{{ if $isPinned }} grid-post-pinned{{ end }}">
+  <a href="{{ .RelPermalink }}" class="grid-post-title" title="{{ .Title }}">
+    <span class="post-content-inline">
+      {{- if $isPinned -}}
+        <span class="pin-icon" aria-label="Pinned Post">&#128204;</span>
+      {{- end -}}
+      {{ .Title }}
+      {{- if $isNew -}}
+        <img src="{{ "/gif/new.gif" | relURL }}" alt="New" class="new-icon" loading="lazy" />
+      {{- end -}}
+    </span>
+  </a>
+</div>
