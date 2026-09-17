@@ -17,20 +17,36 @@
 
       {{ range .Site.Sections }}
 
-        {{/* Safe section name */}}
+        {{/* 1. Safe section name */}}
         {{ $name := .Params.name | default .Title }}
-
         {{ with .File }}
           {{ if not $name }}
             {{ $name = .ContentBaseName }}
           {{ end }}
         {{ end }}
 
-        {{/* Icon */}}
+        {{/* 2. Icon */}}
         {{ $icon := .Params.icon | default $.Site.Params.defaultSidebarIcon }}
 
-        {{/* Active section */}}
-        {{ $isSectionActive := in $.RelPermalink .RelPermalink }}
+        {{/* 3. ROBUST ACTIVE CHECK (URL-Independent) */}}
+        {{ $isSectionActive := false }}
+        
+        {{/* Case A: Current Page usi section ka page/post hai */}}
+        {{ if and $.Section (eq $.Section .Section) }}
+          {{ $isSectionActive = true }}
+        {{/* Case B: Current Page is section ka child/descendant hai */}}
+        {{ else if .IsAncestor $ }}
+          {{ $isSectionActive = true }}
+        {{/* Case C: Directly usi Section Page par hai */}}
+        {{ else if eq . $ }}
+          {{ $isSectionActive = true }}
+        {{/* Case D: Custom Front-matter 'section' match (Agar URL poori tarah alag ho) */}}
+        {{ else if and $.Params.section (eq (lower $.Params.section) (lower .Section)) }}
+          {{ $isSectionActive = true }}
+        {{/* Case E: Fallback URL match */}}
+        {{ else if in $.RelPermalink .RelPermalink }}
+          {{ $isSectionActive = true }}
+        {{ end }}
 
         <li
           class="sidebar-node{{ if $isSectionActive }} is-active-node{{ end }}"
@@ -40,7 +56,7 @@
 
             <a
               href="{{ .RelPermalink }}"
-              class="sidebar-node-link{{ if eq $.RelPermalink .RelPermalink }} is-current-page{{ end }}">
+              class="sidebar-node-link{{ if eq . $ }} is-current-page{{ end }}">
 
               <span class="sidebar-icon">{{ $icon }}</span>
               <span class="sidebar-text">{{ $name }}</span>
@@ -48,35 +64,31 @@
             </a>
 
             {{ if .Pages }}
-
               <button
                 type="button"
                 class="sidebar-expand-btn"
                 aria-expanded="{{ if $isSectionActive }}true{{ else }}false{{ end }}"
                 aria-label="Expand {{ $name }} submenu">
-
                 <span class="expand-indicator">›</span>
-
               </button>
-
             {{ end }}
 
           </div>
 
-
           {{ if .Pages }}
-
             <ul class="sidebar-sub-tree{{ if not $isSectionActive }} is-collapsed{{ end }}">
 
               {{ range .Pages }}
 
                 {{ $subName := .Params.name | default .Title }}
-
                 {{ with .File }}
                   {{ if not $subName }}
                     {{ $subName = .ContentBaseName }}
                   {{ end }}
                 {{ end }}
+
+                {{/* Sub-page exact match check (Direct Page Reference) */}}
+                {{ $isSubCurrent := eq . $ }}
 
                 <li
                   class="sidebar-sub-node"
@@ -84,7 +96,7 @@
 
                   <a
                     href="{{ .RelPermalink }}"
-                    class="sidebar-sub-link{{ if eq $.RelPermalink .RelPermalink }} is-current-page{{ end }}">
+                    class="sidebar-sub-link{{ if $isSubCurrent }} is-current-page{{ end }}">
 
                     <span class="sidebar-sub-text">
                       {{ $subName }}
@@ -98,9 +110,7 @@
 
             </ul>
 
-
             <!-- Hover floating overlay panel for minimized mode -->
-
             <div
               class="sidebar-hover-panel"
               role="region"
@@ -111,7 +121,6 @@
               </div>
 
               <ul class="hover-panel-links">
-
                 <li>
                   <a href="{{ .RelPermalink }}">
                     {{ $name }} Main
@@ -119,9 +128,7 @@
                 </li>
 
                 {{ range .Pages }}
-
                   {{ $subName := .Params.name | default .Title }}
-
                   {{ with .File }}
                     {{ if not $subName }}
                       {{ $subName = .ContentBaseName }}
@@ -129,15 +136,11 @@
                   {{ end }}
 
                   <li data-lang="{{ .Params.lang | default "" }}">
-
                     <a href="{{ .RelPermalink }}">
                       {{ $subName }}
                     </a>
-
                   </li>
-
                 {{ end }}
-
               </ul>
 
             </div>
@@ -151,61 +154,24 @@
     </ul>
   </nav>
 
-    <!-- ============================================================
+  <!-- ============================================================
        FIXED SOCIAL LINKS
        ============================================================ -->
-
   <div class="sidebar-social-bar" aria-label="Social Media Links">
-
-    <a
-      href="https://wa.me/YOUR_NUMBER"
-      class="sidebar-social-link whatsapp"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="WhatsApp"
-      title="WhatsApp">
+    <a href="https://wa.me/YOUR_NUMBER" class="sidebar-social-link whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
       <span>☘</span>
     </a>
-
-    <a
-      href="https://t.me/YOUR_USERNAME"
-      class="sidebar-social-link telegram"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Telegram"
-      title="Telegram">
+    <a href="https://t.me/YOUR_USERNAME" class="sidebar-social-link telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram">
       <span>✈</span>
     </a>
-
-    <a
-      href="https://www.facebook.com/YOUR_PAGE"
-      class="sidebar-social-link facebook"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Facebook"
-      title="Facebook">
+    <a href="https://www.facebook.com/YOUR_PAGE" class="sidebar-social-link facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
       <span>f</span>
     </a>
-
-    <a
-      href="https://www.instagram.com/YOUR_USERNAME"
-      class="sidebar-social-link instagram"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Instagram"
-      title="Instagram">
+    <a href="https://www.instagram.com/YOUR_USERNAME" class="sidebar-social-link instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
       <span>◎</span>
     </a>
-
-    <a
-      href="https://www.youtube.com/@YOUR_CHANNEL"
-      class="sidebar-social-link youtube"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="YouTube"
-      title="YouTube">
+    <a href="https://www.youtube.com/@YOUR_CHANNEL" class="sidebar-social-link youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
       <span>▶</span>
     </a>
-
   </div>
 </aside>

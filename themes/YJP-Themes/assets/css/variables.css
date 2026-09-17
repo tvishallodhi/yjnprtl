@@ -19,6 +19,7 @@
   --bg-surface: #ffffff;
   --border-color: #e2e8f0;
   --border-subtle: #cbd5e1;
+  --background: linear-gradient(135deg, #2563EB 0%, #7C3AED 50%, #06B6D4 100%);
 
   /* Typography */
   --text-main: #1f1f1f;
@@ -61,6 +62,7 @@
   --bg-surface: #242424;
   --border-color: #333333;
   --border-subtle: #444444;
+  --background: linear-gradient(135deg, #1E3A8A 0%, #5B21B6 50%, #0E7490 100%);
 
   /* Typography */
   --text-main: #e3e3e3;

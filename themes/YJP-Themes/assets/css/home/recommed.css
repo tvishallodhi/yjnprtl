@@ -40,7 +40,8 @@
   line-height: 1.35;
   flex: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 2 lines ke baad cut ho jayega */
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -64,7 +65,7 @@
    ========================================================================== */
 @media (max-width: 768px) {
   .post-grid {
-    display: flex; /* Flex container ek single horizontal row ke liye */
+    display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
@@ -74,18 +75,19 @@
     gap: 10px;
   }
 
-  /* Optional: Mobile par scrollbar clean/hide karne ke liye */
   .post-grid::-webkit-scrollbar {
     height: 4px;
   }
+  
   .post-grid::-webkit-scrollbar-thumb {
     background: #cbd5e1;
     border-radius: 4px;
   }
 
+  /* Cards ki width kam ki gayi hai (Pehele: 75% aur 240px) */
   .post-link {
-    flex: 0 0 75%; /* Ek screen par lagbhag 1 pura aur thoda agla card dikhega */
-    max-width: 240px;
+    flex: 0 0 58%; /* Screen par ek pura card aur agle card ka lagbhag aadha hissa dikhega */
+    max-width: 190px; /* Card ki maximum width ko compact rakha gaya hai */
     scroll-snap-align: start;
   }
 }

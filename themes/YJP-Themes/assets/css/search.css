@@ -22,18 +22,18 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: #ffffff;
+  background: var(--bg-surface);
   border-radius: 9999px;
   padding: 6px 8px 6px 14px;
-  border: 1.5px solid #e2e8f0;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  border: 1.5px solid var(--border-color);
+  box-shadow: var(--box-shadow);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
 }
 
 .search-main .search-input-group:focus-within {
-  border-color: #3b82f6;
-  box-shadow: 0 8px 30px -4px rgba(59, 130, 246, 0.2);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(11, 87, 208, 0.15);
 }
 
 /* Icon / Trigger Button */
@@ -46,7 +46,7 @@
   justify-content: center;
   cursor: pointer;
   padding: 0;
-  color: #64748b;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
@@ -62,14 +62,14 @@
   outline: none;
   background: transparent;
   font-size: 15px;
-  color: #1e293b;
+  color: var(--text-main);
   font-family: inherit;
   margin-left: 10px;
   width: 100%;
 }
 
 .search-main .search-input::placeholder {
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 /* Close button - Desktop me hidden rahega */
@@ -80,7 +80,7 @@
   outline: none;
   cursor: pointer;
   padding: 4px;
-  color: #94a3b8;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
@@ -91,12 +91,13 @@
 
 /* Submit button (Desktop) */
 .search-main .search-submit-btn {
-  background: #2563eb;
-  color: #ffffff;
+  background: var(--primary-color);
+  color: var(--btn-notify-text);
   border: none;
   border-radius: 9999px;
-  padding: 10px 24px;
+  padding: 5px 12px;
   font-size: 14px;
+  max-height: 30px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -105,7 +106,7 @@
 }
 
 .search-main .search-submit-btn:hover {
-  background: #1d4ed8;
+  background: var(--primary-hover);
 }
 
 /* ========================================================
@@ -158,14 +159,14 @@
     height: 46px;
     padding: 6px 14px;
     border-radius: 9999px;
-    border-color: #3b82f6;
-    box-shadow: 0 8px 25px -4px rgba(59, 130, 246, 0.25);
+    border-color: var(--primary-color);
+    box-shadow: var(--box-shadow);
   }
 
   .search-main.is-active .search-trigger-btn {
     width: auto;
     height: auto;
-    color: #2563eb;
+    color: var(--primary-color);
   }
 
   .search-main.is-active .search-input {

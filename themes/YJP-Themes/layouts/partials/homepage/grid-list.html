@@ -1,9 +1,10 @@
-{{/* 1. Define Each Grid Config Individually to Prevent Hugo Parser Bracket Issues */}}
+{{/* 1. Define Each Grid Config Individually */}}
 {{ $schemesGrid := dict
   "id" "schemes-grid"
   "title" "Schemes"
   "filters" (dict "post_type" "schemes")
   "exclude" (slice "admitcard" "results")
+  "date_filter" ""
   "limit" 6
   "button" "View all schemes →"
   "url" "/schemes/"
@@ -14,6 +15,7 @@
   "title" "Latest Jobs"
   "filters" (dict "post_type" "latest-jobs")
   "exclude" (slice "admitcard" "results")
+  "date_filter" ""
   "limit" 6
   "button" "View More jobs →"
   "url" "/latest-jobs/"
@@ -24,6 +26,7 @@
   "title" "Admit Card"
   "filters" (dict "post_type" "latest-jobs" "admitcard" "yes")
   "exclude" (slice "results")
+  "date_filter" ""
   "limit" 6
   "button" "View All Admit Cards →"
   "url" "/admit-card/"
@@ -34,6 +37,7 @@
   "title" "Results"
   "filters" (dict "post_type" "latest-jobs" "results" "yes")
   "exclude" (slice)
+  "date_filter" ""
   "limit" 6
   "button" "View All Results →"
   "url" "/results/"
@@ -44,13 +48,27 @@
   "title" "Quick Links"
   "filters" (dict "important" "yes")
   "exclude" (slice)
+  "date_filter" ""
   "limit" 6
   "button" "View More Useful Link →"
   "url" "/important-links/"
 }}
 
-{{ $grids := slice $schemesGrid $latestJobsGrid $admitCardGrid $resultsGrid $quickLinksGrid }}
+{{/* UPCOMING GRID: Checks for begindate >= today */}}
+{{ $upcomingGrid := dict
+  "id" "upcoming-grid"
+  "title" "Upcoming"
+  "filters" (dict)
+  "exclude" (slice)
+  "date_filter" "upcoming"
+  "limit" 6
+  "button" "View All Upcoming →"
+  "url" "/upcoming/"
+}}
+
+{{ $grids := slice $schemesGrid $latestJobsGrid $admitCardGrid $resultsGrid $quickLinksGrid $upcomingGrid }}
 {{ $allPages := site.RegularPages.ByDate.Reverse }}
+{{ $today := now.Format "2006-01-02" }}
 
 <section class="top-grid">
   {{ range $grid := $grids }}
@@ -68,7 +86,21 @@
         {{ end }}
       {{ end }}
 
-      {{ if not $isExcluded }}
+      {{/* Upcoming Date Filter Checking: begindate >= today */}}
+      {{ $passesDateFilter := true }}
+      {{ if eq $grid.date_filter "upcoming" }}
+        {{ if $params.begindate }}
+          {{ $beginDateStr := printf "%v" $params.begindate }}
+          {{/* Standard string comparison for 'YYYY-MM-DD' */}}
+          {{ if lt $beginDateStr $today }}
+            {{ $passesDateFilter = false }}
+          {{ end }}
+        {{ else }}
+          {{ $passesDateFilter = false }}
+        {{ end }}
+      {{ end }}
+
+      {{ if and (not $isExcluded) $passesDateFilter }}
         {{ $matchesAllFilters := true }}
         {{/* Dynamic AND Matching for Filters */}}
         {{ range $filterKey, $expectedVal := $grid.filters }}
