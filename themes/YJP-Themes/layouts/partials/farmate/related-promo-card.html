@@ -1,7 +1,7 @@
 {{- $banner := .Params.imageBanner -}}
 {{- $hasBanner := and $banner (ne $banner "#") -}}
 
-<div class="yp-related-promo{{ if not $hasBanner }} yp-related-promo--full{{ end }}">
+<div class="yp-related-promo{{ if not $hasBanner }} yp-related-promo--full{{ end }}" id="imageBanner">
 
   {{- if $hasBanner -}}
     <div class="yp-related-promo__image">

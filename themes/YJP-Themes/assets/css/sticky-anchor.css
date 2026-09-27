@@ -60,7 +60,6 @@ html {
   color: var(--heading);
 }
 
-
 .anchor-link.active {
   background-color: #2563eb;
   color: #ffffff;
