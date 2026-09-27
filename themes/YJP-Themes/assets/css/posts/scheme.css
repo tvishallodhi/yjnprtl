@@ -264,27 +264,3 @@
   }
 }
 
-/* 1. Mobile viewport par sticky break karne wale containers ko clear karein */
-@media screen and (max-width: 768px) {
-  html,
-  body.site-body,
-  .site-wrapper,
-  .site-main-col,
-  #main-content.main-content-area,
-  .single-article-view {
-    overflow: visible !important;
-    overflow-x: clip !important;
-  }
-}
-
-/* 2. Sticky Anchor ko force karein (Mobile fix) */
-.sticky-anchor {
-  position: -webkit-sticky !important; /* iOS Safari ke liye jaruri */
-  position: sticky !important;
-  /* Agar variable available na ho to default 0px fallback */
-  top: var(--tot-nav-offset, 0px) !important;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 999;
-}
