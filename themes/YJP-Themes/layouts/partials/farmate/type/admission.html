@@ -1,0 +1,182 @@
+
+<div class="yp-job-head1">
+    <h2 style="margin-top:0; color: rgba(223, 83, 3, 0.849);">
+      {{ with .Params.seo_title }}{{ . }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+    </h2>
+  
+    <p><b>Last Update:</b> {{ .Date | time.Format "02/01/2006 | 03:04 PM" }}</p>
+  
+    <p><b>Description:</b> 
+      <a href="{{ .Params.OfficialSource }}" target="_blank" style="color:#007BFF;">
+        {{ .Params.department }}
+      </a> has released a <span class="tooltip"> Official Notification  <span class="tooltiptext"> {{ .Params.Notification }}</span></span>  of <b>{{ .Params.postName}}</b>. 
+      The application process will be open from <b>   {{ with .Params.begindate }} {{ . | time.Format "02 Jan" }}{{ end }}</b> to <b>{{ with .Params.lastdate }} </span> {{ . | time.Format "02 Jan 2006" }}{{ end }}  </b>. 
+      Candidates must meet the required eligibility criteria including <b>{{ .Params.qualified }}</b>. 
+      As per the official notification, <b>{{ .Params.postdetails }}</b>. 
+      Interested candidates are advised to check the important dates and ensure they apply before the last date. 
+      For complete information, download the official notification and apply online using the links provided below.
+    </p>
+    {{ if .Params.Notification }} 
+    <p><b>Notification :</b> 
+      <span style="text-align:center; color:#2563eb "> {{ .Params.Notification | default "N/A" }} </span>
+         {{ with .Params.notificationdate }} </span>(Dated: {{ . | time.Format "02 January 2006" }}){{ end }}
+        
+    {{ end }}</p>
+    </div>
+    <div class="posthead" tabindex="0">
+    
+    {{ if .Params.department }}
+      <h2 class="Department">{{ .Params.department }}</h2>
+    {{ end }}
+    {{ if .Params.AdmissionName }}
+      <h1 class="PostName">{{ .Params.AdmissionName }}</h1>
+    {{ end }}
+  </div>
+  <br>
+  
+ <div class="two-col-grid">
+    
+  {{ with .Params.impdates }}
+<div class="col-box" id="impdates">
+  <h2>Important Dates</h2>
+  <ul class="clean-list" id="imp-dates-list">
+    {{ range . }}
+      {{ $parts := split (replaceRE `\s*[:ः]\s*|\s+-\s+` "@@" .) "@@" }}
+
+      {{ if ge (len $parts) 2 }}
+        {{ $label := trim (index $parts 0) " " }}
+        {{ $date := trim (index $parts 1) " " }}
+
+        {{ $dateClass := "" }}
+        {{ if or (in $label "अंतिम तिथि") (in $label "Lastdate") (in $label "Last Date") }}
+          {{ $dateClass = "date-urgent" }}
+        {{ else if or (in $label "प्रारंभ") (in $label "Begin") (in $label "Start") }}
+          {{ $dateClass = "date-start" }}
+        {{ else if or (in $label "Correction") (in $label "Update") (in $label "सुधार") }}
+          {{ $dateClass = "date-notice" }}
+        {{ end }}
+
+        <li class="date-item">
+          <span class="label">{{ $label }}</span> : 
+          <strong class="date-val {{ $dateClass }}">{{ $date }}</strong>
+        </li>
+      {{ else }}
+        <li class="date-item">{{ . }}</li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
+    <!-- Application Fees Section -->
+    <div class="col-box"  id="applyfees">
+      <h2>Application Fee</h2>
+      <ul class="clean-list fee-list">
+        {{ range .Params.applyfees }}
+          <li>{{ . | replaceRE "^(.*?):(.*)$" "${1}: <b>${2}</b>" | safeHTML }}</li>
+           {{ else }}
+           <li > {{ . }} </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Age Limit -->
+ {{ with .Params.age_limit }}
+<section class="section-block" id="age_limit">
+  <h2>Age Limit</h2>
+  <div class="age-wrapper">
+    <ul class="clean-list age-list">
+      {{ range . }}
+        {{/* Colon ya Space-Hyphen se split */}}
+        {{ $parts := split (replaceRE `\s*[:ः]\s*|\s+-\s+` "@@" .) "@@" }}
+
+        {{ if ge (len $parts) 2 }}
+          {{ $label := trim (index $parts 0) " " }}
+          {{ $val := trim (index $parts 1) " " }}
+          <li>
+            <strong>{{ $label }}</strong> : <span>{{ $val }}</span>
+          </li>
+        {{ else }}
+          {{/* Agar colon nahi mila (jaise calculate on date ya koi direct rule) */}}
+          <li class="age-note">
+            <strong>{{ . }}</strong>
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+    <p class="note-text"><em>Age relaxation applicable as per official state rules.</em></p>
+  </div>
+</section>
+{{ end }}
+
+ {{ partial "farmate/admission/eligibility-list.html" . }}
+
+     <!-- Documents Required -->
+  {{ with .Params.documents }}
+  <section class="section-block" id="documents">
+    <h2>Documents Required</h2>
+    <ul class="checklist">
+      {{ range . }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }} 
+  <!-- How to Apply -->
+  {{ with .Params.how_to }}
+  <section class="section-block" id="how_to">
+    <h2>How to Apply Online</h2>
+    <ol class="steps-list">
+      {{ range . }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ol>
+  </section>
+  {{ end }}
+
+    <!-- Important Links CTA -->
+  <section class="section-block">
+    <h2>Important Links</h2>
+       {{/* Links Table */}}
+    {{ if .Params.links }}
+      <div class="yp-table-wrapper" id="links">
+        {{ with .Params.links.item }}
+<table class="yp-table">
+  <thead>
+    <tr>
+      <th scope="col">Important Links</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range . }}
+      <tr>
+        <td>{{ .title | safeHTML }}</td>
+        <td>
+          {{ with .actions }}
+            {{ range $index, $act := . }}
+              {{ if gt $index 0 }}<span class="link-separator"> | </span>{{ end }}
+              <a href="{{ $act.url | safeURL }}" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 title="Go to {{ $act.name }}'s external page">
+                {{ $act.name }}
+              </a>
+            {{ end }}
+          {{ else }}
+            <span>—</span>
+          {{ end }}
+        </td>
+      </tr>
+    {{ end }}
+  </tbody>
+</table>
+{{ end }}
+      </div>
+    {{ end }}
+  </section>
+
+  <!-- FAQs Accordion -->
+{{ partial "farmate/summary-faqs.html" . }}
+
+    {{ partial "farmate/imageBanner.html" . }}

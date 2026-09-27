@@ -5,15 +5,7 @@
   {{ else if eq $type "Recruitment" }}
      {{ partial "farmate/type/Recruitment.html" . }}
   {{ else if eq $type "admission" }}
-    <div class="meta-section adm-overview"><div class="meta-title">Admission Overview</div><div class="meta-content">{{ .Params.overview }}</div></div>
-    <div class="meta-section adm-dates"><div class="meta-title">Important Dates</div><div class="meta-content">{{ .Params.dates }}</div></div>
-    <div class="meta-section adm-eligibility"><div class="meta-title">Eligibility</div><div class="meta-content">{{ .Params.eligibility }}</div></div>
-    <div class="meta-section adm-info"><div class="meta-title">Application Info</div><div class="meta-content">{{ .Params.application_info }}</div></div>
-    <div class="meta-section adm-docs"><div class="meta-title">Required Documents</div><div class="meta-content">{{ .Params.documents }}</div></div>
-    <div class="meta-section adm-fee"><div class="meta-title">Fee Details</div><div class="meta-content">{{ .Params.fee }}</div></div>
-    <div class="meta-section adm-process"><div class="meta-title">Admission Process</div><div class="meta-content">{{ .Params.selection_process }}</div></div>
-    <div class="meta-section adm-links"><div class="meta-title">Important Links</div><div class="meta-content">{{ .Params.links }}</div></div>
-
+      {{ partial "farmate/type/admission.html" . }}
   {{ else if eq $type "howto" }}
     <div class="howto-intro">{{ .Params.intro }}</div>
     <div class="howto-steps-scaffold">

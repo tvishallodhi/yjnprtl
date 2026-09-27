@@ -1,32 +1,30 @@
 {{ with .Params.faqs }}
-{{ $faqList := slice }}
+  {{ $faqList := slice }}
 
-{{ range . }}
-  {{ $match := findRESubmatch `^(.*?)(?:~{3}|/{3}|:{3}|\+{3})(.*)$` . }}
-  {{ if $match }}
-    {{ $item := index $match 0 }}
-    {{ $rawQ := index $item 1 | strings.TrimSpace }}
-    {{ $question := printf "%s?" (strings.TrimRight "?" $rawQ) }}
-    {{ $answer := index $item 2 | strings.TrimSpace | plainify }}
-    
-    {{ $faqList = $faqList | append (dict 
-      "@type" "Question" 
-      "name" $question 
-      "acceptedAnswer" (dict 
-        "@type" "Answer" 
-        "text" $answer
-      )
-    ) }}
+  {{ range . }}
+    {{ $question := strings.TrimSpace .question }}
+    {{ $answer := .answer | markdownify | plainify | strings.TrimSpace }}
+
+    {{ if and $question $answer }}
+      {{ $faqList = $faqList | append (dict
+        "@type" "Question"
+        "name" $question
+        "acceptedAnswer" (dict
+          "@type" "Answer"
+          "text" $answer
+        )
+      ) }}
+    {{ end }}
   {{ end }}
-{{ end }}
 
-{{ if gt (len $faqList) 0 }}
+  {{ if gt (len $faqList) 0 }}
+    {{ $schema := dict
+      "@context" "https://schema.org"
+      "@type" "FAQPage"
+      "mainEntity" $faqList
+    }}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": {{ $faqList | jsonify }}
-}
+{{ $schema | jsonify | safeJS }}
 </script>
-{{ end }}
+  {{ end }}
 {{ end }}

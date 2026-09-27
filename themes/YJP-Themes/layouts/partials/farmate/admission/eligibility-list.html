@@ -1,0 +1,15 @@
+{{ with .Params.eligibility }}
+<section class="section-block" id="eligibility">
+  <h2>Eligibility</h2>
+
+  <ul>
+    {{ if reflect.IsSlice . }}
+      {{ range . }}
+        <li>{{ . | markdownify }}</li>
+      {{ end }}
+    {{ else }}
+      <li>{{ . | markdownify }}</li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

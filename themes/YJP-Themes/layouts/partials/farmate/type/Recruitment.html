@@ -25,7 +25,7 @@
     <div class="grid-cards">
       <div class="card-item">
         <span class="label">Total Vacancies</span>
-        <span class="val">{{ .Params.totalPost }} Posts</span>
+        <span class="val">MP SI Subedar Recruitment 2026 – Overview Posts</span>
         
       </div>
       <div class="card-item">
@@ -130,7 +130,8 @@
 {{ end }}
 
   <!-- Vacancy & Eligibility Details -->
- {{ partial "farmate/jobs/postwise.html" . }}
+
+ 
 {{ with .Params.eligibility }}
  <section class="section-block" id="eligibility">
   <h2> Eligibility</h2>
@@ -197,19 +198,7 @@
   </section>
 
   <!-- FAQs Accordion -->
-  {{ with .Params.faqs }}
-  <section class="section-block" id="faqs">
-    <h2>Frequently Asked Questions (FAQs)</h2>
-    <div class="faq-accordion">
-      {{ range . }}
-      <details>
-        <summary>{{ . }}</summary>
-        <p>Please refer to the official notification rulebook on {{ $.Params.OfficialSource }} for detailed guidelines.</p>
-      </details>
-      {{ end }}
-    </div>
-  </section>
-  {{ end }}
+{{ partial "farmate/summary-faqs.html" . }}
 
   <!-- Content Fallback (Markdown body text agar ho toh) -->
   {{ if .Content }}
