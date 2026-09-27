@@ -1,0 +1,22 @@
+{{- $banner := .Params.imageBanner -}}
+{{- $hasBanner := and $banner (ne $banner "#") -}}
+
+<div class="yp-related-promo{{ if not $hasBanner }} yp-related-promo--full{{ end }}">
+
+  {{- if $hasBanner -}}
+    <div class="yp-related-promo__image">
+      {{ partial "farmate/imageBanner.html" . }}
+    </div>
+  {{- end -}}
+
+  <div class="yp-related-promo__content">
+
+    <h2 class="yp-related-promo__title">
+      🔗 Related Useful Updates
+    </h2>
+
+    {{ partial "farmate/related-links.html" . }}
+
+  </div>
+
+</div>

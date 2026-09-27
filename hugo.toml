@@ -100,7 +100,21 @@ enableRobotsTXT = true
   [menus.main.params]
     lang = ""
 
+[related]
+  threshold = 30
+  toLower = true
 
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "categories"
+    weight = 80
+
+  [[related.indices]]
+    name = "keywords"
+    weight = 60
 # Footer Menu Items
 
 [[menus.footer]]
@@ -142,3 +156,5 @@ enableRobotsTXT = true
   name = "Advertising Policy"
   url = "/pages/advertising-policy/"
   weight = 80
+
+  

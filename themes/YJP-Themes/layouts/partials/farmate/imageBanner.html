@@ -16,7 +16,7 @@
     {{ $img = resources.Get . }}
   {{ end }}
 
-  <div class="image-banner-wrapper" id="image-banner">
+ 
     {{ if $img }}
       {{ $webp := $img.Process "resize 600x webp q85" }}
       <img src="{{ $webp.RelPermalink }}" 
@@ -36,5 +36,5 @@
            alt="{{ $.Title }} | www.YojnaPortal.com"
            style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
     {{ end }}
-  </div>
+  
 {{ end }}

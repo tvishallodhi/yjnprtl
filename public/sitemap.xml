@@ -2,8 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/categories/admision/</loc>
+    <lastmod>2026-09-03T10:14:12+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2026-09-03T10:14:12+05:30</lastmod>
+  </url><url>
     <loc>http://localhost:1313/farmer-registry/</loc>
     <lastmod>2026-07-27T15:46:43+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/jobs/</loc>
+    <lastmod>2026-09-03T10:14:12+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/schemes/</loc>
     <lastmod>2026-07-27T15:46:43+05:30</lastmod>
@@ -52,8 +61,6 @@
     <loc>http://localhost:1313/pages/advertising-policy/</loc>
   </url><url>
     <loc>http://localhost:1313/jobs/banking/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/</loc>
   </url><url>
     <loc>http://localhost:1313/pages/contact/</loc>
   </url><url>

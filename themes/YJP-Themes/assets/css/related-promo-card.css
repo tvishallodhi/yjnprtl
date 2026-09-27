@@ -1,0 +1,150 @@
+/* ============================================================
+   Related Image + Links
+   Desktop: 50% Image | 50% Links
+   Mobile : Image | Links
+   ============================================================ */
+
+.yp-related-promo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  width: 100%;
+  max-width: 100%;
+  margin: 24px auto;
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+}
+
+
+/* Image
+------------------------------------------------------------ */
+
+.yp-related-promo__image {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 9px;
+}
+
+.yp-related-promo__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 9px;
+}
+
+
+/* Links
+------------------------------------------------------------ */
+
+.yp-related-promo__content {
+  min-width: 0;
+  max-height: 310px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.yp-related-promo__title {
+  margin: 0 0 12px;
+
+  color: var(--text-dark);
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+
+.yp-related-promo__link {
+  display: block;
+
+  margin-bottom: 8px;
+  padding: 10px 12px;
+
+  color: var(--primary-color);
+  background: var(--bg-secondary);
+
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.yp-related-promo__link:hover {
+  color: var(--primary-hover);
+  border-color: var(--primary-color);
+  background: var(--bg-primary);
+}
+
+/* Scrollbar */
+
+.yp-related-promo__content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.yp-related-promo__content::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+}
+
+.yp-related-promo__content::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 10px;
+}
+
+
+/* Firefox */
+
+.yp-related-promo__content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-subtle) var(--bg-secondary);
+}
+/* If not available Image */
+.yp-related-promo--full {
+  grid-template-columns: 1fr;
+}
+
+.yp-related-promo--full .yp-related-promo__content {
+  max-width: 100%;
+}
+/* Mobile
+------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+
+  .yp-related-promo {
+    grid-template-columns: 1fr;
+    gap: 14px;
+
+    margin: 20px auto;
+    padding: 10px;
+  }
+
+  .yp-related-promo__image,
+  .yp-related-promo__image img {
+    width: 100%;
+  }
+
+  .yp-related-promo__title {
+    font-size: 18px;
+  }
+
+  .yp-related-promo__link {
+    padding: 9px 10px;
+    font-size: 14px;
+  }
+  .yp-related-promo__content {
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
+  }
+  
+}

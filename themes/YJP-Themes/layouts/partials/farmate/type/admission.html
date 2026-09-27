@@ -1,13 +1,15 @@
 
-<div class="yp-job-head1">
-    <h2 style="margin-top:0; color: rgba(223, 83, 3, 0.849);">
+{{ partial "farmate/jobs/sticky-anchor.html" . }}
+
+<div class="yp-job-head1" >
+    <h2 style="margin-top:0; color: rgba(223, 83, 3, 0.849);" >
       {{ with .Params.seo_title }}{{ . }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}
     </h2>
   
     <p><b>Last Update:</b> {{ .Date | time.Format "02/01/2006 | 03:04 PM" }}</p>
   
     <p><b>Description:</b> 
-      <a href="{{ .Params.OfficialSource }}" target="_blank" style="color:#007BFF;">
+      <a href="{{ .Params.OfficialSource }}" target="_blank" style="color:#007BFF;" id="Title">
         {{ .Params.department }}
       </a> has released a <span class="tooltip"> Official Notification  <span class="tooltiptext"> {{ .Params.Notification }}</span></span>  of <b>{{ .Params.postName}}</b>. 
       The application process will be open from <b>   {{ with .Params.begindate }} {{ . | time.Format "02 Jan" }}{{ end }}</b> to <b>{{ with .Params.lastdate }} </span> {{ . | time.Format "02 Jan 2006" }}{{ end }}  </b>. 
@@ -23,15 +25,17 @@
         
     {{ end }}</p>
     </div>
-    <div class="posthead" tabindex="0">
-    
-    {{ if .Params.department }}
-      <h2 class="Department">{{ .Params.department }}</h2>
-    {{ end }}
-    {{ if .Params.AdmissionName }}
-      <h1 class="PostName">{{ .Params.AdmissionName }}</h1>
-    {{ end }}
-  </div>
+<div class="yp-container">
+
+   <div class="posthead" tabindex="0">
+  {{ with .Params.department }}
+    <h2 class="Department">{{ . }}</h2>
+  {{ end }}
+  
+  {{ with .Params.AdmissionName }}
+    <h1 class="PostName">{{ . }}</h1>
+  {{ end }}
+</div>
   <br>
   
  <div class="two-col-grid">
@@ -177,6 +181,12 @@
   </section>
 
   <!-- FAQs Accordion -->
-{{ partial "farmate/summary-faqs.html" . }}
+ <section class="section-block" id="faqs">
+    <h2> ❓ Frequently Asked Questions (FAQs)</h2>
+    {{ partial "farmate/summary-faqs.html" . }}
+</section>
 
-    {{ partial "farmate/imageBanner.html" . }}
+    {{ partial "farmate/related-promo-card.html" . }}
+
+   {{ partial "farmate/jobs/overviews.html" . }}
+   </div>

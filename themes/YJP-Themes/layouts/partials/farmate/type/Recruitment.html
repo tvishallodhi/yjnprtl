@@ -130,6 +130,8 @@
 {{ end }}
 
   <!-- Vacancy & Eligibility Details -->
+    <!-- FAQs Accordion -->
+{{ partial "farmate/jobs/postwise.html" . }}
 
  
 {{ with .Params.eligibility }}
@@ -214,6 +216,7 @@
 
 </article>
 
+{{ partial "farmate/related-promo-card.html" . }}
 
 <script>
   (function() {

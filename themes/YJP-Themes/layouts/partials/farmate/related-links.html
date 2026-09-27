@@ -1,0 +1,13 @@
+{{- $current := . -}}
+
+{{- $related := site.RegularPages.Related $current -}}
+{{- with $related -}}
+  {{- range first 10 . -}}
+    <a
+      class="yp-related-promo__link"
+      href="{{ .RelPermalink }}">
+      {{ .Title }}
+    </a>
+
+  {{- end -}}
+{{- end -}}
