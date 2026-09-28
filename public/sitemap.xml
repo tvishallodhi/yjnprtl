@@ -3,7 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-09-28T18:11:02+05:30</lastmod>
+    <lastmod>2026-09-28T18:47:00+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/farmer/</loc>
+    <lastmod>2026-09-28T18:47:00+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-kusum-yojana/</loc>
+    <lastmod>2026-09-28T18:47:00+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/scheme/</loc>
+    <lastmod>2026-09-28T18:47:00+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/internship/</loc>
     <lastmod>2026-09-28T18:11:02+05:30</lastmod>
@@ -14,13 +23,10 @@
     <loc>http://localhost:1313/pm-internship-yojana-pmis/</loc>
     <lastmod>2026-09-28T18:11:02+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/scheme/</loc>
-    <lastmod>2026-09-28T18:11:02+05:30</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/scheme/</loc>
-    <lastmod>2026-09-28T18:11:02+05:30</lastmod>
-  </url><url>
     <loc>http://localhost:1313/pm-awas-yojana/</loc>
+    <lastmod>2026-09-28T17:27:56+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/scheme/</loc>
     <lastmod>2026-09-28T17:27:56+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/ayushman-bharat-yojana/</loc>
@@ -29,11 +35,11 @@
     <loc>http://localhost:1313/categories/card/</loc>
     <lastmod>2026-09-28T17:13:23+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/farmer/</loc>
-    <lastmod>2026-09-28T17:04:07+05:30</lastmod>
-  </url><url>
     <loc>http://localhost:1313/farmer-registry-kisan-id/</loc>
     <lastmod>2026-09-28T17:04:07+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-mudra-yojana/</loc>
+    <lastmod>2026-09-24T15:27:41+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/jobs/</loc>
     <lastmod>2026-09-22T12:07:01+05:30</lastmod>
