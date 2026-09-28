@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Card on YojanaPortal</title>
+    <link>http://localhost:1313/categories/card/</link>
+    <description>Recent content in Card on YojanaPortal</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 28 Sep 2026 17:13:23 +0530</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/card/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ayushman Bharat Yojana 2025: आयुष्मान कार्ड और मुफ्त इलाज</title>
+      <link>http://localhost:1313/ayushman-bharat-yojana/</link>
+      <pubDate>Mon, 28 Sep 2026 17:13:23 +0530</pubDate>
+      <guid>http://localhost:1313/ayushman-bharat-yojana/</guid>
+      <description>आयुष्मान भारत योजना (PM-JAY) केंद्र सरकार की स्वास्थ्य सुरक्षा योजना है, जिसमें पात्र गरीब एवं वंचित परिवारों को प्रति वर्ष ₹5 लाख तक कैशलेस इलाज की सुविधा मिलती है। इस योजना के अंतर्गत सरकारी और सूचीबद्ध निजी अस्पतालों में भर्ती, सर्जरी, दवाइयों, जांच और पहले से मौजूद बीमारियों का उपचार शामिल है।</description>
+    </item>
+    <item>
+      <title>Farmer ID Registration 2026: किसान आईडी ऑनलाइन आवेदन</title>
+      <link>http://localhost:1313/farmer-registry-kisan-id/</link>
+      <pubDate>Mon, 28 Sep 2026 17:04:07 +0530</pubDate>
+      <guid>http://localhost:1313/farmer-registry-kisan-id/</guid>
+      <description>किसान आईडी (Farmer ID) Digital Agriculture Mission के अंतर्गत AgriStack द्वारा विकसित डिजिटल पहचान है। इसके जरिए किसानों के आधार और भूमि संबंधी रिकॉर्ड को डिजिटल रूप से जोड़ा जाता है। Farmer Registry का उद्देश्य कृषि योजनाओं, सब्सिडी, KCC, फसल बीमा और अन्य सरकारी सुविधाओं के लिए किसानों का सत्यापित डेटाबेस तैयार करना है। इसका पंजीकरण संबंधित राज्य सरकारों द्वारा निर्धारित प्रक्रिया के अनुसार किया जा रहा है।</description>
+    </item>
+  </channel>
+</rss>
