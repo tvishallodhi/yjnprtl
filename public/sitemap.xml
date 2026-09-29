@@ -2,28 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/pm-rojgar-srijan-yojana-pmegp/</loc>
+    <lastmod>2026-09-29T13:02:18+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/scheme/</loc>
+    <lastmod>2026-09-29T13:02:18+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2026-09-29T12:30:55+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/farmer/</loc>
+    <lastmod>2026-09-29T12:30:55+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/loan/</loc>
+    <lastmod>2026-09-29T12:30:55+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-vishwakarma-yojana/</loc>
+    <lastmod>2026-09-29T12:30:55+05:30</lastmod>
+  </url><url>
     <loc>http://localhost:1313/scheme/pm-ujjwala-yojana/</loc>
     <lastmod>2026-09-29T11:43:01+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/scheme/</loc>
+    <loc>http://localhost:1313/categories/subsidy/</loc>
     <lastmod>2026-09-29T11:43:01+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-09-29T11:30:08+05:30</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/loan/</loc>
-    <lastmod>2026-09-29T11:30:08+05:30</lastmod>
+    <loc>http://localhost:1313/categories/women/</loc>
+    <lastmod>2026-09-29T11:43:01+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/pm-svanidhi-yojana/</loc>
     <lastmod>2026-09-29T11:30:08+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/farmer/</loc>
-    <lastmod>2026-09-29T11:13:32+05:30</lastmod>
-  </url><url>
     <loc>http://localhost:1313/pm-surya-ghar-muft-bijli-yojana/</loc>
-    <lastmod>2026-09-29T11:13:32+05:30</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/categories/subsidy/</loc>
     <lastmod>2026-09-29T11:13:32+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/pension/</loc>
