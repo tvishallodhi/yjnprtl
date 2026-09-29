@@ -6,27 +6,27 @@
     <description>Recent content in Categories on YojanaPortal</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 29 Sep 2026 12:30:55 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 13:02:18 +0530</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Farmer</title>
-      <link>http://localhost:1313/categories/farmer/</link>
-      <pubDate>Tue, 29 Sep 2026 12:30:55 +0530</pubDate>
-      <guid>http://localhost:1313/categories/farmer/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Loan</title>
       <link>http://localhost:1313/categories/loan/</link>
-      <pubDate>Tue, 29 Sep 2026 12:30:55 +0530</pubDate>
+      <pubDate>Tue, 29 Sep 2026 13:02:18 +0530</pubDate>
       <guid>http://localhost:1313/categories/loan/</guid>
       <description></description>
     </item>
     <item>
       <title>Subsidy</title>
       <link>http://localhost:1313/categories/subsidy/</link>
-      <pubDate>Tue, 29 Sep 2026 11:43:01 +0530</pubDate>
+      <pubDate>Tue, 29 Sep 2026 13:02:18 +0530</pubDate>
       <guid>http://localhost:1313/categories/subsidy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Farmer</title>
+      <link>http://localhost:1313/categories/farmer/</link>
+      <pubDate>Tue, 29 Sep 2026 12:30:55 +0530</pubDate>
+      <guid>http://localhost:1313/categories/farmer/</guid>
       <description></description>
     </item>
     <item>
