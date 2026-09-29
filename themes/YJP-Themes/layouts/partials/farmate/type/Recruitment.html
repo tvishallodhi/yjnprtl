@@ -6,7 +6,7 @@
   <!-- Title / H1 -->
  {{ partial "farmate/jobs-top-info.html" . }}
 
-
+<br>
   <!-- Quick Info Highlights Box -->
   <div class="summary-card" id="recruitment">
     <span class="badge-status">Summarized detail of Notification</span>
@@ -25,7 +25,7 @@
     <div class="grid-cards">
       <div class="card-item">
         <span class="label">Total Vacancies</span>
-        <span class="val">MP SI Subedar Recruitment 2026 – Overview Posts</span>
+        <span class="val">{{ .Params.totalPost }}</span>
         
       </div>
       <div class="card-item">
@@ -37,8 +37,9 @@
         <span class="val">{{ .Params.candidates }}</span>
       </div>
       <div class="card-item">
-        <span class="label">Application Mode</span>
-        <span class="val">Online</span>
+        <span class="label">Apply Date</span>
+        <span class="val">{{ with .Params.begindate }}{{ . | time.Format "02 Jan" }}{{ end }} to 
+      {{ with .Params.lastdate }}{{ . | time.Format "02 Jan 2006" }}{{ end }}. </span>
       </div>
     </div>
   </div>
@@ -100,10 +101,24 @@
     </div>
   </div>
 
-  <!-- Age Limit -->
- {{ with .Params.age_limit }}
+  
+
+  <!-- Vacancy & Eligibility Details -->
+    <!-- FAQs Accordion -->
+{{ partial "farmate/jobs/postwise.html" . }}
+
+ 
+{{ with .Params.eligibility }}
+ <section class="section-block" id="eligibility">
+  <h2>🧍{{ partial "farmate/keywords.html" (dict "Page" $ "index" 1) }}  - Eligibility</h2>
+  <ul><li>{{ . }} </li></ul>
+ </section>
+ {{ end }}
+
+ <!-- Age Limit -->
+{{ with .Params.age_limit }}
 <section class="section-block" id="age_limit">
-  <h2>Age Limit</h2>
+  <h2>👤{{ partial "farmate/keywords.html" (dict "Page" $ "index" 0) }} -  Age Limit</h2>
   <div class="age-wrapper">
     <ul class="clean-list age-list">
       {{ range . }}
@@ -128,22 +143,10 @@
   </div>
 </section>
 {{ end }}
-
-  <!-- Vacancy & Eligibility Details -->
-    <!-- FAQs Accordion -->
-{{ partial "farmate/jobs/postwise.html" . }}
-
- 
-{{ with .Params.eligibility }}
- <section class="section-block" id="eligibility">
-  <h2> Eligibility</h2>
-  <ul><li>{{ . }} </li></ul>
- </section>
- {{ end }}
   <!-- Category-wise Post Distribution -->
   {{ with .Params.castewise }}
   <section class="section-block">
-    <h2>Post-Wise / Category-Wise Vacancy Distribution</h2>
+    <h2> {{ partial "farmate/keywords.html" (dict "Page" $ "index" 1) }} - Post-Wise / Category-Wise Vacancy Distribution</h2>
     <ul class="grid-list">
       {{ range . }}
         <li>{{ . }}</li>
@@ -167,7 +170,7 @@
   <!-- Documents Required -->
   {{ with .Params.documents }}
   <section class="section-block" id="documents">
-    <h2>Documents Required</h2>
+    <h2>📄{{ partial "farmate/keywords.html" (dict "Page" $ "index" 2) }} - Documents Required</h2>
     <ul class="checklist">
       {{ range . }}
         <li>{{ . }}</li>
@@ -179,7 +182,7 @@
   <!-- How to Apply -->
   {{ with .Params.how_to }}
   <section class="section-block" id="how_to">
-    <h2>How to Apply Online</h2>
+    <h2>📝 How to Apply - {{ partial "farmate/keywords.html" (dict "Page" $ "index" 3) }} </h2>
     <ol class="steps-list">
       {{ range . }}
         <li>{{ . }}</li>
@@ -189,18 +192,26 @@
   {{ end }}
 
   <!-- Important Links CTA -->
-  <section class="section-block">
-    <h2>Important Links</h2>
-       {{/* Links Table */}}
+     {{/* Links Table */}}
     {{ if .Params.links }}
-      <div class="yp-table-wrapper" id="links">
+  <section class="section-block" id="links">
+    <h2>🔗{{ partial "farmate/keywords.html" (dict "Page" $ "index" 4) }} - Direct Links</h2>
+      <div class="yp-table-wrapper" >
         {{ partial "farmate/link-table.html" . }}
       </div>
-    {{ end }}
   </section>
-
+ {{ end }}
   <!-- FAQs Accordion -->
-{{ partial "farmate/summary-faqs.html" . }}
+  
+
+    {{ if .Params.faqs }}
+      <div class="faqs" id="faqs">
+        <h2>🙋‍♀️ {{ partial "farmate/keywords.html" (dict "Page" $ "index" 5) }} - Faqs</h2>
+        <div class="faq">
+          {{ partial "farmate/summary-faqs.html" . }}
+        </div>
+      </div>
+    {{ end }}
 
   <!-- Content Fallback (Markdown body text agar ho toh) -->
   {{ if .Content }}

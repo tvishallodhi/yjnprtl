@@ -1,0 +1,55 @@
+
+{{/* STEP 1: Get Keywords → STEP 2: Get Index → STEP 3: Convert to Title Case → STEP 4: Match Exact Acronyms → STEP 5: Display Keyword */}}
+
+{{- $keywords := .Page.Params.keywords -}}
+{{- $index := .index | default 0 -}}
+
+{{- if and $keywords (lt $index (len $keywords)) -}}
+
+  {{/* STEP 1: Get Current Keyword */}}
+  {{- $keyword := index $keywords $index | title -}}
+
+  {{/* STEP 2: Define Always Capital Acronyms */}}
+  {{- $acronyms := dict
+    "mp" "MP"
+    "mpesb" "MPESB"
+    "ssc" "SSC"
+    "rrb" "RRB"
+    "upsc" "UPSC"
+    "ibps" "IBPS"
+    "sbi" "SBI"
+    "nta" "NTA"
+    "neet" "NEET"
+    "jee" "JEE"
+    "ctet" "CTET"
+    "tet" "TET"
+    "psc" "PSC"
+    "esb" "ESB"
+    "peb" "PEB"
+    "bpsc" "BPSC"
+    "bssc" "BSSC"
+    "dsssb" "DSSSB"
+    "rpsc" "RPSC"
+    "ssc cgl" "SSC CGL"
+  -}}
+
+  {{/* STEP 3: Split Keyword into Individual Words */}}
+  {{- $words := split $keyword " " -}}
+  {{- $result := slice -}}
+
+  {{/* STEP 4: Exact Word Matching → Preserve Acronyms */}}
+  {{- range $words -}}
+    {{- $word := . -}}
+    {{- $lower := lower $word -}}
+
+    {{- if isset $acronyms $lower -}}
+      {{- $word = index $acronyms $lower -}}
+    {{- end -}}
+
+    {{- $result = $result | append $word -}}
+  {{- end -}}
+
+  {{/* STEP 5: Display Final Keyword */}}
+  {{- delimit $result " " -}}
+
+{{- end -}}

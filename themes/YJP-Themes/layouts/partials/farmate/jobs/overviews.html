@@ -8,11 +8,8 @@
 
       <caption>
         <h2>
-          {{ with $page.Params.seo_title }}
-            {{ . }} — Overview
-          {{ else }}
-            {{ $page.Title }} — Overview
-          {{ end }}
+          🎯{{ partial "farmate/keywords.html" (dict "Page" $page "index" 1) }}  — Overview
+          
         </h2>
       </caption>
 
