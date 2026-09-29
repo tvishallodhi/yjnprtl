@@ -2,56 +2,89 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/categories/admision/</loc>
-    <lastmod>2026-09-03T10:14:12+05:30</lastmod>
+    <loc>http://localhost:1313/pm-rojgar-srijan-yojana-pmegp/</loc>
+    <lastmod>2026-09-29T13:02:18+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/scheme/</loc>
+    <lastmod>2026-09-29T13:02:18+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2026-09-03T10:14:12+05:30</lastmod>
+    <lastmod>2026-09-29T12:30:55+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/farmer-registry/</loc>
-    <lastmod>2026-07-27T15:46:43+05:30</lastmod>
+    <loc>http://localhost:1313/categories/farmer/</loc>
+    <lastmod>2026-09-29T12:30:55+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/loan/</loc>
+    <lastmod>2026-09-29T12:30:55+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-vishwakarma-yojana/</loc>
+    <lastmod>2026-09-29T12:30:55+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/scheme/pm-ujjwala-yojana/</loc>
+    <lastmod>2026-09-29T11:43:01+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/subsidy/</loc>
+    <lastmod>2026-09-29T11:43:01+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/women/</loc>
+    <lastmod>2026-09-29T11:43:01+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-svanidhi-yojana/</loc>
+    <lastmod>2026-09-29T11:30:08+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-surya-ghar-muft-bijli-yojana/</loc>
+    <lastmod>2026-09-29T11:13:32+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/pension/</loc>
+    <lastmod>2026-09-29T10:48:49+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-shram-yogi-mandhan-yojana-pmsym/</loc>
+    <lastmod>2026-09-29T10:48:49+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-mudra-yojana/</loc>
+    <lastmod>2026-09-28T19:21:07+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-kusum-yojana/</loc>
+    <lastmod>2026-09-28T18:47:00+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/internship/</loc>
+    <lastmod>2026-09-28T18:11:02+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/jobs/</loc>
+    <lastmod>2026-09-28T18:11:02+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-internship-yojana-pmis/</loc>
+    <lastmod>2026-09-28T18:11:02+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/pm-awas-yojana/</loc>
+    <lastmod>2026-09-28T17:27:56+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/scheme/</loc>
+    <lastmod>2026-09-28T17:27:56+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/ayushman-bharat-yojana/</loc>
+    <lastmod>2026-09-28T17:13:23+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/card/</loc>
+    <lastmod>2026-09-28T17:13:23+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/farmer-registry-kisan-id/</loc>
+    <lastmod>2026-09-28T17:04:07+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/jobs/</loc>
+    <lastmod>2026-09-22T12:07:01+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/jobs/mpesb-police-constable-recruitment-2026/</loc>
+    <lastmod>2026-09-22T12:07:01+05:30</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/admision/</loc>
     <lastmod>2026-09-03T10:14:12+05:30</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/schemes/</loc>
-    <lastmod>2026-07-27T15:46:43+05:30</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/post-1/</loc>
-    <lastmod>2026-09-16T16:30:00-07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/red/</loc>
-    <lastmod>2026-09-16T16:30:00-07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-09-16T16:30:00-07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/mp/kalyani-sahayata-yojana-mp/</loc>
-    <lastmod>2026-09-09T19:30:54+05:30</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/mp/</loc>
-    <lastmod>2026-09-07T12:05:11+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/admission/</loc>
     <lastmod>2026-09-03T10:14:12+05:30</lastmod>
   </url><url>
     <loc>http://localhost:1313/admission/nvs-class-9th-admission-2027/</loc>
     <lastmod>2026-09-03T10:14:12+05:30</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/blue/</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/green/</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/post-3/</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/post-2/</loc>
-    <lastmod>2023-02-15T10:00:00-07:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2023-01-01T08:30:00-07:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
     <lastmod>2023-01-01T08:00:00-07:00</lastmod>
@@ -70,9 +103,7 @@
   </url><url>
     <loc>http://localhost:1313/pages/dmca/</loc>
   </url><url>
-    <loc>http://localhost:1313/jobs/</loc>
-  </url><url>
-    <loc>http://localhost:1313/jobs/mp/2026/mpesb-subedar-vacancy-2026/</loc>
+    <loc>http://localhost:1313/jobs/mp/2026/09/mpesb-subedar-vacancy-2026/</loc>
   </url><url>
     <loc>http://localhost:1313/pages/</loc>
   </url><url>
@@ -81,6 +112,8 @@
     <loc>http://localhost:1313/search/</loc>
   </url><url>
     <loc>http://localhost:1313/jobs/ssc/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
   </url><url>
     <loc>http://localhost:1313/pages/terms-and-conditions/</loc>
   </url>

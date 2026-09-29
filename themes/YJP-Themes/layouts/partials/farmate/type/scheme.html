@@ -91,19 +91,11 @@
     {{ if .Params.conclusion }}
       <div class="section" id="conclusion">
         <h3>🔚{{ .Params.YojnaName }} का निष्कर्ष (Conclusion)</h3>
-       {{ partial "farmate/render-list.html" (dict "data" .Params.benefits) }}
+       {{ partial "farmate/render-list.html" (dict "data" .Params.conclusion) }}
       </div>
     {{ end }}
 
-    {{/* 9. FAQs */}}
-    {{ if .Params.faqs }}
-      <div class="faqs" id="faqs">
-        <b>🙋‍♀️ अक्सर पूछे जाने वाले प्रश्न - {{ .Params.YojnaName }}</b>
-        <div class="faq">
-          {{ partial "farmate/summary-faqs.html" . }}
-        </div>
-      </div>
-    {{ end }}
+ 
 
     {{/* Main Post Content */}}
     <div class="content" id="content">
@@ -115,6 +107,16 @@
     {{ if .Params.links }}
       <div class="yp-table-wrapper" id="links">
         {{ partial "farmate/link-table.html" . }}
+      </div>
+    {{ end }}
+
+       {{/* 9. FAQs */}}
+    {{ if .Params.faqs }}
+      <div class="faqs" id="faqs">
+        <b>🙋‍♀️ अक्सर पूछे जाने वाले प्रश्न - {{ .Params.YojnaName }}</b>
+        <div class="faq">
+          {{ partial "farmate/summary-faqs.html" . }}
+        </div>
       </div>
     {{ end }}
 

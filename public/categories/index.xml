@@ -6,20 +6,76 @@
     <description>Recent content in Categories on YojanaPortal</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 03 Sep 2026 10:14:12 +0530</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 12:30:55 +0530</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Admision</title>
-      <link>http://localhost:1313/categories/admision/</link>
-      <pubDate>Thu, 17 Sep 2026 15:46:43 +0530</pubDate>
-      <guid>http://localhost:1313/categories/admision/</guid>
+      <title>Farmer</title>
+      <link>http://localhost:1313/categories/farmer/</link>
+      <pubDate>Tue, 29 Sep 2026 12:30:55 +0530</pubDate>
+      <guid>http://localhost:1313/categories/farmer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Loan</title>
+      <link>http://localhost:1313/categories/loan/</link>
+      <pubDate>Tue, 29 Sep 2026 12:30:55 +0530</pubDate>
+      <guid>http://localhost:1313/categories/loan/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Subsidy</title>
+      <link>http://localhost:1313/categories/subsidy/</link>
+      <pubDate>Tue, 29 Sep 2026 11:43:01 +0530</pubDate>
+      <guid>http://localhost:1313/categories/subsidy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Women</title>
+      <link>http://localhost:1313/categories/women/</link>
+      <pubDate>Tue, 29 Sep 2026 11:43:01 +0530</pubDate>
+      <guid>http://localhost:1313/categories/women/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pension</title>
+      <link>http://localhost:1313/categories/pension/</link>
+      <pubDate>Tue, 29 Sep 2026 10:48:49 +0530</pubDate>
+      <guid>http://localhost:1313/categories/pension/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Internship</title>
+      <link>http://localhost:1313/categories/internship/</link>
+      <pubDate>Mon, 28 Sep 2026 18:11:02 +0530</pubDate>
+      <guid>http://localhost:1313/categories/internship/</guid>
       <description></description>
     </item>
     <item>
       <title>Jobs</title>
       <link>http://localhost:1313/categories/jobs/</link>
-      <pubDate>Thu, 17 Sep 2026 15:46:43 +0530</pubDate>
+      <pubDate>Mon, 28 Sep 2026 18:11:02 +0530</pubDate>
       <guid>http://localhost:1313/categories/jobs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Scheme</title>
+      <link>http://localhost:1313/categories/scheme/</link>
+      <pubDate>Mon, 28 Sep 2026 17:27:56 +0530</pubDate>
+      <guid>http://localhost:1313/categories/scheme/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Card</title>
+      <link>http://localhost:1313/categories/card/</link>
+      <pubDate>Mon, 28 Sep 2026 17:13:23 +0530</pubDate>
+      <guid>http://localhost:1313/categories/card/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Admision</title>
+      <link>http://localhost:1313/categories/admision/</link>
+      <pubDate>Thu, 03 Sep 2026 10:14:12 +0530</pubDate>
+      <guid>http://localhost:1313/categories/admision/</guid>
       <description></description>
     </item>
   </channel>
