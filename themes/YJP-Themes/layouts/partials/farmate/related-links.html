@@ -2,7 +2,7 @@
 
 {{- $related := site.RegularPages.Related $current -}}
 {{- with $related -}}
-  {{- range first 4 . -}}
+  {{- range first 3 . -}}
     <a
       class="yp-related-promo__link"
       href="{{ .RelPermalink }}">

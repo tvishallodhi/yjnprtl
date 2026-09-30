@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
+# Internal search query results & filter parameters crawl hone se rokein
+Disallow: /*?*
+Disallow: /search/
+
+# Static assets aur feed allow rakhein (caching aur rendering ke liye)
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Main Sitemap Index URL
 Sitemap: http://localhost:1313/sitemap.xml
