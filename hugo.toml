@@ -157,4 +157,31 @@ enableRobotsTXT = true
   url = "/pages/advertising-policy/"
   weight = 80
 
+  [minify]
+  disableXML = false
+  minifyOutput = true
+
+  [minify.tdewolff]
+    [minify.tdewolff.html]
+      keepComments = false
+      keepConditionalComments = true
+      keepDefaultAttrVals = true
+      keepDocumentTags = true
+      keepEndTags = true
+      keepQuotes = false
+      keepWhitespace = false
+
+    [minify.tdewolff.css]
+      keepCSS2 = true
+
+    [minify.tdewolff.js]
+      keepVarNames = false
+      precision = 0
+
+    [minify.tdewolff.json]
+      keepNumbers = false
+
+    [minify.tdewolff.svg]
+      keepComments = false
+
   
