@@ -1,11 +1,12 @@
 User-agent: *
 Allow: /
 
-# Internal search query results & filter parameters crawl hone se rokein
+# Internal search & query parameters
 Disallow: /*?*
 Disallow: /search/
+Disallow: /*.json$
 
-# Static assets aur feed allow rakhein (caching aur rendering ke liye)
+# Rendering assets
 Allow: /*.js$
 Allow: /*.css$
 Allow: /*.png$
@@ -14,5 +15,4 @@ Allow: /*.jpeg$
 Allow: /*.webp$
 Allow: /*.svg$
 
-# Main Sitemap Index URL
-Sitemap: http://localhost:1313/sitemap.xml
+Sitemap: https://yojanaportal.com/sitemap.xml
