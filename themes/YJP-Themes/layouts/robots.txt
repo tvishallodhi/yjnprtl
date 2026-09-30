@@ -15,4 +15,4 @@ Allow: /*.jpeg$
 Allow: /*.webp$
 Allow: /*.svg$
 
-Sitemap: https://yojanaportal.com/sitemap.xml
+Sitemap: https://www.yojanaportal.com/sitemap.xml
