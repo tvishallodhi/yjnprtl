@@ -1,0 +1,20 @@
+{{- $page := . -}}
+
+{{- $targetDate := $page.Lastmod -}}
+
+{{- if or (not $targetDate) $targetDate.IsZero -}}
+  {{- $targetDate = $page.Date -}}
+{{- end -}}
+
+{{- if or (not $targetDate) $targetDate.IsZero -}}
+  {{- with site.Params.date -}}
+    {{- $targetDate = time . -}}
+  {{- end -}}
+{{- end -}}
+
+  <url>
+    <loc>{{ $page.Permalink | htmlEscape }}</loc>
+    {{- if and $targetDate (not $targetDate.IsZero) }}
+    <lastmod>{{ $targetDate.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+    {{- end }}
+  </url>

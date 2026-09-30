@@ -1,5 +1,5 @@
 baseURL = "https://yojanaportal.com/"
-title = "YojanaPortal"
+title = "Yojana Portal"
 theme = "YJP-Themes"
 
 defaultContentLanguage = "en"
@@ -8,8 +8,47 @@ enableRobotsTXT = true
 [pagination]
   pagerSize = 10
 
+# Hugo के डिफ़ॉल्ट सिंगल sitemap को बंद करें ताकि कस्टम इंडेक्स ओवरराइट न हो
+[sitemap]
+  disable = true
+
+# 1. कस्टम मीडिया टाइप
+[mediaTypes."application/sitemap+xml"]
+  suffixes = ["xml"]
+
+# 2. कस्टम आउटपुट फॉर्मेट्स
+[outputFormats.SitemapIndex]
+  mediaType = "application/sitemap+xml"
+  baseName = "sitemap"
+  isPlainText = false
+  notAlternative = true
+
+[outputFormats.SitemapJobs]
+  mediaType = "application/sitemap+xml"
+  baseName = "sitemap-jobs"
+  isPlainText = false
+  notAlternative = true
+
+[outputFormats.SitemapYojana]
+  mediaType = "application/sitemap+xml"
+  baseName = "sitemap-yojana"
+  isPlainText = false
+  notAlternative = true
+
+[outputFormats.SitemapEducation]
+  mediaType = "application/sitemap+xml"
+  baseName = "sitemap-education"
+  isPlainText = false
+  notAlternative = true
+ 
+[outputFormats.SitemapPages]
+  mediaType = "application/sitemap+xml"
+  baseName = "sitemap-pages"
+  isPlainText = false
+  notAlternative = true
+
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+   home = ["HTML", "RSS", "SitemapIndex", "SitemapPages", "SitemapJobs", "SitemapYojana", "SitemapEducation"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
@@ -20,11 +59,15 @@ enableRobotsTXT = true
   tag = "tags"
 
 [params]
+  date = 2025-07-03T10:02:12+05:30
   description = "Lightweight, language-aware portal framework."
   defaultSidebarIcon = "↪️"
   defaultLanguage = "hi"
   logo = "/images/logo.svg"
-
+  sitemap_custom_urls = [
+    # "/custom-tool-path/",
+    # "/external-service/"
+  ]
 
 # Primary Horizontal Scrollable Menu
 

@@ -1,0 +1,42 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" | safeHTML -}}
+{{- $validPages := partial "sitemap/filter-pages.html" . -}}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  {{- /* 1. Homepage Entry (हमेशा सबसे ऊपर) */ -}}
+  {{- $homeLastmod := .Site.Home.Lastmod.Format "2006-01-02" -}}
+  {{- if not $homeLastmod -}}
+    {{- $homeLastmod = .Site.Home.Date.Format "2006-01-02" -}}
+  {{- end -}}
+  <url>
+    <loc>{{ .Site.Home.Permalink | htmlEscape }}</loc>
+    <lastmod>{{ $homeLastmod }}</lastmod>
+  </url>
+
+  {{- /* 2. Content Pages: Pages Folder, Tools, या अन्य बचे हुए पेजेस */ -}}
+  {{- range $validPages -}}
+    {{- $postType := lower (string .Params.post_type) -}}
+    {{- $type := lower (string .Type) -}}
+    {{- $section := lower .Section -}}
+
+    {{- /* चेक करें कि क्या यह पोस्ट पहले से किसी मुख्य वर्टिकल में है */ -}}
+    {{- $isJob := or (in (slice "latest-jobs" "jobs" "recruitment") $postType) (in (slice "recruitment" "jobs") $type) (eq $section "jobs") -}}
+    {{- $isYojana := or (in (slice "scheme" "yojana" "sarkari-yojana") $postType) (in (slice "scheme" "yojana") $type) (in (slice "scheme" "yojana") $section) -}}
+    {{- $isEducation := or (in (slice "education" "admission" "scholarship" "syllabus" "exam") $postType) (in (slice "education") $type) (in (slice "education") $section) -}}
+
+    {{- /* यदि यह जॉब, योजना या एजुकेशन नहीं है (जैसे pages, tools, privacy, contact आदि) */ -}}
+    {{- if and (not $isJob) (not $isYojana) (not $isEducation) -}}
+      {{ partial "sitemap/url-entry.xml" . }}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* 3. Manual Custom URLs (यदि hugo.toml के params में डिफाइन हों) */ -}}
+  {{- with .Site.Params.sitemap_custom_urls -}}
+    {{- range . -}}
+      <url>
+        <loc>{{ . | absURL | htmlEscape }}</loc>
+        <lastmod>{{ now.Format "2006-01-02" }}</lastmod>
+      </url>
+    {{- end -}}
+  {{- end -}}
+
+</urlset>

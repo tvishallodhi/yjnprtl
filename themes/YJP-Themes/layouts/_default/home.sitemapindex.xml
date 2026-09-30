@@ -1,0 +1,60 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" | safeHTML -}}
+{{- $validPages := partial "sitemap/filter-pages.html" . -}}
+
+{{- $jobsPages := slice -}}
+{{- $yojanaPages := slice -}}
+{{- $eduPages := slice -}}
+{{- $otherPages := slice -}}
+
+{{- range $validPages -}}
+  {{- $postType := lower (string .Params.post_type) -}}
+  {{- $type := lower (string .Type) -}}
+  {{- $section := lower .Section -}}
+
+  {{- if or (in (slice "latest-jobs" "jobs" "recruitment") $postType) (in (slice "recruitment" "jobs") $type) (eq $section "jobs") -}}
+    {{- $jobsPages = $jobsPages | append . -}}
+  {{- else if or (in (slice "scheme" "yojana" "sarkari-yojana") $postType) (in (slice "scheme" "yojana") $type) (in (slice "scheme" "yojana") $section) -}}
+    {{- $yojanaPages = $yojanaPages | append . -}}
+  {{- else if or (in (slice "education" "admission" "scholarship" "syllabus" "exam") $postType) (in (slice "education") $type) (in (slice "education") $section) -}}
+    {{- $eduPages = $eduPages | append . -}}
+  {{- else -}}
+    {{- $otherPages = $otherPages | append . -}}
+  {{- end -}}
+{{- end -}}
+
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Pages & Tools Sitemap -->
+  <sitemap>
+    <loc>{{ "sitemap-pages.xml" | absURL }}</loc>
+    {{- with index ($otherPages.ByLastmod.Reverse) 0 }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+    {{- end }}
+  </sitemap>
+
+  {{- if gt (len $jobsPages) 0 }}
+  <sitemap>
+    <loc>{{ "sitemap-jobs.xml" | absURL }}</loc>
+    {{- with index ($jobsPages.ByLastmod.Reverse) 0 }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+    {{- end }}
+  </sitemap>
+  {{- end }}
+
+  {{- if gt (len $yojanaPages) 0 }}
+  <sitemap>
+    <loc>{{ "sitemap-yojana.xml" | absURL }}</loc>
+    {{- with index ($yojanaPages.ByLastmod.Reverse) 0 }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+    {{- end }}
+  </sitemap>
+  {{- end }}
+
+  {{- if gt (len $eduPages) 0 }}
+  <sitemap>
+    <loc>{{ "sitemap-education.xml" | absURL }}</loc>
+    {{- with index ($eduPages.ByLastmod.Reverse) 0 }}
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}</lastmod>
+    {{- end }}
+  </sitemap>
+  {{- end }}
+</sitemapindex>

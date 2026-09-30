@@ -1,0 +1,15 @@
+{{- printf "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" | safeHTML -}}
+{{- $validPages := partial "sitemap/filter-pages.html" . -}}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range $validPages -}}
+    {{- $postType := lower (string .Params.post_type) -}}
+    {{- $type := lower (string .Type) -}}
+    {{- $section := lower .Section -}}
+    {{- $isJob := or (in (slice "latest-jobs" "jobs" "recruitment") $postType) (in (slice "recruitment" "jobs") $type) (eq $section "jobs") -}}
+    {{- $isYojana := or (in (slice "scheme" "yojana" "sarkari-yojana") $postType) (in (slice "scheme" "yojana") $type) (in (slice "scheme" "yojana") $section) -}}
+
+    {{- if and (not $isJob) $isYojana -}}
+      {{ partial "sitemap/url-entry.xml" . }}
+    {{- end -}}
+  {{- end -}}
+</urlset>

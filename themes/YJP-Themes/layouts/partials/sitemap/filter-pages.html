@@ -1,0 +1,13 @@
+{{- /* Input: Site Context (.) */ -}}
+{{- $validPages := slice -}}
+{{- range .RegularPagesRecursive -}}
+  {{- $isPublished := and (le .Date.Unix now.Unix) (or (not .ExpiryDate) (gt .ExpiryDate.Unix now.Unix)) -}}
+  {{- $notDraft := not .Draft -}}
+  {{- $sitemapAllowed := ne .Params.sitemap false -}}
+  {{- $notNoIndex := ne .Params.noindex true -}}
+
+  {{- if and $isPublished $notDraft $sitemapAllowed $notNoIndex -}}
+    {{- $validPages = $validPages | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $validPages -}}
