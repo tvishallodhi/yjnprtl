@@ -1,0 +1,24 @@
+{{ $src := .Params.imageBanner | default .Params.featured_image | default .Params.thumbnail }}
+{{ with $src }}
+  {{ $imgRes := "" }}
+  {{ $isRemote := or (hasPrefix . "http://") (hasPrefix . "https://") }}
+
+  {{ if $isRemote }}
+    {{ with try (resources.GetRemote .) }}
+      {{ with .Err }}
+        {{ warnf "%s" . }}
+      {{ else }}
+        {{ $imgRes = .Value }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ $imgRes = resources.Get . }}
+  {{ end }}
+
+  {{ if $imgRes }}
+    {{ $webp := $imgRes.Process "resize 400x webp q85" }}
+    <img src="{{ $webp.RelPermalink }}" width="{{ $webp.Width }}" height="{{ $webp.Height }}" alt="{{ $.Title }}" class="slv-img" loading="lazy" decoding="async">
+  {{ else }}
+    <img src="{{ . | safeURL }}" alt="{{ $.Title }}" class="slv-img" loading="lazy" decoding="async">
+  {{ end }}
+{{ end }}

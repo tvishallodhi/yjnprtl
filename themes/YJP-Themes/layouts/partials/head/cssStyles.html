@@ -23,10 +23,16 @@
 {{ end }}
 
 
-{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes")  (eq .Params.listType "schemes")}}
+{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes")  (eq .Params.listType "schemes") (eq .Params.listType "jobs")}}
   {{ with resources.Get "css/list-updates/scheme-filter.css" }}
     {{ $style := . | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
   {{ end }}
 {{ end }}
 
+{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes") (eq .Section "jobs") (eq .Section "admission") (eq .Section "pages")}}
+  {{ with resources.Get "css/list-updates/section-list.css" }}
+    {{ $style := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{ end }}
+{{ end }}

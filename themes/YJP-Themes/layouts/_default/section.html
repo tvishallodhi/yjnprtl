@@ -1,18 +1,91 @@
 {{ define "main" }}
-{{ partial "breadcrumbs.html" . }}
+<div class="slv-container">
+  {{ partial "breadcrumbs.html" . }}
 
-<div class="section-wrapper">
-  <h1 class="section-title">{{ .Params.name | default .Title }}</h1>
-  
-  <div class="card-grid">
+  <header class="slv-header">
+    <h1 class="slv-main-title">{{ .Params.name | default .Title }}</h1>
+    {{ with .Description }}
+      <p class="slv-main-desc">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <div class="slv-grid">
     {{ range .Paginator.Pages }}
-      <article class="content-card" data-lang="{{ .Params.lang | default "" }}">
-        <h2 class="card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-        <p class="card-desc">{{ .Description }}</p>
+      {{ $img := .Params.imageBanner | default .Params.featured_image | default .Params.thumbnail }}
+
+      <article class="slv-card" data-lang="{{ .Params.lang | default "" }}">
+        
+        {{/* 1. फ़ीचर्ड इमेज */}}
+        {{ if $img }}
+         <a href="{{ .RelPermalink }}" class="slv-card-media" tabindex="-1" aria-hidden="true">
+  <div class="slv-media-frame">
+    {{ partial "imp-codes/card-image.html" . }}
+  </div>
+</a>
+        {{ end }}
+
+        <div class="slv-card-body">
+          {{/* 2. मेटा हेडर (कैटेगरी/बैज + अंतिम तिथि या दिनांक) */}}
+          <div class="slv-card-meta">
+            {{ with .Params.categories }}
+              <span class="slv-pill slv-pill-primary">{{ index . 0 }}</span>
+            {{ else }}
+              {{ with .Section }}
+                <span class="slv-pill slv-pill-primary">{{ . | humanize }}</span>
+              {{ end }}
+            {{ end }}
+
+            {{ with .Params.last_date }}
+              <span class="slv-deadline">अंतिम तिथि: {{ . }}</span>
+            {{ else }}
+              <time datetime="{{ .Date.Format "2006-01-02" }}" class="slv-post-date">
+                {{ .Date.Format "02 Jan 2006" }}
+              </time>
+            {{ end }}
+          </div>
+
+          {{/* 3. कार्ड टाइटल */}}
+          <h2 class="slv-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h2>
+
+          {{/* 4. डिस्क्रिप्शन / सारांश */}}
+          {{ $desc := .Description | default .Summary }}
+          {{ if $desc }}
+            <p class="slv-desc">
+              {{ $desc | plainify | truncate 120 }}
+            </p>
+          {{ end }}
+
+          {{/* 5. कार्ड फ़ुटर */}}
+          <div class="slv-card-footer">
+            {{ with .Params.total_posts }}
+              <span class="slv-posts-tag"><strong>{{ . }}</strong> पद</span>
+            {{ else }}
+              <span></span>
+            {{ end }}
+
+            <a href="{{ .RelPermalink }}" class="slv-action-btn">
+              <span>विवरण देखें</span>
+              <svg class="slv-arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
       </article>
     {{ end }}
   </div>
 
-  {{ partial "pagination.html" . }}
+  <div class="slv-pagination-wrap">
+    {{ partial "pagination.html" . }}
+  </div>
 </div>
+
 {{ end }}
+
+
+
+
