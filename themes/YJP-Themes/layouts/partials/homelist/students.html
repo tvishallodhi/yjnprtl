@@ -1,0 +1,38 @@
+{{ $today := now.Format "2006-01-02" }}
+{{ $allStudents := where .Site.RegularPages "Params.post-type" "student" }}
+
+{{/* activedate >= today वाले */}}
+{{ $activePosts := where $allStudents "Params.activedate" "ge" $today }}
+{{ $withDate := where $activePosts "Date" "!=" nil }}
+
+{{/* Pinned groups */}}
+{{ $pinFirst := sort (where $withDate "Params.pin" "==" "first") "Date" "desc" }}
+{{ $pinLast := sort (where $withDate "Params.pin" "==" "last") "Date" "desc" }}
+{{ $middle := where $withDate "Params.pin" "!=" "first" }}
+{{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+{{/* Merge posts: first → normal → last */}}
+{{ $.Scratch.Set "orderedStudents" (slice) }}
+{{ range $pinFirst }}  {{ $.Scratch.Add "orderedStudents" (slice .) }} {{ end }}
+{{ range $normal }}    {{ $.Scratch.Add "orderedStudents" (slice .) }} {{ end }}
+{{ range $pinLast }}   {{ $.Scratch.Add "orderedStudents" (slice .) }} {{ end }}
+{{ $ordered := first 15 ($.Scratch.Get "orderedStudents") }}
+
+{{/* Final Output */}}
+{{ range $ordered }}
+  <li>
+    <a href="{{ .RelPermalink }}" target="_blank">
+          {{ if or (eq .Params.pin "first") (eq .Params.pin "last") }} <span>📌</span> {{ end }}
+      {{ .Title }}
+    </a>
+
+    {{ if eq (.Date.Format "2006-01-02") (now.Format "2006-01-02") }}
+      <a href="{{ .RelPermalink }}" target="_blank">
+        <img src="/gif/new.gif" alt="New" style="width: 40px; vertical-align: middle;" />
+      </a>
+    {{ end }}
+
+    {{ if eq .Params.extended "yes" }} • <a href="/extended/" target="_blank">Extended</a> {{ end }}
+  </li>
+  <hr>
+{{ end }}

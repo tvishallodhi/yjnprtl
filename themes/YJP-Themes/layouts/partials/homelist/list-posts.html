@@ -1,0 +1,43 @@
+{{ $colors := slice "#f8dbb4" "#e9c3f8" "#fbfcc4" "#befccc" "#f8bcb4" "#bec9fc" "#b4f0f8" "#b4f8d3" "#f8b4de" "#ffa4ff" }}
+{{ $today := now.Format "2006-01-02" }}
+
+{{/* Step 1: Filter by activedate */}}
+{{ $filteredPages := where .Site.RegularPages "Params.activedate" "ge" $today }}
+
+{{/* ✅ Step 2: Filter only those with valid .Date */}}
+{{ $hasDate := where $filteredPages "Date" "!=" nil }}
+
+{{/* Step 3: Categorize & Sort */}}
+{{ $pinnedFirst := sort (where $hasDate "Params.pin" "==" "first") "Date" "desc" }}
+{{ $pinnedLast := sort (where $hasDate "Params.pin" "==" "last") "Date" "desc" }}
+{{ $middle := where $hasDate "Params.pin" "!=" "first" }}
+{{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+{{/* Step 4: Merge using Scratch */}}
+{{ $.Scratch.Set "ordered" (slice) }}
+{{ range $pinnedFirst }} {{ $.Scratch.Add "ordered" (slice .) }} {{ end }}
+{{ range $normal }} {{ $.Scratch.Add "ordered" (slice .) }} {{ end }}
+{{ range $pinnedLast }} {{ $.Scratch.Add "ordered" (slice .) }} {{ end }}
+{{ $orderedPages := $.Scratch.Get "ordered" }}
+
+{{/* Step 5: Display */}}
+<div class="post-grid">
+  {{ range $index, $element := first 12 $orderedPages }}
+    {{ $colorIndex := mod $index (len $colors) }}
+    {{ $randColor := index $colors $colorIndex }}
+    <a href="{{ $element.Permalink }}" class="post-link" style="position: relative;">
+      <div class="post" style="background-color: {{ $randColor }}; padding: 10px; position: relative;">
+        {{ if eq ($element.Date.Format "2006-01-02") (now.Format "2006-01-02") }}
+          <img src="/gif/new.gif" alt="New" class="new-icon" />
+        {{ end }}
+        {{ with $element.Params.RecommendName }}
+           {{ . }}
+        {{ else }}
+          {{ $element.Title }}
+        {{ end }} {{ if or (eq $element.Params.pin "first") (eq $element.Params.pin "last") }}
+            <span class="pin-icon" >📌</span>
+          {{ end }} 
+      </div>
+    </a>
+  {{ end }}
+</div>

@@ -1,0 +1,26 @@
+{{ if eq .Params.extended "yes" }}
+    • <a href="/extended/" target="_blank" rel="noopener">Extended</a>
+{{ end }}
+
+{{ if eq .Params.pdfForm "yes" }}
+    • <a href="/pdf-forms/" target="_blank" rel="noopener">PDF</a>
+{{ end }}
+
+{{/* पोस्ट आज की तारीख को डाली गई हो तो NEW */}}
+{{ if eq (.Date.Format "2006-01-02") (now.Format "2006-01-02") }}
+    <a href="{{ .RelPermalink }}" target="_blank"><img src="/gif/new.gif" alt="New" style="width: 40px; vertical-align: middle;" /></a> 
+{{ end }}
+
+{{/* अगर begindate आज की तारीख हो तो Start Today */}}
+{{ with .Params.begindate }}
+    {{ if eq . (now.Format "2006-01-02") }}
+        • <span class="text-blue-600 font-semibold">Starts Today</span>
+    {{ end }}
+{{ end }}
+
+{{/* अगर lastdate बीत गई हो तो Expired */}}
+{{ with .Params.lastdate }}
+    {{ if lt . (now.Format "2006-01-02") }}
+        • <span class="text-red-600 font-semibold">✏️</span>
+    {{ end }}
+{{ end }}

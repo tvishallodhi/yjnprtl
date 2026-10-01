@@ -1,0 +1,98 @@
+
+
+
+<nav class="sticky-anchor">
+    <a href="#Jobs">💼 Jobs</a>
+  <a href="#Schemes">🗂️ Schemes</a>
+   <a href="#Education">📚 Education</a>
+     <a href="#Certificate">📜 Certificate</a>
+   <a href="#Implinks">🔗 Useful Links</a>
+    <a href="#Admitcard">🎟️ Admitcard</a>
+  <a href="#Results">📊 Results</a>
+  <a href="#Forms">📄 Pdf Forms</a>
+  <a href="#Upcoming">🔔 Upcoming</a>
+   <a href="#Education">📚 Admission</a>
+</nav>
+<hr>
+
+<div class="grid-container">
+  <!-- First Row -->
+    <div class="card">
+     <span id="Jobs"> </span>
+    <div class="card-header" > Latest Jobs </div>
+    <div class="card-content">
+      {{ partial "homelist/latest-jobs.html" . }}
+    </div>
+    <div class="card-footer">
+      <a href="/latest-jobs/" class="more-link" title="View all latest government job openings">View More jobs</a>
+    </div>
+  </div>
+
+ <div class="card">
+    <span id="Schemes"> </span>
+    <div class="card-header" >Schemes</div>
+    <div class="card-content" >
+      {{ partial "homelist/schemes.html" . }}
+    </div>
+    <div class="card-footer" >
+      <a href="/latest-schemes/" class="more-link" title="View all latest government schemes">View all schemes</a>
+    </div>
+  </div>
+<!-- Second Row -->
+  <div class="card">
+    <span id="Education"> </span>
+    <div class="card-header" >Education</div>
+    <div class="card-content">
+      {{ partial "homelist/students.html" . }}
+    </div>
+    <div class="card-footer">
+      <a href="/student-help/" class="more-link" title="View all resources available for students">More student resources</a>
+    </div>
+  </div>
+ <div class="card">
+    <span id="Admitcard"> </span>
+    <div class="card-header" >Admit Card</div>
+    <div class="card-content">
+      {{ partial "homelist/admitcard.html" . }}
+    </div>
+    <div class="card-footer">
+      <a href="/admitcard/"  class="more-link" title="View and download all available admit cards">more  admit cards</a>
+    </div>
+  </div>
+
+    <div class="card">
+      <span id="Results"> </span>
+    <div class="card-header" >Results</div>
+    <div class="card-content">
+      {{ partial "homelist/results.html" . }}
+    </div>
+    <div class="card-footer">
+      <a href="/results/" class="more-link" title="View all latest exam results">View more results</a>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+     <span  id="Implinks"> </span>
+
+  <div class="card-header"   >Quick Links</div>
+  <div class="card-content">
+    {{ partial "homelist/important.html" . }}
+  </div>
+  <div class="card-footer">
+    <a href="/imp-links/" class="more-link" title="View  more useful Link Update">View More Useful link</a>
+  </div>
+
+     <span  id="Upcoming"> </span>
+    <div class="card-header"> Upcoming </div>
+    <div class="card-content">
+      {{ partial "homelist/upcoming.html" . }}
+    </div>
+    <div class="card-footer">
+      <a href="/upcoming/" class="more-link" title="View all upcoming government schemes/jobs">More Upcoming Update</a>
+    </div> 
+
+  </div>
+<!-- third Row -->
+</div>

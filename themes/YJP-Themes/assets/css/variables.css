@@ -20,6 +20,8 @@
   --border-color: #e2e8f0;
   --border-subtle: #cbd5e1;
   --background: linear-gradient(135deg, #2563EB 0%, #7C3AED 50%, #06B6D4 100%);
+  --link-color: #313f00;
+  --link-hover: #23027e;
 
   /* Typography */
   --text-main: #1f1f1f;
@@ -47,11 +49,16 @@
   --btn-notify-text: #ffffff;
   --btn-disabled-bg: #e2e8f0;
   --btn-disabled-text: #64748b;
+
+  /* Card Component Specific Tokens */
+  --border-radius: 6px;
+  --card-width: 350px;
+  --font-size: 16px;
 }
 
 [data-theme="dark"] {
   /* Brand & Navigation */
-  --primary-color: #a8c7fa;
+  --primary-color: #5c7500;
   --primary-hover: #d3e3fd;
   --focus-ring: 2px solid #a8c7fa;
   --box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
@@ -63,7 +70,8 @@
   --border-color: #333333;
   --border-subtle: #444444;
   --background: linear-gradient(135deg, #1E3A8A 0%, #5B21B6 50%, #0E7490 100%);
-
+  --link-color: #dbfd5f;
+  --link-hover: #e6ff02;
   /* Typography */
   --text-main: #e3e3e3;
   --text-muted: #9e9e9e;

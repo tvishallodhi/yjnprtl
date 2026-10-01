@@ -82,8 +82,8 @@ enableRobotsTXT = true
 
 [[menus.main]]
   identifier = "ssc"
-  name = "SSC"
-  url = "/ssc/"
+  name = "Schemes"
+  url = "/schemes/"
   weight = 20
 
   [menus.main.params]

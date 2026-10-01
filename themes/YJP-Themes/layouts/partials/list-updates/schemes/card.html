@@ -1,0 +1,71 @@
+{{/*
+  layouts/partials/schemes/card.html
+  Context: Dictionary with .post (Page object), .type ("central"|"state"), .state_code (string), .state_title (string)
+*/}}
+{{ $p := .post }}
+{{ $type := .type }}
+{{ $stateCode := .state_code }}
+{{ $stateTitle := .state_title }}
+
+{{/* Extract keywords, aliases, and description for deep instant search */}}
+{{ $searchContent := slice $p.Title }}
+{{ with $p.Description }}{{ $searchContent = $searchContent | append . }}{{ end }}
+{{ with $p.Summary }}{{ $searchContent = $searchContent | append . }}{{ end }}
+{{ with $p.Params.keywords }}{{ $searchContent = $searchContent | append (delimit . " ") }}{{ end }}
+{{ with $p.Params.aliases }}{{ $searchContent = $searchContent | append (delimit . " ") }}{{ end }}
+{{ with $stateTitle }}{{ $searchContent = $searchContent | append . }}{{ end }}
+{{ $searchData := delimit $searchContent " " | lower | plainify }}
+
+<article 
+  class="yjp-scheme-card" 
+  data-scheme-item
+  data-type="{{ $type }}"
+  data-state="{{ $stateCode }}"
+  data-search="{{ $searchData }}">
+  
+  {{/* Featured Image (if defined) */}}
+  {{ $img := $p.Params.imageBanner | default $p.Params.featured_image | default $p.Params.thumbnail }}
+  {{ if $img }}
+    <a href="{{ $p.RelPermalink }}" class="yjp-scheme-thumb-link" tabindex="-1" aria-hidden="true">
+      <div class="yjp-scheme-thumb-wrapper">
+        <img 
+          src="{{ $img | relURL }}" 
+          alt="{{ $p.Title }}" 
+          class="yjp-scheme-thumb"
+          loading="lazy"
+          decoding="async">
+      </div>
+    </a>
+  {{ end }}
+
+  <div class="yjp-scheme-body">
+    <div class="yjp-scheme-badge-wrapper">
+      {{ if eq $type "central" }}
+        <span class="yjp-badge yjp-badge-central">केंद्र सरकार</span>
+      {{ else }}
+        <span class="yjp-badge yjp-badge-state">{{ $stateTitle }}</span>
+      {{ end }}
+    </div>
+
+    <h3 class="yjp-scheme-title">
+      <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+    </h3>
+
+    {{ $desc := $p.Description | default $p.Summary }}
+    {{ if $desc }}
+      <p class="yjp-scheme-excerpt">
+        {{ $desc | plainify | truncate 130 }}
+      </p>
+    {{ end }}
+
+    <div class="yjp-scheme-footer">
+      <a href="{{ $p.RelPermalink }}" class="yjp-scheme-link">
+        <span>विवरण देखें</span>
+        <svg class="yjp-icon-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>

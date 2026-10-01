@@ -1,0 +1,147 @@
+{{/*
+  layouts/partials/jobs/filter.html
+  Build-time static collector with regex detection for Year / Central / State paths
+*/}}
+
+{{/* 1. केवल post_type = "jobs" वाली पोस्ट एकत्रित करें */}}
+{{ $allJobs := where site.RegularPages "Params.post_type" "jobs" }}
+
+{{/* 2. content/jobs/ के उप-अनुभागों (States) के नाम और टाइटल्स निकालें */}}
+{{ $jobsSection := site.GetPage "section" "jobs" }}
+{{ $stateInfoMap := dict }}
+
+{{ if $jobsSection }}
+  {{ range $jobsSection.Sections }}
+    {{ $path := .File.Dir }}
+    {{ $trimmed := strings.TrimSuffix "/" (replace $path "\\" "/") }}
+    {{ $parts := split $trimmed "/" }}
+    {{ $folder := index $parts (sub (len $parts) 1) }}
+    {{/* 4 अंकों का वर्ष (जैसे 2025, 2026) या 'central' को राज्य सूची में शामिल न करें */}}
+    {{ if and $folder (not (findRE "^[0-9]{4}$" $folder)) (ne $folder "central") (ne $folder "jobs") }}
+      {{ $stateInfoMap = merge $stateInfoMap (dict $folder .Title) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* 3. प्रत्येक जॉब पोस्ट को Central अथवा State में वर्गीकृत करें */}}
+{{ $classifiedPosts := slice }}
+{{ $activeStatesMap := dict }}
+
+{{ range $allJobs }}
+  {{ $p := . }}
+  {{ $fileDir := $p.File.Dir }}
+  {{ $normDir := replace $fileDir "\\" "/" }}
+  {{ $normDir = strings.TrimLeft "/" (strings.TrimRight "/" $normDir) }}
+  {{ $dirParts := split $normDir "/" }}
+
+  {{/* 
+     यदि पोस्ट content/jobs/ के रूट में है -> len = 1 (उदा. jobs/ssc.md)
+     यदि subfolder में है -> len >= 2 (उदा. jobs/2026/..., jobs/mp/...)
+  */}}
+  {{ $isCentral := false }}
+  {{ $stateCode := "" }}
+  {{ $stateTitle := "केंद्र सरकार" }}
+
+  {{ if le (len $dirParts) 1 }}
+    {{/* रूट jobs/ फोल्डर में स्थित पोस्ट सीधे Central मानी जाएगी */}}
+    {{ $isCentral = true }}
+  {{ else }}
+    {{ $subFolder := index $dirParts 1 }}
+    {{/* यदि सब-फ़ोल्डर 4-अंकीय वर्ष (उदा. 2026, 2025) या 'central' हो */}}
+    {{ if or (findRE "^[0-9]{4}$" $subFolder) (eq $subFolder "central") }}
+      {{ $isCentral = true }}
+    {{ else }}
+      {{/* राज्य फ़ोल्डर (उदा. mp, up, rj) */}}
+      {{ $stateCode = $subFolder }}
+      {{ $stateTitle = index $stateInfoMap $stateCode | default (upper $stateCode) }}
+      {{ $activeStatesMap = merge $activeStatesMap (dict $stateCode $stateTitle) }}
+    {{ end }}
+  {{ end }}
+
+  {{ if $isCentral }}
+    {{ $classifiedPosts = $classifiedPosts | append (dict 
+      "post" $p 
+      "type" "central" 
+      "state_code" "" 
+      "state_title" "केंद्र सरकार"
+    ) }}
+  {{ else }}
+    {{ $classifiedPosts = $classifiedPosts | append (dict 
+      "post" $p 
+      "type" "state" 
+      "state_code" $stateCode 
+      "state_title" $stateTitle
+    ) }}
+  {{ end }}
+{{ end }}
+
+{{/* 4. सक्रिय राज्यों की वर्णानुक्रम (Alphabetical) सॉर्टिंग */}}
+{{ $statesList := slice }}
+{{ range $code, $title := $activeStatesMap }}
+  {{ $statesList = $statesList | append (dict "code" $code "title" $title) }}
+{{ end }}
+{{ $sortedStates := sort $statesList "title" "asc" }}
+
+<div class="yjp-jobs-container" id="yjp-jobs-app">
+  <!-- Controls -->
+  <div class="yjp-job-toolbar">
+    <div class="yjp-filter-group yjp-filter-select-group">
+      <label for="yjp-job-state-select" class="yjp-sr-only">राज्य चुनें</label>
+      <div class="yjp-select-wrapper">
+        <select id="yjp-job-state-select" class="yjp-form-select" aria-label="राज्य या केंद्र अनुसार जॉब्स फ़िल्टर करें">
+          <option value="all">सभी राज्य व केंद्र (All Jobs)</option>
+          <option value="central">केंद्र सरकार (Central Jobs)</option>
+          <optgroup label="राज्य अनुसार नौकरियाँ (State Jobs)">
+            {{ range $sortedStates }}
+              <option value="{{ .code }}">{{ .title }}</option>
+            {{ end }}
+          </optgroup>
+        </select>
+        <span class="yjp-select-chevron" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="yjp-filter-group yjp-filter-search-group">
+      <label for="yjp-job-search" class="yjp-sr-only">नौकरी खोजें</label>
+      <div class="yjp-search-wrapper">
+        <svg class="yjp-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="search" 
+          id="yjp-job-search" 
+          class="yjp-form-input" 
+          placeholder="विभाग, पद या भर्ती का नाम खोजें..." 
+          autocomplete="off"
+          spellcheck="false">
+        <button type="button" id="yjp-job-search-clear" class="yjp-search-clear" aria-label="खोज साफ़ करें" hidden>
+          &times;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Counter Status -->
+  <div class="yjp-filter-status" aria-live="polite">
+    कुल <strong id="yjp-job-count-display">{{ len $classifiedPosts }}</strong> नौकरियाँ उपलब्ध
+  </div>
+
+  <!-- Jobs Grid -->
+  <div class="yjp-jobs-grid" id="yjp-jobs-list">
+    {{ range $classifiedPosts }}
+      {{ partial "list-update/jobs/card.html" . }}
+    {{ end }}
+  </div>
+
+  <!-- No Results Message -->
+  <div id="yjp-job-no-results" class="yjp-no-results" hidden>
+    <div class="yjp-empty-icon" aria-hidden="true">💼</div>
+    <p class="yjp-empty-text">कोई नौकरी / भर्ती नहीं मिली। कृपया दूसरा नाम या राज्य चुनें।</p>
+    <button type="button" id="yjp-job-reset-filters" class="yjp-btn-reset">फ़िल्टर रीसेट करें</button>
+  </div>
+</div>

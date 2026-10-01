@@ -1,0 +1,31 @@
+
+
+{{ $today := now.Format "2006-01-02" }}
+
+<ul class="card-list">
+  {{ range first 10 .Site.RegularPages }}
+    {{ $postDate := .Date.Format "2006-01-02" }}
+    <li class="card-item">
+
+      <a class="card-title" href="{{ .RelPermalink }}" target="_blank">
+        {{ if .Params.resultName }}
+          {{ .Params.resultName }}
+        {{ else if .Params.admitcardName }}
+          {{ .Params.admitcardName }}
+        {{ else }}
+          {{ .Title }}
+        {{ end }}
+        {{ if eq $postDate $today }}
+          <img src="/gif/new.gif" alt="New" style="width: 40px; vertical-align: middle;" />
+        {{ end }}
+      </a>
+
+      <div class="card-tags">
+        {{ if eq .Params.extended "yes" }}<a href="/extended/">📌 Extended</a>{{ end }}
+        {{ if eq .Params.pdfForm "yes" }}<a href="/pdf-forms/">📄 PDF Form</a>{{ end }}
+      </div>
+
+      <div class="card-date">📅 {{ .Date.Format "02 Jan 2006" }}</div>
+    </li>
+  {{ end }}
+</ul>

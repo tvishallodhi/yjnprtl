@@ -1,0 +1,43 @@
+{{ $today := now.Format "2006-01-02" }}
+{{ $allSchemes := where .Site.RegularPages "Params.post_type" "schemes"  }}
+
+{{/* ✅ Step 1: Filter सभी valid schemes */}}
+{{ $validSchemes := slice }}
+{{ range $allSchemes }}
+  {{ $last := .Params.lastdate | default "" }}
+  {{ if or (eq $last "") (ge $last $today) }}
+    {{ $validSchemes = $validSchemes | append . }}
+  {{ end }}
+{{ end }}
+
+{{/* ✅ Step 2: Split by pin */}}
+{{ $withDate := where $validSchemes "Date" "!=" nil }}
+{{ $pinFirst := sort (where $withDate "Params.pin" "==" "first") "Date" "desc" }}
+{{ $pinLast := sort (where $withDate "Params.pin" "==" "last") "Date" "desc" }}
+{{ $middle := where $withDate "Params.pin" "!=" "first" }}
+{{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+{{/* ✅ Step 3: Merge for final ordering */}}
+{{ $.Scratch.Set "orderedSchemes" (slice) }}
+{{ range $pinFirst }}  {{ $.Scratch.Add "orderedSchemes" (slice .) }} {{ end }}
+{{ range $normal }}    {{ $.Scratch.Add "orderedSchemes" (slice .) }} {{ end }}
+{{ range $pinLast }}   {{ $.Scratch.Add "orderedSchemes" (slice .) }} {{ end }}
+{{ $ordered := first 10 ($.Scratch.Get "orderedSchemes") }}
+
+{{/* ✅ Step 4: Render Output */}}
+{{ range $ordered }}
+  <li>
+    <a href="{{ .RelPermalink }}" target="_blank">
+         {{ if or (eq .Params.pin "first") (eq .Params.pin "last") }} <span>📌</span> {{ end }}
+      {{ .Title }}
+    </a>
+
+    {{ if eq (.Date.Format "2006-01-02") $today }}
+      <a href="{{ .RelPermalink }}" target="_blank">
+      </a>
+    {{ end }}
+
+    {{ partial "main-part/list-comment" . }}
+  </li>
+  <hr>
+{{ end }}

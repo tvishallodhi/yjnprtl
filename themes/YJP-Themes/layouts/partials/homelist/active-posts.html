@@ -1,0 +1,22 @@
+{{ $today := now.Format "2006-01-02" }}
+{{ $filteredPages := where .Site.RegularPages "Params.lastdate" "ge" $today }}
+
+{{ if $filteredPages }}
+  {{ range $filteredPages }}
+  <li>
+    <a href="{{ .RelPermalink }}" target="_blank">
+        {{ if .Params.pdfName }}
+            {{ .Params.pdfName }}
+        {{ else }}
+            {{ .Title }}
+        {{ end }}
+ </a>
+ {{ partial "main-part/list-comment" . }}
+ </li>
+<hr>
+  {{ end }}
+{{ else }}
+
+    <a href="/latest-update/" style="text-align: center;" target="_blank">No upcoming posts or updates here. If available, they will be updated soon. Go to Latest Update</a>
+    
+{{ end }}

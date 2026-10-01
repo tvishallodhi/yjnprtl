@@ -21,3 +21,12 @@
     {{ end }}
   {{ end }}
 {{ end }}
+
+
+{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes")  (eq .Params.listType "schemes")}}
+  {{ with resources.Get "css/list-updates/scheme-filter.css" }}
+    {{ $style := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{ end }}
+{{ end }}
+

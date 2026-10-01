@@ -1,0 +1,41 @@
+{{ $today := now.Format "2006-01-02" }}
+{{ $allPdfPosts := where .Site.RegularPages "Params.pdfForm" "==" "yes" }}
+{{ $withDate := where $allPdfPosts "Date" "!=" nil }}
+
+{{/* Split by pin type */}}
+{{ $pinFirst := sort (where $withDate "Params.pin" "==" "first") "Date" "desc" }}
+{{ $pinLast := sort (where $withDate "Params.pin" "==" "last") "Date" "desc" }}
+{{ $middle := where $withDate "Params.pin" "!=" "first" }}
+{{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+{{/* Merge first + normal + last */}}
+{{ $.Scratch.Set "orderedPdf" (slice) }}
+{{ range $pinFirst }}  {{ $.Scratch.Add "orderedPdf" (slice .) }} {{ end }}
+{{ range $normal }}    {{ $.Scratch.Add "orderedPdf" (slice .) }} {{ end }}
+{{ range $pinLast }}   {{ $.Scratch.Add "orderedPdf" (slice .) }} {{ end }}
+{{ $ordered := first 10 ($.Scratch.Get "orderedPdf") }}
+
+{{ range $ordered }}
+  <li>
+    <a href="{{ .RelPermalink }}" target="_blank">
+       {{ if or (eq .Params.pin "first") (eq .Params.pin "last") }}
+        <span style="margin-left: 5px;">📌</span>
+      {{ end }}
+      {{ if .Params.pdfName }}
+        {{ .Params.pdfName }}
+      {{ else }}
+        {{ .Title }}
+      {{ end }}  </a>
+
+    {{ if eq .Params.pdfForm "yes" }}
+      • <a href="/pdf-forms/" target="_blank">pdf</a>
+    {{ end }}
+
+    {{ if eq (.Date.Format "2006-01-02") (now.Format "2006-01-02") }}
+      <a href="{{ .RelPermalink }}" target="_blank">
+        <img src="/gif/new.gif" alt="New" style="width: 40px; vertical-align: middle;" />
+      </a>
+    {{ end }}
+  </li>
+  <hr>
+{{ end }}

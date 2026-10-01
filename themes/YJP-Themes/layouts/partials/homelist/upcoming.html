@@ -1,0 +1,26 @@
+{{ $today := now.Format "2006-01-02" }}
+{{ $filteredPages := where .Site.RegularPages "Params.BeginDate" "ge" $today }}
+
+{{ if $filteredPages }}
+  {{ range $filteredPages }}
+    <li>
+      <a href="{{ .RelPermalink }}" target="_blank">
+          {{ if or (eq .Params.pin "first") (eq .Params.pin "last") }} <span>📌</span> {{ end }}
+        {{ .Title }}
+      
+      </a>
+
+      {{ if eq (.Date.Format "2006-01-02") $today }}
+        <a href="{{ .RelPermalink }}" target="_blank">
+        </a>
+      {{ end }}
+
+      {{ partial "main-part/list-comment" . }}
+    </li>
+    <hr>
+  {{ end }}
+{{ else }}
+  <a href="/latest-update/" style="text-align: center;" target="_blank">
+    No upcoming posts or updates here. If available, they will be updated soon. Go to Latest Update
+  </a>
+{{ end }}
