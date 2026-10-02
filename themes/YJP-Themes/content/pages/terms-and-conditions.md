@@ -3,6 +3,7 @@ date = "2026-10-02T18:53:17+05:30"
 lastmod = "2026-10-02T18:53:17+05:30"
 title = "Terms and Conditions"
 url = "/terms-and-conditions/"
+aliases = ["/pages/terms-and-conditions/"]
 description = "Read the Terms and Conditions governing the use of YOJANA PORTAL, including website content, permitted use, external links, and limitations of liability."
 keywords = ["Terms and Conditions", "YOJANA PORTAL", "Terms of Use", "Website Disclaimer", "Government Schemes"]
 type = "default"

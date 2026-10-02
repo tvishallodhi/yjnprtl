@@ -4,7 +4,7 @@ date = "2026-10-02T18:51:28+05:30"
 lastmod = "2026-10-02T18:51:28+05:30"
 
 title = "Advertising Policy"
-
+aliases = ["/pages/advertising-policy/"]
 description = "Learn about the advertising practices, third-party advertisements, cookies and advertising disclosures on YOJANA PORTAL."
 url = "/advertising-policy/"
 type = "default"
