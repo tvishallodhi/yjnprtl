@@ -1,8 +1,9 @@
 ---
-title: "All Schemes"
+title: "Latest Schemes"
 icon: '📢'
 listType: 'schemes'
 type: 'lists'
 layout: 'schemes-list'
-url: "schemes"
+aliases: [ "/schemes/" ]
+url: "/latest-schemes/"
 ---

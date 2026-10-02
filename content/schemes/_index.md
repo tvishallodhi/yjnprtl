@@ -1,7 +1,7 @@
 ---
 title: "State Schemes"
 name: "State Schemes"
-icon: "🌾"
+icon: "♨️"
 lang: ""
 url: "/state-schemes/"
 --- 

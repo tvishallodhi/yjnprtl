@@ -23,7 +23,7 @@
 {{ end }}
 
 
-{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes")  (eq .Params.listType "schemes") (eq .Params.listType "jobs")}}
+{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes")  (eq .Params.listType "schemes") }}
   {{ with resources.Get "css/list-updates/scheme-filter.css" }}
     {{ $style := . | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
@@ -32,6 +32,20 @@
 
 {{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes") (eq .Section "jobs") (eq .Section "admission") (eq .Section "pages")}}
   {{ with resources.Get "css/list-updates/section-list.css" }}
+    {{ $style := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{ end }}
+{{ end }}
+
+{{ if or (eq .Params.listType "schemes")}}
+  {{ with resources.Get "css/list-updates/section-list.css" }}
+    {{ $style := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{ end }}
+{{ end }}
+
+{{ if in (slice "/results/" "/admit-card/" "/upcoming-updates/" "/important-updates/") .RelPermalink }}
+  {{ with resources.Get "css/list-updates/post-table.css" }}
     {{ $style := . | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
   {{ end }}

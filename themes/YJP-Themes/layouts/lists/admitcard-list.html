@@ -1,0 +1,3 @@
+{{ define "main" }}
+<table class="post-table"><thead><tr><th>Latest & Upcoming Admitcard or Examcity Update</th></tr></thead><tbody> {{ range (where  .Site.RegularPages ".Params.admitcard" "yes") }}<tr><td data-label="Check Here 👉"><a href="{{ .RelPermalink }}" target="_blank">{{ .Params.admitcardName }}</a></td></tr>{{ end }}</tbody></table>
+{{ end }}

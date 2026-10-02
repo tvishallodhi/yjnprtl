@@ -90,18 +90,18 @@ enableRobotsTXT = true
     lang = ""
 
 [[menus.main]]
-  identifier = "banking"
-  name = "Banking"
-  url = "/banking/"
+  identifier = "Jobs"
+  name = "Latest Jobs"
+  url = "/latest-jobs/"
   weight = 30
 
   [menus.main.params]
     lang = ""
 
 [[menus.main]]
-  identifier = "teaching"
-  name = "Teaching"
-  url = "/teaching/"
+  identifier = "Education"
+  name = "Education News"
+  url = "/education/"
   weight = 40
 
   [menus.main.params]
@@ -126,18 +126,18 @@ enableRobotsTXT = true
     lang = ""
 
 [[menus.main]]
-  identifier = "answer-key"
-  name = "Answer Key"
-  url = "/answer-key/"
+  identifier = "upcoming"
+  name = "Upcoming Updates"
+  url = "/upcoming-updates/"
   weight = 70
 
   [menus.main.params]
     lang = ""
 
 [[menus.main]]
-  identifier = "news"
-  name = "News"
-  url = "/news/"
+  identifier = "Quick"
+  name = "Important Updates"
+  url = "/Important-Updates/"
   weight = 80
 
   [menus.main.params]
