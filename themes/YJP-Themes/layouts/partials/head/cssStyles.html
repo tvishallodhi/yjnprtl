@@ -50,3 +50,12 @@
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
   {{ end }}
 {{ end }}
+
+
+
+{{ if or  (eq .Type "default") }}
+  {{ with resources.Get "css/partial/topic-content.css" }}
+    {{ $style := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{ end }}
+{{ end }}

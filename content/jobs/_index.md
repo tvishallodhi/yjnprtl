@@ -1,7 +1,7 @@
 ---
 title: "Latest Jobs"
 name: "Latest Jobs"
-icon: "🛡️"
+icon: "🔰"
 lang: ""
 url: "/latest-jobs/"
 --- 

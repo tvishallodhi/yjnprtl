@@ -1,0 +1,47 @@
+ {{/* Partial ke andar flag enable karein */}}
+{{ .Store.Set "loadTopicContentCSS" true }}
+
+<div class="topic-content-wrapper">
+  <!-- Aapka partial content yaha rahega -->
+   {{- $page := . -}}
+
+{{/* Topic Update */}}
+{{- with $page.Params.topicupdate -}}
+  {{- range . -}}
+    <div class="topic-update">
+      {{- with .title -}}
+        <h3>{{ . | markdownify }}</h3>
+      {{- end -}}
+
+      {{- with .details -}}
+        <div class="topic-details">
+          {{- range . -}}
+            {{- $text := . | replaceRE `\*([^*]+)\*` `**$1**` -}}
+            <p>{{ $text | markdownify }}</p>
+          {{- end -}}
+        </div>
+      {{- end -}}
+    </div>
+  {{- end -}}
+{{- end -}}
+
+{{/* Topics */}}
+{{- with $page.Params.topics -}}
+  {{- range . -}}
+    <div class="topic-item">
+      {{- with .title -}}
+        <h3>{{ . | markdownify }}</h3>
+      {{- end -}}
+
+      {{- with .details -}}
+        <ul class="topic-details">
+          {{- range . -}}
+            {{- $text := . | replaceRE `\*([^*]+)\*` `**$1**` -}}
+            <li>{{ $text | markdownify }}</li>
+          {{- end -}}
+        </ul>
+      {{- end -}}
+    </div>
+  {{- end -}}
+{{- end -}}
+</div>

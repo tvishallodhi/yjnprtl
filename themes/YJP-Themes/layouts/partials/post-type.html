@@ -6,6 +6,8 @@
      {{ partial "farmate/type/Recruitment.html" . }}
   {{ else if eq $type "admission" }}
       {{ partial "farmate/type/admission.html" . }}
+       {{ else if eq $type "defalut" }}
+      {{ partial "farmate/type/default.html" . }}
   {{ else if eq $type "howto" }}
     <div class="howto-intro">{{ .Params.intro }}</div>
     <div class="howto-steps-scaffold">
@@ -19,6 +21,7 @@
   {{ else }}
     <div class="post-default-container">
       <!-- Default post rendering boundary -->
+       {{ partial "farmate/type/default.html" . }}
     </div>
   {{ end }}
 </div>
