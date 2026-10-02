@@ -2,7 +2,7 @@
 date = "2026-10-02T18:53:06+05:30"
 lastmod = "2026-10-02T18:53:06+05:30"
 title = "Report an Error"
-url = "/pages/report-an-error/"
+url = "/report-an-error/"
 description = "Report incorrect, outdated, incomplete, or broken information on YOJANA PORTAL to help us maintain accurate and useful content."
 keywords = ["Report an Error", "YOJANA PORTAL", "Report Incorrect Information", "Content Correction", "Website Feedback"]
 type = "default"
