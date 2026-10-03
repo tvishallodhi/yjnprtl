@@ -5,7 +5,6 @@
 
   <!-- Title / H1 -->
  {{ partial "farmate/jobs-top-info.html" . }}
-
 <br>
   <!-- Quick Info Highlights Box -->
   <div class="summary-card" id="recruitment">
@@ -196,9 +195,8 @@
     {{ if .Params.links }}
   <section class="section-block" id="links">
     <h2>🔗{{ partial "farmate/keywords.html" (dict "Page" $ "index" 4) }} - Direct Links</h2>
-      <div class="yp-table-wrapper" >
-        {{ partial "farmate/link-table.html" . }}
-      </div>
+       {{ partial "imp-codes/implinks.html" . }}
+       {{ partial "imp-codes/pdfLinks.html" . }}
   </section>
  {{ end }}
   <!-- FAQs Accordion -->

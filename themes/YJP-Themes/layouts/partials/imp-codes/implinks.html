@@ -1,0 +1,60 @@
+{{ with .Params.links.item }}
+
+  <div class="yp-important-links">
+
+    {{ range . }}
+
+      <div class="yp-link-card">
+
+        <div class="yp-link-title">
+          <span class="yp-link-icon" aria-hidden="true">🔗</span>
+          <span>{{ .title | safeHTML }}</span>
+        </div>
+
+        {{ with .actions }}
+
+          <div class="yp-link-actions">
+              {{ range . }}
+
+              <a href="{{ .url | safeURL }}"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 title="Go to {{ .name }}'s external page"
+                 class="yp-link-btn">
+
+                <span>{{ .name }}</span>
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="16"
+                     height="16"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     aria-hidden="true">
+                  <path d="M14 3h7v7"/>
+                  <path d="M10 14 21 3"/>
+                  <path d="M21 14v7H3V3h7"/>
+                </svg>
+
+              </a>
+
+            {{ end }}
+
+          </div>
+
+        {{ else }}
+
+          <span class="yp-link-empty">No links available</span>
+
+        {{ end }}
+
+      </div>
+
+    {{ end }}
+
+  </div>
+
+{{ end }}

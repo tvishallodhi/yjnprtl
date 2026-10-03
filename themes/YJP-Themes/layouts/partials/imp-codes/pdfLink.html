@@ -1,0 +1,45 @@
+
+{{ with .Params.pdfLink }}
+
+  {{ $pdf := false }}
+  {{ $url := . }}
+
+  {{ $isRemote := or (hasPrefix . "http://") (hasPrefix . "https://") }}
+
+  {{ if $isRemote }}
+
+    {{ with try (resources.GetRemote .) }}
+      {{ with .Err }}
+        {{ warnf "PDF fetch error: %s" . }}
+      {{ else }}
+        {{ $pdf = .Value }}
+      {{ end }}
+    {{ end }}
+
+  {{ else }}
+
+    {{ $pdf = resources.Get . }}
+
+  {{ end }}
+
+  {{ if $pdf }}
+
+    <a href="{{ $pdf.RelPermalink }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="pdf-btn">
+      📄 Download / View PDF
+    </a>
+
+  {{ else }}
+
+    <a href="{{ $url | safeURL }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="pdf-btn">
+      📄 Download / View PDF
+    </a>
+
+  {{ end }}
+
+{{ end }}
