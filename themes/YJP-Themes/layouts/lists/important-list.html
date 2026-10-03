@@ -1,0 +1,23 @@
+{{ define "main" }}
+<h2 class="list-title" style="text-align:center;">{{.Title }}</h2>
+<table class="post-table"><table class="post-table" id="dataTable">
+    <thead>
+        <tr>
+            <th>Post Date</th>
+            <th> Important Links </th>
+            <th>Category</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        {{ range  (where .Site.RegularPages ".Params.important" "yes") }}
+        <tr>
+            <td>{{ .Date.Format "02/01/2006" }}</td>
+            <td><a href="{{ .RelPermalink }}" target="_blank">{{ .Title }}</a></td>
+            <td style="background-color:rgb(255, 161, 37);"><a href="#" class="dynamic-link" data-search="{{ with .Params.category }}{{ . }}{{ else }}---{{ end }}"> {{ with .Params.category }}{{ . }}{{ else }}---{{ end }}  </a></td>
+           
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+ {{ end }}

@@ -1,0 +1,19 @@
+{{ define "main" }}
+<h2 class="list-title" style="text-align:center;">{{.Title }}</h2>
+<table class="post-table">
+  <thead>
+      <tr>
+        <th>Post/Update</th>
+          <th>Latest Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range first 20 (where .Site.RegularPages ".Params.result" "yes") }}
+  <tr>
+    <td>{{ .Date.Format "02/01/2006" }}</td>
+    <td><a href="{{ .RelPermalink }}" target="_blank">{{ .Params.ResultName }}</a></td>
+  </tr>
+{{ end }}
+  </tbody>
+</table>
+{{ end }}

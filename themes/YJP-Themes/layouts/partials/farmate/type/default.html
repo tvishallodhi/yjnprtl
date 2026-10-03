@@ -1,0 +1,10 @@
+<div class="topic-content topic-style-highlight">
+  {{ partial "farmate/topic-content.html" . }}
+</div>
+
+  <!-- Content Fallback (Markdown body text agar ho toh) -->
+  {{ if .Content }}
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+  {{ end }}

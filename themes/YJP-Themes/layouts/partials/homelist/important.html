@@ -1,0 +1,5 @@
+{{ range first 10 (where .Site.RegularPages ".Params.important" "yes") }}
+<li>
+  <a href="{{ .Permalink }}"  target="_blank">{{ .Title }}</a>
+</li><hr>
+{{ end }}

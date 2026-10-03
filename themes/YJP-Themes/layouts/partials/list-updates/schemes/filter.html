@@ -1,0 +1,132 @@
+{{/*
+  layouts/partials/list-updates/schemes/filter.html
+  Robust build-time collector for Central and State schemes.
+*/}}
+
+{{/* Step 1: Collect all regular pages with post_type = "schemes" */}}
+{{ $allSchemes := where site.RegularPages "Params.post_type" "schemes" }}
+
+{{/* Step 2: Build state directories map from content/schemes/ */}}
+{{ $schemesSection := site.GetPage "section" "schemes" }}
+{{ $stateInfoMap := dict }}
+
+{{ if $schemesSection }}
+  {{ range $schemesSection.Sections }}
+    {{/* .File.Dir typically ends with schemes/mp/ or schemes/up/ */}}
+    {{ $path := .File.Dir }}
+    {{ $trimmed := strings.TrimSuffix "/" $path }}
+    {{ $parts := split $trimmed "/" }}
+    {{ $folder := index $parts (sub (len $parts) 1) }}
+    {{ if and $folder (ne $folder "schemes") }}
+      {{ $stateInfoMap = merge $stateInfoMap (dict $folder .Title) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Step 3: Classify each scheme post into Central or State */}}
+{{ $classifiedPosts := slice }}
+{{ $activeStatesMap := dict }}
+
+{{ range $allSchemes }}
+  {{ $p := . }}
+  {{ $fileDir := $p.File.Dir }}
+  {{ $normDir := replace $fileDir "\\" "/" }}
+  {{ $normDir = strings.TrimLeft "/" (strings.TrimRight "/" $normDir) }}
+  {{ $dirParts := split $normDir "/" }}
+  {{ $rootFolder := index $dirParts 0 }}
+
+  {{ if eq $rootFolder "scheme" }}
+    {{/* Rule: ANY depth inside content/scheme/ is Central */}}
+    {{ $classifiedPosts = $classifiedPosts | append (dict 
+      "post" $p 
+      "type" "central" 
+      "state_code" "" 
+      "state_title" "केंद्र सरकार"
+    ) }}
+  {{ else if eq $rootFolder "schemes" }}
+    {{/* Rule: content/schemes/{state}/... identified by immediate state folder */}}
+    {{ if ge (len $dirParts) 2 }}
+      {{ $stateCode := index $dirParts 1 }}
+      {{ $stateName := index $stateInfoMap $stateCode | default (upper $stateCode) }}
+      {{ $classifiedPosts = $classifiedPosts | append (dict 
+        "post" $p 
+        "type" "state" 
+        "state_code" $stateCode 
+        "state_title" $stateName
+      ) }}
+      {{/* Mark state as active (has valid schemes) */}}
+      {{ $activeStatesMap = merge $activeStatesMap (dict $stateCode $stateName) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Step 4: Extract and Sort Active States Alphabetically by Display Title */}}
+{{ $statesList := slice }}
+{{ range $code, $title := $activeStatesMap }}
+  {{ $statesList = $statesList | append (dict "code" $code "title" $title) }}
+{{ end }}
+{{ $sortedStates := sort $statesList "title" "asc" }}
+
+<div class="yjp-schemes-container" id="yjp-schemes-app">
+  <!-- Controls Section -->
+  <div class="yjp-filter-toolbar">
+    <div class="yjp-filter-group yjp-filter-select-group">
+      <label for="yjp-state-select" class="yjp-sr-only">राज्य चुनें</label>
+      <div class="yjp-select-wrapper">
+        <select id="yjp-state-select" class="yjp-form-select" aria-label="राज्य या केंद्र अनुसार फ़िल्टर करें">
+          <option value="all">सभी राज्य (All States)</option>
+          <option value="central">केंद्र सरकार (Central Government)</option>
+          <optgroup label="राज्य अनुसार (States)">
+            {{ range $sortedStates }}
+              <option value="{{ .code }}">{{ .title }}</option>
+            {{ end }}
+          </optgroup>
+        </select>
+        <span class="yjp-select-chevron" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="yjp-filter-group yjp-filter-search-group">
+      <label for="yjp-scheme-search" class="yjp-sr-only">योजना खोजें</label>
+      <div class="yjp-search-wrapper">
+        <svg class="yjp-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="search" 
+          id="yjp-scheme-search" 
+          class="yjp-form-input" 
+          placeholder="योजना का नाम या कीवर्ड खोजें..." 
+          autocomplete="off"
+          spellcheck="false">
+        <button type="button" id="yjp-search-clear" class="yjp-search-clear" aria-label="खोज साफ़ करें" hidden>
+          &times;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Counter Status -->
+  <div class="yjp-filter-status" aria-live="polite">
+    कुल <strong id="yjp-count-display">{{ len $classifiedPosts }}</strong> योजनाएं उपलब्ध
+  </div>
+
+  <!-- Scheme Grid -->
+  <div class="yjp-schemes-grid" id="yjp-schemes-list">
+    {{ range $classifiedPosts }}
+      {{ partial "list-updates/schemes/card.html" . }}
+    {{ end }}
+  </div>
+
+  <!-- No Results Message -->
+  <div id="yjp-no-results" class="yjp-no-results" hidden>
+    <div class="yjp-empty-icon" aria-hidden="true">📋</div>
+    <p class="yjp-empty-text">कोई योजना नहीं मिली। कृपया दूसरा नाम या राज्य चुनें।</p>
+    <button type="button" id="yjp-reset-filters" class="yjp-btn-reset">फ़िल्टर रीसेट करें</button>
+  </div>
+</div>

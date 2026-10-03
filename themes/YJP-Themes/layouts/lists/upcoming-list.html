@@ -1,0 +1,31 @@
+{{ define "main" }}
+<h2 class="list-title" style="text-align:center;">{{.Title }}</h2>
+  <table class="post-table">
+    <thead>
+      <tr>
+        <th>Begin Date</th>
+        <th>Upcoming Jobs-</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ $today := now.Format "2006-01-02" }}
+      {{ $filteredPages := where .Site.RegularPages "Params.BeginDate" "ge" $today }}
+      
+      {{ if $filteredPages }}
+        {{ range $filteredPages }}
+          <tr>
+            <td data-label="Begin Date">{{ (time .Params.BeginDate).Format "02-01-2006" }}</td>
+            <td  data-label="Upcoming--"><a href="{{ .RelPermalink }}" target="_blank">{{ .Title }}</a></td>
+          
+          </tr>
+        {{ end }}
+      {{ else }}
+        <tr>
+          <td colspan="2" style="text-   : center;">No upcoming posts or updates here. If available, they will be updated soon.</td>
+        </tr>
+      {{ end }}
+      
+    </tbody>
+  </table>
+
+{{ end }}

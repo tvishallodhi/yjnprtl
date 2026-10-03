@@ -1,0 +1,35 @@
+{{ $today := now.Format "2006-01-02" }}
+{{ $allCertificates := where .Site.RegularPages "Params.post-type" "certificate" }}
+{{ $withDate := where $allCertificates "Date" "!=" nil }}
+
+{{/* Pin-based categorization */}}
+{{ $pinFirst := sort (where $withDate "Params.pin" "==" "first") "Date" "desc" }}
+{{ $pinLast := sort (where $withDate "Params.pin" "==" "last") "Date" "desc" }}
+{{ $middle := where $withDate "Params.pin" "!=" "first" }}
+{{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+{{/* Merge into one ordered list */}}
+{{ $.Scratch.Set "orderedCerts" (slice) }}
+{{ range $pinFirst }}  {{ $.Scratch.Add "orderedCerts" (slice .) }} {{ end }}
+{{ range $normal }}    {{ $.Scratch.Add "orderedCerts" (slice .) }} {{ end }}
+{{ range $pinLast }}   {{ $.Scratch.Add "orderedCerts" (slice .) }} {{ end }}
+{{ $ordered := first 10 ($.Scratch.Get "orderedCerts") }}
+
+{{ range $ordered }}
+  <li>
+    <a href="{{ .Permalink }}" target="_blank">
+      {{ if or (eq .Params.pin "first") (eq .Params.pin "last") }}
+        <span style="margin-left: 5px;">📌</span>
+      {{ end }} {{ .Title }}
+
+     
+    </a>
+
+    {{ if eq (.Date.Format "2006-01-02") (now.Format "2006-01-02") }}
+      <a href="{{ .RelPermalink }}" target="_blank">
+        <img src="/gif/new.gif" alt="New" style="width: 40px; vertical-align: middle;" />
+      </a>
+    {{ end }}
+  </li>
+  <hr>
+{{ end }}

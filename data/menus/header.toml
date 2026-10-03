@@ -1,0 +1,65 @@
+
+# Primary Horizontal Scrollable Header Menu
+
+[[header]]
+identifier = "home"
+name = "Home"
+icon = "🏠"
+url = "/"
+weight = 10
+
+[[header]]
+identifier = "ssc"
+name = "Schemes"
+icon = "📋"
+url = "/schemes/"
+weight = 20
+
+[[header]]
+identifier = "Jobs"
+name = "Latest Jobs"
+icon = "💼"
+url = "/latest-jobs/"
+weight = 30
+
+[[header]]
+identifier = "Education"
+name = "Education News"
+icon = "🎓"
+url = "/education/"
+weight = 40
+
+[[header]]
+identifier = "admit-card"
+name = "Admit Card"
+icon = "🎫"
+url = "/admit-card/"
+weight = 50
+
+[[header]]
+identifier = "results"
+name = "Results"
+icon = "🏆"
+url = "/results/"
+weight = 60
+
+[[header]]
+identifier = "upcoming"
+name = "Upcoming Updates"
+icon = "📅"
+url = "/upcoming-updates/"
+weight = 70
+
+[[header]]
+identifier = "Quick"
+name = "Important Updates"
+icon = "🔔"
+url = "/important-updates/"
+weight = 80
+
+[[header]]
+identifier = "search"
+name = "Search"
+icon = "🔎"
+url = "/search/"
+weight = 90

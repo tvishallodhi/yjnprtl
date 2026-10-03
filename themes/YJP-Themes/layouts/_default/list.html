@@ -2,10 +2,10 @@
 <div class="section-list-view">
   {{ partial "breadcrumbs.html" . }}
 
-  <header class="list-header">
+  <div class="list-header">
     <h1 class="list-title">{{ .Params.name | default .Title }}</h1>
     {{ with .Description }}<p class="list-description">{{ . }}</p>{{ end }}
-  </header>
+  </div>
 
   <div class="card-grid">
     {{ range .Paginator.Pages }}

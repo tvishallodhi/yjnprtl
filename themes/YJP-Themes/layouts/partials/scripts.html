@@ -8,3 +8,5 @@
 
 {{ $jsBundle := slice $theme $lang $sidebar $mobile $search $main | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint }}
 <script src="{{ $jsBundle.RelPermalink }}" integrity="{{ $jsBundle.Data.Integrity }}" defer></script>
+
+ {{ partial "head/jsFiles.html" . }}

@@ -1,0 +1,8 @@
+
+
+{{ range .Site.Data.social.social }}
+  <a href="{{ .link }}" target="_blank" rel="noopener noreferrer">
+    <img src="{{ .icon }}" alt="{{ .name }}">
+    <span>{{ .name }}</span>
+  </a>
+{{ end }}
