@@ -30,7 +30,7 @@
   {{ end }}
 {{ end }}
 
-{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes") (eq .Section "jobs") (eq .Section "admission") (eq .Section "pages")}}
+{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes") (eq .Section "jobs") (eq .Section "admission") (eq .Section "apprentice") (eq .Section "pages")}}
   {{ with resources.Get "css/list-updates/section-list.css" }}
     {{ $style := . | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
