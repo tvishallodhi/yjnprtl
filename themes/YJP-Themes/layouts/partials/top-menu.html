@@ -6,16 +6,31 @@
       <span class="hamburger-bar"></span>
     </button>
     
-    <div class="nav-scrollable-track" id="horizontalNavTrack">
-      <ul class="nav-list">
-        {{ range .Site.Menus.main }}
-          <li class="nav-item" data-lang="{{ .Params.lang | default "" }}">
-            <a href="{{ .URL }}" class="nav-link{{ if $.IsMenuCurrent "main" . }} is-active{{ end }}">
-              {{ .Name }}
-            </a>
-          </li>
-        {{ end }}
-      </ul>
-    </div>
+   
+
+<div class="nav-scrollable-track" id="horizontalNavTrack">
+  <ul class="nav-list">
+
+    {{ $currentURL := .RelPermalink }}
+
+    {{ range sort .Site.Data.menus.header.header "weight" }}
+      {{ $menuURL := .url | relURL }}
+
+      <li class="nav-item">
+        <a href="{{ $menuURL }}"
+           class="nav-link{{ if eq $currentURL $menuURL }} is-active{{ end }}">
+
+          {{ with .icon }}
+            <span class="nav-icon" aria-hidden="true">{{ . }}</span>
+          {{ end }}
+
+          <span class="nav-text">{{ .name }}</span>
+
+        </a>
+      </li>
+    {{ end }}
+
+  </ul>
+</div>
   </div>
 </nav>

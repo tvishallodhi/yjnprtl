@@ -1,0 +1,35 @@
+[[social]]
+id = "whatsapp"
+name = "WhatsApp"
+icon = "/icons/whatsapp.svg"
+link = "https://whatsapp.com/channel/0029VbBjxaz7oQhZq13M9E3Y"
+
+[[social]]
+id = "telegram"
+name = "Telegram"
+icon = "/icons/telegram.svg"
+link = "https://telegram.me/yojanaportalofficial"
+
+[[social]]
+id = "facebook"
+name = "Facebook"
+icon = "/icons/facebook.svg"
+link = "https://www.facebook.com/yojanaportalfb"
+
+[[social]]
+id = "instagram"
+name = "Instagram"
+icon = "/icons/instagram.svg"
+link = "https://www.instagram.com/yojanaportalofficial"
+
+[[social]]
+id = "youtube"
+name = "YouTube"
+icon = "/icons/youtube.svg"
+link = "https://www.youtube.com/@yojanaportalofficial"
+
+[[social]]
+id = "x-twitter"
+name = "X (Twitter)"
+icon = "/icons/x-twitter.svg"
+link = "https://x.com/yojnaportal"

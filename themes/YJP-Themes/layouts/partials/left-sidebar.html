@@ -157,21 +157,26 @@
   <!-- ============================================================
        FIXED SOCIAL LINKS
        ============================================================ -->
-  <div class="sidebar-social-bar" aria-label="Social Media Links">
-    <a href="https://wa.me/YOUR_NUMBER" class="sidebar-social-link whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
-      <span>☘</span>
-    </a>
-    <a href="https://t.me/YOUR_USERNAME" class="sidebar-social-link telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram">
-      <span>✈</span>
-    </a>
-    <a href="https://www.facebook.com/YOUR_PAGE" class="sidebar-social-link facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
-      <span>f</span>
-    </a>
-    <a href="https://www.instagram.com/YOUR_USERNAME" class="sidebar-social-link instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-      <span>◎</span>
-    </a>
-    <a href="https://www.youtube.com/@YOUR_CHANNEL" class="sidebar-social-link youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="YouTube">
-      <span>▶</span>
-    </a>
-  </div>
+ <div class="sidebar-social-bar" aria-label="Social Media Links">
+
+  {{ $socialIDs := slice "whatsapp" "telegram" "facebook" "instagram" "youtube" }}
+
+  {{ range $socialIDs }}
+    {{ with index (where $.Site.Data.social.social "id" .) 0 }}
+
+      <a href="{{ .link }}"
+         class="sidebar-social-link {{ .id }}"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="{{ .name }}"
+         title="{{ .name }}">
+
+        <img src="{{ .icon }}" alt="" width="20" height="20" loading="lazy">
+
+      </a>
+
+    {{ end }}
+  {{ end }}
+
+</div>
 </aside>

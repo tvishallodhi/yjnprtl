@@ -1,26 +1,32 @@
- .list-title {
+/* ==========================================================================
+   Table & List Components (Integrated with Theme Variables)
+   ========================================================================== */
+
+/* Title */
+.list-title {
   font-size: 26px;
   font-weight: 700;
   margin: 20px 0;
-  color: #111827;
+  color: var(--heading);
   text-align: center;
-  font-family: Arial, sans-serif;
+  font-family: inherit;
 }
 
 /* Table Wrapper */
 .post-table {
   width: 100%;
   border-collapse: collapse;
-  background: #ffffff;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  border-radius: 12px;
+  background: var(--bg-surface);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  font-family: inherit;
 }
 
 /* Table Header */
 .post-table thead {
-  background: #ab183d;
+  background: var(--primary-color);
   color: #ffffff;
 }
 
@@ -35,22 +41,24 @@
 .post-table td {
   padding: 14px;
   font-size: 15px;
-  color: #333;
-  border-bottom: 1px solid #e5e7eb;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .post-table tbody tr:hover {
-  background: #f3f4f6;
+  background: var(--bg-secondary);
 }
 
 /* Links */
 .post-table a {
-  color: #2563eb;
+  color: var(--link-color);
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .post-table a:hover {
+  color: var(--link-hover);
   text-decoration: underline;
 }
 
@@ -58,6 +66,6 @@
 .post-table td[colspan] {
   text-align: center;
   padding: 20px;
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 15px;
 }

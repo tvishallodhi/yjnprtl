@@ -1,0 +1,24 @@
+[[footer]]
+name = "Terms & Conditions"
+url = "/terms-and-conditions/"
+weight = 40
+
+[[footer]]
+name = "Disclaimer"
+url = "/disclaimer/"
+weight = 50
+
+[[footer]]
+name = "DMCA"
+url = "/dmca-policy/"
+weight = 60
+
+[[footer]]
+name = "Cookie Policy"
+url = "/cookie-policy/"
+weight = 70
+
+[[footer]]
+name = "Advertising Policy"
+url = "/advertising-policy/"
+weight = 80
