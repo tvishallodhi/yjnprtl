@@ -8,47 +8,91 @@
       {{- $name := .name | default "View PDF" -}}
       {{- $url := .url | default "" -}}
       {{- $pdf := false -}}
+      {{- $isRemote := or (hasPrefix $url "http://") (hasPrefix $url "https://") -}}
 
-      {{- $isRemote := or
-        (hasPrefix $url "http://")
-        (hasPrefix $url "https://")
-      -}}
+      {{- if $url -}}
 
-      {{- if $isRemote -}}
+        {{- if $isRemote -}}
 
-        {{/* Remote PDF Resource - Same as Image */}}
-        {{- with try (resources.GetRemote $url) -}}
+          {{/* Remote PDF Resource */}}
+          {{- with try (resources.GetRemote $url) -}}
 
-          {{- with .Err -}}
-            {{- warnf "PDF Resource Error: %s" . -}}
+            {{- with .Err -}}
+              {{- warnf "PDF fetch error [%s]: %s" $name . -}}
+            {{- else -}}
+              {{- $pdf = .Value -}}
+            {{- end -}}
+
+          {{- end -}}
+
+        {{- else -}}
+
+          {{/* Local PDF Resource from assets */}}
+          {{- with resources.Get $url -}}
+            {{- $pdf = . -}}
           {{- else -}}
-            {{- $pdf = .Value -}}
+            {{- warnf "Local PDF not found: %s" $url -}}
           {{- end -}}
 
         {{- end -}}
 
-      {{- else -}}
+        {{/* PDF Resource Available */}}
+        {{- if $pdf -}}
 
-        {{/* Local PDF Resource */}}
-        {{- $pdf = resources.Get $url -}}
+          <a href="{{ $pdf.RelPermalink }}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="pdf-btn">
 
-      {{- end -}}
+            <span class="pdf-icon" aria-hidden="true">📄</span>
+            <span class="pdf-name">{{ $name }}</span>
+            <span class="pdf-action" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="18"
+                   height="18"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor"
+                   stroke-width="2"
+                   stroke-linecap="round"
+                   stroke-linejoin="round">
+                <path d="M14 3h7v7"/>
+                <path d="M10 14 21 3"/>
+                <path d="M21 14v7H3V3h7"/>
+              </svg>
+            </span>
 
-      {{- if $pdf -}}
+          </a>
 
-        <a href="{{ $pdf.RelPermalink }}"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="pdf-btn">
+        {{- else -}}
 
-          <span class="pdf-icon">📄</span>
-          <span class="pdf-name">{{ $name }}</span>
+          {{/* Fallback: Original PDF URL */}}
+          <a href="{{ $url | safeURL }}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="pdf-btn">
 
-        </a>
+            <span class="pdf-icon" aria-hidden="true">📄</span>
+            <span class="pdf-name">{{ $name }}</span>
+            <span class="pdf-action" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   width="18"
+                   height="18"
+                   viewBox="0 0 24 24"
+                   fill="none"
+                   stroke="currentColor"
+                   stroke-width="2"
+                   stroke-linecap="round"
+                   stroke-linejoin="round">
+                <path d="M14 3h7v7"/>
+                <path d="M10 14 21 3"/>
+                <path d="M21 14v7H3V3h7"/>
+              </svg>
+            </span>
 
-      {{- else -}}
+          </a>
 
-        {{- warnf "PDF Resource Not Created: %s" $url -}}
+        {{- end -}}
 
       {{- end -}}
 
