@@ -106,13 +106,9 @@
     <!-- FAQs Accordion -->
 {{ partial "farmate/jobs/postwise.html" . }}
 
- 
-{{ with .Params.eligibility }}
- <section class="section-block" id="eligibility">
-  <h2>🧍{{ partial "farmate/keywords.html" (dict "Page" $ "index" 1) }}  - Eligibility</h2>
-  <ul><li>{{ . }} </li></ul>
- </section>
- {{ end }}
+   <!-- Vacancy & Eligibility Details -->
+{{ partial "farmate/admission/eligibility-list.html" . }}
+
 
  <!-- Age Limit -->
 {{ with .Params.age_limit }}
@@ -222,10 +218,10 @@
   <aside class="disclaimer">
     <strong>Disclaimer:</strong> यह जानकारी केवल सूचनात्मक उद्देश्यों के लिए है। आवेदन करने से पहले अभ्यर्थी आधिकारिक पोर्टल ({{ .Params.OfficialSource }}) पर जाकर मूल विज्ञापन एवं नियमपुस्तिका (Rulebook) का मिलान अवश्य कर लें।
   </aside>
-
+{{ partial "farmate/related-promo-card.html" . }}
 </article>
 
-{{ partial "farmate/related-promo-card.html" . }}
+
 
 <script>
   (function() {

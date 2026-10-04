@@ -1,11 +1,13 @@
 {{ with .Params.eligibility }}
 <section class="section-block" id="eligibility">
-  <h2>Eligibility</h2>
+  <h2>🧍{{ partial "farmate/keywords.html" (dict "Page" $ "index" 1) }} - Eligibility</h2>
 
   <ul>
     {{ if reflect.IsSlice . }}
       {{ range . }}
-        <li>{{ . | markdownify }}</li>
+        {{ with . }}
+          <li>{{ . | markdownify }}</li>
+        {{ end }}
       {{ end }}
     {{ else }}
       <li>{{ . | markdownify }}</li>
