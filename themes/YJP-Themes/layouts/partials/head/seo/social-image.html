@@ -1,0 +1,32 @@
+{{/* Social Image */}}
+{{ with .Params.imageBanner }}
+
+  {{ $imageURL := "" }}
+  {{ $isRemote := or (hasPrefix . "http://") (hasPrefix . "https://") }}
+
+  {{ if $isRemote }}
+
+    {{ with try (resources.GetRemote .) }}
+      {{ with .Err }}
+        {{ warnf "OG image download failed: %s" . }}
+      {{ else }}
+        {{ $imageURL = .Value.RelPermalink }}
+      {{ end }}
+    {{ end }}
+
+  {{ else }}
+
+    {{ with resources.Get . }}
+      {{ $imageURL = .Permalink }}
+    {{ else }}
+      {{ $imageURL = . | absURL }}
+    {{ end }}
+
+  {{ end }}
+
+  {{ with $imageURL }}
+    <meta property="og:image" content="{{ . }}">
+    <meta name="twitter:image" content="{{ . }}">
+  {{ end }}
+
+{{ end }}
