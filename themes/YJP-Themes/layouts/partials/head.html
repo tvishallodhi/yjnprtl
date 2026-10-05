@@ -28,9 +28,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ with .Params.seo_title }}{{ . }}{{ else }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}{{ end }}">
 <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}{{ end }}">
-{{/* Social Images */}}
 
+
+{{/* Social Images */}}
 {{/* Social Image */}}
+
 {{ with .Params.imageBanner }}
 
   {{ $imageURL := "" }}
@@ -42,7 +44,7 @@
       {{ with .Err }}
         {{ warnf "OG image download failed: %s" . }}
       {{ else }}
-        {{ $imageURL = .Value.RelPermalink }}
+        {{ $imageURL = .Value.Permalink }}
       {{ end }}
     {{ end }}
 
@@ -62,7 +64,6 @@
   {{ end }}
 
 {{ end }}
-
 
 <meta name="twitter:site" content="@yojanaportal">
 
