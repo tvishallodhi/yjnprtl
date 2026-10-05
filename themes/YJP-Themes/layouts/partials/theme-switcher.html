@@ -1,4 +1,26 @@
   <!-- Theme Switcher -->
+<div class="export-options">
+
+  <!-- Share -->
+  <button type="button"
+          class="ctrl-btn share-btn"
+          id="shareBtn"
+          aria-label="Share this page"
+          title="Share this page">
+    <span class="share-icon" aria-hidden="true"><img src="{{ "icons/share.svg" | relURL }}" alt ="share-icon"></span>
+  </button>
+</div>
+<div class="export-options1">
+  <!-- Copy Link -->
+  <button type="button"
+          class="ctrl-btn copy-link-btn"
+          id="copyLinkBtn"
+          aria-label="Copy page link"
+          title="Copy page link">
+    <span class="copy-icon" aria-hidden="true"><img src="{{ "icons/copy-link.svg" | relURL }}" alt ="copy-link-icon"></span>
+  </button>
+
+</div>
   <div class="theme-switcher">
     <button type="button" class="ctrl-btn theme-btn" id="themeToggleBtn" aria-label="Toggle Color Theme" title="Switch theme (Light / Dark / System)">
       <span class="theme-icon icon-light" aria-hidden="true">☀️</span>
@@ -6,4 +28,115 @@
       <span class="theme-icon icon-system" aria-hidden="true">🌓</span>
     </button>
   </div>
-</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const shareBtn = document.getElementById("shareBtn");
+  const copyLinkBtn = document.getElementById("copyLinkBtn");
+
+  const pageTitle = {{ if .Params.seo_title }}{{ .Params.seo_title | jsonify }}{{ else }}{{ .Title | jsonify }}{{ end }} + " | Yojana Portal";
+  const pageUrl = window.location.href;
+
+  const shareText = pageTitle + "\n\n" + pageUrl;
+
+
+  // Share
+  if (shareBtn) {
+    shareBtn.addEventListener("click", async function () {
+
+      const shareData = {
+        title: pageTitle,
+        text: shareText,
+        url: pageUrl
+      };
+
+      if (navigator.share) {
+
+        try {
+          await navigator.share(shareData);
+
+        } catch (error) {
+          // User cancelled share
+        }
+
+      } else {
+
+        // Fallback: Copy title + link
+        try {
+          await navigator.clipboard.writeText(shareText);
+
+          const oldTitle = shareBtn.getAttribute("title");
+
+          shareBtn.setAttribute("title", "Copied!");
+
+          setTimeout(() => {
+            shareBtn.setAttribute("title", oldTitle);
+          }, 1500);
+
+        } catch (error) {
+          console.error("Unable to share or copy link.");
+        }
+
+      }
+    });
+  }
+
+
+  // Copy Link
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener("click", async function () {
+
+      try {
+        await navigator.clipboard.writeText(shareText);
+
+        const icon = copyLinkBtn.querySelector(".copy-icon");
+
+        // Original SVG ko preserve karega
+        const oldHTML = icon.innerHTML;
+
+        // Temporary check mark
+        icon.innerHTML = "✓";
+
+        copyLinkBtn.setAttribute("title", "Copied!");
+
+        setTimeout(() => {
+
+          // Original copy-link.svg wapas
+          icon.innerHTML = oldHTML;
+
+          copyLinkBtn.setAttribute("title", "Copy page link");
+
+        }, 1500);
+
+      } catch (error) {
+        console.error("Unable to copy link.");
+      }
+
+    });
+  }
+
+});
+</script>
+<style>
+.share-btn img,
+.copy-link-btn img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  filter: none;
+}
+
+/* Dark Mode */
+[data-color-mode="dark"] .share-btn img,
+[data-color-mode="dark"] .copy-link-btn img {
+  filter: brightness(0) invert(1);
+}
+
+/* System Mode + OS Dark */
+@media (prefers-color-scheme: dark) {
+  [data-color-mode="system"] .share-btn img,
+  [data-color-mode="system"] .copy-link-btn img {
+    filter: brightness(0) invert(1);
+  }
+}
+</style>
