@@ -18,15 +18,7 @@
 <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
 <!-- JSON-LD Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "{{ if .IsPage }}Article{{ else }}WebSite{{ end }}",
-  "name": "{{ .Title }}",
-  "url": "{{ .Permalink }}",
-  "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"
-}
-</script>
+{{ partial "imp-codes/schema.html" . }}
 
 <link rel="icon" href="{{ .Site.Params.logo }}" type="image/svg+xml">
 
