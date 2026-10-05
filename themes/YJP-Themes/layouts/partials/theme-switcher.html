@@ -117,26 +117,330 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-<style>
-.share-btn img,
-.copy-link-btn img {
-  width: 20px;
-  height: 20px;
-  display: block;
-  filter: none;
-}
 
-/* Dark Mode */
-[data-color-mode="dark"] .share-btn img,
-[data-color-mode="dark"] .copy-link-btn img {
+
+<!-- Mobile Action Menu -->
+<div class="mobile-action-menu">
+
+  <button type="button"
+          class="ctrl-btn mobile-action-toggle"
+          id="mobileActionToggle"
+          aria-label="More options"
+          title="More options"
+          aria-expanded="false">
+
+    <span aria-hidden="true">⋮</span>
+
+  </button>
+
+
+  <div class="mobile-action-dropdown" id="mobileActionDropdown">
+
+    <!-- Share -->
+    <button type="button"
+            class="mobile-action-item"
+            id="mobileShareBtn">
+
+      <span class="mobile-action-icon">
+        <img src="{{ "icons/share.svg" | relURL }}" alt="">
+      </span>
+
+      <span>Share</span>
+
+    </button>
+
+
+    <!-- Copy Link -->
+    <button type="button"
+            class="mobile-action-item"
+            id="mobileCopyLinkBtn">
+
+      <span class="mobile-action-icon">
+        <img src="{{ "icons/copy-link.svg" | relURL }}" alt="">
+      </span>
+
+      <span>Copy Link</span>
+
+    </button>
+
+
+    <!-- Theme -->
+    <button type="button"
+            class="mobile-action-item"
+            id="mobileThemeBtn">
+
+      <span class="mobile-action-icon theme-menu-icon">
+        🌓
+      </span>
+
+      <span>Theme</span>
+
+    </button>
+
+  </div>
+
+</div>
+<style>
+  [data-theme="dark"] .share-btn img,
+[data-theme="dark"] .copy-link-btn img,
+[data-theme="dark"] .mobile-action-icon img {
   filter: brightness(0) invert(1);
 }
 
-/* System Mode + OS Dark */
 @media (prefers-color-scheme: dark) {
+
   [data-color-mode="system"] .share-btn img,
-  [data-color-mode="system"] .copy-link-btn img {
+  [data-color-mode="system"] .copy-link-btn img,
+  [data-color-mode="system"] .mobile-action-icon img {
+    filter: brightness(0) invert(1);
+  }
+
+}
+/* ==========================================================================
+   Mobile Action Menu
+   ========================================================================== */
+
+.mobile-action-menu {
+  display: none;
+  position: relative;
+}
+
+.mobile-action-toggle {
+  cursor: pointer;
+}
+
+
+/* Dropdown */
+
+.mobile-action-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+
+  min-width: 155px;
+  padding: 6px;
+
+  display: none;
+
+  background: var(--bg-surface);
+  color: var(--text-main);
+
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+
+  box-shadow: var(--box-shadow);
+
+  z-index: 9999;
+}
+
+.mobile-action-dropdown.show {
+  display: block;
+}
+
+
+/* Menu Items */
+
+.mobile-action-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+
+  border: 0;
+  border-radius: var(--border-radius);
+
+  background: transparent;
+  color: var(--text-main);
+
+  font-size: var(--font-size);
+  text-align: left;
+
+  cursor: pointer;
+}
+
+
+/* Hover */
+
+.mobile-action-item:hover {
+  background: var(--bg-secondary);
+}
+
+
+/* Icons */
+
+.mobile-action-icon {
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.mobile-action-icon img {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+
+/* Dark Mode SVG */
+
+[data-color-mode="dark"] .mobile-action-icon img {
+  filter: brightness(0) invert(1);
+}
+
+
+/* System Mode + OS Dark */
+
+@media (prefers-color-scheme: dark) {
+  [data-color-mode="system"] .mobile-action-icon img {
     filter: brightness(0) invert(1);
   }
 }
+
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+  /* Existing desktop buttons hide */
+  .export-options,
+  .export-options1,
+  .theme-switcher {
+    display: none;
+  }
+
+  /* Mobile menu show */
+  .mobile-action-menu {
+    display: block;
+  }
+
+}
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const toggle = document.getElementById("mobileActionToggle");
+  const dropdown = document.getElementById("mobileActionDropdown");
+
+  const mobileShare = document.getElementById("mobileShareBtn");
+  const mobileCopy = document.getElementById("mobileCopyLinkBtn");
+  const mobileTheme = document.getElementById("mobileThemeBtn");
+
+  const shareBtn = document.getElementById("shareBtn");
+  const copyLinkBtn = document.getElementById("copyLinkBtn");
+  const themeBtn = document.getElementById("themeToggleBtn");
+
+
+  /* Open / Close */
+
+  if (toggle && dropdown) {
+
+    toggle.addEventListener("click", function (e) {
+
+      e.stopPropagation();
+
+      const isOpen = dropdown.classList.toggle("show");
+
+      toggle.setAttribute(
+        "aria-expanded",
+        isOpen ? "true" : "false"
+      );
+
+    });
+
+  }
+
+
+  /* Share */
+
+  if (mobileShare && shareBtn) {
+
+    mobileShare.addEventListener("click", function () {
+
+      shareBtn.click();
+
+      closeMenu();
+
+    });
+
+  }
+
+
+  /* Copy Link */
+
+  if (mobileCopy && copyLinkBtn) {
+
+    mobileCopy.addEventListener("click", function () {
+
+      copyLinkBtn.click();
+
+      closeMenu();
+
+    });
+
+  }
+
+
+  /* Theme */
+
+  if (mobileTheme && themeBtn) {
+
+    mobileTheme.addEventListener("click", function () {
+
+      themeBtn.click();
+
+      closeMenu();
+
+    });
+
+  }
+
+
+  /* Close */
+
+  function closeMenu() {
+
+    if (!dropdown) return;
+
+    dropdown.classList.remove("show");
+
+    if (toggle) {
+
+      toggle.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    }
+
+  }
+
+
+  /* Click outside */
+
+  document.addEventListener("click", function (e) {
+
+    if (
+      dropdown &&
+      toggle &&
+      !dropdown.contains(e.target) &&
+      !toggle.contains(e.target)
+    ) {
+
+      closeMenu();
+
+    }
+
+  });
+
+});
+</script>

@@ -7,13 +7,18 @@
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
 </button>
 <button type=submit class=search-submit-btn>
-Search</button></div></form></div></div><div class=theme-switcher><button type=button class="ctrl-btn theme-btn" id=themeToggleBtn aria-label="Toggle Color Theme" title="Switch theme (Light / Dark / System)">
-<span class="theme-icon icon-light" aria-hidden=true>☀️</span>
-<span class="theme-icon icon-dark" aria-hidden=true>🌙</span>
-<span class="theme-icon icon-system" aria-hidden=true>🌓</span></button></div></div><div class=theme-switcher><button type=button class="ctrl-btn theme-btn" id=themeToggleBtn aria-label="Toggle Color Theme" title="Switch theme (Light / Dark / System)">
-<span class="theme-icon icon-light" aria-hidden=true>☀️</span>
-<span class="theme-icon icon-dark" aria-hidden=true>🌙</span>
-<span class="theme-icon icon-system" aria-hidden=true>🌓</span></button></div></div></div></div></header><nav class=nav-bar-strip aria-label="Secondary Horizontal Navigation"><div class=nav-bar-container><button type=button class=nav-hamburger-btn id=menuToggleBtn aria-label="Toggle Navigation Menu" aria-controls=mobileSidebarDrawer aria-expanded=false>
+Search</button></div></form></div></div><div class=mobile-action-menu><button type=button class="ctrl-btn mobile-action-toggle" id=mobileActionToggle aria-label="More options" title="More options" aria-expanded=false>
+<span aria-hidden=true>⋮</span></button><div class=mobile-action-dropdown id=mobileActionDropdown><button type=button class=mobile-action-item id=mobileShareBtn>
+<span class=mobile-action-icon><img src=/icons/share.svg alt>
+</span><span>Share</span>
+</button>
+<button type=button class=mobile-action-item id=mobileCopyLinkBtn>
+<span class=mobile-action-icon><img src=/icons/copy-link.svg alt>
+</span><span>Copy Link</span>
+</button>
+<button type=button class=mobile-action-item id=mobileThemeBtn>
+<span class=mobile-action-icon>🌓</span>
+<span>Theme</span></button></div></div><script>document.addEventListener("DOMContentLoaded",function(){const e=document.getElementById("mobileActionToggle"),n=document.getElementById("mobileActionDropdown"),s=document.getElementById("mobileShareBtn"),o=document.getElementById("mobileCopyLinkBtn"),i=document.getElementById("mobileThemeBtn"),a=document.getElementById("shareBtn"),r=document.getElementById("copyLinkBtn"),c=document.getElementById("themeToggleBtn");e&&e.addEventListener("click",function(t){t.stopPropagation();const s=n.classList.toggle("show");e.setAttribute("aria-expanded",s?"true":"false")}),s&&a&&s.addEventListener("click",function(){a.click(),t()}),o&&r&&o.addEventListener("click",function(){r.click(),t()}),i&&c&&i.addEventListener("click",function(){c.click(),t()});function t(){n.classList.remove("show"),e.setAttribute("aria-expanded","false")}document.addEventListener("click",function(s){!n.contains(s.target)&&!e.contains(s.target)&&t()})})</script><style>.mobile-action-menu{position:relative;display:none}.mobile-action-toggle{cursor:pointer}.mobile-action-dropdown{position:absolute;top:calc(100% + 8px);right:0;min-width:150px;display:none;padding:6px;background:var(--bg-color,#fff);border:1px solid var(--border-color,#ddd);border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.15);z-index:9999}.mobile-action-dropdown.show{display:block}.mobile-action-item{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border:0;background:0 0;color:inherit;text-align:left;border-radius:7px;cursor:pointer}.mobile-action-item:hover{background:rgba(128,128,128,.12)}.mobile-action-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center}.mobile-action-icon img{width:20px;height:20px;display:block}[data-color-mode=dark] .mobile-action-icon img{filter:brightness(0)invert(1)}@media(prefers-color-scheme:dark){[data-color-mode=system] .mobile-action-icon img{filter:brightness(0)invert(1)}}</style></div></div></header><nav class=nav-bar-strip aria-label="Secondary Horizontal Navigation"><div class=nav-bar-container><button type=button class=nav-hamburger-btn id=menuToggleBtn aria-label="Toggle Navigation Menu" aria-controls=mobileSidebarDrawer aria-expanded=false>
 <span class=hamburger-bar></span>
 <span class=hamburger-bar></span>
 <span class=hamburger-bar></span></button><div class=nav-scrollable-track id=horizontalNavTrack><ul class=nav-list><li class=nav-item><a href=/ class=nav-link><span class=nav-icon aria-hidden=true>🏠</span>
