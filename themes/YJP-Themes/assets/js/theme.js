@@ -29,43 +29,50 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Elements
   const get = (id) => document.getElementById(id);
 
-  const toggle = get("mobileActionToggle");
-  const dropdown = get("mobileActionDropdown");
-
+  // Desktop
   const shareBtn = get("shareBtn");
   const copyLinkBtn = get("copyLinkBtn");
   const themeBtn = get("themeToggleBtn");
 
+  // Mobile menu
+  const toggle = get("mobileActionToggle");
+  const dropdown = get("mobileActionDropdown");
   const mobileShare = get("mobileShareBtn");
   const mobileCopy = get("mobileCopyLinkBtn");
+  const mobileWhatsApp = get("mobileWhatsAppBtn");
+  const mobileTelegram = get("mobileTelegramBtn");
   const mobileTheme = get("mobileThemeBtn");
 
+  // Page title + URL
+  const titleElement = get("pageShareTitle");
 
-  // Page Info
   const pageTitle =
-    get("pageShareTitle")?.dataset.title || document.title;
+    titleElement?.dataset.title || document.title;
 
   const pageUrl = window.location.href;
+
+  // Title + URL
   const shareText = `${pageTitle}\n\n${pageUrl}`;
 
 
-  // Close Mobile Menu
+  /* =========================
+     Mobile Menu
+  ========================= */
+
   const closeMenu = () => {
     dropdown?.classList.remove("show");
     toggle?.setAttribute("aria-expanded", "false");
   };
 
-  // Mobile Dropdown
   if (toggle && dropdown) {
 
     toggle.addEventListener("click", (e) => {
-
       e.stopPropagation();
 
-      const isOpen = dropdown.classList.toggle("show");
+      const isOpen =
+        dropdown.classList.toggle("show");
 
       toggle.setAttribute(
         "aria-expanded",
@@ -73,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
 
-    // Outside Click
     document.addEventListener("click", (e) => {
 
       if (
@@ -84,10 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
     });
-
   }
 
-  // Share
+
+  /* =========================
+     Normal Share
+  ========================= */
+
   async function sharePage() {
 
     if (navigator.share) {
@@ -96,12 +105,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         await navigator.share({
           title: pageTitle,
-          text: shareText,
-          url: pageUrl
+          text: shareText
         });
 
-      } catch (err) {
-        // User cancelled sharing
+      } catch (error) {
+
+        if (error.name !== "AbortError") {
+          console.error(
+            "Unable to share:",
+            error
+          );
+        }
+
       }
 
       return;
@@ -111,40 +126,57 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fallback: Copy
     try {
 
-      await navigator.clipboard.writeText(shareText);
+      await navigator.clipboard.writeText(
+        shareText
+      );
 
       if (shareBtn) {
 
         const oldTitle =
           shareBtn.getAttribute("title") || "";
 
-        shareBtn.setAttribute("title", "Copied!");
+        shareBtn.setAttribute(
+          "title",
+          "Copied!"
+        );
 
         setTimeout(() => {
-          shareBtn.setAttribute("title", oldTitle);
-        }, 1500);
 
+          shareBtn.setAttribute(
+            "title",
+            oldTitle
+          );
+
+        }, 1500);
       }
 
-    } catch (err) {
+    } catch (error) {
 
-      console.error("Unable to share or copy link.");
+      console.error(
+        "Unable to share or copy link:",
+        error
+      );
 
     }
-
   }
 
 
-  // Copy Link
+  /* =========================
+     Copy Link
+  ========================= */
+
   async function copyPageLink() {
 
     try {
 
-      await navigator.clipboard.writeText(shareText);
+      await navigator.clipboard.writeText(
+        shareText
+      );
 
       if (!copyLinkBtn) return;
 
-      const icon = copyLinkBtn.querySelector(".copy-icon");
+      const icon =
+        copyLinkBtn.querySelector(".copy-icon");
 
       if (!icon) return;
 
@@ -152,7 +184,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       icon.innerHTML = "✓";
 
-      copyLinkBtn.setAttribute("title", "Copied!");
+      copyLinkBtn.setAttribute(
+        "title",
+        "Copied!"
+      );
 
       setTimeout(() => {
 
@@ -165,43 +200,117 @@ document.addEventListener("DOMContentLoaded", () => {
 
       }, 1500);
 
-    } catch (err) {
+    } catch (error) {
 
-      console.error("Unable to copy link.");
+      console.error(
+        "Unable to copy link:",
+        error
+      );
 
     }
-
   }
 
 
-  // Desktop Buttons
-  shareBtn?.addEventListener("click", sharePage);
+  /* =========================
+     WhatsApp
+  ========================= */
 
-  copyLinkBtn?.addEventListener("click", copyPageLink);
+  function shareWhatsApp() {
 
+    const whatsappUrl =
+      "https://wa.me/?text=" +
+      encodeURIComponent(shareText);
 
-  // Mobile Buttons
-  mobileShare?.addEventListener("click", () => {
+    window.open(
+      whatsappUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
 
-    sharePage();
     closeMenu();
+  }
 
-  });
 
+  /* =========================
+     Telegram
+  ========================= */
 
-  mobileCopy?.addEventListener("click", () => {
+  function shareTelegram() {
 
-    copyPageLink();
+    const telegramUrl =
+      "https://t.me/share/url?url=" +
+      encodeURIComponent(pageUrl) +
+      "&text=" +
+      encodeURIComponent(pageTitle);
+
+    window.open(
+      telegramUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
     closeMenu();
+  }
 
-  });
+
+  /* =========================
+     Desktop Buttons
+  ========================= */
+
+  shareBtn?.addEventListener(
+    "click",
+    sharePage
+  );
+
+  copyLinkBtn?.addEventListener(
+    "click",
+    copyPageLink
+  );
 
 
-  mobileTheme?.addEventListener("click", () => {
+  /* =========================
+     Mobile Buttons
+  ========================= */
 
-    themeBtn?.click();
-    closeMenu();
+  mobileShare?.addEventListener(
+    "click",
+    () => {
+      sharePage();
+      closeMenu();
+    }
+  );
 
-  });
+
+  mobileCopy?.addEventListener(
+    "click",
+    () => {
+      copyPageLink();
+      closeMenu();
+    }
+  );
+
+
+  mobileWhatsApp?.addEventListener(
+    "click",
+    shareWhatsApp
+  );
+
+
+  mobileTelegram?.addEventListener(
+    "click",
+    shareTelegram
+  );
+
+
+  mobileTheme?.addEventListener(
+    "click",
+    () => {
+
+      themeBtn?.click();
+
+      closeMenu();
+
+    }
+  );
 
 });
