@@ -1,0 +1,72 @@
+{{/* Schema Image */}}
+{{ $imageURL := "" }}
+
+{{ with .Params.imageBanner }}
+
+  {{ $isRemote := or (hasPrefix . "http://") (hasPrefix . "https://") }}
+
+  {{ if $isRemote }}
+
+    {{ with try (resources.GetRemote .) }}
+      {{ with .Err }}
+        {{ warnf "Schema image download failed: %s" . }}
+      {{ else }}
+        {{ $imageURL = .Value.Permalink }}
+      {{ end }}
+    {{ end }}
+
+  {{ else }}
+
+    {{ with resources.Get . }}
+      {{ $imageURL = .Permalink }}
+    {{ else }}
+      {{ $imageURL = . | absURL }}
+    {{ end }}
+
+  {{ end }}
+
+{{ end }}
+
+{{ if not $imageURL }}
+  {{ with .Site.Params.logo }}
+    {{ $imageURL = . | absURL }}
+  {{ end }}
+{{ end }}
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+
+  "headline": {{ with .Params.seo_title }}"{{ . | plainify | htmlEscape }}"{{ else }}"{{ .Title | plainify | htmlEscape }}"{{ end }},
+
+  "description": {{ with .Params.description }}"{{ . | plainify | htmlEscape }}"{{ else }}"{{ .Summary | plainify | htmlEscape }}"{{ end }},
+
+  "image": "{{ $imageURL }}",
+
+  "author": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.logo | absURL }}"
+    }
+  },
+
+  "datePublished": "{{ with .Date }}{{ .Format "2006-01-02" }}{{ else }}{{ now.Format "2006-01-02" }}{{ end }}",
+
+  "dateModified": "{{ with .Lastmod }}{{ .Format "2006-01-02" }}{{ else }}{{ now.Format "2006-01-02" }}{{ end }}"
+}
+</script>

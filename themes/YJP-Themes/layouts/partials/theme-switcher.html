@@ -1,4 +1,26 @@
   <!-- Theme Switcher -->
+<div class="export-options">
+
+  <!-- Share -->
+  <button type="button"
+          class="ctrl-btn share-btn"
+          id="shareBtn"
+          aria-label="Share this page"
+          title="Share this page">
+    <span class="share-icon" aria-hidden="true"><img src="{{ "icons/share.svg" | relURL }}" alt ="share-icon"></span>
+  </button>
+</div>
+<div class="export-options1">
+  <!-- Copy Link -->
+  <button type="button"
+          class="ctrl-btn copy-link-btn"
+          id="copyLinkBtn"
+          aria-label="Copy page link"
+          title="Copy page link">
+    <span class="copy-icon" aria-hidden="true"><img src="{{ "icons/copy-link.svg" | relURL }}" alt ="copy-link-icon"></span>
+  </button>
+
+</div>
   <div class="theme-switcher">
     <button type="button" class="ctrl-btn theme-btn" id="themeToggleBtn" aria-label="Toggle Color Theme" title="Switch theme (Light / Dark / System)">
       <span class="theme-icon icon-light" aria-hidden="true">☀️</span>
@@ -6,4 +28,93 @@
       <span class="theme-icon icon-system" aria-hidden="true">🌓</span>
     </button>
   </div>
+
+<!-- Mobile Action Menu -->
+<div class="mobile-action-menu">
+
+  <button type="button"
+          class="ctrl-btn mobile-action-toggle"
+          id="mobileActionToggle"
+          aria-label="More options"
+          title="More options"
+          aria-expanded="false">
+
+    <span aria-hidden="true" class="mobile-action-icon"><img src="{{ "icons/thin-outline-share.svg" | relURL }}" alt ="outline-share-icon"></span>
+
+  </button>
+
+
+  <div class="mobile-action-dropdown " id="mobileActionDropdown">
+
+
+
+
+  <!-- Copy Link -->
+<button type="button"
+        class="mobile-action-item"
+        id="mobileCopyLinkBtn">
+
+  <span class="mobile-action-icon">
+    <img src="{{ "icons/copy-link.svg" | relURL }}" alt="">
+  </span>
+
+  <span>Copy Link</span>
+
+</button>
+
+
+<!-- WhatsApp -->
+<button type="button"
+        class="mobile-action-item"
+        id="mobileWhatsAppBtn">
+
+  <span class="mobile-action-icon">
+    <img src="{{ "icons/whatsapp.svg" | relURL }}" alt="">
+  </span>
+
+  <span>WhatsApp</span>
+
+</button>
+
+
+<!-- Telegram -->
+<button type="button"
+        class="mobile-action-item"
+        id="mobileTelegramBtn">
+
+  <span class="mobile-action-icon">
+    <img src="{{ "icons/telegram.svg" | relURL }}" alt="">
+  </span>
+
+  <span>Telegram</span>
+
+</button>
+    <!-- Share -->
+    <button type="button"
+            class="mobile-action-item"
+            id="mobileShareBtn">
+
+      <span class="mobile-action-icon">
+        <img src="{{ "icons/share.svg" | relURL }}" alt="">
+      </span>
+
+      <span>Share</span>
+
+    </button>
+
+    <!-- Theme -->
+    <button type="button"
+            class="mobile-action-item"
+            id="mobileThemeBtn">
+ <span class="theme-icon icon-light" aria-hidden="true">☀️</span>
+      <span class="theme-icon icon-dark" aria-hidden="true">🌙</span>
+      <span class="theme-icon icon-system" aria-hidden="true">🌓</span>
+ 
+
+      <span>Theme</span>
+
+    </button>
+
+  </div>
+
 </div>

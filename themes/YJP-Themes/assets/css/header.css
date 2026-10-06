@@ -183,3 +183,103 @@
         gap: 8px;
     }
 }
+
+/*===================header icon effect ===============================================*/
+/* ==========================================================================
+   Dark Mode Icons (Grouped & Deduplicated)
+   ========================================================================== */
+
+:is([data-theme="dark"], [data-color-mode="dark"]) :is(.share-btn, .copy-link-btn, .mobile-action-icon) img {
+  filter: brightness(0) invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-color-mode="system"] :is(.share-btn, .copy-link-btn, .mobile-action-icon) img {
+    filter: brightness(0) invert(1);
+  }
+}
+
+/* ==========================================================================
+   Mobile Action Menu
+   ========================================================================== */
+
+.mobile-action-menu {
+  display: none;
+  position: relative;
+}
+
+.mobile-action-toggle {
+  cursor: pointer;
+}
+
+/* Dropdown */
+.mobile-action-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 155px;
+  padding: 6px;
+  display: none;
+  background: var(--bg-surface);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  z-index: 9999;
+}
+
+.mobile-action-dropdown.show {
+  display: block;
+}
+
+/* Menu Items */
+.mobile-action-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: var(--border-radius);
+  background: transparent;
+  color: var(--text-main);
+  font-size: var(--font-size);
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-action-item:hover {
+  background: var(--bg-secondary);
+}
+
+/* Icons */
+.mobile-action-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mobile-action-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   Responsive View
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .export-options,
+  .export-options1,
+  .theme-switcher {
+    display: none;
+  }
+
+  .mobile-action-menu {
+    display: block;
+  }
+}
