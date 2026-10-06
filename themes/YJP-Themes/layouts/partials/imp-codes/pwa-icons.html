@@ -1,0 +1,31 @@
+{{- /* layouts/partials/imp-codes/pwa-icons.html */ -}}
+{{- $res192 := partial "imp-codes/logo-resource.html" "192x192 png" -}}
+{{- $res512 := partial "imp-codes/logo-resource.html" "512x512 png" -}}
+{{- $res180 := partial "imp-codes/logo-resource.html" "180x180 png" -}}
+
+{{- $pwa192 := "" -}}
+{{- $pwa512 := "" -}}
+{{- $apple180 := "" -}}
+
+{{- if $res192 -}}
+  {{- $pwa192 = $res192 | resources.Copy "pwa/icon-192.png" -}}
+{{- end -}}
+
+{{- if $res512 -}}
+  {{- $pwa512 = $res512 | resources.Copy "pwa/icon-512.png" -}}
+{{- end -}}
+
+{{- if $res180 -}}
+  {{- $apple180 = $res180 | resources.Copy "pwa/icon-180.png" -}}
+{{- end -}}
+
+{{- /* Output tags and trigger Hugo publishing pipeline */ -}}
+{{- if $apple180 -}}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ $apple180.RelPermalink }}">
+{{- end -}}
+{{- if $pwa192 -}}
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ $pwa192.RelPermalink }}">
+{{- end -}}
+{{- if $pwa512 -}}
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ $pwa512.RelPermalink }}">
+{{- end -}}

@@ -62,8 +62,8 @@ enableRobotsTXT = true
   date = 2025-07-03T10:02:12+05:30
   description = "Lightweight, language-aware portal framework."
   defaultSidebarIcon = "↪️"
-  defaultLanguage = "hi"
-  logo = "/images/logo.svg"
+  defaultLanguage = ""
+ logo = "images/logo-source.png"
   sitemap_custom_urls = [
     # "/custom-tool-path/",
     # "/external-service/"
