@@ -9,15 +9,7 @@
        {{ else if eq $type "defalut" }}
       {{ partial "farmate/type/default.html" . }}
   {{ else if eq $type "howto" }}
-    <div class="howto-intro">{{ .Params.intro }}</div>
-    <div class="howto-steps-scaffold">
-      <div class="howto-step-marker">1</div>
-      <div class="howto-step-content">Step-by-step instructions render here.</div>
-    </div>
-    <div class="howto-note-box">{{ .Params.note }}</div>
-    <div class="howto-warning-box">{{ .Params.warning }}</div>
-    <div class="howto-tips-box">{{ .Params.tips }}</div>
-
+  {{ partial "farmate/type/howto.html" . }}
   {{ else }}
     <div class="post-default-container">
       <!-- Default post rendering boundary -->

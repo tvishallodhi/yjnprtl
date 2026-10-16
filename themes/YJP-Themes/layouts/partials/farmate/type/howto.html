@@ -1,0 +1,80 @@
+
+
+<div class="topic-content topic-style-highlight">
+  {{ partial "farmate/topic-content.html" . }}
+</div>
+<div class="howto">
+ {{/* Scheme Title & Department */}}
+    <section class="scheme-box">
+      {{ with .Params.Department }}
+        <div class="department-badge">{{ . }}</div>
+      {{ end }}
+
+      {{ if or .Params.seo_title .Params.state }}
+        <div class="scheme-title">
+          {{ with .Params.seo_title }}{{ . }}{{ end }}
+          {{ if and .Params.seo_title .Params.state }}
+            <span class="separator"> - </span>
+          {{ end }}
+          {{ with .Params.state }}
+            <span class="state-name">{{ . }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
+    </section>
+
+  {{/* 6. Documents (List) */}}
+    {{ if .Params.documents }}
+      <div class="section" id="documents">
+        <h3>🔸Required Documents</h3>
+        {{ partial "farmate/render-list.html" (dict "data" .Params.documents) }}
+      </div>
+    {{ end }}
+
+      {{ if .Content }}
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+  {{ end }}
+
+    {{/* 7. How to Apply (Online / Offline / Steps) */}}
+    {{ if or .Params.how_to .Params.apply_online .Params.apply_offline .Params.how_to_offline }}
+      <div class="section" id="how_to">
+        <h3>🔸{{ .Params.PostName }}(How to Apply)</h3>
+        {{ if .Params.how_to }}
+          {{ partial "farmate/render-list.html" (dict "data" .Params.how_to "ordered" true) }}
+        {{ end }}
+        {{ if .Params.apply_online }}
+          {{ partial "farmate/parts/scheme/how_to.html" . }}
+        {{ end }}
+        {{ if .Params.apply_offline }}
+          {{ partial "farmate/parts/scheme/how_to_offline.html" . }}
+        {{ end }}
+      </div>
+    {{ end }}
+
+     {{/* Links Table */}}
+    {{ if .Params.links }}
+      <div class="yp-table-wrapper" id="links">
+        {{ partial "farmate/link-table.html" . }}
+      </div>
+    {{ end }}
+
+       {{/* 9. FAQs */}}
+    {{ if .Params.faqs }}
+      <div class="faqs" id="faqs">
+        <b>🙋‍♀️ अक्सर पूछे जाने वाले प्रश्न - {{ .Params.YojnaName }}</b>
+        <div class="faq">
+          {{ partial "farmate/summary-faqs.html" . }}
+        </div>
+      </div>
+    {{ end }}
+
+    {{ partial "farmate/related-promo-card.html" . }}
+
+    {{/* Important Note Notice */}}
+    {{ if .Params.impnote }}
+      <p class="notice">{{ .Params.impnote | safeHTML }}</p>
+    {{ end }}
+
+</div>

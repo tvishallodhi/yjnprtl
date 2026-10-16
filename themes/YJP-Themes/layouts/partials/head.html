@@ -129,3 +129,12 @@
     {{ partial "head/cssStyles.html" . }}
   {{ partial "head/seo/faq-schema.html" . }}
     {{ partial "imp-codes/google-analytics.html" . }}
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "78fbf614-3bcc-48c5-ab8f-dc1ddc53d8af",
+    });
+  });
+</script>

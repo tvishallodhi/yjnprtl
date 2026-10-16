@@ -1,0 +1,466 @@
+
+/* =========================================
+   YOJNA PORTAL - COMPLETE POST CSS
+   Scheme / How-to / FAQ / Links
+========================================= */
+
+.howto {
+  --post-primary: #2563eb;
+  --post-primary-dark: #1d4ed8;
+  --post-primary-soft: #eff6ff;
+  --post-green: #059669;
+  --post-green-soft: #ecfdf5;
+  --post-orange: #d97706;
+  --post-orange-soft: #fffbeb;
+  --post-red: #dc2626;
+  --post-text: #1e293b;
+  --post-muted: #64748b;
+  --post-border: #e2e8f0;
+  --post-surface: #ffffff;
+  --post-background: #f8fafc;
+  --post-radius: 14px;
+  --post-shadow: 0 4px 16px rgb(15 23 42 / 6%);
+
+  color: var(--post-text);
+  font-size: 16px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+/* Topic content */
+.topic-content {
+  margin-bottom: 22px;
+}
+
+.topic-style-highlight {
+  padding: 16px 20px;
+  border-left: 4px solid var(--post-primary, #2563eb);
+  border-radius: 0 12px 12px 0;
+  background: #eff6ff;
+  color: #1e293b;
+}
+
+/* Common sections */
+.howto .section,
+.howto .scheme-box,
+.howto .faqs,
+.howto .yp-table-wrapper {
+  margin: 22px 0;
+}
+
+.howto .section {
+  padding: 20px;
+  background: var(--post-surface);
+  border: 1px solid var(--post-border);
+  border-radius: var(--post-radius);
+  box-shadow: var(--post-shadow);
+}
+
+/* =========================================
+   SCHEME TITLE & DEPARTMENT
+========================================= */
+
+.howto .scheme-box {
+  padding: 22px;
+  text-align: center;
+  background: linear-gradient(135deg, #eff6ff, #ffffff 65%, #ecfdf5);
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  box-shadow: var(--post-shadow);
+}
+
+.howto .department-badge {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 12px;
+  padding: 7px 15px;
+  color: #ffffff;
+  background: var(--post-primary);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.howto .scheme-title {
+  color: #0f172a;
+  font-size: clamp(20px, 3vw, 29px);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.howto .separator {
+  color: #94a3b8;
+}
+
+.howto .state-name {
+  color: var(--post-primary-dark);
+}
+
+/* =========================================
+   SECTION HEADINGS
+========================================= */
+
+.howto .section h2,
+.howto .section h3 {
+  margin: 0 0 18px;
+  padding: 0 0 12px;
+  color: #0f172a;
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 800;
+  line-height: 1.55;
+  border-bottom: 2px solid var(--post-border);
+}
+
+.howto .section h3::first-letter {
+  color: var(--post-orange);
+}
+
+.howto p {
+  margin: 10px 0;
+}
+
+.howto ul,
+.howto ol {
+  margin: 12px 0;
+  padding-left: 26px;
+}
+
+.howto li {
+  margin: 8px 0;
+  padding-left: 3px;
+}
+
+.howto li::marker {
+  color: var(--post-primary);
+  font-weight: 700;
+}
+
+/* =========================================
+   HOW TO APPLY - ORDERED STEPS
+========================================= */
+
+.howto #how_to ol {
+  counter-reset: howto-step;
+  list-style: none;
+  padding: 0;
+}
+
+.howto #how_to ol > li {
+  position: relative;
+  min-height: 44px;
+  margin: 12px 0;
+  padding: 11px 14px 11px 52px;
+  background: var(--post-background);
+  border: 1px solid var(--post-border);
+  border-radius: 10px;
+  counter-increment: howto-step;
+}
+
+.howto #how_to ol > li::before {
+  content: counter(howto-step);
+  position: absolute;
+  top: 10px;
+  left: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  color: #ffffff;
+  background: var(--post-primary);
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.howto #how_to ol > li::marker {
+  content: "";
+}
+
+/* =========================================
+   LINKS TABLE
+========================================= */
+
+.howto .yp-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--post-border);
+  border-radius: var(--post-radius);
+  background: var(--post-surface);
+  box-shadow: var(--post-shadow);
+  -webkit-overflow-scrolling: touch;
+}
+
+.howto .yp-table-wrapper table {
+  width: 100%;
+  min-width: 320px;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.howto .yp-table-wrapper th {
+  padding: 14px 16px;
+  color: #ffffff;
+  background: #1e40af;
+  text-align: left;
+  font-weight: 750;
+}
+
+.howto .yp-table-wrapper td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--post-border);
+  vertical-align: middle;
+}
+
+.howto .yp-table-wrapper tr:last-child td {
+  border-bottom: 0;
+}
+
+.howto .yp-table-wrapper tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.howto .yp-table-wrapper tbody tr:hover {
+  background: #eff6ff;
+}
+
+.howto .yp-table-wrapper a {
+  color: var(--post-primary-dark);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.howto .yp-table-wrapper a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   FAQ SECTION
+========================================= */
+
+.howto .faqs {
+  padding: 20px;
+  background: var(--post-surface);
+  border: 1px solid var(--post-border);
+  border-radius: var(--post-radius);
+  box-shadow: var(--post-shadow);
+}
+
+.howto .faqs > b {
+  display: block;
+  margin-bottom: 18px;
+  padding-bottom: 13px;
+  color: #0f172a;
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 800;
+  line-height: 1.6;
+  border-bottom: 2px solid var(--post-border);
+}
+
+.howto .faq {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.howto .faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.howto .faq-item,
+.howto .faq details {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--post-border);
+  border-radius: 10px;
+  transition: border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.howto .faq-item:hover,
+.howto .faq details:hover {
+  border-color: #93c5fd;
+}
+
+.howto .faq-item[open],
+.howto .faq details[open] {
+  border-color: #93c5fd;
+  box-shadow: 0 3px 12px rgb(37 99 235 / 7%);
+}
+
+.howto .faq-summary,
+.howto .faq summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 15px;
+  color: #1e293b;
+  font-weight: 700;
+  line-height: 1.7;
+  cursor: pointer;
+  list-style: none;
+}
+
+.howto .faq-summary::-webkit-details-marker,
+.howto .faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.howto .faq-summary::after,
+.howto .faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--post-primary);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.howto .faq-item[open] > .faq-summary::after,
+.howto .faq details[open] > summary::after {
+  content: "−";
+}
+
+.howto .faq-icon {
+  flex-shrink: 0;
+}
+
+.howto .faq-question {
+  flex: 1;
+}
+
+.howto .faq-answer {
+  padding: 0 16px 16px;
+  color: #475569;
+  border-top: 1px solid #f1f5f9;
+  line-height: 1.85;
+}
+
+.howto .faq-answer p {
+  margin: 12px 0 0;
+}
+
+.howto .faq-answer a {
+  color: var(--post-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* =========================================
+   IMPORTANT NOTICE
+========================================= */
+
+.howto .notice {
+  margin: 22px 0;
+  padding: 16px 18px;
+  color: #92400e;
+  background: var(--post-orange-soft);
+  border: 1px solid #fcd34d;
+  border-left: 5px solid var(--post-orange);
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+.howto .notice p:first-child {
+  margin-top: 0;
+}
+
+.howto .notice p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================
+   RELATED PROMO CARD
+========================================= */
+
+.howto .related-promo-card {
+  margin: 22px 0;
+  border-radius: var(--post-radius);
+}
+
+/* =========================================
+   FOCUS & ACCESSIBILITY
+========================================= */
+
+.howto a:focus-visible,
+.howto summary:focus-visible,
+.howto button:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+.howto .faq summary:focus-visible {
+  border-radius: 8px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .howto {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .howto .section,
+  .howto .faqs {
+    padding: 15px;
+    margin: 17px 0;
+  }
+
+  .howto .scheme-box {
+    padding: 17px 13px;
+  }
+
+  .howto .department-badge {
+    font-size: 12px;
+  }
+
+  .howto #how_to ol > li {
+    padding: 10px 11px 10px 46px;
+  }
+
+  .howto #how_to ol > li::before {
+    left: 8px;
+    width: 27px;
+    height: 27px;
+  }
+
+  .howto .yp-table-wrapper th,
+  .howto .yp-table-wrapper td {
+    padding: 11px 12px;
+  }
+
+  .howto .faq-summary,
+  .howto .faq summary {
+    padding: 13px;
+    gap: 8px;
+  }
+
+  .howto .faq-answer {
+    padding: 0 13px 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .howto .scheme-title {
+    font-size: 19px;
+  }
+
+  .howto .section h3 {
+    font-size: 18px;
+  }
+
+  .howto .faqs > b {
+    font-size: 18px;
+  }
+
+  .topic-style-highlight {
+    padding: 12px 14px;
+  }
+}
