@@ -15,6 +15,3 @@
   {{- end }}
 {{- end }}
 
-{{ if or (eq .Section "schemes") (eq .Section "scheme") (eq .Type "schemes") (eq .Params.listType "schemes") }}
-  <script src="{{ "js/scheme-filter.js" | relURL }}" defer></script>
-{{ end }}
