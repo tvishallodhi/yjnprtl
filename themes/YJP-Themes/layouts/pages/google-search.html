@@ -1,0 +1,319 @@
+
+
+{{ define "main" }}
+<div class="search-page-container">
+     <header class="search-page-header">
+    <h1 class="search-page-title">Search</h1>
+    <div class="search-page-bar">
+      {{ partial "search-box.html" . }}
+    </div>
+    <div id="searchStats" class="search-stats" aria-live="polite" style="display: none;"></div>
+  </header>
+
+<script async src="https://cse.google.com/cse.js?cx=e739d17bbc86c420c">
+</script>
+ 
+<!-- 2-Column Responsive Layout: Left = Results + Recent, Right = Latest Updates -->
+  <div class="search-layout-grid">
+    
+    <!-- LEFT COLUMN: Search Results & Recently Viewed -->
+    <main class="search-main-column">
+      
+      <!-- 1. Search Results Container -->
+      <section class="search-results-section" id="searchResultsSection">
+        
+        <!-- Empty State with Clickable Suggestion Chips -->
+        <div id="searchEmptyPrompt" class="search-empty-prompt">
+          
+          <div class="empty-icon">🔍</div>
+          <h3>Type to search jobs, schemes & articles</h3>
+          <p>Or click one of the popular topics below to search instantly:</p>
+          
+         {{ $pages := where site.RegularPages "Params.RecommendName" "!=" nil }}
+{{ $randomSuggestions := first 20 (shuffle $pages) }}
+
+<!-- Visible Container jisme 6 chips dikhenge -->
+<div class="popular-suggestions" id="popularSuggestions"></div>
+
+<!-- Hidden Data Pool: Hugo se aane wale saare items -->
+<div id="suggestionPool" style="display: none;">
+  {{ range $randomSuggestions }}
+    {{ $name := .Params.RecommendName }}
+    <a href="?q={{ $name | urlquery }}" rel="nofollow" class="suggestion-link">
+      <button type="button" class="suggestion-chip">
+        {{ $name }}
+      </button>
+    </a>
+  {{ end }}
+</div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="searchLoadingIndicator" class="search-loading-state" style="display: none;">
+          <span class="search-spinner" aria-hidden="true"></span> Searching index...
+        </div>
+
+        <!-- Dynamic Results Cards Container -->
+        <div id="searchResultsList" class="search-results-list" role="feed"></div>
+
+        <!-- Load More Button -->
+        <div id="searchLoadMoreWrapper" class="search-load-more-wrapper" style="display: none;">
+          <button type="button" id="searchLoadMoreBtn" class="search-load-more-btn">
+            Load More Results
+          </button>
+        </div>
+      </section>
+
+      <!-- 2. RECENTLY VIEWED (Result Box ke theek niche) -->
+      <section class="search-panel recently-viewed-panel" id="recentlyViewedSection" style="display: none;">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <span class="panel-icon">🕒</span> Recently Viewed
+          </h2>
+          <button type="button" id="clearRecentBtn" class="clear-recent-btn" title="Clear History">Clear All</button>
+        </div>
+        <!-- बिना गिनती के, व्यू आइकन वाली लिस्ट -->
+        <ul id="recentlyViewedList" class="recent-posts-list"></ul>
+      </section>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR: Latest Updates (20 Posts with Trending Badge) -->
+    <aside class="search-sidebar-column">
+      <section class="search-panel latest-posts-panel" aria-labelledby="latestUpdatesHeading">
+        <div class="panel-header">
+          <h2 id="latestUpdatesHeading" class="panel-title">
+            <span class="panel-icon">🔥</span> Latest Updates
+          </h2>
+        </div>
+        <!-- गिनती हटाकर सिर्फ Trending icon दिया गया है -->
+        <ul class="latest-posts-list">
+          {{- $latest := first 20 (where site.RegularPages "Draft" "!=" true).ByDate.Reverse -}}
+          {{- range $latest -}}
+          <li class="latest-post-item">
+            <span class="trending-badge" title="Trending / Latest">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 23c-4.97 0-9-4.03-9-9 0-4.04 2.82-7.5 6.78-8.62.48-.14.94.22.94.72v.22c0 .32-.2.6-.5.71C7.81 7.91 6 10.66 6 14c0 3.31 2.69 6 6 6s6-2.69 6-6c0-1.84-.83-3.49-2.14-4.6-.26-.22-.36-.58-.24-.89.12-.31.42-.51.75-.51h.11c3.19.82 5.52 3.73 5.52 7 0 4.97-4.03 9-9 9zm2.5-12.5c-.83 0-1.5-.67-1.5-1.5 0-.58.33-1.08.81-1.33.39-.2.53-.68.32-1.07-.15-.28-.43-.45-.73-.45-.06 0-.13.01-.19.03C11.58 6.71 10.5 8.23 10.5 10c0 1.93 1.57 3.5 3.5 3.5.94 0 1.8-.38 2.43-1 .24-.24.27-.61.08-.88-.19-.28-.56-.37-.88-.23-.52.23-1.07.11-1.13.11z"/>
+              </svg>
+            </span>
+            <a href="{{ .RelPermalink }}" class="post-link track-post-click" data-title="{{ .Title }}">
+              {{ .Title }}
+            </a>
+          </li>
+          {{- end -}}
+        </ul>
+      </section>
+    </aside>
+
+  </div>
+</div>
+ <div class="gcse-searchresults-only"></div>
+{{ $searchCSS := resources.Get "css/pages/search.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $searchCSS.RelPermalink }}">
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const poolContainer = document.getElementById("suggestionPool");
+  const displayContainer = document.getElementById("popularSuggestions");
+
+  if (!poolContainer || !displayContainer) return;
+
+  const allLinks = Array.from(poolContainer.querySelectorAll(".suggestion-link"));
+  if (allLinks.length === 0) return;
+
+  const MAX_VISIBLE = 6;
+  const FADE_TIME = 400;
+
+  let activeIndices = [];
+  let availableIndices = allLinks.map((_, i) => i);
+  let isHovered = false;
+  let hoverResumeTimer = null;
+
+  // Hover detection: Pure container par cursor aane par pause, hatne ke 5s baad resume
+  displayContainer.addEventListener("mouseenter", () => {
+    isHovered = true;
+    if (hoverResumeTimer) {
+      clearTimeout(hoverResumeTimer);
+      hoverResumeTimer = null;
+    }
+  });
+
+  displayContainer.addEventListener("mouseleave", () => {
+    if (hoverResumeTimer) clearTimeout(hoverResumeTimer);
+    // Cursor hatne ke theek 5 second baad hi delete/hide trigger hone diya jayega
+    hoverResumeTimer = setTimeout(() => {
+      isHovered = false;
+    }, 5000);
+  });
+
+  // Initial 6 items render karein
+  const initialCount = Math.min(MAX_VISIBLE, allLinks.length);
+  for (let i = 0; i < initialCount; i++) {
+    const randPoolIndex = Math.floor(Math.random() * availableIndices.length);
+    const chosenIndex = availableIndices.splice(randPoolIndex, 1)[0];
+
+    activeIndices.push(chosenIndex);
+
+    const node = allLinks[chosenIndex].cloneNode(true);
+    node.dataset.index = chosenIndex;
+    displayContainer.appendChild(node);
+  }
+
+  if (allLinks.length <= MAX_VISIBLE) return;
+
+  function startChipCycle(targetNode, totalDuration = 10000) {
+    if (!targetNode || !targetNode.isConnected) return;
+
+    requestAnimationFrame(() => {
+      targetNode.classList.add("highlight-target");
+    });
+    targetNode.dataset.inCycle = "true";
+
+    const blinkDelay = Math.max(0, totalDuration - 3000);
+
+    // Khatam hone se 3 sec pehle blink activate hoga
+    setTimeout(() => {
+      if (!targetNode.isConnected) return;
+      targetNode.classList.add("blink-target");
+    }, blinkDelay);
+
+    // Duration complete hone par check karega ki hover to nahi hai
+    setTimeout(() => {
+      executeRemoval(targetNode);
+    }, totalDuration);
+  }
+
+  // Agar user hover kiye hue hai ya 5 sec ka pause chal raha hai, to wait karega
+  function executeRemoval(targetNode) {
+    if (!targetNode || !targetNode.isConnected) return;
+
+    if (isHovered) {
+      // Agar cursor abhi bhi upar hai ya 5 sec ka cooldown chal raha hai, har 500ms par re-check karega
+      setTimeout(() => executeRemoval(targetNode), 500);
+      return;
+    }
+
+    const oldPoolIndex = parseInt(targetNode.dataset.index, 10);
+    targetNode.classList.remove("highlight-target", "blink-target");
+    targetNode.classList.add("fade-out");
+
+    setTimeout(() => {
+      availableIndices.push(oldPoolIndex);
+      activeIndices = activeIndices.filter(idx => idx !== oldPoolIndex);
+
+      const newPoolChoice = Math.floor(Math.random() * availableIndices.length);
+      const newIndex = availableIndices.splice(newPoolChoice, 1)[0];
+      activeIndices.push(newIndex);
+
+      const newNode = allLinks[newIndex].cloneNode(true);
+      newNode.dataset.index = newIndex;
+      newNode.classList.add("fade-in-start");
+
+      displayContainer.replaceChild(newNode, targetNode);
+
+      requestAnimationFrame(() => {
+        newNode.classList.remove("fade-in-start");
+      });
+    }, FADE_TIME);
+  }
+
+  function getUnpickedNode() {
+    const candidates = Array.from(displayContainer.children).filter(
+      node => !node.dataset.inCycle
+    );
+    if (candidates.length === 0) return null;
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  }
+
+  // --- Staggered Pipeline Initialization ---
+  // Chip 1: 5 second me replacement stage par pahuchega
+  const firstNode = getUnpickedNode();
+  if (firstNode) {
+    startChipCycle(firstNode, 5000);
+  }
+
+  // Chip 2: 10 second me replacement stage par pahuchega
+  const secondNode = getUnpickedNode();
+  if (secondNode) {
+    startChipCycle(secondNode, 10000);
+  }
+
+  // Har 5 second me naya chip pipeline me add hoga (agar hover na ho to)
+  setInterval(() => {
+    if (isHovered) return;
+    const nextNode = getUnpickedNode();
+    if (nextNode) {
+      startChipCycle(nextNode, 10000);
+    }
+  }, 5000);
+});
+</script>
+
+<style>
+.popular-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.popular-suggestions .suggestion-link {
+  display: inline-block;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Base Chip styling: Smooth transition pehle se active rahegi */
+.popular-suggestions .suggestion-chip {
+  cursor: pointer;
+  transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+              outline 0.3s ease,
+              transform 0.3s ease;
+}
+
+/* 1. Slow & Smooth Yellow Highlighter Fade-in */
+.popular-suggestions .suggestion-link.highlight-target .suggestion-chip {
+  background-color: #fef08a2f !important;
+  color: #854d0e !important;
+  box-shadow: 0 0 6px rgba(250, 204, 21, 0.178);
+}
+
+/* 2. Last 3 seconds Border Blink / Pulse Animation */
+.popular-suggestions .suggestion-link.blink-target .suggestion-chip {
+  animation: chipBorderBlink 0.8s infinite alternate ease-in-out;
+}
+
+/* Hover ke dauran blink pause ho jayega taaki click karne me dikkat na ho */
+.popular-suggestions .suggestion-link:hover .suggestion-chip {
+  animation-play-state: paused !important;
+}
+
+@keyframes chipBorderBlink {
+  0% {
+    outline: 2px solid rgba(234, 179, 8, 0.2);
+    outline-offset: 1px;
+    transform: scale(1);
+  }
+  100% {
+    outline: 2px solid rgba(202, 138, 4, 1);
+    outline-offset: 3px;
+    transform: scale(1.04);
+  }
+}
+
+/* 3. Hide & Replace Transitions */
+.popular-suggestions .suggestion-link.fade-out {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.popular-suggestions .suggestion-link.fade-in-start {
+  opacity: 0;
+  transform: scale(0.85);
+}
+</style>
+{{ end }}
