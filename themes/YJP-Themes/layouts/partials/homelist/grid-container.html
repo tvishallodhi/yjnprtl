@@ -49,27 +49,20 @@
       <a href="/education/" class="more-link" title="View all resources available for students">More student resources</a>
     </div>
   </div>
- <div class="card">
-    <span id="Admitcard"> </span>
-    <div class="card-header" >Admit Card</div>
+
+
+   <div class="card">
+    <span id="Scholarship"> </span>
+    <div class="card-header" >Scholarship</div>
     <div class="card-content">
-      {{ partial "homelist/admitcard.html" . }}
+      {{ partial "homelist/scholarship.html" . }}
     </div>
     <div class="card-footer">
-      <a href="/admitcard/"  class="more-link" title="View and download all available admit cards">more  admit cards</a>
+      <a href="/scholarships/"  class="more-link" title="View all available scholarships Updates">more scholarships</a>
     </div>
   </div>
 
-    <div class="card">
-      <span id="Results"> </span>
-    <div class="card-header" >Results</div>
-    <div class="card-content">
-      {{ partial "homelist/results.html" . }}
-    </div>
-    <div class="card-footer">
-      <a href="/results/" class="more-link" title="View all latest exam results">View more results</a>
-    </div>
-  </div>
+   
 
 
 
@@ -84,7 +77,10 @@
     <a href="/imp-links/" class="more-link" title="View  more useful Link Update">View More Useful link</a>
   </div>
 
-     <span  id="Upcoming"> </span>
+  </div>
+
+  <div class="card">
+   <span  id="Upcoming"> </span>
     <div class="card-header"> Upcoming </div>
     <div class="card-content">
       {{ partial "homelist/upcoming.html" . }}
@@ -92,7 +88,38 @@
     <div class="card-footer">
       <a href="/upcoming/" class="more-link" title="View all upcoming government schemes/jobs">More Upcoming Update</a>
     </div> 
-
   </div>
-<!-- third Row -->
+ <div class="card">
+    <span id="Admitcard"> </span>
+    <div class="card-header" >Admit Card</div>
+    <div class="card-content">
+      {{ partial "homelist/admitcard.html" . }}
+    </div>
+    <div class="card-footer">
+      <a href="/admitcard/"  class="more-link" title="View and download all available admit cards">more  admit cards</a>
+    </div>
+  </div>
+   <div class="card">
+      <span id="Results"> </span>
+    <div class="card-header" >Results</div>
+    <div class="card-content">
+      {{ partial "homelist/results.html" . }}
+    </div>
+    <div class="card-footer">
+      <a href="/results/" class="more-link" title="View all latest exam results">View more results</a>
+    </div>
+  </div>
+<!-- pdf form-->
+   <div class="card">
+   <span  id="pdfForms"> </span>
+    <div class="card-header">PDF Forms </div>
+    <div class="card-content">
+      {{ partial "homelist/pdf-forms.html" . }}
+    </div>
+    <div class="card-footer">
+      <a href="/pdf-forms/" class="more-link" title="View all pdf Updates">More Pdf Forms</a>
+    </div> 
+  </div>
+
+
 </div>

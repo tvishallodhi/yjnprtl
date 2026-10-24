@@ -163,6 +163,59 @@
 }
 
 
+
+/* ============================================================
+                   NAVIGATION DRAWAL
+   ============================================================ */
+.drawer-item-label-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.drawer-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Arrow button and link styling */
+.drawer-expand-btn,
+.drawer-expand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Arrow indicator base */
+.drawer-expand-indicator {
+  display: inline-block;
+  pointer-events: none;
+  transform-origin: center;
+  transition: transform 0.25s ease-in-out;
+}
+
+/* Active section me arrow 90deg niche rotate hoga */
+.drawer-nav-item.is-active-node:not(.is-collapsed-node) .drawer-expand-btn .drawer-expand-indicator {
+  transform: rotate(90deg);
+}
+
+/* Collapsed hone par wapas 0deg (samne) ho jayega */
+.drawer-nav-item.is-collapsed-node .drawer-expand-btn .drawer-expand-indicator,
+.drawer-nav-item:not(.is-active-node) .drawer-expand-indicator {
+  transform: rotate(0deg);
+}
+
 @media (max-width: 992px) {
 
     .nav-link {
