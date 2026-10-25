@@ -199,7 +199,7 @@
     width: 100%;
 
     color: var(--text-main);
-
+    
     text-decoration: none;
 
     font-size: 0.95rem;
@@ -228,7 +228,7 @@
     padding: 8px 14px;
 
     color: var(--text-muted);
-
+    
     display: flex;
 
     align-items: center;
@@ -530,7 +530,52 @@ body.sidebar-is-minimized .sidebar-social-link {
     height: 34px;
 }
 
+/* Dono buttons/links ke liye common base */
+.sidebar-expand-btn,
+.sidebar-expand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  color: inherit;
+}
+/* ============================================================
+    Base indicator style
+   ============================================================ */
+/* Normal state: Arrow indicator animation */
+.expand-indicator {
+  display: inline-block;
+  pointer-events: none;
+  transform-origin: center;
+  transition: transform 0.25s ease-in-out;
+}
 
+/* Active section open hone par arrow niche ghume (90deg) */
+.sidebar-node.is-active-node:not(.is-collapsed-node) .sidebar-expand-btn .expand-indicator {
+  transform: rotate(90deg);
+  
+}
+
+/* Active section band hone par arrow samne rahe (0deg) */
+.sidebar-node.is-collapsed-node .sidebar-expand-btn .expand-indicator,
+.sidebar-node:not(.is-active-node) .expand-indicator {
+  transform: rotate(0deg);
+}
+
+/* Jab desktop sidebar minimize ho, tab > icon poori tarah hide ho jaye */
+body.sidebar-is-minimized .sidebar-expand-btn,
+body.sidebar-is-minimized .sidebar-expand-link {
+  display: none !important;
+}
+
+/* Optional: Minimize hone par submenu list bhi band rahe */
+body.sidebar-is-minimized .sidebar-sub-tree {
+  display: none !important;
+}
 /* ============================================================
    MOBILE
    ============================================================ */

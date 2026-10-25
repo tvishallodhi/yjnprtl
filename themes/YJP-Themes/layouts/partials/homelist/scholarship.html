@@ -1,0 +1,18 @@
+{{ $scholarship := .Site.GetPage "section" "scholarship" }}
+
+{{ range $scholarship.RegularPages }}
+<li>
+  <a href="{{ .RelPermalink }}" target="_blank">
+    {{ .Params.RecommendName}}
+  </a>
+
+  {{ if eq (.Date.Format "2006-01-02") (now.Format "2006-01-02") }}
+    <a href="{{ .RelPermalink }}" target="_blank">
+      <img src="/gif/new.gif"
+           alt="New"
+           style="width: 40px; vertical-align: middle;">
+    </a>
+  {{ end }}
+</li>
+<hr>
+{{ end }}

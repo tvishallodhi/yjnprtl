@@ -1,6 +1,6 @@
-<aside class="left-sidebar" id="desktopSidebar" aria-label="Sections Navigation">
+<aside class="left-sidebar" id="desktopSidebar" aria-label="Sections Navigation" data-nosnippet>
   <div class="sidebar-header">
-    <span class="sidebar-title">Sections</span>
+    <span class="sidebar-title">Updates</span>
 
     <button
       type="button"
@@ -17,69 +17,67 @@
 
       {{ range .Site.Sections }}
 
-        {{/* 1. Safe section name */}}
+        {{/* Section Name aur Icon */}}
         {{ $name := .Params.name | default .Title }}
         {{ with .File }}
           {{ if not $name }}
             {{ $name = .ContentBaseName }}
           {{ end }}
         {{ end }}
-
-        {{/* 2. Icon */}}
         {{ $icon := .Params.icon | default $.Site.Params.defaultSidebarIcon }}
 
-        {{/* 3. ROBUST ACTIVE CHECK (URL-Independent) */}}
+        {{/* Active Section Check */}}
         {{ $isSectionActive := false }}
-        
-        {{/* Case A: Current Page usi section ka page/post hai */}}
         {{ if and $.Section (eq $.Section .Section) }}
           {{ $isSectionActive = true }}
-        {{/* Case B: Current Page is section ka child/descendant hai */}}
         {{ else if .IsAncestor $ }}
           {{ $isSectionActive = true }}
-        {{/* Case C: Directly usi Section Page par hai */}}
         {{ else if eq . $ }}
           {{ $isSectionActive = true }}
-        {{/* Case D: Custom Front-matter 'section' match (Agar URL poori tarah alag ho) */}}
         {{ else if and $.Params.section (eq (lower $.Params.section) (lower .Section)) }}
           {{ $isSectionActive = true }}
-        {{/* Case E: Fallback URL match */}}
         {{ else if in $.RelPermalink .RelPermalink }}
           {{ $isSectionActive = true }}
         {{ end }}
 
-        <li
-          class="sidebar-node{{ if $isSectionActive }} is-active-node{{ end }}"
-          data-lang="{{ .Params.lang | default "" }}">
+        <li class="sidebar-node{{ if $isSectionActive }} is-active-node{{ end }}"
+            data-lang="{{ .Params.lang | default "" }}">
 
           <div class="sidebar-node-label-wrap">
-
-            <a
-              href="{{ .RelPermalink }}"
-              class="sidebar-node-link{{ if eq . $ }} is-current-page{{ end }}">
-
+            {{/* Main Section Link */}}
+            <a href="{{ .RelPermalink }}" class="sidebar-node-link{{ if eq . $ }} is-current-page{{ end }}">
               <span class="sidebar-icon">{{ $icon }}</span>
               <span class="sidebar-text">{{ $name }}</span>
-
             </a>
 
+            {{/* Arrow Action */}}
             {{ if .Pages }}
-              <button
-                type="button"
-                class="sidebar-expand-btn"
-                aria-expanded="{{ if $isSectionActive }}true{{ else }}false{{ end }}"
-                aria-label="Expand {{ $name }} submenu">
-                <span class="expand-indicator">›</span>
-              </button>
+              {{ if $isSectionActive }}
+                {{/* Active Section: Toggle Button (Isme sirf JS chale) */}}
+                <button
+                  type="button"
+                  class="sidebar-expand-btn"
+                  aria-expanded="true"
+                  aria-label="Toggle {{ $name }} submenu">
+                  <span class="expand-indicator">›</span>
+                </button>
+              {{ else }}
+                {{/* Inactive Section: Direct Link (Is par click karne se URL khulega) */}}
+                <a
+                  href="{{ .RelPermalink }}"
+                  class="sidebar-expand-link"
+                  aria-label="Open {{ $name }} Section">
+                  <span class="expand-indicator">›</span>
+                </a>
+              {{ end }}
             {{ end }}
-
           </div>
 
-          {{ if .Pages }}
-            <ul class="sidebar-sub-tree{{ if not $isSectionActive }} is-collapsed{{ end }}">
+          {{/* Sirf Active Section ke andar hi child links render honge */}}
+          {{ if and $isSectionActive .Pages }}
+            <ul class="sidebar-sub-tree">
 
               {{ range .Pages }}
-
                 {{ $subName := .Params.name | default .Title }}
                 {{ with .File }}
                   {{ if not $subName }}
@@ -87,64 +85,16 @@
                   {{ end }}
                 {{ end }}
 
-                {{/* Sub-page exact match check (Direct Page Reference) */}}
                 {{ $isSubCurrent := eq . $ }}
 
-                <li
-                  class="sidebar-sub-node"
-                  data-lang="{{ .Params.lang | default "" }}">
-
-                  <a
-                    href="{{ .RelPermalink }}"
-                    class="sidebar-sub-link{{ if $isSubCurrent }} is-current-page{{ end }}">
-
-                    <span class="sidebar-sub-text">
-                      {{ $subName }}
-                    </span>
-
+                <li class="sidebar-sub-node" data-lang="{{ .Params.lang | default "" }}">
+                  <a href="{{ .RelPermalink }}" class="sidebar-sub-link{{ if $isSubCurrent }} is-current-page{{ end }}">
+                    <span class="sidebar-sub-text">{{ $subName }}</span>
                   </a>
-
                 </li>
-
               {{ end }}
 
             </ul>
-
-            <!-- Hover floating overlay panel for minimized mode -->
-            <div
-              class="sidebar-hover-panel"
-              role="region"
-              aria-label="{{ $name }}">
-
-              <div class="hover-panel-title">
-                {{ $icon }} {{ $name }}
-              </div>
-
-              <ul class="hover-panel-links">
-                <li>
-                  <a href="{{ .RelPermalink }}">
-                    {{ $name }} Main
-                  </a>
-                </li>
-
-                {{ range .Pages }}
-                  {{ $subName := .Params.name | default .Title }}
-                  {{ with .File }}
-                    {{ if not $subName }}
-                      {{ $subName = .ContentBaseName }}
-                    {{ end }}
-                  {{ end }}
-
-                  <li data-lang="{{ .Params.lang | default "" }}">
-                    <a href="{{ .RelPermalink }}">
-                      {{ $subName }}
-                    </a>
-                  </li>
-                {{ end }}
-              </ul>
-
-            </div>
-
           {{ end }}
 
         </li>
@@ -154,29 +104,14 @@
     </ul>
   </nav>
 
-  <!-- ============================================================
-       FIXED SOCIAL LINKS
-       ============================================================ -->
- <div class="sidebar-social-bar" aria-label="Social Media Links">
-
-  {{ $socialIDs := slice "whatsapp" "telegram" "facebook" "instagram" "youtube" }}
-
-  {{ range $socialIDs }}
-    {{ with index (where $.Site.Data.social.social "id" .) 0 }}
-
-      <a href="{{ .link }}"
-         class="sidebar-social-link {{ .id }}"
-         target="_blank"
-         rel="noopener noreferrer"
-         aria-label="{{ .name }}"
-         title="{{ .name }}">
-
-        <img src="{{ .icon }}" alt="" width="20" height="20" loading="lazy">
-
-      </a>
-
+  <div class="sidebar-social-bar" aria-label="Social Media Links">
+    {{ $socialIDs := slice "whatsapp" "telegram" "facebook" "instagram" "youtube" }}
+    {{ range $socialIDs }}
+      {{ with index (where $.Site.Data.social.social "id" .) 0 }}
+        <a href="{{ .link }}" class="sidebar-social-link {{ .id }}" target="_blank" rel="noopener noreferrer" aria-label="{{ .name }}" title="{{ .name }}">
+          <img src="{{ .icon }}" alt="" width="20" height="20" loading="lazy">
+        </a>
+      {{ end }}
     {{ end }}
-  {{ end }}
-
-</div>
+  </div>
 </aside>

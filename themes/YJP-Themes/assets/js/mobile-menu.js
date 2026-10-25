@@ -39,3 +39,24 @@
     });
   }
 })();
+
+  document.addEventListener('DOMContentLoaded', () => {
+  // Mobile drawer me active section toggle handler
+  const drawerExpandButtons = document.querySelectorAll('button.drawer-expand-btn');
+
+  drawerExpandButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const item = btn.closest('.drawer-nav-item');
+      const subList = item.querySelector('.drawer-sub-list');
+
+      if (subList) {
+        const isCollapsed = item.classList.toggle('is-collapsed-node');
+        subList.style.display = isCollapsed ? 'none' : '';
+        btn.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+      }
+    });
+  });
+});
