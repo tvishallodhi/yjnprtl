@@ -58,6 +58,13 @@ url = "/important-updates/"
 weight = 80
 
 [[header]]
+identifier = "PDF"
+name = "PDF Forms"
+icon = "📃"
+url = "/pdf-forms/"
+weight = 60
+
+[[header]]
 identifier = "search"
 name = "Search"
 icon = "🔎"

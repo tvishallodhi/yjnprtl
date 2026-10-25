@@ -1,0 +1,30 @@
+{{ define "main" }}
+<h2 class="list-title" style="text-align:center;">{{.Title }}</h2>
+
+    <table class="post-table" id="formsTable">
+    <thead>
+        <tr>
+            <th>  PDF Form Update</th> 
+            <th> Download Links</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {{ range  (where .Site.RegularPages ".Params.pdfForm" "yes") }}
+        <tr>
+
+            <td >📃
+                {{ if .Params.pdfName }}
+                    <a href="{{ .RelPermalink }}" target="_blank">{{ .Params.pdfName }}</a>
+                {{ else }}
+                    <a href="{{ .RelPermalink }}" target="_blank">{{ .Title }}</a>
+                {{ end }}
+            </td>
+            <td>⬇️ <a href="{{ .RelPermalink }}/#links" target="_blank" title="Quick Download Link for {{ if .Params.pdfName }}{{ .Params.pdfName }} {{ else }}{{ .Title }}{{ end }}">Download Now</a></td>
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+
+
+
+{{ end }}

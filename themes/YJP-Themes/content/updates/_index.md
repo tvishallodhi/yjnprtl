@@ -1,7 +1,7 @@
 ---
 title: "Quick Updates"
 icon: '📢'
-type: 'pages'
-layout: 'search'
+type: 'lists'
+layout: 'all-updates'
 url: "latest-update"
 ---

@@ -1,0 +1,66 @@
+{{ define "main" }}
+
+<h2 class="list-title" style="text-align:center;">{{ .Title }}</h2>
+
+<table class="post-table" id="dataTable">
+    <thead>
+        <tr>
+            <th>Section</th>
+            <th>Post Date</th>
+            <th>Important Links</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{/* 1. 'pages' को छोड़कर बाकी मुख्य सेक्शन्स इकट्ठा करें */}}
+        {{ $sectionsData := slice }}
+        {{ range where .Site.Sections "Section" "!=" "pages" }}
+            {{/* सेक्शन के अंतर्गत आने वाली सभी रेगुलर पेजों को Lastmod से सॉर्ट करें */}}
+            {{ $pages := sort .RegularPagesRecursive ".Lastmod" "desc" }}
+
+            {{ if gt (len $pages) 0 }}
+                {{/* इस सेक्शन की सबसे हालिया अपडेट डेट (पहली पोस्ट से) */}}
+                {{ $latestMod := (index $pages 0).Lastmod }}
+                {{ $sectionsData = $sectionsData | append (dict "section" . "pages" $pages "latestMod" $latestMod) }}
+            {{ end }}
+        {{ end }}
+
+        {{/* 2. सेक्शन्स को latestMod के आधार पर Descending सॉर्ट करें (ताकि लेटेस्ट अपडेट वाला सेक्शन सबसे ऊपर आए) */}}
+        {{ $sortedSections := sort $sectionsData "latestMod" "desc" }}
+
+        {{/* 3. सॉर्ट किए गए सेक्शन्स और उनकी पोस्ट्स को रेंडर करें */}}
+        {{ range $sortedSections }}
+            {{ $sec := .section }}
+            {{ $pages := .pages }}
+            {{ $rowCount := len $pages }}
+
+            {{ range $index, $page := $pages }}
+            <tr>
+                {{/* पहली रो पर पूरे सेक्शन के लिए rowspan लगाएं */}}
+                {{ if eq $index 0 }}
+                <td rowspan="{{ $rowCount }}" style="vertical-align: top; width:150px;">
+                    <a href="{{ $sec.RelPermalink }}" class="section-link">
+                        {{ with $sec.Params.icon }}
+                            <span class="section-icon">{{ . }}</span>
+                        {{ end }}
+                        <span class="section-name">
+                            {{ $sec.Params.name | default $sec.Title }}
+                        </span>
+                    </a>
+                </td>
+                {{ end }}
+
+                <td>{{ $page.Date.Format "02/01/2006" }}</td>
+
+                <td>
+                    <a href="{{ $page.RelPermalink }}" target="_blank">
+                        {{ $page.Title }}
+                    </a>
+                </td>
+            </tr>
+            {{ end }}
+        {{ end }}
+    </tbody>
+</table>
+
+{{ end }}
