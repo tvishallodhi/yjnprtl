@@ -47,8 +47,14 @@ enableRobotsTXT = true
   isPlainText = false
   notAlternative = true
 
+[outputFormats.LatestJobsJSON]
+mediaType = "application/json"
+baseName = "latest-jobs"
+isPlainText = true
+notAlternative = true
+
 [outputs]
-   home = ["HTML", "RSS", "SitemapIndex", "SitemapPages", "SitemapJobs", "SitemapYojana", "SitemapEducation"]
+   home = ["HTML", "RSS", "SitemapIndex", "SitemapPages", "SitemapJobs", "SitemapYojana", "SitemapEducation" , "LatestJobsJSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
@@ -57,6 +63,10 @@ enableRobotsTXT = true
 [taxonomies]
   category = "categories"
   tag = "tags"
+
+
+
+
 
 [params]
   date = 2025-07-03T10:02:12+05:30

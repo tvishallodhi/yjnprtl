@@ -20,8 +20,9 @@
 <meta property="og:title" content="{{ with .Params.seo_title }}{{ . }}{{ else }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}{{ end }}">
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-
-
+{{/* Adsense Ads */}}
+ {{ partial "ads/adsense/anonymous.html" . }}
+<meta name="google-adsense-account" content="ca-pub-3871589544605216">
 
 
 {{/* Twitter Card */}}
@@ -138,5 +139,3 @@
     });
   });
 </script>
-
-<meta name="google-adsense-account" content="ca-pub-3871589544605216">
