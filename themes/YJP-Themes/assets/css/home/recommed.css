@@ -1,93 +1,274 @@
-/* ==========================================================================
-   Desktop Grid (4x3 Layout: 4 Columns)
-   ========================================================================== */
-.post-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Desktop par exact 4 columns */
-  gap: 12px;
-  margin: 1rem 0;
-}
-
-.post-link {
-  text-decoration: none;
-  display: block;
-}
-
-.post-box {
-  position: relative;
-  padding: 10px 12px;
-  border-radius: 8px;
-  height: 64px; /* Fixed equal height sabhi cards ke liye */
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  color: #111827;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.post-box:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
-}
-
-/* Title Truncation (Max 2 Lines, extra text hides with ...) */
-.post-title {
-  font-size: 0.90rem;
-  font-weight: 600;
-  line-height: 1.35;
-  flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-}
-
-.new-icon {
-  width: 26px;
-  height: auto;
-  vertical-align: middle;
-  flex-shrink: 0;
-}
-
-.pin-icon {
-  font-size: 0.85rem;
-  flex-shrink: 0;
-}
-
-/* ==========================================================================
-   Mobile Responsive (Single Row, Horizontal Scroll)
-   ========================================================================== */
-@media (max-width: 768px) {
-  .post-grid {
+/* =========================================
+     CARD COMPONENT INTEGRATED WITH THEME ENGINE
+     ========================================= */
+  .yp-cards-wrapper {
+    width: 100%;
+    padding: 16px 0;
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 8px;
-    gap: 10px;
+    justify-content: center;
   }
 
-  .post-grid::-webkit-scrollbar {
-    height: 4px;
-  }
-  
-  .post-grid::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
+  /* Desktop: 4 Columns x 3 Rows */
+  .yp-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 1380px;
+    width: 100%;
   }
 
-  /* Cards ki width kam ki gayi hai (Pehele: 75% aur 240px) */
-  .post-link {
-    flex: 0 0 58%; /* Screen par ek pura card aur agle card ka lagbhag aadha hissa dikhega */
-    max-width: 190px; /* Card ki maximum width ko compact rakha gaya hai */
-    scroll-snap-align: start;
+  /* Card Base (Uses --bg-surface & --text-dark from your :root / [data-theme="dark"]) */
+  .yp-update-card {
+    --yp-radius: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    background: linear-gradient(180deg, var(--bg-surface, #ffffff) 62%, var(--tint-bottom) 100%);
+    border-radius: var(--yp-radius);
+    border: 1.5px solid var(--card-border);
+    box-shadow: var(--box-shadow, 0 4px 14px rgba(0, 0, 0, 0.08)), 0 4px 12px -4px var(--shadow-color);
+    padding: 11px 11px 16px 15px;
+    min-height: 82px;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.22s ease;
   }
-}
+
+  .yp-update-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--c-main);
+    box-shadow: 0 10px 22px -5px var(--shadow-color), var(--box-shadow, 0 4px 14px rgba(0, 0, 0, 0.12));
+  }
+
+  .yp-update-card:focus-visible {
+    outline: var(--focus-ring, 2px solid #0b57d0);
+    outline-offset: 2px;
+  }
+
+  /* Left Curved Colored Strip */
+  .yp-update-card::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    bottom: 4px;
+    left: -1px;
+    width: 20px;
+    background: linear-gradient(180deg, var(--c-main) 0%, var(--c-mid) 65%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 42px at 46px 46%, transparent 39px, #000 40px);
+    mask-image: radial-gradient(circle 42px at 46px 46%, transparent 39px, #000 40px);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Bottom Curved Gradient Wave (Uses CSS Variables for instant Dark Mode switch) */
+  .yp-bottom-wave {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 14px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Top-Left Diagonal NEW Ribbon */
+  .yp-ribbon-new {
+    position: absolute;
+    top: 9px;
+    left: -27px;
+    width: 88px;
+    background: linear-gradient(135deg, var(--color-danger, #dc2626) 0%, #991b1b 100%);
+    color: #ffffff;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 3px 0;
+    transform: rotate(-42deg);
+    box-shadow: 0 2px 5px rgba(220, 38, 38, 0.4);
+    z-index: 4;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  /* Top-Right Red Push-Pin */
+  .yp-pin-mark {
+    position: absolute;
+    top: 5px;
+    right: 17px;
+    width: 15px;
+    height: 15px;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.35));
+  }
+
+  /* Inner Content */
+  .yp-card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 9px;
+  }
+
+  /* Left Circular Icon */
+  .yp-icon-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--icon-bg);
+    color: var(--c-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid var(--card-border);
+  }
+
+  .yp-svg-mask {
+    width: 22px;
+    height: 22px;
+    background-color: var(--c-main);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    display: block;
+  }
+
+  /* Title Typography (Linked to --text-dark) */
+  .yp-card-title {
+    flex: 1;
+    color: var(--text-dark, #0f172a);
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: -0.2px;
+    padding: 2px 4px;
+    word-wrap: break-word;
+    transition: color 0.2s ease;
+  }
+
+  /* Right Circular Arrow */
+  .yp-arrow-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-mid) 0%, var(--c-main) 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+    box-shadow: 0 3px 7px -2px var(--shadow-color);
+    transition: transform 0.2s ease;
+  }
+
+  .yp-update-card:hover .yp-arrow-circle {
+    transform: translateX(2.5px);
+  }
+
+  .yp-arrow-circle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* =========================================
+     LIGHT MODE INDIVIDUAL CARD PALETTES
+     ========================================= */
+  .c-pink       { --c-main: #E6005C; --c-mid: #FF2E7E; --wave-start: #FFD1E3; --icon-bg: #FFE8F1; --tint-bottom: #FFF5F9; --card-border: rgba(230, 0, 92, 0.22);   --shadow-color: rgba(230, 0, 92, 0.20); }
+  .c-royal-blue { --c-main: #0052D4; --c-mid: #1D75FF; --wave-start: #C7DFFF; --icon-bg: #E5F0FF; --tint-bottom: #F4F8FF; --card-border: rgba(0, 82, 212, 0.22);   --shadow-color: rgba(0, 82, 212, 0.20); }
+  .c-purple     { --c-main: #6B00D7; --c-mid: #8E2DE2; --wave-start: #E4CFFF; --icon-bg: #F2E7FF; --tint-bottom: #F9F5FF; --card-border: rgba(107, 0, 215, 0.22); --shadow-color: rgba(107, 0, 215, 0.20); }
+  .c-green      { --c-main: #15803d; --c-mid: #22c55e; --wave-start: #C8F7CE; --icon-bg: #E4FCE7; --tint-bottom: #F4FDF5; --card-border: rgba(21, 128, 61, 0.22);  --shadow-color: rgba(21, 128, 61, 0.20); }
+  .c-orange     { --c-main: #F25C05; --c-mid: #FF832B; --wave-start: #FFDCC2; --icon-bg: #FFF0E3; --tint-bottom: #FFF8F2; --card-border: rgba(242, 92, 5, 0.22);   --shadow-color: rgba(242, 92, 5, 0.20); }
+  .c-cyan       { --c-main: #0099D6; --c-mid: #1CC5FF; --wave-start: #C2EFFF; --icon-bg: #E3F8FF; --tint-bottom: #F3FCFF; --card-border: rgba(0, 153, 214, 0.22); --shadow-color: rgba(0, 153, 214, 0.20); }
+  .c-sky-blue   { --c-main: #2563eb; --c-mid: #3b82f6; --wave-start: #C7E4FF; --icon-bg: #E5F2FF; --tint-bottom: #F4F9FF; --card-border: rgba(37, 99, 235, 0.22);  --shadow-color: rgba(37, 99, 235, 0.20); }
+  .c-emerald    { --c-main: #0FA62A; --c-mid: #28CC44; --wave-start: #C4F5CE; --icon-bg: #E2FBE7; --tint-bottom: #F3FDF5; --card-border: rgba(15, 166, 42, 0.22);  --shadow-color: rgba(15, 166, 42, 0.20); }
+  .c-violet     { --c-main: #7C3AED; --c-mid: #9B30E8; --wave-start: #E7CEFF; --icon-bg: #F4E8FF; --tint-bottom: #FAF5FF; --card-border: rgba(124, 58, 237, 0.22); --shadow-color: rgba(124, 58, 237, 0.20); }
+  .c-magenta    { --c-main: #D9048E; --c-mid: #F725A8; --wave-start: #FFCEEC; --icon-bg: #FFE8F6; --tint-bottom: #FFF5FB; --card-border: rgba(217, 4, 142, 0.22); --shadow-color: rgba(217, 4, 142, 0.20); }
+  .c-amber      { --c-main: #d97706; --c-mid: #f59e0b; --wave-start: #FFF0AD; --icon-bg: #FFF7D6; --tint-bottom: #FFFDF2; --card-border: rgba(217, 119, 6, 0.24);  --shadow-color: rgba(217, 119, 6, 0.20); }
+  .c-red-pink   { --c-main: #dc2626; --c-mid: #f43f5e; --wave-start: #FFD1DA; --icon-bg: #FFE8ED; --tint-bottom: #FFF5F7; --card-border: rgba(220, 38, 38, 0.22);  --shadow-color: rgba(220, 38, 38, 0.20); }
+
+  /* =========================================
+     DARK MODE ([data-theme="dark"]) OVERRIDES
+     ========================================= */
+  [data-theme="dark"] .c-pink       { --c-main: #fb7185; --c-mid: #e11d48; --wave-start: rgba(225, 29, 72, 0.22);  --icon-bg: rgba(225, 29, 72, 0.16);  --tint-bottom: #2b1d23; --card-border: rgba(251, 113, 133, 0.28); --shadow-color: rgba(225, 29, 72, 0.28); }
+  [data-theme="dark"] .c-royal-blue { --c-main: #60a5fa; --c-mid: #2563eb; --wave-start: rgba(37, 99, 235, 0.22);  --icon-bg: rgba(37, 99, 235, 0.16);  --tint-bottom: #1c2433; --card-border: rgba(96, 165, 250, 0.28);  --shadow-color: rgba(37, 99, 235, 0.28); }
+  [data-theme="dark"] .c-purple     { --c-main: #c084fc; --c-mid: #7c3aed; --wave-start: rgba(124, 58, 237, 0.22); --icon-bg: rgba(124, 58, 237, 0.16); --tint-bottom: #251e32; --card-border: rgba(192, 132, 252, 0.28); --shadow-color: rgba(124, 58, 237, 0.28); }
+  [data-theme="dark"] .c-green      { --c-main: #4ade80; --c-mid: #16a34a; --wave-start: rgba(22, 163, 74, 0.22);  --icon-bg: rgba(22, 163, 74, 0.16);  --tint-bottom: #1b2b22; --card-border: rgba(74, 222, 128, 0.28);  --shadow-color: rgba(22, 163, 74, 0.28); }
+  [data-theme="dark"] .c-orange     { --c-main: #fb923c; --c-mid: #ea580c; --wave-start: rgba(234, 88, 12, 0.22);  --icon-bg: rgba(234, 88, 12, 0.16);  --tint-bottom: #2d221b; --card-border: rgba(251, 146, 60, 0.28);  --shadow-color: rgba(234, 88, 12, 0.28); }
+  [data-theme="dark"] .c-cyan       { --c-main: #22d3ee; --c-mid: #0891b2; --wave-start: rgba(8, 145, 178, 0.22);  --icon-bg: rgba(8, 145, 178, 0.16);  --tint-bottom: #1a2930; --card-border: rgba(34, 211, 238, 0.28);  --shadow-color: rgba(8, 145, 178, 0.28); }
+  [data-theme="dark"] .c-sky-blue   { --c-main: #38bdf8; --c-mid: #0284c7; --wave-start: rgba(2, 132, 199, 0.22);  --icon-bg: rgba(2, 132, 199, 0.16);  --tint-bottom: #1b2631; --card-border: rgba(56, 189, 248, 0.28);  --shadow-color: rgba(2, 132, 199, 0.28); }
+  [data-theme="dark"] .c-emerald    { --c-main: #34d399; --c-mid: #059669; --wave-start: rgba(5, 150, 105, 0.22);  --icon-bg: rgba(5, 150, 105, 0.16);  --tint-bottom: #1a2b25; --card-border: rgba(52, 211, 153, 0.28);  --shadow-color: rgba(5, 150, 105, 0.28); }
+  [data-theme="dark"] .c-violet     { --c-main: #a78bfa; --c-mid: #6d28d9; --wave-start: rgba(109, 40, 217, 0.22); --icon-bg: rgba(109, 40, 217, 0.16); --tint-bottom: #231e31; --card-border: rgba(167, 139, 250, 0.28); --shadow-color: rgba(109, 40, 217, 0.28); }
+  [data-theme="dark"] .c-magenta    { --c-main: #f472b6; --c-mid: #db2777; --wave-start: rgba(219, 39, 119, 0.22); --icon-bg: rgba(219, 39, 119, 0.16); --tint-bottom: #2c1d27; --card-border: rgba(244, 114, 182, 0.28); --shadow-color: rgba(219, 39, 119, 0.28); }
+  [data-theme="dark"] .c-amber      { --c-main: #fbbf24; --c-mid: #d97706; --wave-start: rgba(217, 119, 6, 0.22);  --icon-bg: rgba(217, 119, 6, 0.16);  --tint-bottom: #2c2519; --card-border: rgba(251, 191, 36, 0.28);  --shadow-color: rgba(217, 119, 6, 0.28); }
+  [data-theme="dark"] .c-red-pink   { --c-main: #f87171; --c-mid: #dc2626; --wave-start: rgba(220, 38, 38, 0.22);  --icon-bg: rgba(220, 38, 38, 0.16);  --tint-bottom: #2d1d1e; --card-border: rgba(248, 113, 113, 0.28); --shadow-color: rgba(220, 38, 38, 0.28); }
+
+  /* Dark mode arrow icon contrast */
+  [data-theme="dark"] .yp-arrow-circle {
+    background: linear-gradient(135deg, var(--c-mid) 0%, var(--c-main) 100%);
+    color: #0f172a;
+  }
+
+  /* =========================================
+     RESPONSIVE BREAKPOINTS
+     ========================================= */
+  @media (max-width: 1180px) {
+    .yp-grid-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 860px) {
+    .yp-grid-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+  }
+
+  /* Mobile: Single Row Horizontal Left-Right Scroll */
+  @media (max-width: 640px) {
+    .yp-cards-wrapper {
+      padding: 12px 0;
+      display: block;
+    }
+
+    .yp-grid-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 14px;
+      padding: 8px 16px 18px 16px;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .yp-grid-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .yp-update-card {
+      flex: 0 0 285px;
+      min-height: 82px;
+      scroll-snap-align: start;
+      padding: 12px 13px 16px 17px;
+    }
+
+    .yp-card-title {
+      font-size: 15px;
+      padding: 2px 4px;
+    }
+  }
