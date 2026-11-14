@@ -1,0 +1,74 @@
+<!-- Vertical AdSense Wrapper Start -->
+<div class="adsense-vertical-wrapper">
+  <span class="ad-label">Advertisement</span>
+  
+  <div class="adsense-vertical-slot">
+    <!-- Yahan apna Google AdSense ka Vertical <ins> aur <script> code paste karein -->
+<!-- Baner Ads -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3871589544605216"
+     data-ad-slot="4035768646"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+  </div>
+</div>
+<!-- Vertical AdSense Wrapper End -->
+<style>
+    /* Main Vertical Container */
+.adsense-vertical-wrapper {
+  width: 100%;
+  max-width: 320px;         /* 300x600 Half Page ad ke liye best width */
+  margin: 0 auto 24px auto;
+  max-height: 600px;
+  padding: 12px 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  text-align: center;
+  box-sizing: border-box;
+  
+  /* Optional: Scroll karne par Ad ko screen par rokne (Sticky) ke liye */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;                /* Upar se 20px ka gap rakhega */
+}
+
+/* Chota "Advertisement" label */
+.adsense-vertical-wrapper .ad-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  font-family: sans-serif;
+}
+
+/* Fixed Min-Height Container (CLS / Layout Shift rokne ke liye) */
+.adsense-vertical-slot {
+  width: 100%;
+  min-height: 600px;        /* 300x600 ya 160x600 ad ke liye jagah reserve karega */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Mobile Screens ke liye Adjustment (Mobile par sidebar niche chala jata hai) */
+@media (max-width: 768px) {
+  .adsense-vertical-wrapper {
+    position: static;       /* Mobile par sticky hatana zaroori hai */
+    max-width: 100%;
+    margin: 20px auto;
+  }
+
+  .adsense-vertical-slot {
+    min-height: 250px;      /* Mobile par ye automatically 300x250 rectangle ban jayega */
+  }
+}
+</style>

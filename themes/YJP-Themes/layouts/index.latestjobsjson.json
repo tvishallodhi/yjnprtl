@@ -1,0 +1,20 @@
+{{- $latestJobs := where site.RegularPages "Section" "jobs" -}}
+{{- $apprentice := where site.RegularPages "Section" "apprentice" -}}
+{{- $jobs := union $latestJobs $apprentice -}}
+{{- $jobs = $jobs.ByDate.Reverse -}}
+[
+{{- range $index, $job := $jobs -}}
+{{- if $index }},{{ end -}}
+{
+    "id": {{ $job.File.UniqueID | default (printf "job-%d" $index) | jsonify }},
+    "title": {{ with $job.Params.recommended_name }}{{ . | jsonify }}{{ else }}{{ $job.Title | jsonify }}{{ end }},
+    "department": {{ with $job.Params.department }}{{ . | jsonify }}{{ else }}{{ "" | jsonify }}{{ end }},
+    "total_posts": {{ with $job.Params.totalposts }}{{ . | jsonify }}{{ else }}{{ "" | jsonify }}{{ end }},
+    "qualification": {{ with $job.Params.qualification }}{{ . | jsonify }}{{ else }}{{ "" | jsonify }}{{ end }},
+    "post_date": {{ $job.Date.Format "2006-01-02" | jsonify }},
+    "begin_date": {{ with $job.Params.begindate }}{{ . | jsonify }}{{ else }}{{ "" | jsonify }}{{ end }},
+    "lastdate": {{ with $job.Params.lastdate }}{{ . | jsonify }}{{ else }}{{ "" | jsonify }}{{ end }},
+    "url": {{ printf "https://gajabjobs.com%s" $job.RelPermalink | jsonify }}
+}
+{{- end -}}
+]

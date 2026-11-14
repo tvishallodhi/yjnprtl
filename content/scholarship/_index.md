@@ -1,6 +1,6 @@
 ---
 title: "Scholarships"
-name: "scholarships"
+name: "Scholarships"
 icon: "👨‍🎓"
 lang: ""
 url: "/scholarships/"

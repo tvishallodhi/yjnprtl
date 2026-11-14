@@ -1,7 +1,7 @@
 ---
-title: "Education Updates"
-name: "Education Updates"
+title: "Admissions"
+name: "Admissions"
 icon: "🎓"
 lang: ""
-url: "/education/"
+url: "/admission/"
 --- 

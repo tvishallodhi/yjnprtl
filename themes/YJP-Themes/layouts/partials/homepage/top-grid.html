@@ -1,4 +1,3 @@
-{{ $colors := slice "#f8dbb4" "#e9c3f8" "#fbfcc4" "#befccc" "#f8bcb4" "#bec9fc" "#b4f0f8" "#b4f8d3" "#f8b4de" "#ffa4ff" }}
 {{ $today := now.Format "2006-01-02" }}
 
 {{/* Step 1: Active and Valid Date Filter */}}
@@ -10,14 +9,9 @@
 {{ $pinnedLast  := sort (where $hasDate "Params.pin" "==" "last") "Date" "desc" }}
 {{ $normal      := sort (where (where $hasDate "Params.pin" "!=" "first") "Params.pin" "!=" "last") "Date" "desc" }}
 
-{{/* Step 3: Exact 12 Slots Calculation */}}
-{{/* First pin hamesha slot 1 lega (agar available ho) */}}
+{{/* Step 3: Exact 12 Slots Calculation (4 Columns x 3 Rows = 12 Cards) */}}
 {{ $firstSlot := first 1 $pinnedFirst }}
-
-{{/* Last pin hamesha slot 12 ke liye lock rahega (agar available ho) */}}
-{{ $lastSlot := first 1 $pinnedLast }}
-
-{{/* Middle slots count: 12 - (firstSlot + lastSlot) */}}
+{{ $lastSlot  := first 1 $pinnedLast }}
 {{ $middleCount := sub 12 (add (len $firstSlot) (len $lastSlot)) }}
 {{ $middleSlots := first $middleCount $normal }}
 
@@ -33,28 +27,381 @@
   {{ $finalList = $finalList | append . }}
 {{ end }}
 
-<div class="post-grid">
-  {{ range $index, $element := $finalList }}
-    {{ $randColor := index $colors (mod $index (len $colors)) }}
-    <a href="{{ $element.Permalink }}" class="post-link">
-      <div class="post-box" style="background-color: {{ $randColor }};">
+{{/* 12 Theme Color Classes */}}
+{{ $themes := slice
+  "c-pink"
+  "c-royal-blue"
+  "c-purple"
+  "c-green"
+  "c-orange"
+  "c-cyan"
+  "c-sky-blue"
+  "c-emerald"
+  "c-violet"
+  "c-magenta"
+  "c-amber"
+  "c-red-pink"
+}}
+
+<style>
+  /* =========================================
+     CARD COMPONENT INTEGRATED WITH THEME ENGINE
+     ========================================= */
+  .yp-cards-wrapper {
+    width: 100%;
+    padding: 16px 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Desktop: 4 Columns x 3 Rows */
+  .yp-grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 1380px;
+    width: 100%;
+  }
+
+  /* Card Base (Uses --bg-surface & --text-dark from your :root / [data-theme="dark"]) */
+  .yp-update-card {
+    --yp-radius: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    background: linear-gradient(180deg, var(--bg-surface, #ffffff) 62%, var(--tint-bottom) 100%);
+    border-radius: var(--yp-radius);
+    border: 1.5px solid var(--card-border);
+    box-shadow: var(--box-shadow, 0 4px 14px rgba(0, 0, 0, 0.08)), 0 4px 12px -4px var(--shadow-color);
+    padding: 11px 11px 16px 15px;
+    min-height: 82px;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  }
+
+  .yp-update-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--c-main);
+    box-shadow: 0 10px 22px -5px var(--shadow-color), var(--box-shadow, 0 4px 14px rgba(0, 0, 0, 0.12));
+  }
+
+  .yp-update-card:focus-visible {
+    outline: var(--focus-ring, 2px solid #0b57d0);
+    outline-offset: 2px;
+  }
+
+  /* Left Curved Colored Strip */
+  .yp-update-card::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    bottom: 4px;
+    left: -1px;
+    width: 20px;
+    background: linear-gradient(180deg, var(--c-main) 0%, var(--c-mid) 65%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 42px at 46px 46%, transparent 39px, #000 40px);
+    mask-image: radial-gradient(circle 42px at 46px 46%, transparent 39px, #000 40px);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Bottom Curved Gradient Wave (Uses CSS Variables for instant Dark Mode switch) */
+  .yp-bottom-wave {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 14px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Top-Left Diagonal NEW Ribbon */
+  .yp-ribbon-new {
+    position: absolute;
+    top: 9px;
+    left: -27px;
+    width: 88px;
+    background: linear-gradient(135deg, var(--color-danger, #dc2626) 0%, #991b1b 100%);
+    color: #ffffff;
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 3px 0;
+    transform: rotate(-42deg);
+    box-shadow: 0 2px 5px rgba(220, 38, 38, 0.4);
+    z-index: 4;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  /* Top-Right Red Push-Pin */
+  .yp-pin-mark {
+    position: absolute;
+    top: 5px;
+    right: 17px;
+    width: 15px;
+    height: 15px;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.35));
+  }
+
+  /* Inner Content */
+  .yp-card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 9px;
+  }
+
+  /* Left Circular Icon */
+  .yp-icon-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--icon-bg);
+    color: var(--c-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid var(--card-border);
+  }
+
+  .yp-svg-mask {
+    width: 22px;
+    height: 22px;
+    background-color: var(--c-main);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    display: block;
+  }
+
+  /* Title Typography (Linked to --text-dark) */
+  .yp-card-title {
+    flex: 1;
+    color: var(--text-dark, #0f172a);
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: -0.2px;
+    padding: 2px 4px;
+    word-wrap: break-word;
+    transition: color 0.2s ease;
+  }
+
+  /* Right Circular Arrow */
+  .yp-arrow-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-mid) 0%, var(--c-main) 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+    box-shadow: 0 3px 7px -2px var(--shadow-color);
+    transition: transform 0.2s ease;
+  }
+
+  .yp-update-card:hover .yp-arrow-circle {
+    transform: translateX(2.5px);
+  }
+
+  .yp-arrow-circle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* =========================================
+     LIGHT MODE INDIVIDUAL CARD PALETTES
+     ========================================= */
+  .c-pink       { --c-main: #E6005C; --c-mid: #FF2E7E; --wave-start: #FFD1E3; --icon-bg: #FFE8F1; --tint-bottom: #FFF5F9; --card-border: rgba(230, 0, 92, 0.22);   --shadow-color: rgba(230, 0, 92, 0.20); }
+  .c-royal-blue { --c-main: #0052D4; --c-mid: #1D75FF; --wave-start: #C7DFFF; --icon-bg: #E5F0FF; --tint-bottom: #F4F8FF; --card-border: rgba(0, 82, 212, 0.22);   --shadow-color: rgba(0, 82, 212, 0.20); }
+  .c-purple     { --c-main: #6B00D7; --c-mid: #8E2DE2; --wave-start: #E4CFFF; --icon-bg: #F2E7FF; --tint-bottom: #F9F5FF; --card-border: rgba(107, 0, 215, 0.22); --shadow-color: rgba(107, 0, 215, 0.20); }
+  .c-green      { --c-main: #15803d; --c-mid: #22c55e; --wave-start: #C8F7CE; --icon-bg: #E4FCE7; --tint-bottom: #F4FDF5; --card-border: rgba(21, 128, 61, 0.22);  --shadow-color: rgba(21, 128, 61, 0.20); }
+  .c-orange     { --c-main: #F25C05; --c-mid: #FF832B; --wave-start: #FFDCC2; --icon-bg: #FFF0E3; --tint-bottom: #FFF8F2; --card-border: rgba(242, 92, 5, 0.22);   --shadow-color: rgba(242, 92, 5, 0.20); }
+  .c-cyan       { --c-main: #0099D6; --c-mid: #1CC5FF; --wave-start: #C2EFFF; --icon-bg: #E3F8FF; --tint-bottom: #F3FCFF; --card-border: rgba(0, 153, 214, 0.22); --shadow-color: rgba(0, 153, 214, 0.20); }
+  .c-sky-blue   { --c-main: #2563eb; --c-mid: #3b82f6; --wave-start: #C7E4FF; --icon-bg: #E5F2FF; --tint-bottom: #F4F9FF; --card-border: rgba(37, 99, 235, 0.22);  --shadow-color: rgba(37, 99, 235, 0.20); }
+  .c-emerald    { --c-main: #0FA62A; --c-mid: #28CC44; --wave-start: #C4F5CE; --icon-bg: #E2FBE7; --tint-bottom: #F3FDF5; --card-border: rgba(15, 166, 42, 0.22);  --shadow-color: rgba(15, 166, 42, 0.20); }
+  .c-violet     { --c-main: #7C3AED; --c-mid: #9B30E8; --wave-start: #E7CEFF; --icon-bg: #F4E8FF; --tint-bottom: #FAF5FF; --card-border: rgba(124, 58, 237, 0.22); --shadow-color: rgba(124, 58, 237, 0.20); }
+  .c-magenta    { --c-main: #D9048E; --c-mid: #F725A8; --wave-start: #FFCEEC; --icon-bg: #FFE8F6; --tint-bottom: #FFF5FB; --card-border: rgba(217, 4, 142, 0.22); --shadow-color: rgba(217, 4, 142, 0.20); }
+  .c-amber      { --c-main: #d97706; --c-mid: #f59e0b; --wave-start: #FFF0AD; --icon-bg: #FFF7D6; --tint-bottom: #FFFDF2; --card-border: rgba(217, 119, 6, 0.24);  --shadow-color: rgba(217, 119, 6, 0.20); }
+  .c-red-pink   { --c-main: #dc2626; --c-mid: #f43f5e; --wave-start: #FFD1DA; --icon-bg: #FFE8ED; --tint-bottom: #FFF5F7; --card-border: rgba(220, 38, 38, 0.22);  --shadow-color: rgba(220, 38, 38, 0.20); }
+
+  /* =========================================
+     DARK MODE ([data-theme="dark"]) OVERRIDES
+     ========================================= */
+  [data-theme="dark"] .c-pink       { --c-main: #fb7185; --c-mid: #e11d48; --wave-start: rgba(225, 29, 72, 0.22);  --icon-bg: rgba(225, 29, 72, 0.16);  --tint-bottom: #2b1d23; --card-border: rgba(251, 113, 133, 0.28); --shadow-color: rgba(225, 29, 72, 0.28); }
+  [data-theme="dark"] .c-royal-blue { --c-main: #60a5fa; --c-mid: #2563eb; --wave-start: rgba(37, 99, 235, 0.22);  --icon-bg: rgba(37, 99, 235, 0.16);  --tint-bottom: #1c2433; --card-border: rgba(96, 165, 250, 0.28);  --shadow-color: rgba(37, 99, 235, 0.28); }
+  [data-theme="dark"] .c-purple     { --c-main: #c084fc; --c-mid: #7c3aed; --wave-start: rgba(124, 58, 237, 0.22); --icon-bg: rgba(124, 58, 237, 0.16); --tint-bottom: #251e32; --card-border: rgba(192, 132, 252, 0.28); --shadow-color: rgba(124, 58, 237, 0.28); }
+  [data-theme="dark"] .c-green      { --c-main: #4ade80; --c-mid: #16a34a; --wave-start: rgba(22, 163, 74, 0.22);  --icon-bg: rgba(22, 163, 74, 0.16);  --tint-bottom: #1b2b22; --card-border: rgba(74, 222, 128, 0.28);  --shadow-color: rgba(22, 163, 74, 0.28); }
+  [data-theme="dark"] .c-orange     { --c-main: #fb923c; --c-mid: #ea580c; --wave-start: rgba(234, 88, 12, 0.22);  --icon-bg: rgba(234, 88, 12, 0.16);  --tint-bottom: #2d221b; --card-border: rgba(251, 146, 60, 0.28);  --shadow-color: rgba(234, 88, 12, 0.28); }
+  [data-theme="dark"] .c-cyan       { --c-main: #22d3ee; --c-mid: #0891b2; --wave-start: rgba(8, 145, 178, 0.22);  --icon-bg: rgba(8, 145, 178, 0.16);  --tint-bottom: #1a2930; --card-border: rgba(34, 211, 238, 0.28);  --shadow-color: rgba(8, 145, 178, 0.28); }
+  [data-theme="dark"] .c-sky-blue   { --c-main: #38bdf8; --c-mid: #0284c7; --wave-start: rgba(2, 132, 199, 0.22);  --icon-bg: rgba(2, 132, 199, 0.16);  --tint-bottom: #1b2631; --card-border: rgba(56, 189, 248, 0.28);  --shadow-color: rgba(2, 132, 199, 0.28); }
+  [data-theme="dark"] .c-emerald    { --c-main: #34d399; --c-mid: #059669; --wave-start: rgba(5, 150, 105, 0.22);  --icon-bg: rgba(5, 150, 105, 0.16);  --tint-bottom: #1a2b25; --card-border: rgba(52, 211, 153, 0.28);  --shadow-color: rgba(5, 150, 105, 0.28); }
+  [data-theme="dark"] .c-violet     { --c-main: #a78bfa; --c-mid: #6d28d9; --wave-start: rgba(109, 40, 217, 0.22); --icon-bg: rgba(109, 40, 217, 0.16); --tint-bottom: #231e31; --card-border: rgba(167, 139, 250, 0.28); --shadow-color: rgba(109, 40, 217, 0.28); }
+  [data-theme="dark"] .c-magenta    { --c-main: #f472b6; --c-mid: #db2777; --wave-start: rgba(219, 39, 119, 0.22); --icon-bg: rgba(219, 39, 119, 0.16); --tint-bottom: #2c1d27; --card-border: rgba(244, 114, 182, 0.28); --shadow-color: rgba(219, 39, 119, 0.28); }
+  [data-theme="dark"] .c-amber      { --c-main: #fbbf24; --c-mid: #d97706; --wave-start: rgba(217, 119, 6, 0.22);  --icon-bg: rgba(217, 119, 6, 0.16);  --tint-bottom: #2c2519; --card-border: rgba(251, 191, 36, 0.28);  --shadow-color: rgba(217, 119, 6, 0.28); }
+  [data-theme="dark"] .c-red-pink   { --c-main: #f87171; --c-mid: #dc2626; --wave-start: rgba(220, 38, 38, 0.22);  --icon-bg: rgba(220, 38, 38, 0.16);  --tint-bottom: #2d1d1e; --card-border: rgba(248, 113, 113, 0.28); --shadow-color: rgba(220, 38, 38, 0.28); }
+
+  /* Dark mode arrow icon contrast */
+  [data-theme="dark"] .yp-arrow-circle {
+    background: linear-gradient(135deg, var(--c-mid) 0%, var(--c-main) 100%);
+    color: #0f172a;
+  }
+
+  /* =========================================
+     RESPONSIVE BREAKPOINTS
+     ========================================= */
+  @media (max-width: 1180px) {
+    .yp-grid-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 860px) {
+    .yp-grid-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+  }
+
+  /* Mobile: Single Row Horizontal Left-Right Scroll */
+  @media (max-width: 640px) {
+    .yp-cards-wrapper {
+      padding: 12px 0;
+      display: block;
+    }
+
+    .yp-grid-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 14px;
+      padding: 8px 16px 18px 16px;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .yp-grid-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .yp-update-card {
+      flex: 0 0 285px;
+      min-height: 82px;
+      scroll-snap-align: start;
+      padding: 12px 13px 16px 17px;
+    }
+
+    .yp-card-title {
+      font-size: 15px;
+      padding: 2px 4px;
+    }
+  }
+</style>
+
+{{ if gt (len $finalList) 0 }}
+<section class="yp-cards-wrapper" aria-label="Featured Updates">
+  <div class="yp-grid-container">
+
+    {{ range $index, $page := $finalList }}
+      {{ $themeClass := index $themes (mod $index 12) }}
+
+      {{/* 1. Determine Icon Path */}}
+      {{ $iconPath := "" }}
+      {{ with $page.Params.icon }}
+        {{ $iconPath = . }}
+      {{ else }}
+        {{ $ptype := index $page.Params "post-type" | default "" }}
+        {{ if or (eq $ptype "lastest_jobs") (eq $ptype "latest_jobs") }}
+          {{ $iconPath = "icon/jobs_icon.svg" }}
+        {{ else if eq $ptype "Schemes" }}
+          {{ $iconPath = "icon/scheme_new.svg" }}
+        {{ else if eq $ptype "Admission" }}
+          {{ $iconPath = "icon/education.svg" }}
+        {{ else if eq $ptype "Student" }}
+          {{ $iconPath = "icon/education-student.svg" }}
+        {{ else }}
+          {{ $iconPath = "icon/jobs_icon.svg" }}
+        {{ end }}
+      {{ end }}
+
+      {{/* 2. Check PIN status (first or last) */}}
+      {{ $isPinned := or (eq $page.Params.pin "first") (eq $page.Params.pin "last") }}
+
+      {{/* 3. Check NEW status (Published within last 7 days OR Params.new == true) */}}
+      {{ $daysOld := div (sub now.Unix $page.Date.Unix) 86400 }}
+      {{ $isNew := or (le $daysOld 7) (eq $page.Params.new true) }}
+
+      <a href="{{ $page.RelPermalink }}" class="yp-update-card {{ $themeClass }}">
         
-        {{ if eq ($element.Date.Format "2006-01-02") $today }}
-          <img src="/gif/new.gif" alt="New" class="new-icon" />
+        {{/* Diagonal NEW Ribbon */}}
+        {{ if $isNew }}
+          <span class="yp-ribbon-new">NEW</span>
         {{ end }}
 
-        <span class="post-title">
-          {{ $element.Params.RecommendName | default $element.Title }}
-        </span>
-
-        {{ if or (eq $element.Params.pin "first") (eq $element.Params.pin "last") }}
-          <span class="pin-icon" title="Pinned">📌</span>
+        {{/* Top-Right Red Push-Pin */}}
+        {{ if $isPinned }}
+          <svg class="yp-pin-mark" viewBox="0 0 24 24" aria-label="Pinned">
+            <path d="M14.5 3.5l6 6-1.5 1.5-1.5-.8-3.2 3.2.7 2.6-1.4 1.4-3.3-3.3-4.8 4.8-1.2.4.4-1.2 4.8-4.8-3.3-3.3 1.4-1.4 2.6.7 3.2-3.2-.8-1.5z" fill="var(--color-danger, #dc2626)" stroke="var(--bg-surface, #ffffff)" stroke-width="1.3" stroke-linejoin="round"/>
+          </svg>
         {{ end }}
 
-      </div>
-    </a>
-  {{ end }}
-</div>
+        {{/* Bottom Curved Gradient Wave (Uses CSS Variables so SVG updates automatically in Dark Mode) */}}
+        <svg class="yp-bottom-wave" viewBox="0 0 400 24" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="yp-grad-{{ $index }}" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color: var(--wave-start);"/>
+              <stop offset="50%" style="stop-color: var(--c-mid);"/>
+              <stop offset="100%" style="stop-color: var(--c-main);"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,10 Q110,23 230,13 T400,2 L400,24 L0,24 Z" fill="url(#yp-grad-{{ $index }})"/>
+        </svg>
+
+        <div class="yp-card-content">
+          {{/* Left Circular Icon */}}
+          <div class="yp-icon-circle">
+            <span class="yp-svg-mask" style="-webkit-mask-image: url('{{ $iconPath | relURL }}'); mask-image: url('{{ $iconPath | relURL }}');"></span>
+          </div>
+
+          {{/* Post Title */}}
+          <div class="yp-card-title">{{ $page.Title }}</div>
+
+          {{/* Right Circular Arrow */}}
+          <div class="yp-arrow-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"/><path d="M13 6l6 6-6 6"/>
+            </svg>
+          </div>
+        </div>
+
+      </a>
+    {{ end }}
+
+  </div>
+</section>
+{{ end }}
 {{ $gridstyles := slice "css/home/grid.css"  "css/home/recommed.css" }}
 {{ range $gridstyles }}
   {{ with resources.Get . | resources.Minify | resources.Fingerprint }}
