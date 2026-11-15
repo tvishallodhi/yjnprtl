@@ -18,13 +18,13 @@
 </div>
 
 <style>
-    .homepage-banner-ad {
+.homepage-banner-ad {
     width: 100%;
-    margin: 5px auto 5px;
+    margin: 5px auto;
     max-height: 300px;
     text-align: center;
     overflow: hidden;
-     padding:2px;
+    padding: 2px;
 }
 
 .homepage-banner-ad .ad-label {
@@ -34,6 +34,7 @@
     letter-spacing: 1px;
     margin-bottom: 2px;
     text-transform: uppercase;
+    line-height: 1.2;
 }
 
 .homepage-banner-ad .ad-content {
@@ -42,5 +43,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* मोबाइल स्क्रीन के लिए ऊँचाई सीमित करें ताकि Latest Jobs ऊपर दिखे */
+@media (max-width: 768px) {
+    .homepage-banner-ad {
+        max-height: 120px;
+    }
+    .homepage-banner-ad .ad-content {
+        min-height: 60px;
+        max-height: 100px;
+    }
+    .homepage-banner-ad ins.adsbygoogle {
+        max-height: 100px !important;
+    }
 }
 </style>
