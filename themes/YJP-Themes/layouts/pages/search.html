@@ -100,3 +100,4 @@
 {{ $searchJS := resources.Get "js/pages/search.js" | minify | fingerprint }}
 <script src="{{ $searchJS.RelPermalink }}" defer></script>
 {{ end }}
+

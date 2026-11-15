@@ -106,13 +106,6 @@
 {{ $css := resources.Match "css/*.css" | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
-<!-- Integration of CSS & JS via Hugo Assets Pipeline -->
-{{ $searchCSS := resources.Get "css/search.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $searchCSS.RelPermalink }}">
-
-{{ $searchJS := resources.Get "js/search.js" | minify | fingerprint }}
-<script src="{{ $searchJS.RelPermalink }}" defer></script>
-
 <!-- Prevent Dark Theme FOUC -->
 <script>
   (function() {
