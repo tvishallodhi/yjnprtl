@@ -142,7 +142,7 @@
 
         // 1. Google AdSense लोड करें
         var adScript = document.createElement('script');
-        adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3871589544605216';
+        adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX';
         adScript.async = true;
         adScript.crossOrigin = 'anonymous';
         document.head.appendChild(adScript);
@@ -152,14 +152,21 @@
         osScript.src = 'https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js';
         osScript.defer = true;
         document.head.appendChild(osScript);
+
+        // 3. Cloudflare Web Analytics (Beacon) लोड करें
+        var cfScript = document.createElement('script');
+        cfScript.src = 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092';
+        cfScript.defer = true;
+        cfScript.setAttribute('data-cf-beacon', '{"token": "4a69029fed204d01bbd17bda6e06b716"}');
+        document.body.appendChild(cfScript);
     }
 
-    // यूज़र के स्क्रॉल, टच या माउस मूव करते ही लोड करें
+    // यूज़र के पहले इंटरैक्शन (स्क्रॉल, टच, माउस मूव या की-प्रेस) पर लोड करें
     ['scroll', 'touchstart', 'mousemove', 'keydown'].forEach(function(evt) {
         window.addEventListener(evt, loadThirdPartyScripts, { once: true, passive: true });
     });
 
-    // या अगर यूज़र कुछ न करे तो 3.5 सेकंड बाद अपने आप लोड करें
+    // या यदि कोई इंटरैक्शन न हो तो 3.5 सेकंड बाद लोड करें
     setTimeout(loadThirdPartyScripts, 3500);
 })();
 </script>
