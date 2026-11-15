@@ -2,10 +2,10 @@
   <div class="header-container">
     <div class="header-branding">
       <a href="{{ .Site.BaseURL }}" class="brand-link" aria-label="{{ .Site.Title }}">
-       {{ $logo64 := partial "imp-codes/logo-resource.html" "64X64" }}
+       {{ $logo32 := partial "imp-codes/logo-resource.html" "32X32" }}
 
-{{ if $logo64 }}
- <img src="{{ $logo64.RelPermalink }}" alt="YOJANA PORTAL" class="site-logo" width="32" height="32">
+{{ if $logo32 }}
+ <img src="{{ $logo32.RelPermalink }}" alt="YOJANA PORTAL" class="site-logo" width="32" height="32" >
 {{ end }}
         
         <span class="site-title-text">{{ .Site.Title }}</span>
