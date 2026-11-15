@@ -1,0 +1,28 @@
+{{- $page := .page -}}
+{{- $customIcon := .icon -}}
+
+{{- if eq ($page.Date.Format "2006-01-02") (now.Format "2006-01-02") -}}
+
+  <img src="/gif/new.gif" alt="New" class="new-icon">
+
+{{- else if or (eq $page.Params.pin "first") (eq $page.Params.pin "last") -}}
+
+  <span class="pin-icon">📌</span>
+
+{{- else if $customIcon -}}
+
+  <img src="{{ $customIcon }}" alt="" class="item-icon">
+
+{{- else if $page.Params.icon -}}
+
+  <img src="{{ $page.Params.icon }}" alt="" class="item-icon">
+
+{{- else if $page.Params.iconType -}}
+
+  <img src="/icons/category/{{ $page.Params.iconType }}.svg" alt="" class="item-icon">
+
+{{- else -}}
+
+  <img src="/icons/category/default.svg" alt="" class="item-icon">
+
+{{- end -}}

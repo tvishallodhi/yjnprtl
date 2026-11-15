@@ -1,0 +1,691 @@
+<style>
+/* ==========================================================================
+   YOJNA PORTAL – Update Panels (Theme-Engine Integrated)
+   ========================================================================== */
+.portal-panels {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-main, #1f1f1f);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.portal-panels *,
+.portal-panels *::before,
+.portal-panels *::after {
+  box-sizing: border-box;
+}
+
+/* Panel Container & Default Category Accent (Blue) */
+.portal-panel {
+  --theme: var(--color-info, #2563eb);
+  --theme-dark: color-mix(in srgb, var(--theme) 82%, var(--text-dark, #0f172a));
+  --tint: color-mix(in srgb, var(--theme) 12%, var(--bg-surface, #ffffff));
+
+  min-width: 0;
+  height: 590px;
+  overflow: hidden;
+  background: var(--bg-surface, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--theme) 26%, var(--border-color, #e2e8f0));
+  border-radius: 17px;
+  box-shadow: var(--box-shadow, 0 4px 14px rgba(0, 0, 0, 0.08));
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Category Color Accents */
+.portal-panel.jobs,
+.portal-panel.scholarship,
+.portal-panel.pdf {
+  --theme: var(--color-warning, #f59e0b);
+}
+
+.portal-panel.schemes,
+.portal-panel.results {
+  --theme: var(--color-success, #15803d);
+}
+
+.portal-panel.education,
+.portal-panel.admit,
+.portal-panel.quick {
+  --theme: var(--color-info, #2563eb);
+}
+
+.portal-panel.upcoming {
+  --theme: #e60076;
+}
+
+/* Dark Mode Accent Adjustments for Better Contrast */
+[data-theme="dark"] .portal-panel {
+  --theme-dark: color-mix(in srgb, var(--theme) 75%, #ffffff);
+  --tint: color-mix(in srgb, var(--theme) 16%, var(--bg-surface, #242424));
+}
+
+[data-theme="dark"] .portal-panel.upcoming {
+  --theme: #f43f8e;
+}
+
+/* Panel Header */
+.panel-heading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 49px;
+  margin: 0;
+  padding: 8px 48px;
+  color: var(--theme-dark);
+  font-size: 21px;
+  line-height: 1.2;
+  font-weight: 750;
+  background: linear-gradient(180deg, var(--tint), var(--bg-surface, #ffffff));
+  border-bottom: 1px solid color-mix(in srgb, var(--theme) 22%, var(--border-color, #e2e8f0));
+}
+
+.heading-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--theme);
+  color: #ffffff;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--theme) 30%, transparent);
+}
+
+.heading-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.panel-heading::after {
+  content: "";
+  position: absolute;
+  left: 24%;
+  right: 24%;
+  bottom: -2px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--theme);
+  opacity: 0.55;
+}
+
+/* Scrollable List */
+.panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 7px 9px 12px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--theme) 48%, var(--border-subtle, #cbd5e1)) transparent;
+}
+
+.panel-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.panel-list::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--theme) 45%, var(--border-subtle, #cbd5e1));
+  border-radius: 20px;
+}
+
+.panel-list li + li {
+  margin-top: 2px;
+}
+
+/* List Item Link */
+.panel-link {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 9px 7px 11px;
+  text-decoration: none;
+  color: var(--text-main, #1f1f1f);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: linear-gradient(
+    105deg,
+    var(--bg-surface, #ffffff) 0%,
+    var(--bg-surface, #ffffff) 74%,
+    var(--tint) 100%
+  );
+  transition: background 0.18s, border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+}
+
+.panel-link:hover,
+.panel-link:focus-visible {
+  border-color: color-mix(in srgb, var(--theme) 36%, var(--border-color, #e2e8f0));
+  background: linear-gradient(105deg, var(--bg-surface, #ffffff), var(--tint));
+  box-shadow: var(--box-shadow, 0 3px 8px rgba(0, 0, 0, 0.08));
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.panel-link:focus-visible {
+  outline: var(--focus-ring, 2px solid #0b57d0);
+  outline-offset: -2px;
+}
+
+/* Protect readability when inline .Params.highlights is set in Dark Mode */
+[data-theme="dark"] .panel-link[style*="background-color"] {
+  background-color: var(--highlight-bg, #2b2405) !important;
+  border-color: color-mix(in srgb, var(--highlight-border, #f8cb00) 45%, transparent);
+}
+
+/* Item Icon (Supports both SVG wrappers and <img> tags) */
+.item-icon {
+  flex: 0 0 27px;
+  width: 27px;
+  height: 27px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  color: var(--theme-dark);
+  background: var(--tint);
+  border: 1px solid color-mix(in srgb, var(--theme) 22%, var(--border-color, #e2e8f0));
+  margin-top: 1px;
+  object-fit: contain;
+  padding: 3px;
+}
+
+.item-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.item-text {
+  min-width: 0;
+  flex: 1;
+  font-size: 14.5px;
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--text-main, #1f1f1f);
+  overflow-wrap: anywhere;
+}
+
+.item-text strong {
+  font-weight: 650;
+  color: var(--text-dark, #0f172a);
+}
+
+.item-arrow {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--theme-dark);
+  background: var(--tint);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.panel-link::after {
+  content: "";
+  position: absolute;
+  left: 42px;
+  right: 7px;
+  bottom: -2px;
+  height: 5px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--theme) 30%, var(--border-subtle, #cbd5e1));
+  border-radius: 0 0 55% 55%;
+  pointer-events: none;
+}
+
+/* Empty State Link */
+.panel-empty {
+  display: block;
+  padding: 24px 14px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted, #64748b);
+  text-decoration: none;
+}
+
+.panel-empty:hover {
+  color: var(--primary-color, #0b57d0);
+  text-decoration: underline;
+}
+
+/* Panel Footer */
+.panel-footer {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: var(--bg-secondary, #f8fafc);
+  border-top: 1px solid var(--border-color, #e2e8f0);
+}
+
+.panel-footer a {
+  color: var(--primary-color, #0b57d0);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.panel-footer a:hover {
+  color: var(--primary-hover, #0842a0);
+  text-decoration: underline;
+}
+
+.footer-arrow {
+  font-size: 17px;
+  color: var(--primary-color, #0b57d0);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 850px) {
+  .portal-panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .portal-panels {
+    display: flex;
+    gap: 12px;
+    padding: 10px 10px 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+
+  .portal-panel {
+    flex: 0 0 min(88vw, 370px);
+    width: min(88vw, 370px);
+    height: 560px;
+    scroll-snap-align: start;
+  }
+
+  .panel-heading {
+    font-size: 20px;
+  }
+
+  .item-text {
+    font-size: 14.5px;
+  }
+}
+</style>
+
+<main class="portal-panels">
+
+  <!-- 1. Latest Jobs -->
+  <section class="portal-panel jobs">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="7" width="18" height="14" rx="2"/>
+          <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/>
+        </svg>
+      </span>
+      Latest Jobs
+    </h2>
+    <ul class="panel-list">
+      {{ $today := now.Format "2006-01-02" }}
+      {{ $latestJobs := slice }}
+
+      {{ range .Site.RegularPages }}
+        {{ if or (eq (index .Params "post-type") "latest-jobs") (eq .Params.post_type "latest-jobs") }}
+          {{ $latestJobs = $latestJobs | append . }}
+        {{ end }}
+      {{ end }}
+
+      {{ $finalFiltered := slice }}
+      {{ range $latestJobs }}
+        {{ $lastDate := .Params.lastdate | default "0000-00-00" }}
+        {{ $correction := .Params.correction | default "no" }}
+        {{ if or (ge $lastDate $today) (eq $correction "yes") }}
+          {{ $finalFiltered = $finalFiltered | append . }}
+        {{ end }}
+      {{ end }}
+
+      {{ $pinFirst := sort (where $finalFiltered "Params.pin" "==" "first") "Date" "desc" }}
+      {{ $pinLast := sort (where $finalFiltered "Params.pin" "==" "last") "Date" "desc" }}
+      {{ $middle := where $finalFiltered "Params.pin" "!=" "first" }}
+      {{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+      {{ $.Scratch.Set "orderedJobs" (slice) }}
+      {{ range $pinFirst }}{{ $.Scratch.Add "orderedJobs" (slice .) }}{{ end }}
+      {{ range $normal }}{{ $.Scratch.Add "orderedJobs" (slice .) }}{{ end }}
+      {{ range $pinLast }}{{ $.Scratch.Add "orderedJobs" (slice .) }}{{ end }}
+      {{ $ordered := $.Scratch.Get "orderedJobs" }}
+
+      {{ if $ordered }}
+        {{ range $ordered }}
+          <li>
+            <a class="panel-link" href="{{ .RelPermalink }}" target="_blank" {{ with .Params.highlights }}style="background-color:{{ . }};"{{ end }}>
+              {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/briefcase.svg") }}
+              <span class="item-text">
+                {{ if .Params.correctionName }}
+                  {{ .Params.correctionName }}
+                {{ else }}
+                  {{ .Title }}
+                {{ end }}
+              </span>
+              <span class="item-arrow">›</span>
+            </a>
+          </li>
+        {{ end }}
+      {{ else }}
+        <li>
+          <a class="panel-empty" href="/latest-update/" target="_blank">
+            No upcoming posts or updates here. If available, they will be updated soon. Go to Latest Update
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="/latest-update/">View More jobs →</a></div>
+  </section>
+
+  <!-- 2. Schemes -->
+  <section class="portal-panel schemes">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 4c-8 0-14 4-14 11a5 5 0 0 0 5 5c7 0 11-6 9-16Z"/>
+          <path d="M4 21c3-6 7-9 13-13"/>
+        </svg>
+      </span>
+      Schemes
+    </h2>
+    <ul class="panel-list">
+      {{ $today := now.Format "2006-01-02" }}
+      {{ $allSchemes := where .Site.RegularPages "Params.post_type" "schemes" }}
+
+      {{ $validSchemes := slice }}
+      {{ range $allSchemes }}
+        {{ $last := .Params.lastdate | default "" }}
+        {{ if or (eq $last "") (ge $last $today) }}
+          {{ $validSchemes = $validSchemes | append . }}
+        {{ end }}
+      {{ end }}
+
+      {{ $withDate := where $validSchemes "Date" "!=" nil }}
+      {{ $pinFirst := sort (where $withDate "Params.pin" "==" "first") "Date" "desc" }}
+      {{ $pinLast := sort (where $withDate "Params.pin" "==" "last") "Date" "desc" }}
+      {{ $middle := where $withDate "Params.pin" "!=" "first" }}
+      {{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+      {{ $.Scratch.Set "orderedSchemes" (slice) }}
+      {{ range $pinFirst }}{{ $.Scratch.Add "orderedSchemes" (slice .) }}{{ end }}
+      {{ range $normal }}{{ $.Scratch.Add "orderedSchemes" (slice .) }}{{ end }}
+      {{ range $pinLast }}{{ $.Scratch.Add "orderedSchemes" (slice .) }}{{ end }}
+      {{ $ordered := first 10 ($.Scratch.Get "orderedSchemes") }}
+
+      {{ range $ordered }}
+        <li>
+          <a class="panel-link" href="{{ .RelPermalink }}" target="_blank">
+            {{ if or (eq .Params.pin "first") (eq .Params.pin "last") }}
+              <span class="item-icon" aria-label="Pinned">📌</span>
+            {{ else }}
+              <img class="item-icon" src="/icons/category/schemes-leaf.svg" alt="">
+            {{ end }}
+            <span class="item-text">{{ .Title }}</span>
+            <span class="item-arrow">›</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="/latest-schemes/">View all schemes →</a></div>
+  </section>
+
+  <!-- 3. Education -->
+  <section class="portal-panel education">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/>
+          <path d="M4 5.5v14A2.5 2.5 0 0 1 6.5 17H20M8 7h8M8 11h8"/>
+        </svg>
+      </span>
+      Education
+    </h2>
+    <ul class="panel-list">
+      {{ $today := now.Format "2006-01-02" }}
+      {{ $allStudents := where .Site.RegularPages "Params.post-type" "student" }}
+      {{ $activePosts := where $allStudents "Params.activedate" "ge" $today }}
+      {{ $withDate := where $activePosts "Date" "!=" nil }}
+
+      {{ $pinFirst := sort (where $withDate "Params.pin" "==" "first") "Date" "desc" }}
+      {{ $pinLast := sort (where $withDate "Params.pin" "==" "last") "Date" "desc" }}
+      {{ $middle := where $withDate "Params.pin" "!=" "first" }}
+      {{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+      {{ $.Scratch.Set "orderedStudents" (slice) }}
+      {{ range $pinFirst }}{{ $.Scratch.Add "orderedStudents" (slice .) }}{{ end }}
+      {{ range $normal }}{{ $.Scratch.Add "orderedStudents" (slice .) }}{{ end }}
+      {{ range $pinLast }}{{ $.Scratch.Add "orderedStudents" (slice .) }}{{ end }}
+      {{ $ordered := first 15 ($.Scratch.Get "orderedStudents") }}
+
+      {{ range $ordered }}
+        <li>
+          <a class="panel-link" href="{{ .RelPermalink }}">
+            {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/education-book.svg") }}
+            <span class="item-text">{{ .Title }}</span>
+            <span class="item-arrow">›</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="#">More student resources →</a></div>
+  </section>
+
+  <!-- 4. Admit Card -->
+  <section class="portal-panel admit">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <circle cx="9" cy="10" r="2"/>
+          <path d="M6 16c.8-2 5.2-2 6 0M14 9h4M14 13h4"/>
+        </svg>
+      </span>
+      Admit Card
+    </h2>
+    <ul class="panel-list">
+      {{ range first 13 (where .Site.RegularPages ".Params.admitcard" "yes") }}
+        <li>
+          <a class="panel-link" href="{{ .Permalink }}">
+            {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/admit-card.svg") }}
+            <span class="item-text">{{ .Params.admitcardName }}</span>
+            <span class="item-arrow">›</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="/admit-card/">more admit cards →</a></div>
+  </section>
+
+  <!-- 5. Results -->
+  <section class="portal-panel results">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v5M8 21h8M9 18h6"/>
+        </svg>
+      </span>
+      Results
+    </h2>
+    <ul class="panel-list">
+      {{ range first 12 (where .Site.RegularPages ".Params.result" "yes") }}
+        <li>
+          <a class="panel-link" href="{{ .Permalink }}">
+            {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/results-trophy.svg") }}
+            <span class="item-text">{{ .Params.ResultName }}</span>
+            <span class="item-arrow">›</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="/results/">View more results →</a></div>
+  </section>
+
+  <!-- 6. PDF Forms -->
+  <section class="portal-panel pdf">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 2h9l5 5v15H5z"/>
+          <path d="M14 2v6h5M8 16h2a1.5 1.5 0 0 0 0-3H8v5M13 18v-5h1a2.5 2.5 0 0 1 0 5zM18 13h-2v5M16 15h2"/>
+        </svg>
+      </span>
+      PDF Forms
+    </h2>
+    <ul class="panel-list">
+      {{ $today := now.Format "2006-01-02" }}
+      {{ $allPdfPosts := where .Site.RegularPages "Params.pdfForm" "==" "yes" }}
+      {{ $withDate := where $allPdfPosts "Date" "!=" nil }}
+
+      {{ $pinFirst := sort (where $withDate "Params.pin" "==" "first") "Date" "desc" }}
+      {{ $pinLast := sort (where $withDate "Params.pin" "==" "last") "Date" "desc" }}
+      {{ $middle := where $withDate "Params.pin" "!=" "first" }}
+      {{ $normal := sort (where $middle "Params.pin" "!=" "last") "Date" "desc" }}
+
+      {{ $.Scratch.Set "orderedPdf" (slice) }}
+      {{ range $pinFirst }}{{ $.Scratch.Add "orderedPdf" (slice .) }}{{ end }}
+      {{ range $normal }}{{ $.Scratch.Add "orderedPdf" (slice .) }}{{ end }}
+      {{ range $pinLast }}{{ $.Scratch.Add "orderedPdf" (slice .) }}{{ end }}
+      {{ $ordered := first 10 ($.Scratch.Get "orderedPdf") }}
+
+      {{ range $ordered }}
+        <li>
+          <a class="panel-link" href="{{ .Permalink }}">
+            {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/pdf-document.svg") }}
+            <span class="item-text">
+              {{ if .Params.pdfName }}
+                {{ .Params.pdfName }}
+              {{ else }}
+                {{ .Title }}
+              {{ end }}
+            </span>
+            <span class="item-arrow">›</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="/pdf-forms">More Pdf Forms →</a></div>
+  </section>
+
+  <!-- 7. Scholarship -->
+  <section class="portal-panel scholarship">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m2 9 10-5 10 5-10 5zM6 11v6c4 3 8 3 12 0v-6M22 9v6"/>
+        </svg>
+      </span>
+      Scholarship
+    </h2>
+    <ul class="panel-list">
+      {{ $scholarship := .Site.GetPage "section" "scholarship" }}
+      {{ range $scholarship.RegularPages }}
+        <li>
+          <a class="panel-link" href="{{ .RelPermalink }}">
+            {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/scholarship-graduation.svg") }}
+            <span class="item-text">{{ .Params.RecommendName }}</span>
+            <span class="item-arrow">›</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="/scholarships/">More scholarships →</a></div>
+  </section>
+
+  <!-- 8. Quick Links -->
+  <section class="portal-panel quick">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 13a5 5 0 0 0 7.1 0l3-3A5 5 0 0 0 13 2.9l-1.7 1.7"/>
+          <path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/>
+        </svg>
+      </span>
+      Quick Links
+    </h2>
+    <ul class="panel-list">
+      {{ range first 10 (where .Site.RegularPages ".Params.important" "yes") }}
+        <li>
+          <a class="panel-link" href="{{ .Permalink }}">
+            {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/quick-links.svg") }}
+            <span class="item-text">{{ .Title }}</span>
+            <span class="item-arrow">›</span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="/important-updates/">View More Useful link →</a></div>
+  </section>
+
+  <!-- 9. Upcoming -->
+  <section class="portal-panel upcoming">
+    <h2 class="panel-heading">
+      <span class="heading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+        </svg>
+      </span>
+      Upcoming
+    </h2>
+    <ul class="panel-list">
+      {{ $today := now.Format "2006-01-02" }}
+      {{ $filteredPages := where .Site.RegularPages "Params.BeginDate" "ge" $today }}
+
+      {{ if $filteredPages }}
+        {{ range $filteredPages }}
+          <li>
+            <a class="panel-link" href="{{ .RelPermalink }}">
+              {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/upcoming-bell.svg") }}
+              <span class="item-text">{{ .Title }}</span>
+              <span class="item-arrow">›</span>
+            </a>
+          </li>
+        {{ end }}
+      {{ else }}
+        <li>
+          <a class="panel-empty" href="/latest-update/" target="_blank">
+            No upcoming posts or updates here. If available, they will be updated soon. Go to Latest Update
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="panel-footer"><a href="/upcoming-updates/">More Upcoming Update →</a></div>
+  </section>
+
+</main>
