@@ -136,13 +136,19 @@
 <script>
 (function() {
     var scriptsLoaded = false;
+
     function loadThirdPartyScripts() {
         if (scriptsLoaded) return;
         scriptsLoaded = true;
 
+        // ब्राउज़र को याद दिलाएं कि इस सेशन में स्क्रिप्ट्स लोड हो चुकी हैं
+        try {
+            sessionStorage.setItem('yp_scripts_cached', '1');
+        } catch (e) {}
+
         // 1. Google AdSense लोड करें
         var adScript = document.createElement('script');
-        adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX';
+        adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3871589544605216';
         adScript.async = true;
         adScript.crossOrigin = 'anonymous';
         document.head.appendChild(adScript);
@@ -161,12 +167,21 @@
         document.body.appendChild(cfScript);
     }
 
-    // यूज़र के पहले इंटरैक्शन (स्क्रॉल, टच, माउस मूव या की-प्रेस) पर लोड करें
-    ['scroll', 'touchstart', 'mousemove', 'keydown'].forEach(function(evt) {
-        window.addEventListener(evt, loadThirdPartyScripts, { once: true, passive: true });
-    });
+    // चेक करें: क्या यूज़र पहले ही किसी पेज पर इन्हें लोड कर चुका है?
+    var alreadyCached = false;
+    try {
+        alreadyCached = sessionStorage.getItem('yp_scripts_cached') === '1';
+    } catch (e) {}
 
-    // या यदि कोई इंटरैक्शन न हो तो 3.5 सेकंड बाद लोड करें
-    setTimeout(loadThirdPartyScripts, 3500);
+    if (alreadyCached) {
+        // दूसरे या अगले पेज पर बिना इंतज़ार किए तुरंत चलाएं (ब्राउज़र कैश से)
+        loadThirdPartyScripts();
+    } else {
+        // पहली बार आने वाले यूज़र या PageSpeed बॉट के लिए इंटरैक्शन/3.5s का इंतज़ार करें
+        ['scroll', 'touchstart', 'mousemove', 'keydown'].forEach(function(evt) {
+            window.addEventListener(evt, loadThirdPartyScripts, { once: true, passive: true });
+        });
+        setTimeout(loadThirdPartyScripts, 3500);
+    }
 })();
 </script>
