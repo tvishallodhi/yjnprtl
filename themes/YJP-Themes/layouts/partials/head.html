@@ -21,7 +21,7 @@
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 {{/* Adsense Ads */}}
- {{ partial "ads/adsense/anonymous.html" . }}
+
 <meta name="google-adsense-account" content="ca-pub-3871589544605216">
 
 
@@ -123,7 +123,7 @@
     {{ partial "head/cssStyles.html" . }}
   {{ partial "head/seo/faq-schema.html" . }}
     {{ partial "imp-codes/google-analytics.html" . }}
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+   
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
@@ -131,4 +131,35 @@
       appId: "78fbf614-3bcc-48c5-ab8f-dc1ddc53d8af",
     });
   });
+</script>
+
+<script>
+(function() {
+    var scriptsLoaded = false;
+    function loadThirdPartyScripts() {
+        if (scriptsLoaded) return;
+        scriptsLoaded = true;
+
+        // 1. Google AdSense लोड करें
+        var adScript = document.createElement('script');
+        adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3871589544605216';
+        adScript.async = true;
+        adScript.crossOrigin = 'anonymous';
+        document.head.appendChild(adScript);
+
+        // 2. OneSignal SDK लोड करें
+        var osScript = document.createElement('script');
+        osScript.src = 'https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js';
+        osScript.defer = true;
+        document.head.appendChild(osScript);
+    }
+
+    // यूज़र के स्क्रॉल, टच या माउस मूव करते ही लोड करें
+    ['scroll', 'touchstart', 'mousemove', 'keydown'].forEach(function(evt) {
+        window.addEventListener(evt, loadThirdPartyScripts, { once: true, passive: true });
+    });
+
+    // या अगर यूज़र कुछ न करे तो 3.5 सेकंड बाद अपने आप लोड करें
+    setTimeout(loadThirdPartyScripts, 3500);
+})();
 </script>
