@@ -94,341 +94,370 @@
 
 {{- $title := index $data "recruitment name" | default $page.Title -}}
 
-{{/* ================= MAIN CARD ================= */}}
+{{/* ================= MAIN WRAPPER ================= */}}
 
-<section class="yp-tile-overview" aria-labelledby="yp-tile-heading">
+<div class="yp-overview-wrapper">
 
-  <!-- HEADER -->
-  <header class="yp-tile-header">
+  <section class="yp-tile-overview" id="yp-overview-capture" aria-labelledby="yp-tile-heading">
 
-    <div class="yp-tile-header-inner">
+    <!-- HEADER -->
+    <header class="yp-tile-header">
 
-      <div class="yp-nurse-icon" aria-hidden="true">
-        <svg viewBox="0 0 64 64" fill="none">
-          <path d="M22 12a10 10 0 0 1 20 0"
-                stroke="currentColor" stroke-width="5"/>
-          <path d="M18 19h28v10a14 14 0 0 1-28 0V19Z"
-                fill="currentColor"/>
-          <path d="M29 5h6v13h-6zM25.5 8.5h13v6h-13z"
-                fill="#0876D1"/>
-          <path d="M9 59c1-13 9-21 23-21s22 8 23 21H9Z"
-                fill="currentColor"/>
-          <path d="M25 39l7 9 7-9"
-                stroke="#0876D1" stroke-width="3"/>
-        </svg>
-      </div>
+      <div class="yp-tile-header-inner">
 
-      <div class="yp-tile-heading-text">
-        <h2 id="yp-tile-heading">
-          {{ $title }} <span>— Overview</span>
-        </h2>
-      </div>
-
-    </div>
-
-    <svg class="yp-header-curve" viewBox="0 0 1000 65"
-         preserveAspectRatio="none" aria-hidden="true">
-      <path fill="#ffffff"
-        d="M0 45 C180 5 330 65 510 43 S830 20 1000 0 V65 H0Z"/>
-    </svg>
-
-  </header>
-
-  <div class="yp-tile-body">
-
-    <!-- ================= SHORT COLORFUL TILES ================= -->
-
-    {{- $tileCount := len $shortTiles -}}
-    {{- if gt $tileCount 0 -}}
-
-    {{- $tileThemes := slice
-      "theme-pink"
-      "theme-orange"
-      "theme-blue"
-      "theme-green"
-      "theme-purple"
-      "theme-teal"
-      "theme-coral"
-      "theme-indigo"
-      "theme-cyan"
-      "theme-rose"
-    -}}
-
-    {{- $gridClass := "yp-grid-3" -}}
-    {{- if eq $tileCount 1 -}}
-      {{- $gridClass = "yp-grid-1" -}}
-    {{- else if or (eq $tileCount 2) (eq $tileCount 4) -}}
-      {{- $gridClass = "yp-grid-2" -}}
-    {{- end -}}
-
-    <div class="yp-tile-grid {{ $gridClass }}" data-count="{{ $tileCount }}">
-
-      {{- range $index, $item := $shortTiles -}}
-
-        {{- $lbl := lower $item.label -}}
-        {{- $theme := index $tileThemes (mod $index (len $tileThemes)) -}}
-
-        <article class="yp-tile-box {{ $theme }}">
-
-          <div class="yp-tile-svg" aria-hidden="true">
-
-            {{- if in $lbl "vacanc" -}}
-              <svg viewBox="0 0 64 64" fill="currentColor">
-                <circle cx="32" cy="17" r="11"/>
-                <circle cx="12" cy="25" r="8"/>
-                <circle cx="52" cy="25" r="8"/>
-                <path d="M10 55c0-13 8-21 22-21s22 8 22 21H10Z"/>
-                <path d="M1 53c0-9 4-15 12-17 3 0 6 1 8 3-5 4-8 9-8 14H1ZM63 53c0-9-4-15-12-17-3 0-6 1-8 3 5 4 8 9 8 14h12Z"/>
-              </svg>
-
-            {{- else if in $lbl "qualif" -}}
-              <svg viewBox="0 0 64 64" fill="currentColor">
-                <path d="m2 22 30-15 30 15-30 15L2 22Z"/>
-                <path d="M14 30v15c10 10 26 10 36 0V30L32 40 14 30Z"/>
-                <path d="M58 25h4v22h-4z"/>
-              </svg>
-
-            {{- else if in $lbl "age" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="5"
-                   stroke-linecap="round">
-                <rect x="7" y="12" width="50" height="46" rx="7"/>
-                <path d="M20 5v14M44 5v14M8 26h48"/>
-                <path d="M20 36h2M32 36h2M44 36h2M20 47h2M32 47h2M44 47h2"/>
-              </svg>
-
-            {{- else if in $lbl "mode" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="5"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <rect x="10" y="7" width="44" height="37" rx="4"/>
-                <path d="M4 51h56l-5 6H9l-5-6Z"
-                      fill="currentColor"/>
-              </svg>
-
-            {{- else if in $lbl "location" -}}
-              <svg viewBox="0 0 64 64" fill="currentColor">
-                <path d="M32 4C17 4 8 15 8 29c0 17 24 34 24 34s24-17 24-34C56 15 47 4 32 4Zm0 34a10 10 0 1 1 0-20 10 10 0 0 1 0 20Z"/>
-              </svg>
-
-            {{- else if in $lbl "salary" -}}
-              <svg viewBox="0 0 64 64" fill="currentColor">
-                <ellipse cx="32" cy="13" rx="23" ry="10"/>
-                <path d="M9 13v12c0 13 46 13 46 0V13c0 13-46 13-46 0Z"/>
-                <path d="M9 31v12c0 13 46 13 46 0V31c0 13-46 13-46 0Z"/>
-              </svg>
-
-            {{- else if in $lbl "department" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4">
-                <path d="M5 25 32 7l27 18H5Z"/>
-                <path d="M10 26h44M14 27v25M26 27v25M38 27v25M50 27v25M7 54h50"/>
-              </svg>
-
-            {{- else if in $lbl "authority" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4">
-                <path d="M5 25 32 7l27 18H5Z"/>
-                <path d="M12 29v23M24 29v23M40 29v23M52 29v23M6 55h52"/>
-              </svg>
-
-            {{- else -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 8h22l12 12v36H17V8Z"/>
-                <path d="M39 8v13h12M25 32h18M25 42h18"/>
-              </svg>
-
-            {{- end -}}
-
-          </div>
-
-          <div class="yp-tile-divider" aria-hidden="true"></div>
-
-          <div class="yp-tile-content">
-            <div class="yp-tile-value">{{ $item.value }}</div>
-            <div class="yp-tile-label">{{ $item.label }}</div>
-          </div>
-
-        </article>
-
-      {{- end -}}
-
-    </div>
-
-    {{- end -}}
-
-    <!-- ================= POST NAMES BANNER ================= -->
-
-    {{- with $postName -}}
-
-    <div class="yp-info-banner yp-post-highlight {{ if eq $tileCount 0 }}yp-no-top-margin{{ end }}">
-
-      <div class="yp-info-icon" aria-hidden="true">
-        <svg viewBox="0 0 80 80" fill="none"
-             stroke="currentColor" stroke-width="5"
-             stroke-linecap="round" stroke-linejoin="round">
-          <path d="M10 35 40 8l30 27v37H10V35Z"/>
-          <path d="M30 72V48h20v24M36 28h8M40 24v16"/>
-          <path d="M18 45h6M56 45h6M18 56h6M56 56h6"/>
-        </svg>
-      </div>
-
-      <div class="yp-info-divider"></div>
-
-      <div class="yp-info-text">
-        <h3>Post Names:</h3>
-        <p>{{ . }}</p>
-      </div>
-
-    </div>
-
-    {{- end -}}
-
-    <!-- ================= LONG INFORMATION BANNERS ================= -->
-
-    {{- if gt (len $longItems) 0 -}}
-
-    <div class="yp-long-info-list {{ if and (eq $tileCount 0) (eq $postName "") }}yp-no-top-margin{{ end }}">
-
-      {{- range $index, $item := $longItems -}}
-
-        {{- $lbl := lower $item.label -}}
-        {{- $theme := index $bannerThemes (mod $index (len $bannerThemes)) -}}
-
-        <div class="yp-info-banner yp-long-banner {{ $theme }}">
-
-          <div class="yp-info-icon" aria-hidden="true">
-
-            {{- if in $lbl "selection" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="32" cy="32" r="25"/>
-                <path d="M20 32l8 8 17-18"/>
-              </svg>
-
-            {{- else if in $lbl "qualification" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4">
-                <path d="m4 22 28-15 28 15-28 15L4 22Z"/>
-                <path d="M15 30v15c10 10 24 10 34 0V30"/>
-              </svg>
-
-            {{- else if in $lbl "salary" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4">
-                <circle cx="32" cy="32" r="26"/>
-                <path d="M42 21c-3-5-17-6-19 2-2 8 19 5 19 14s-15 12-22 4M32 12v40"/>
-              </svg>
-
-            {{- else if in $lbl "age" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4">
-                <rect x="8" y="10" width="48" height="46" rx="5"/>
-                <path d="M20 5v12M44 5v12M8 25h48"/>
-              </svg>
-
-            {{- else if in $lbl "department" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4">
-                <path d="M5 25 32 7l27 18H5Z"/>
-                <path d="M10 26h44M14 27v25M26 27v25M38 27v25M50 27v25M7 54h50"/>
-              </svg>
-
-            {{- else if in $lbl "authority" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4">
-                <path d="M5 25 32 7l27 18H5Z"/>
-                <path d="M12 29v23M24 29v23M40 29v23M52 29v23M6 55h52"/>
-              </svg>
-
-            {{- else if in $lbl "location" -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4">
-                <path d="M32 59S10 39 10 25a22 22 0 1 1 44 0C54 39 32 59 32 59Z"/>
-                <circle cx="32" cy="25" r="8"/>
-              </svg>
-
-            {{- else -}}
-              <svg viewBox="0 0 64 64" fill="none"
-                   stroke="currentColor" stroke-width="4"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 8h22l12 12v36H17V8Z"/>
-                <path d="M39 8v13h12M25 32h18M25 42h18"/>
-              </svg>
-
-            {{- end -}}
-
-          </div>
-
-          <div class="yp-info-divider"></div>
-
-          <div class="yp-info-text">
-            <h3>{{ $item.label }}:</h3>
-            <p>{{ $item.value }}</p>
-          </div>
-
+        <div class="yp-nurse-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <path d="M22 12a10 10 0 0 1 20 0"
+                  stroke="currentColor" stroke-width="5"/>
+            <path d="M18 19h28v10a14 14 0 0 1-28 0V19Z"
+                  fill="currentColor"/>
+            <path d="M29 5h6v13h-6zM25.5 8.5h13v6h-13z"
+                  fill="#0876D1"/>
+            <path d="M9 59c1-13 9-21 23-21s22 8 23 21H9Z"
+                  fill="currentColor"/>
+            <path d="M25 39l7 9 7-9"
+                  stroke="#0876D1" stroke-width="3"/>
+          </svg>
         </div>
 
-      {{- end -}}
-
-    </div>
-
-    {{- end -}}
-
-    <!-- ================= LINK BANNERS - ALWAYS LAST ================= -->
-
-    {{- if gt (len $linkItems) 0 -}}
-
-    <div class="yp-link-list">
-
-      {{- range $index, $item := $linkItems -}}
-
-        {{- $themeIndex := mod (add $index 3) (len $bannerThemes) -}}
-        {{- $theme := index $bannerThemes $themeIndex -}}
-
-        <div class="yp-info-banner yp-link-card {{ $theme }}">
-
-          <div class="yp-info-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none"
-                 stroke="currentColor" stroke-width="4"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M26 38 18 46a13 13 0 0 1-18-18l13-13a13 13 0 0 1 18 0"/>
-              <path d="m38 26 8-8a13 13 0 0 1 18 18L51 49a13 13 0 0 1-18 0"/>
-              <path d="m22 42 20-20"/>
-            </svg>
-          </div>
-
-          <div class="yp-info-divider"></div>
-
-          <div class="yp-info-text">
-            <h3>{{ $item.label }}:</h3>
-            <p class="yp-link-url">{{ $item.url }}</p>
-          </div>
-
+        <div class="yp-tile-heading-text">
+          <h2 id="yp-tile-heading">
+            {{ $title }} <span>— YojanaPortal.com</span>
+          </h2>
         </div>
 
+      </div>
+
+      <svg class="yp-header-curve" viewBox="0 0 1000 65"
+           preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#ffffff"
+          d="M0 45 C180 5 330 65 510 43 S830 20 1000 0 V65 H0Z"/>
+      </svg>
+
+    </header>
+
+    <div class="yp-tile-body">
+
+      <!-- ================= SHORT COLORFUL TILES ================= -->
+
+      {{- $tileCount := len $shortTiles -}}
+      {{- if gt $tileCount 0 -}}
+
+      {{- $tileThemes := slice
+        "theme-pink"
+        "theme-orange"
+        "theme-blue"
+        "theme-green"
+        "theme-purple"
+        "theme-teal"
+        "theme-coral"
+        "theme-indigo"
+        "theme-cyan"
+        "theme-rose"
+      -}}
+
+      {{- $gridClass := "yp-grid-3" -}}
+      {{- if eq $tileCount 1 -}}
+        {{- $gridClass = "yp-grid-1" -}}
+      {{- else if or (eq $tileCount 2) (eq $tileCount 4) -}}
+        {{- $gridClass = "yp-grid-2" -}}
+      {{- end -}}
+
+      <div class="yp-tile-grid {{ $gridClass }}" data-count="{{ $tileCount }}">
+
+        {{- range $index, $item := $shortTiles -}}
+
+          {{- $lbl := lower $item.label -}}
+          {{- $theme := index $tileThemes (mod $index (len $tileThemes)) -}}
+
+          <article class="yp-tile-box {{ $theme }}">
+
+            <div class="yp-tile-svg" aria-hidden="true">
+
+              {{- if in $lbl "vacanc" -}}
+                <svg viewBox="0 0 64 64" fill="currentColor">
+                  <circle cx="32" cy="17" r="11"/>
+                  <circle cx="12" cy="25" r="8"/>
+                  <circle cx="52" cy="25" r="8"/>
+                  <path d="M10 55c0-13 8-21 22-21s22 8 22 21H10Z"/>
+                  <path d="M1 53c0-9 4-15 12-17 3 0 6 1 8 3-5 4-8 9-8 14H1ZM63 53c0-9-4-15-12-17-3 0-6 1-8 3 5 4 8 9 8 14h12Z"/>
+                </svg>
+
+              {{- else if in $lbl "qualif" -}}
+                <svg viewBox="0 0 64 64" fill="currentColor">
+                  <path d="m2 22 30-15 30 15-30 15L2 22Z"/>
+                  <path d="M14 30v15c10 10 26 10 36 0V30L32 40 14 30Z"/>
+                  <path d="M58 25h4v22h-4z"/>
+                </svg>
+
+              {{- else if in $lbl "age" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="5"
+                     stroke-linecap="round">
+                  <rect x="7" y="12" width="50" height="46" rx="7"/>
+                  <path d="M20 5v14M44 5v14M8 26h48"/>
+                  <path d="M20 36h2M32 36h2M44 36h2M20 47h2M32 47h2M44 47h2"/>
+                </svg>
+
+              {{- else if in $lbl "mode" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="5"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="10" y="7" width="44" height="37" rx="4"/>
+                  <path d="M4 51h56l-5 6H9l-5-6Z"
+                        fill="currentColor"/>
+                </svg>
+
+              {{- else if in $lbl "location" -}}
+                <svg viewBox="0 0 64 64" fill="currentColor">
+                  <path d="M32 4C17 4 8 15 8 29c0 17 24 34 24 34s24-17 24-34C56 15 47 4 32 4Zm0 34a10 10 0 1 1 0-20 10 10 0 0 1 0 20Z"/>
+                </svg>
+
+              {{- else if in $lbl "salary" -}}
+                <svg viewBox="0 0 64 64" fill="currentColor">
+                  <ellipse cx="32" cy="13" rx="23" ry="10"/>
+                  <path d="M9 13v12c0 13 46 13 46 0V13c0 13-46 13-46 0Z"/>
+                  <path d="M9 31v12c0 13 46 13 46 0V31c0 13-46 13-46 0Z"/>
+                </svg>
+
+              {{- else if in $lbl "department" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4">
+                  <path d="M5 25 32 7l27 18H5Z"/>
+                  <path d="M10 26h44M14 27v25M26 27v25M38 27v25M50 27v25M7 54h50"/>
+                </svg>
+
+              {{- else if in $lbl "authority" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4">
+                  <path d="M5 25 32 7l27 18H5Z"/>
+                  <path d="M12 29v23M24 29v23M40 29v23M52 29v23M6 55h52"/>
+                </svg>
+
+              {{- else -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 8h22l12 12v36H17V8Z"/>
+                  <path d="M39 8v13h12M25 32h18M25 42h18"/>
+                </svg>
+
+              {{- end -}}
+
+            </div>
+
+            <div class="yp-tile-divider" aria-hidden="true"></div>
+
+            <div class="yp-tile-content">
+              <div class="yp-tile-value">{{ $item.value }}</div>
+              <div class="yp-tile-label">{{ $item.label }}</div>
+            </div>
+
+          </article>
+
+        {{- end -}}
+
+      </div>
+
+      {{- end -}}
+
+      <!-- ================= POST NAMES BANNER ================= -->
+
+      {{- with $postName -}}
+
+      <div class="yp-info-banner yp-post-highlight {{ if eq $tileCount 0 }}yp-no-top-margin{{ end }}">
+
+        <div class="yp-info-icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none"
+               stroke="currentColor" stroke-width="5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 35 40 8l30 27v37H10V35Z"/>
+            <path d="M30 72V48h20v24M36 28h8M40 24v16"/>
+            <path d="M18 45h6M56 45h6M18 56h6M56 56h6"/>
+          </svg>
+        </div>
+
+        <div class="yp-info-divider"></div>
+
+        <div class="yp-info-text">
+          <h3>Post Names:</h3>
+          <p>{{ . }}</p>
+        </div>
+
+      </div>
+
+      {{- end -}}
+
+      <!-- ================= LONG INFORMATION BANNERS ================= -->
+
+      {{- if gt (len $longItems) 0 -}}
+
+      <div class="yp-long-info-list {{ if and (eq $tileCount 0) (eq $postName "") }}yp-no-top-margin{{ end }}">
+
+        {{- range $index, $item := $longItems -}}
+
+          {{- $lbl := lower $item.label -}}
+          {{- $theme := index $bannerThemes (mod $index (len $bannerThemes)) -}}
+
+          <div class="yp-info-banner yp-long-banner {{ $theme }}">
+
+            <div class="yp-info-icon" aria-hidden="true">
+
+              {{- if in $lbl "selection" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="32" cy="32" r="25"/>
+                  <path d="M20 32l8 8 17-18"/>
+                </svg>
+
+              {{- else if in $lbl "qualification" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4">
+                  <path d="m4 22 28-15 28 15-28 15L4 22Z"/>
+                  <path d="M15 30v15c10 10 24 10 34 0V30"/>
+                </svg>
+
+              {{- else if in $lbl "salary" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4">
+                  <circle cx="32" cy="32" r="26"/>
+                  <path d="M42 21c-3-5-17-6-19 2-2 8 19 5 19 14s-15 12-22 4M32 12v40"/>
+                </svg>
+
+              {{- else if in $lbl "age" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4">
+                  <rect x="8" y="10" width="48" height="46" rx="5"/>
+                  <path d="M20 5v12M44 5v12M8 25h48"/>
+                </svg>
+
+              {{- else if in $lbl "department" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4">
+                  <path d="M5 25 32 7l27 18H5Z"/>
+                  <path d="M10 26h44M14 27v25M26 27v25M38 27v25M50 27v25M7 54h50"/>
+                </svg>
+
+              {{- else if in $lbl "authority" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4">
+                  <path d="M5 25 32 7l27 18H5Z"/>
+                  <path d="M12 29v23M24 29v23M40 29v23M52 29v23M6 55h52"/>
+                </svg>
+
+              {{- else if in $lbl "location" -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4">
+                  <path d="M32 59S10 39 10 25a22 22 0 1 1 44 0C54 39 32 59 32 59Z"/>
+                  <circle cx="32" cy="25" r="8"/>
+                </svg>
+
+              {{- else -}}
+                <svg viewBox="0 0 64 64" fill="none"
+                     stroke="currentColor" stroke-width="4"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 8h22l12 12v36H17V8Z"/>
+                  <path d="M39 8v13h12M25 32h18M25 42h18"/>
+                </svg>
+
+              {{- end -}}
+
+            </div>
+
+            <div class="yp-info-divider"></div>
+
+            <div class="yp-info-text">
+              <h3>{{ $item.label }}:</h3>
+              <p>{{ $item.value }}</p>
+            </div>
+
+          </div>
+
+        {{- end -}}
+
+      </div>
+
+      {{- end -}}
+
+      <!-- ================= LINK BANNERS - ALWAYS LAST ================= -->
+
+      {{- if gt (len $linkItems) 0 -}}
+
+      <div class="yp-link-list">
+
+        {{- range $index, $item := $linkItems -}}
+
+          {{- $themeIndex := mod (add $index 3) (len $bannerThemes) -}}
+          {{- $theme := index $bannerThemes $themeIndex -}}
+
+          <div class="yp-info-banner yp-link-card {{ $theme }}">
+
+            <div class="yp-info-icon" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none"
+                   stroke="currentColor" stroke-width="4"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="M26 38 18 46a13 13 0 0 1-18-18l13-13a13 13 0 0 1 18 0"/>
+                <path d="m38 26 8-8a13 13 0 0 1 18 18L51 49a13 13 0 0 1-18 0"/>
+                <path d="m22 42 20-20"/>
+              </svg>
+            </div>
+
+            <div class="yp-info-divider"></div>
+
+            <div class="yp-info-text">
+              <h3>{{ $item.label }}:</h3>
+              <p class="yp-link-url">{{ $item.url }}</p>
+            </div>
+
+          </div>
+
+        {{- end -}}
+
+      </div>
+
       {{- end -}}
 
     </div>
 
-    {{- end -}}
+    <!-- BOTTOM WAVE -->
+    <div class="yp-bottom-wave" aria-hidden="true">
+      <svg viewBox="0 0 1000 45" preserveAspectRatio="none">
+        <path fill="#0876D1"
+          d="M0 20 C180 45 320 4 510 20 S830 40 1000 5 V45 H0Z"/>
+        <path fill="#0756B5"
+          d="M0 34 C200 45 350 20 520 30 S850 43 1000 24 V45 H0Z"/>
+      </svg>
+    </div>
+
+  </section>
+
+  <!-- ================= ACTION BUTTONS (DOWNLOAD & BLOB SHARE) ================= -->
+  <div class="yp-action-bar" data-filename="{{ $title | urlize }}-overview.png" data-share-title="{{ $title }} — Overview">
+
+    <button type="button" class="yp-action-btn yp-btn-download" id="ypDownloadBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      <span>Download Card</span>
+    </button>
+
+    <button type="button" class="yp-action-btn yp-btn-share" id="ypShareBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="18" cy="5" r="3"/>
+        <circle cx="6" cy="12" r="3"/>
+        <circle cx="18" cy="19" r="3"/>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+      </svg>
+      <span>Share Image</span>
+    </button>
 
   </div>
 
-  <!-- BOTTOM WAVE -->
-  <div class="yp-bottom-wave" aria-hidden="true">
-    <svg viewBox="0 0 1000 45" preserveAspectRatio="none">
-      <path fill="#0876D1"
-        d="M0 20 C180 45 320 4 510 20 S830 40 1000 5 V45 H0Z"/>
-      <path fill="#0756B5"
-        d="M0 34 C200 45 350 20 520 30 S850 43 1000 24 V45 H0Z"/>
-    </svg>
-  </div>
-
-</section>
+</div>
 
 {{- end -}}
 
@@ -439,15 +468,22 @@
    Smart Responsive Grid + Swapped Typography
 ========================================= */
 
+.yp-overview-wrapper {
+  width: 100%;
+  max-width: 960px;
+  margin: 22px auto;
+}
+
 .yp-tile-overview,
-.yp-tile-overview * {
+.yp-tile-overview *,
+.yp-action-bar,
+.yp-action-bar * {
   box-sizing: border-box;
 }
 
 .yp-tile-overview {
   width: 100%;
-  max-width: 960px;
-  margin: 22px auto;
+  margin: 0;
   overflow: hidden;
   background: #fff;
   border: 1.5px solid #d7e5f5;
@@ -455,6 +491,85 @@
   box-shadow: 0 6px 18px rgba(7, 86, 181, .10);
   color: #111827;
   font-family: inherit;
+}
+
+/* =========================================
+   ACTION BUTTONS (DOWNLOAD & SHARE)
+========================================= */
+
+.yp-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.yp-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 165px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+}
+
+.yp-action-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .16);
+}
+
+.yp-action-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.yp-action-btn:disabled {
+  opacity: 0.72;
+  cursor: wait;
+}
+
+.yp-action-btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.yp-btn-download {
+  background: linear-gradient(135deg, #063879, #0879d9);
+}
+
+.yp-btn-share {
+  background: linear-gradient(135deg, #079447, #0ab659);
+}
+
+@media (max-width: 540px) {
+  .yp-action-bar {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .yp-action-btn {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .yp-action-btn svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* =========================================
@@ -790,7 +905,6 @@
 
 /* =========================================
    COMMON INFORMATION BANNERS
-   (यहाँ भी h3 छोटा और p बड़ा/बोल्ड कर दिया गया है)
 ========================================= */
 
 .yp-info-banner {
@@ -832,7 +946,6 @@
   min-width: 0;
 }
 
-/* h3 (Label) को छोटा और हल्का रखा गया है */
 .yp-info-text h3 {
   margin: 0 0 2px;
   color: #4b5563;
@@ -841,7 +954,6 @@
   line-height: 1.3;
 }
 
-/* p (Value) को बड़ा और प्रमुख रखा गया है */
 .yp-info-text p {
   margin: 0;
   color: #082b64;
@@ -1282,7 +1394,6 @@
     min-height: 38px;
   }
 
-  /* मोबाइल पर भी h3 (Label) छोटा और p (Value) बड़ा */
   .yp-info-text h3 {
     font-size: 11px;
     margin-bottom: 2px;
@@ -1395,3 +1506,119 @@
 }
 
 </style>
+
+<!-- ================= VANILLA JS: PNG DOWNLOAD & BLOB SHARE ================= -->
+<script>
+(function () {
+  const cardEl = document.getElementById('yp-overview-capture');
+  const actionBar = document.querySelector('.yp-action-bar');
+  const downloadBtn = document.getElementById('ypDownloadBtn');
+  const shareBtn = document.getElementById('ypShareBtn');
+
+  if (!cardEl || !actionBar || !downloadBtn || !shareBtn) return;
+
+  const fileName = actionBar.getAttribute('data-filename') || 'yojna-portal-overview.png';
+  const shareTitle = actionBar.getAttribute('data-share-title') || 'Recruitment Overview';
+
+  // html-to-image लाइब्रेरी को केवल बटन क्लिक पर ही लोड करें (Page Speed पर 0 असर)
+  function loadHtmlToImage() {
+    return new Promise((resolve, reject) => {
+      if (window.htmlToImage) {
+        resolve(window.htmlToImage);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js';
+      script.onload = () => resolve(window.htmlToImage);
+      script.onerror = () => reject(new Error('Image generator load failed'));
+      document.head.appendChild(script);
+    });
+  }
+
+  // कार्ड को हाई-क्वालिटी PNG Blob में बदलें
+  async function generateCardBlob() {
+    const htmlToImage = await loadHtmlToImage();
+    return await htmlToImage.toBlob(cardEl, {
+      pixelRatio: 2,
+      backgroundColor: '#ffffff',
+      cacheBust: true
+    });
+  }
+
+  function setButtonLoading(btn, isLoading, loadingText, defaultText) {
+    const span = btn.querySelector('span');
+    btn.disabled = isLoading;
+    if (span) span.textContent = isLoading ? loadingText : defaultText;
+  }
+
+  // 1. DOWNLOAD BUTTON HANDLER
+  downloadBtn.addEventListener('click', async () => {
+    setButtonLoading(downloadBtn, true, 'Generating...', 'Download Card');
+    try {
+      const blob = await generateCardBlob();
+      if (!blob) throw new Error('Blob generation failed');
+
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+    } catch (err) {
+      console.error(err);
+      alert('इमेज डाउनलोड करने में समस्या आई। कृपया पुनः प्रयास करें।');
+    } finally {
+      setButtonLoading(downloadBtn, false, 'Generating...', 'Download Card');
+    }
+  });
+
+  // 2. BLOB SHARE BUTTON HANDLER
+  shareBtn.addEventListener('click', async () => {
+    setButtonLoading(shareBtn, true, 'Preparing...', 'Share Image');
+    try {
+      const blob = await generateCardBlob();
+      if (!blob) throw new Error('Blob generation failed');
+
+      const imageFile = new File([blob], fileName, { type: 'image/png' });
+
+      // मोबाइल / सपोर्टेड ब्राउज़र पर सीधे Blob File शेयर करें
+      if (navigator.canShare && navigator.canShare({ files: [imageFile] })) {
+        await navigator.share({
+          title: shareTitle,
+          text: shareTitle + '\n' + window.location.href,
+          files: [imageFile]
+        });
+      }
+      // डेस्कटॉप ब्राउज़र जहाँ File Share नहीं है, वहाँ Clipboard में इमेज कॉपी करें
+      else if (navigator.clipboard && window.ClipboardItem) {
+        await navigator.clipboard.write([
+          new ClipboardItem({ 'image/png': blob })
+        ]);
+        const span = shareBtn.querySelector('span');
+        if (span) span.textContent = 'Image Copied!';
+        setTimeout(() => {
+          if (span) span.textContent = 'Share Image';
+        }, 2500);
+      }
+      // अन्यथा Blob को नए टैब में खोलें
+      else {
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, '_blank');
+      }
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        console.error(err);
+        alert('इमेज शेयर नहीं हो सकी। आप Download Card बटन का उपयोग कर सकते हैं।');
+      }
+    } finally {
+      if (shareBtn.querySelector('span').textContent !== 'Image Copied!') {
+        setButtonLoading(shareBtn, false, 'Preparing...', 'Share Image');
+      } else {
+        shareBtn.disabled = false;
+      }
+    }
+  });
+})();
+</script>
