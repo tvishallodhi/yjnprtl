@@ -3,7 +3,7 @@
 
 {{- if eq ($page.Date.Format "2006-01-02") (now.Format "2006-01-02") -}}
 
-  <img src="/gif/new.gif" alt="New" class="new-icon">
+  <img src="/gif/new-stamp-blinking.svg" alt="New" class="item-icon">
 
 {{- else if or (eq $page.Params.pin "first") (eq $page.Params.pin "last") -}}
 

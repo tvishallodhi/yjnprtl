@@ -108,11 +108,7 @@
       {{ range $ordered }}
         <li>
           <a class="panel-link" href="{{ .RelPermalink }}" target="_blank">
-            {{ if or (eq .Params.pin "first") (eq .Params.pin "last") }}
-              <span class="item-icon" aria-label="Pinned">📌</span>
-            {{ else }}
-              <img class="item-icon" src="/icons/category/schemes-leaf.svg" alt="">
-            {{ end }}
+            {{ partial "imp-codes/post-icon.html" (dict "page" . "icon" "/icons/category/schemes-leaf.svg") }}
             <span class="item-text">{{ .Title }}</span>
             <span class="item-arrow">›</span>
           </a>
