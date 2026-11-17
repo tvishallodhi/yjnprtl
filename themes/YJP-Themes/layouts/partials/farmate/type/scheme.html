@@ -108,7 +108,9 @@
       <div class="yp-table-wrapper" id="links">
         {{ partial "farmate/link-table.html" . }}
       </div>
+
     {{ end }}
+ {{ partial "imp-codes/pdfLinks.html" . }}
 
        {{/* 9. FAQs */}}
     {{ if .Params.faqs }}
@@ -121,6 +123,8 @@
     {{ end }}
 
     {{ partial "farmate/related-promo-card.html" . }}
+    {{ partial "farmate/jobs/overviews.html" . }}
+
 
     {{/* Important Note Notice */}}
     {{ if .Params.impnote }}
