@@ -72,13 +72,13 @@ notAlternative = true
   date = 2025-07-03T10:02:12+05:30
   description = "Lightweight, language-aware portal framework."
   defaultSidebarIcon = "↪️"
-  defaultLanguage = ""
+  defaultLanguage = "en-hi"
  logo = "images/logo-source.png"
   sitemap_custom_urls = [
     # "/custom-tool-path/",
     # "/external-service/"
   ]
-
+  
 [related]
   threshold = 30
   toLower = true

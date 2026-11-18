@@ -1,7 +1,8 @@
 +++
-title = 'YOJANA PORTAL 2027: SARKARI NAUKARI, SCHEMES, RESULTS & ADMITCARD UPDATE'
-date = 2026-11-11T18:30:00+05:30
-lastmod = 2026-11-15T18:30:00+05:30
+  seo_title = 'Yojana Portal 2027 - Latest Jobs, Schemes & Sarkari Results'
+  description = 'Yojana Portal par payein latest Sarkari Naukari, Government Schemes (Yojana), Admit Card, aur Sarkari Results ki sabse tez jankari.'
+date = 2026-11-18T09:30:00+05:30
+lastmod = 2026-11-18T09:30:00+05:30
 draft = false
 +++
 
