@@ -12,14 +12,14 @@
   {{ if $isOrdered }}<ol class="scheme-list ordered-list">{{ else }}<ul class="scheme-list unordered-list">{{ end }}
     {{ range $items }}
       {{ $match := findRESubmatch `^(.*?)(?:\+{3}|/{3}|:{3}|[:ः])(.*)$` . }}
-      <li>
+      <ul>
         {{ if $match }}
           {{ $item := index $match 0 }}
-          <b>{{ index $item 1 | strings.TrimSpace | safeHTML }}</b>: {{ index $item 2 | strings.TrimSpace | safeHTML }}
+          <b style="color:var(--primary-color);">{{ index $item 1 | strings.TrimSpace | safeHTML }}</b>: {{ index $item 2 | strings.TrimSpace | safeHTML }}
         {{ else }}
-          {{ . | strings.TrimSpace | safeHTML }}
+        <span style="color:rgb(136, 44, 2);"> » </span>  {{ . | strings.TrimSpace | safeHTML }}
         {{ end }}
-      </li>
+      </ul>
     {{ end }}
   {{ if $isOrdered }}</ol>{{ else }}</ul>{{ end }}
 {{ end }}

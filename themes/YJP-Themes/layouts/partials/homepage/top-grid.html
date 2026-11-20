@@ -109,7 +109,8 @@
           </div>
 
           {{/* Post Title */}}
-          <div class="yp-card-title">{{ $page.Title }}</div>
+          {{ $cardTitle := $page.Params.RecommendName | default $page.Title }}
+           <div class="yp-card-title">{{ $cardTitle }}</div>
 
           {{/* Right Circular Arrow */}}
           <div class="yp-arrow-circle">

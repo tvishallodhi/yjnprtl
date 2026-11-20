@@ -1,0 +1,224 @@
+{{- with site.Data.officialLinks -}}
+
+<section class="official-links">
+
+  <div class="official-links-header">
+    <div>
+      <span class="official-links-label">IMPORTANT PORTALS</span>
+
+      <h2>{{ .title | default "सरकारी सेवाएं और महत्वपूर्ण लिंक" }}</h2>
+
+      <p>{{ .description }}</p>
+    </div>
+  </div>
+
+  <div class="official-links-grid">
+
+    {{- range .items -}}
+      {{- $item := . -}}
+      {{- $url := $item.url | default "#" -}}
+
+      <a
+        href="{{ $url }}"
+        class="official-service-card"
+        {{ if ne $url "#" }}target="_blank" rel="noopener noreferrer"{{ end }}
+      >
+
+        {{ with $item.badge }}
+          <span class="official-card-badge{{ with $item.badgeClass }} badge-{{ . }}{{ end }}">
+            {{ . }}
+          </span>
+        {{ end }}
+
+        <div class="official-svg-box">
+          <img
+            src="{{ $item.svgicon | default "/icons/default.svg" }}"
+            alt="{{ $item.title }}"
+            width="38"
+            height="38"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="official-service-title">
+          {{ $item.title }}
+        </span>
+
+        <span class="official-service-desc">
+          {{ $item.description }}
+        </span>
+
+      </a>
+
+    {{- end -}}
+
+  </div>
+
+</section>
+
+{{- end -}}
+
+<style>
+    .official-links {
+  width: 100%;
+  margin: 25px 0;
+}
+
+.official-links-header {
+  margin-bottom: 18px;
+}
+
+.official-links-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.official-links-header h2 {
+  font-size: 22px;
+  font-weight: 750;
+  margin: 0 0 6px;
+  color: var(--heading-color, #172033);
+}
+
+.official-links-header p {
+  font-size: 14px;
+  color: var(--text-muted, #64748b);
+  margin: 0;
+}
+
+.official-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.official-service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 18px 15px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 13px;
+  background: var(--card-bg, #fff);
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease,
+              border-color .2s ease;
+}
+
+.official-service-card::before {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  right: -45px;
+  top: -45px;
+  border-radius: 50%;
+  background: var(--card-accent, #dbeafe);
+  opacity: .45;
+  pointer-events: none;
+}
+
+.official-service-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--card-accent, #93c5fd);
+  box-shadow: 0 7px 20px rgba(15, 23, 42, .08);
+}
+
+.official-svg-box {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--card-icon-bg, #eff6ff);
+  margin-bottom: 13px;
+}
+
+.official-svg-box img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.official-service-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--heading-color, #172033);
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.official-service-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted, #64748b);
+}
+
+.official-card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 7px;
+  border-radius: 20px;
+  color: #475569;
+  background: #f1f5f9;
+}
+
+.official-card-badge.badge-mp {
+  color: #9a3412;
+  background: #ffedd5;
+}
+
+.official-card-badge.badge-new {
+  color: #047857;
+  background: #d1fae5;
+}
+
+.official-card-badge.badge-hot {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .official-links-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .official-links-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .official-service-card {
+    padding: 14px 12px;
+    border-radius: 11px;
+  }
+
+  .official-service-title {
+    font-size: 13px;
+  }
+
+  .official-service-desc {
+    font-size: 11px;
+  }
+
+  .official-links-header h2 {
+    font-size: 19px;
+  }
+}
+</style>

@@ -1,7 +1,9 @@
 ---
 title: "Search"
-lang: "hi"
+lang: "hi-en"
 icon: '🔎'
+aliases: "/keyword/"
 type: 'pages'
+
 layout: 'google-search'
 ---

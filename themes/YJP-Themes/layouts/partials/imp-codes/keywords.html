@@ -1,0 +1,33 @@
+
+{{/* Related Keywords Partial */}}
+
+{{ $page := . }}
+{{ $keywords := $page.Params.keywords }}
+{{ $name := $page.Params.recommdedName | default $page.Title }}
+
+{{ if or $keywords $name }}
+<div class="related-keywords-wrap">
+
+  <strong class="related-keywords-title">Related Keywords</strong>
+
+  <div class="related-keywords">
+
+    {{ with $name }}
+    <a href="https://www.google.com/search?q={{ . | urlquery }}+site%3Ayojanaportal.com"
+       class="keyword-tag google-keyword"
+       target="_blank"
+       rel="noopener noreferrer">
+      🔎<b>Google</b> : {{ . }} 
+    </a>
+    {{ end }}
+
+    {{ range $keywords }}
+    <a href="/search?q={{ . | urlquery }}"
+       class="keyword-tag">
+      🔎 {{ . }}
+    </a>
+    {{ end }}
+
+  </div>
+</div>
+{{ end }}
