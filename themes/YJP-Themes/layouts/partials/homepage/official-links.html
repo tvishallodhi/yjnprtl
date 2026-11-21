@@ -1,0 +1,283 @@
+{{- with site.Data.officialLinks -}}
+
+<section class="official-links" id="official-links">
+
+  <!-- Curved Header Card -->
+  <div class="official-links-header">
+    <div class="header-content">
+      <span class="official-links-label">IMPORTANT PORTALS</span>
+
+      <h2>{{ .title | default "सरकारी सेवाएं और महत्वपूर्ण लिंक" }}</h2>
+
+      <p>{{ .description }}</p>
+    </div>
+  </div>
+
+  <!-- Service Cards Grid -->
+  <div class="official-links-grid">
+
+    {{- range .items -}}
+      {{- $item := . -}}
+      {{- $url := $item.url | default "#" -}}
+
+      <a
+        href="{{ $url }}"
+        class="official-service-card"
+        {{ if ne $url "#" }}target="_blank" rel="noopener noreferrer"{{ end }}
+      >
+
+        {{ with $item.badge }}
+          <span class="official-card-badge{{ with $item.badgeClass }} badge-{{ . }}{{ end }}">
+            {{ . }}
+          </span>
+        {{ end }}
+
+        <div class="official-svg-box">
+          <img
+            src="{{ $item.svgicon | default "/icons/default.svg" }}"
+            alt="{{ $item.title }}"
+            width="38"
+            height="38"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="official-service-title">
+          {{ $item.title }}
+        </span>
+
+        <span class="official-service-desc">
+          {{ $item.description }}
+        </span>
+
+      </a>
+
+    {{- end -}}
+
+  </div>
+
+</section>
+
+{{- end -}}
+
+<style>
+.official-links {
+  width: 100%;
+  margin: 25px 0;
+}
+
+/* =========================================
+   Curved Header Card Design
+   ========================================= */
+.official-links-header {
+  position: relative;
+  background: var(--background); /* आपके थीम का ग्रेडिएंट */
+  padding: 28px 26px 36px;
+  margin-bottom: 24px;
+  border-radius: 20px 20px 50% 50% / 20px 20px 28px 28px; /* नीचे की तरफ स्मूद कर्व */
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  text-align: center; /* सेंटर अलाइन कर्व के साथ ज्यादा अच्छा दिखता है */
+}
+
+/* हेडर के अंदर डेकोरेटिव कर्व्ड गोले */
+.official-links-header::before,
+.official-links-header::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.official-links-header::before {
+  width: 180px;
+  height: 180px;
+  top: -60px;
+  left: -40px;
+}
+
+.official-links-header::after {
+  width: 140px;
+  height: 140px;
+  bottom: -50px;
+  right: -20px;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.official-links-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+
+.official-links-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.official-links-header p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 auto;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   Cards Grid & Items
+   ========================================= */
+.official-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.official-service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 18px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--bg-surface);
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.official-service-card::before {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  right: -45px;
+  top: -45px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  opacity: .45;
+  pointer-events: none;
+}
+
+.official-service-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--card-accent-hover);
+  box-shadow: var(--box-shadow);
+}
+
+.official-svg-box {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--card-icon-bg);
+  margin-bottom: 13px;
+}
+
+.official-svg-box img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.official-service-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.official-service-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.official-card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 7px;
+  border-radius: 20px;
+  color: var(--badge-text);
+  background: var(--badge-bg);
+}
+
+.official-card-badge.badge-mp {
+  color: var(--badge-mp-text);
+  background: var(--badge-mp-bg);
+}
+
+.official-card-badge.badge-new {
+  color: var(--badge-new-text);
+  background: var(--badge-new-bg);
+}
+
+.official-card-badge.badge-hot {
+  color: var(--badge-hot-text);
+  background: var(--badge-hot-bg);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .official-links-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .official-links-header {
+    padding: 22px 16px 28px;
+    border-radius: 16px 16px 50% 50% / 16px 16px 20px 20px;
+  }
+
+  .official-links-header h2 {
+    font-size: 19px;
+  }
+
+  .official-links-header p {
+    font-size: 12px;
+  }
+
+  .official-links-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .official-service-card {
+    padding: 14px 12px;
+    border-radius: 11px;
+  }
+
+  .official-service-title {
+    font-size: 13px;
+  }
+
+  .official-service-desc {
+    font-size: 11px;
+  }
+}
+</style>

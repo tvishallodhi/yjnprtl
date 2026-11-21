@@ -54,6 +54,39 @@
   --border-radius: 6px;
   --card-width: 350px;
   --font-size: 16px;
+
+  /* Official Links & Service Cards Tokens (नये जोड़े गए वेरिएबल्स) */
+  --card-accent: #dbeafe;
+  --card-accent-hover: #93c5fd;
+  --card-icon-bg: #eff6ff;
+  --badge-mp-bg: #ffedd5;
+  --badge-mp-text: #9a3412;
+  --badge-new-bg: #d1fae5;
+  --badge-new-text: #047857;
+  --badge-hot-bg: #fee2e2;
+  --badge-hot-text: #b91c1c;
+
+  /* ...आपके पुराने सभी वेरिएबल्स... */
+
+  /* Quick Links Curved Orange Wrapper Tokens */
+  --ql-wrapper-bg: linear-gradient(135deg, #fffaf5 0%, #ffedd5 50%, #fed7aa 100%);
+  --ql-wrapper-border: #fed7aa;
+  --ql-wrapper-shadow: 0 15px 35px -10px rgba(249, 115, 22, 0.14);
+  --ql-decor-glow: rgba(251, 146, 60, 0.18);
+  --ql-decor-blob: rgba(255, 255, 255, 0.45);
+  
+  --ql-card-bg: rgba(255, 255, 255, 0.88);
+  --ql-card-border: rgba(255, 255, 255, 0.9);
+  --ql-card-hover-bg: var(--bg-surface, #ffffff);
+  --ql-card-hover-border: #fb923c;
+  --ql-card-shadow: 0 4px 12px rgba(234, 88, 12, 0.05);
+  --ql-card-hover-shadow: 0 12px 24px -6px rgba(249, 115, 22, 0.22);
+  --ql-title-hover: #ea580c;
+
+  /* Asymmetric Curved Radii */
+  --radius-wrapper-curved: 32px 12px 32px 12px;
+  --radius-card-curved: 22px 8px 22px 8px;
+  --radius-icon-curved: 18px 8px 18px 8px;
 }
 
 [data-theme="dark"] {
@@ -72,6 +105,7 @@
   --background: linear-gradient(135deg, #1E3A8A 0%, #5B21B6 50%, #0E7490 100%);
   --link-color: #dbfd5f;
   --link-hover: #e6ff02;
+
   /* Typography */
   --text-main: #e3e3e3;
   --text-muted: #9e9e9e;
@@ -98,4 +132,30 @@
   --btn-notify-text: #f8fafc;
   --btn-disabled-bg: #2a2a2a;
   --btn-disabled-text: #666666;
+
+  /* Official Links & Service Cards Tokens (Dark Mode सपोर्ट) */
+  --card-accent: #1e3a8a;
+  --card-accent-hover: #3b82f6;
+  --card-icon-bg: #1e293b;
+  --badge-mp-bg: #431407;
+  --badge-mp-text: #fdba74;
+  --badge-new-bg: #064e3b;
+  --badge-new-text: #6ee7b7;
+  --badge-hot-bg: #450a0a;
+  --badge-hot-text: #fca5a5;
+
+  /* Quick Links Curved Orange Wrapper Tokens (Dark Mode) */
+  --ql-wrapper-bg: linear-gradient(135deg, #1c1917 0%, #291d16 50%, #3b2314 100%);
+  --ql-wrapper-border: #431407;
+  --ql-wrapper-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+  --ql-decor-glow: rgba(249, 115, 22, 0.15);
+  --ql-decor-blob: rgba(255, 255, 255, 0.03);
+
+  --ql-card-bg: rgba(36, 36, 36, 0.85);
+  --ql-card-border: var(--border-color, #333333);
+  --ql-card-hover-bg: #2e2925;
+  --ql-card-hover-border: #f97316;
+  --ql-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --ql-card-hover-shadow: 0 12px 24px -6px rgba(249, 115, 22, 0.25);
+  --ql-title-hover: #fb923c;
 }
