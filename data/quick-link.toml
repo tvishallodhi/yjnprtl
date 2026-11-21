@@ -1,0 +1,97 @@
+[[items]]
+title = "Aadhaar Card"
+url = "https://myaadhaar.uidai.gov.in/"
+svgicon = "/icons/aadhaar.svg"
+bg_color = "#ffedd5"
+icon_color = "#ea580c"
+
+[[items]]
+title = "WhatsApp"
+url = "https://www.whatsapp.com/channel/0029VbBjxaz7oQhZq13M9E3Y"
+svgicon = "/icons/whatsapp.svg"
+bg_color = "#dcfce7"
+icon_color = "#16a34a"
+
+[[items]]
+title = "Telegram"
+url = "https://telegram.me/yojanaportalofficial"
+svgicon = "/icons/telegram.svg"
+bg_color = "#e0f2fe"
+icon_color = "#0284c7"
+
+[[items]]
+title = "Instagram"
+url = "https://www.instagram.com/yojanaportalofficial"
+svgicon = "/icons/instagram.svg"
+bg_color = "#fce7f3"
+icon_color = "#db2777"
+
+[[items]]
+title = "Search"
+url = "/search/"
+svgicon = "/icons/search.svg"
+bg_color = "#e0f2fe"
+icon_color = "#0369a1"
+
+[[items]]
+title = "Quote"
+url = "#"
+svgicon = "/icons/quote.svg"
+bg_color = "#e2e8f0"
+icon_color = "#0f172a"
+
+[[items]]
+title = "Upcoming"
+url = "/upcoming-updates/"
+svgicon = "/icons/upcoming.svg"
+bg_color = "#fee2e2"
+icon_color = "#ef4444"
+
+[[items]]
+title = "State Schemes"
+url = "/state-schemes/"
+svgicon = "/icons/all-schemes.svg"
+bg_color = "#ffe4e6"
+icon_color = "#e11d48"
+
+[[items]]
+title = "Useful Updates"
+url = "/important-updates/"
+svgicon = "/icons/notification.svg"
+bg_color = "#f1f5f9"
+icon_color = "#1e293b"
+
+[[items]]
+title = "PDF Forms"
+url = "/pdf-forms/"
+svgicon = "/icons/pdf-forms.svg"
+bg_color = "#e0e7ff"
+icon_color = "#4338ca"
+
+[[items]]
+title = "Advance Tools"
+url = "https://www.gajabtools.com/"
+svgicon = "/icons/advance-tools.svg"
+bg_color = "#fef3c7"
+icon_color = "#d97706"
+
+[[items]]
+title = "Latest Jobs"
+url = "/latest-jobs/"
+svgicon = "/icons/latest-jobs.svg"
+bg_color = "#fee2e2"
+icon_color = "#dc2626"
+
+[[items]]
+title = "Admisions"
+url = "/admission/"
+svgicon = "/icons/exam-date.svg"
+bg_color = "#dbeafe"
+icon_color = "#2563eb"
+
+[[items]]
+title = "Last Date"
+url = "#"
+svgicon = "/icons/last-date.svg"
+bg_color = "#fef9c3"
+icon_color = "#ca8a04"
