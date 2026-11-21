@@ -6,7 +6,7 @@ title = "Aadhaar Card"
 description = "डाउनलोड व अपडेट स्टेटस"
 badge = "UIDAI"
 badgeClass = "hot"
-url = "https://myaadhaar.uidai.gov.in/"
+url = "/aadhaar-card/#links"
 svgicon = "/icons/aadhaar.svg"
 
 [[items]]
