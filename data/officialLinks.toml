@@ -18,6 +18,23 @@ url = "/samagra-portal-2-0/"
 svgicon = "/icons/samagra.svg"
 
 [[items]]
+title = "PM Matru Vandana Yojana"
+description = "गर्भवती एवं स्तनपान कराने वाली महिलाओं के लिए योजना"
+badge = "Women"
+badgeClass = "hot"
+url = "/pm-matru-vandana-yojana-pmmvy/"
+svgicon = "/icons/ladli-behna.svg"
+
+[[items]]
+title = "Samagra Portal 2.0"
+description = "समग्र आईडी और परिवार संबंधी सेवाएं"
+badge = "MP Service"
+badgeClass = "info"
+url = "/samagra-portal-2-0/"
+svgicon = "/icons/samagra.svg"
+
+
+[[items]]
 title = "Sambal Card"
 description = "जन कल्याण संबल कार्ड"
 badge = "योजना"
@@ -26,12 +43,36 @@ url = "/sambal-card/"
 svgicon = "/icons/sambal.svg"
 
 [[items]]
-title = "PAN Card"
-description = "ई-पैन व आधार लिंकिंग"
-badge = "NSDL"
+title = "E-Token Booking"
+description = "किसानों के लिए खाद वितरण ई-टोकन बुकिंग"
+badge = "Farmer"
+badgeClass = "hot"
+url = "/mp-evikas-pranali/"
+svgicon = "/icons/token.svg"
+
+[[items]]
+title = "Ladli Behna"
+description = "आवेदन व किस्त की स्थिति"
+badge = "लोकप्रिय"
+badgeClass = "mp"
+url = "/cm-ladli-behna-yojna/"
+svgicon = "/icons/ladli-behna.svg"
+
+[[items]]
+title = "PM Kisan"
+description = "किसान सम्मान निधि स्टेटस"
+badge = "PM-KISAN"
 badgeClass = ""
-url = "https://www.incometax.gov.in/iec/foportal/"
-svgicon = "/icons/pan.svg"
+url = "/pm-kisan-samman-nidhi-yojana/"
+svgicon = "/icons/pm-kisan.svg"
+
+[[items]]
+title = "Scholarship"
+description = "छात्रवृत्ति आवेदन व स्टेटस"
+badge = "छात्रवृत्ति"
+badgeClass = ""
+url = "/scholarships/"
+svgicon = "/icons/scholarship.svg"
 
 [[items]]
 title = "Ayushman Card"
@@ -50,6 +91,14 @@ url = "/voter-id-card/"
 svgicon = "/icons/voter.svg"
 
 [[items]]
+title = "Character Certificate "
+description = "चरित्र प्रमाण पत्र के लिए ऑनलाइन सेवाएं"
+badge = "Certificate"
+badgeClass = "new"
+url = "/character-certificate-mp/"
+svgicon = "/icons/certificate.svg"
+
+[[items]]
 title = "Ration Card"
 description = "खाद्य सुरक्षा पर्ची व सूची"
 badge = "NFSA"
@@ -58,20 +107,12 @@ url = "https://nfsa.gov.in/portal/ration_card_state_portals_aa"
 svgicon = "/icons/ration.svg"
 
 [[items]]
-title = "Ladli Behna"
-description = "आवेदन व किस्त की स्थिति"
-badge = "लोकप्रिय"
-badgeClass = "mp"
-url = "/cm-ladli-behna-yojna/"
-svgicon = "/icons/ladli-behna.svg"
-
-[[items]]
-title = "PM Kisan"
-description = "किसान सम्मान निधि स्टेटस"
-badge = "PM-KISAN"
+title = "PAN Card"
+description = "ई-पैन व आधार लिंकिंग"
+badge = "NSDL"
 badgeClass = ""
-url = "/pm-kisan-samman-nidhi-yojana/"
-svgicon = "/icons/pm-kisan.svg"
+url = "https://www.incometax.gov.in/iec/foportal/"
+svgicon = "/icons/pan.svg"
 
 [[items]]
 title = "E-Shram Card"
@@ -113,13 +154,7 @@ badgeClass = ""
 url = "https://www.india.gov.in/services/details/civil-registration-system-birth-death-certificate"
 svgicon = "/icons/birth-certificate.svg"
 
-[[items]]
-title = "Scholarship"
-description = "छात्रवृत्ति आवेदन व स्टेटस"
-badge = "छात्रवृत्ति"
-badgeClass = ""
-url = "/scholarships/"
-svgicon = "/icons/scholarship.svg"
+
 
 [[items]]
 title = "PF / EPFO Balance"
@@ -160,3 +195,362 @@ badge = "योजना"
 badgeClass = "hot"
 url = "/latest-schemes/"
 svgicon = "/icons/result.svg"
+
+[[items]]
+title = "MPTAAS Profile"
+description = "MPTAAS प्रोफाइल और छात्रवृत्ति सेवाएं"
+badge = "Scholarship"
+badgeClass = "new"
+url = "https://www.tribal.mp.gov.in/MPTAAS"
+svgicon = "/icons/student.svg"
+
+[[items]]
+title = "MPESB Profile"
+description = "MPESB उम्मीदवार प्रोफाइल और आवेदन"
+badge = "MPESB"
+badgeClass = "hot"
+url = "https://esb.mp.gov.in/"
+svgicon = "/icons/profile.svg"
+
+[[items]]
+title = "Rojgar Panjiyan"
+description = "मध्य प्रदेश रोजगार पंजीयन और नवीनीकरण"
+badge = "Registration"
+badgeClass = "new"
+url = "https://mprojgar.gov.in/"
+svgicon = "/icons/rojgar.svg"
+
+[[items]]
+title = "SSC Exam Calendar"
+description = "SSC परीक्षाओं का वार्षिक कैलेंडर"
+badge = "Calendar"
+badgeClass = "info"
+url = "https://ssc.gov.in/"
+svgicon = "/icons/calendar.svg"
+
+[[items]]
+title = "ESB Exam Calendar"
+description = "मध्य प्रदेश कर्मचारी चयन मंडल परीक्षा कैलेंडर"
+badge = "Exam"
+badgeClass = "info"
+url = "https://esb.mp.gov.in/"
+svgicon = "/icons/calendar.svg"
+
+[[items]]
+title = "Central Government"
+description = "केंद्र सरकार के विभाग और आधिकारिक पोर्टल"
+badge = "Central"
+badgeClass = "hot"
+url = "https://www.india.gov.in/"
+svgicon = "/icons/government.svg"
+
+[[items]]
+title = "MP Online"
+description = "मध्य प्रदेश की ऑनलाइन सरकारी सेवाएं"
+badge = "MP Portal"
+badgeClass = "new"
+url = "https://www.mponline.gov.in/"
+svgicon = "/icons/online.svg"
+
+
+[[items]]
+title = "National Scholarship"
+description = "राष्ट्रीय छात्रवृत्ति पोर्टल पर आवेदन"
+badge = "Scholarship"
+badgeClass = "hot"
+url = "https://scholarships.gov.in/"
+svgicon = "/icons/scholarship.svg"
+
+[[items]]
+title = "UPSC Online"
+description = "UPSC भर्ती और ऑनलाइन आवेदन"
+badge = "UPSC"
+badgeClass = "info"
+url = "https://upsconline.nic.in/"
+svgicon = "/icons/exam.svg"
+
+[[items]]
+title = "DigiLocker"
+description = "डिजिटल दस्तावेज डाउनलोड और सुरक्षित रखें"
+badge = "Digital"
+badgeClass = "new"
+url = "https://www.digilocker.gov.in/"
+svgicon = "/icons/digilocker.svg"
+
+[[items]]
+title = "UMANG Portal"
+description = "विभिन्न सरकारी सेवाएं एक ही जगह"
+badge = "Services"
+badgeClass = "hot"
+url = "https://web.umang.gov.in/"
+svgicon = "/icons/umang.svg"
+
+[[items]]
+title = "NTA Exams"
+description = "NTA प्रवेश परीक्षाएं और ऑनलाइन आवेदन"
+badge = "Exams"
+badgeClass = "info"
+url = "https://exams.nta.ac.in/"
+svgicon = "/icons/exam.svg"
+
+[[items]]
+title = "MP Treasury"
+description = "मध्य प्रदेश कोषालय और वित्तीय सेवाएं"
+badge = "MP Portal"
+badgeClass = "info"
+url = "https://mptreasury.gov.in/"
+svgicon = "/icons/treasury.svg"
+
+[[items]]
+title = "PFMS Portal"
+description = "सरकारी भुगतान और DBT की स्थिति जांचें"
+badge = "Payment"
+badgeClass = "hot"
+url = "https://pfms.nic.in/"
+svgicon = "/icons/payment.svg"
+
+
+
+[[items]]
+title = "Driving Licence"
+description = "ड्राइविंग लाइसेंस आवेदन और संबंधित सेवाएं"
+badge = "Transport"
+badgeClass = "info"
+url = "https://sarathi.parivahan.gov.in/"
+svgicon = "/icons/driving.svg"
+
+[[items]]
+title = "Registration Certificate (RC)"
+description = "वाहन रजिस्ट्रेशन सर्टिफिकेट और संबंधित सेवाएं"
+badge = "Vehicle"
+badgeClass = "info"
+url = "https://vahan.parivahan.gov.in/"
+svgicon = "/icons/vehicle.svg"
+
+[[items]]
+title = "E-Challan"
+description = "ट्रैफिक चालान की स्थिति और ऑनलाइन भुगतान"
+badge = "Challan"
+badgeClass = "hot"
+url = "https://echallan.parivahan.gov.in/"
+svgicon = "/icons/challan.svg"
+
+[[items]]
+title = "Bank DBT Status"
+description = "बैंक खाते में आधार लिंकिंग और DBT स्थिति जांचें"
+badge = "DBT"
+badgeClass = "hot"
+url = "https://myaadhaar.uidai.gov.in/"
+svgicon = "/icons/bank.svg"
+
+[[items]]
+title = "Pension Apply / Status"
+description = "मध्य प्रदेश सामाजिक सुरक्षा पेंशन आवेदन और स्थिति"
+badge = "Pension"
+badgeClass = "new"
+url = "https://socialsecurity.mp.gov.in/"
+svgicon = "/icons/pension.svg"
+
+[[items]]
+title = "Aadhaar eKYC"
+description = "आधार ऑनलाइन सेवाएं और eKYC संबंधित सुविधाएं"
+badge = "Aadhaar"
+badgeClass = "info"
+url = "https://myaadhaar.uidai.gov.in/"
+svgicon = "/icons/aadhaar.svg"
+
+
+
+[[items]]
+title = "Railway Reservation"
+description = "ऑनलाइन ट्रेन टिकट बुकिंग और आरक्षण"
+badge = "Railway"
+badgeClass = "new"
+url = "https://www.irctc.co.in/"
+svgicon = "/icons/train.svg"
+
+[[items]]
+title = "Krishi Yantra Anudan"
+description = "कृषि यंत्रों पर अनुदान और ऑनलाइन आवेदन"
+badge = "Agriculture"
+badgeClass = "hot"
+url = "https://mpdage.mp.gov.in/"
+svgicon = "/icons/tractor.svg"
+
+[[items]]
+title = "PM Shram Yogi Maandhan"
+description = "असंगठित श्रमिकों के लिए पेंशन योजना"
+badge = "Pension"
+badgeClass = "new"
+url = "https://maandhan.in/"
+svgicon = "/icons/pension.svg"
+
+[[items]]
+title = "Atal Pension Yojana"
+description = "अटल पेंशन योजना की जानकारी और पंजीयन"
+badge = "APY"
+badgeClass = "info"
+url = "https://www.npscra.nsdl.co.in/"
+svgicon = "/icons/pension.svg"
+
+[[items]]
+title = "MP Guest Teacher"
+description = "अतिथि शिक्षक पंजीयन, प्रोफाइल और सेवाएं"
+badge = "Education"
+badgeClass = "new"
+url = "https://gfms.educationportal3.mp.gov.in/"
+svgicon = "/icons/teacher.svg"
+
+[[items]]
+title = "College Admission"
+description = "मध्य प्रदेश कॉलेज प्रवेश और ऑनलाइन पंजीयन"
+badge = "Admission"
+badgeClass = "hot"
+url = "https://epravesh.mponline.gov.in/"
+svgicon = "/icons/college.svg"
+
+[[items]]
+title = "Business Loan"
+description = "प्रधानमंत्री मुद्रा योजना के अंतर्गत बिजनेस लोन आवेदन"
+badge = "Loan"
+badgeClass = "new"
+url = "https://www.jansamarth.in/"
+svgicon = "/icons/loan.svg"
+
+[[items]]
+title = "Food Licence"
+description = "FSSAI फूड लाइसेंस और रजिस्ट्रेशन आवेदन"
+badge = "Licence"
+badgeClass = "hot"
+url = "https://foscos.fssai.gov.in/"
+svgicon = "/icons/food.svg"
+
+[[items]]
+title = "Gumasta Licence"
+description = "दुकान एवं स्थापना पंजीयन और गुमास्ता प्रमाण पत्र"
+badge = "Business"
+badgeClass = "info"
+url = "https://labour.mp.gov.in/"
+svgicon = "/icons/shop.svg"
+
+[[items]]
+title = "ABHA Health Card"
+description = "आयुष्मान भारत हेल्थ अकाउंट और ABHA कार्ड"
+badge = "Health"
+badgeClass = "new"
+url = "https://abha.abdm.gov.in/"
+svgicon = "/icons/health.svg"
+
+[[items]]
+title = "Jeevan Bima"
+description = "जीवन बीमा योजनाएं और ऑनलाइन पॉलिसी सेवाएं"
+badge = "Insurance"
+badgeClass = "new"
+url = "https://www.lifeinscouncil.org/"
+svgicon = "/icons/life-insurance.svg"
+
+[[items]]
+title = "Vehicle Insurance"
+description = "वाहन बीमा खरीदें और पॉलिसी रिन्यू करें"
+badge = "Insurance"
+badgeClass = "hot"
+url = "https://policyholder.gov.in/"
+svgicon = "/icons/vehicle-insurance.svg"
+
+[[items]]
+title = "Jeevan Pramaan Patra"
+description = "पेंशनभोगियों के लिए डिजिटल जीवन प्रमाण पत्र"
+badge = "Pension"
+badgeClass = "new"
+url = "https://jeevanpramaan.gov.in/"
+svgicon = "/icons/jeevan-pramaan.svg"
+
+[[items]]
+title = "Udyam Registration"
+description = "MSME उद्यम आधार पंजीयन और प्रमाण पत्र"
+badge = "Business"
+badgeClass = "hot"
+url = "https://udyamregistration.gov.in/"
+svgicon = "/icons/udyam.svg"
+
+[[items]]
+title = "Income Tax Return (ITR)"
+description = "इनकम टैक्स रिटर्न ऑनलाइन फाइल और स्टेटस जांचें"
+badge = "Tax"
+badgeClass = "info"
+url = "https://www.incometax.gov.in/"
+svgicon = "/icons/income-tax.svg"
+
+[[items]]
+title = "Bank Statement"
+description = "बैंक खाते का स्टेटमेंट और ट्रांजेक्शन विवरण"
+badge = "Banking"
+badgeClass = "info"
+url = "https://www.rbi.org.in/"
+svgicon = "/icons/bank-statement.svg"
+
+[[items]]
+title = "Aadhaar Cash Withdrawal (AEPS)"
+description = "आधार आधारित बैंकिंग और नकद निकासी सेवा"
+badge = "Banking"
+badgeClass = "hot"
+url = "https://digipayweb.csccloud.in/"
+svgicon = "/icons/aeps.svg"
+
+[[items]]
+title = "ABC Card / APAAR ID"
+description = "छात्रों की APAAR ID और Academic Bank of Credits सेवाएं"
+badge = "Students"
+badgeClass = "new"
+url = "https://www.abc.gov.in/"
+svgicon = "/icons/student.svg"
+
+[[items]]
+title = "Jan Aadhaar Card"
+description = "राजस्थान जन आधार कार्ड, eKYC और परिवार विवरण"
+badge = "Rajasthan"
+badgeClass = "info"
+url = "https://janaadhaar.rajasthan.gov.in/"
+svgicon = "/icons/samagra.svg"
+
+
+
+[[items]]
+title = "Antyeshti Sahayata"
+description = "मध्य प्रदेश अंत्येष्टि सहायता योजना की जानकारी"
+badge = "MP Scheme"
+badgeClass = "info"
+url = "https://socialjustice.mp.gov.in/social-assistance"
+svgicon = "/icons/certificate.svg"
+
+[[items]]
+title = "UDID Disability Card"
+description = "दिव्यांगजन प्रमाण पत्र और UDID कार्ड के लिए आवेदन"
+badge = "UDID"
+badgeClass = "new"
+url = "https://www.swavlambancard.gov.in/"
+svgicon = "/icons/health.svg"
+
+[[items]]
+title = "Vivah Sahayata"
+description = "मध्य प्रदेश विवाह एवं निकाह सहायता योजनाएं"
+badge = "MP Scheme"
+badgeClass = "hot"
+url = "https://socialjustice.mp.gov.in/"
+svgicon = "/icons/certificate.svg"
+
+[[items]]
+title = "PM Suraksha Bima Yojana (PMSBY)"
+description = "प्रधानमंत्री दुर्घटना बीमा योजना में पंजीयन और जानकारी"
+badge = "Insurance"
+badgeClass = "hot"
+url = "https://www.jansuraksha.gov.in/"
+svgicon = "/icons/life-insurance.svg"
+
+[[items]]
+title = "PM Jeevan Jyoti Bima Yojana (PMJJBY)"
+description = "प्रधानमंत्री जीवन ज्योति बीमा योजना की जानकारी"
+badge = "Insurance"
+badgeClass = "info"
+url = "https://www.jansuraksha.gov.in/"
+svgicon = "/icons/life-insurance.svg"
