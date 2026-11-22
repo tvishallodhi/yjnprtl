@@ -69,3 +69,10 @@
   {{ end }}
 {{ end }}
 
+{{ if in (slice "/" "/most-useful-links/") .RelPermalink }}
+  {{ with resources.Get "css/list-updates/official-links.css" }}
+    {{ $style := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  {{ end }}
+{{ end }}
+

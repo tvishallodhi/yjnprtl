@@ -6,7 +6,7 @@ title = "Aadhaar Card"
 description = "डाउनलोड व अपडेट स्टेटस"
 badge = "UIDAI"
 badgeClass = "hot"
-url = "https://myaadhaar.uidai.gov.in/"
+url = "/aadhaar-card/#links"
 svgicon = "/icons/aadhaar.svg"
 
 [[items]]
@@ -38,7 +38,7 @@ title = "Ayushman Card"
 description = "5 लाख मुफ्त इलाज कार्ड"
 badge = "PM-JAY"
 badgeClass = "new"
-url = "#"
+url = "/ayushman-bharat-yojana/#links"
 svgicon = "/icons/ayushman.svg"
 
 [[items]]
@@ -118,7 +118,7 @@ title = "Scholarship"
 description = "छात्रवृत्ति आवेदन व स्टेटस"
 badge = "छात्रवृत्ति"
 badgeClass = ""
-url = "#"
+url = "/scholarships/"
 svgicon = "/icons/scholarship.svg"
 
 [[items]]
@@ -142,7 +142,7 @@ title = "PM Awas Yojana"
 description = "आवास योजना ग्रामीण/शहरी सूची"
 badge = "PMAY"
 badgeClass = ""
-url = "#"
+url = "/pm-awas-yojana/#links"
 svgicon = "/icons/pmay.svg"
 
 [[items]]

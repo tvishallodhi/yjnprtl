@@ -1,0 +1,65 @@
+{{ define "main" }}
+
+{{- with site.Data.officialLinks -}}
+
+<section class="official-links" id="official-links">
+
+  <!-- Curved Header Card -->
+  <div class="official-links-header">
+    <div class="header-content">
+      <span class="official-links-label">IMPORTANT PORTALS</span>
+
+      <h2>{{ .title | default "सरकारी सेवाएं और महत्वपूर्ण लिंक" }}</h2>
+
+      <p>{{ .description }}</p>
+    </div>
+  </div>
+
+  <!-- Service Cards Grid -->
+  <div class="official-links-grid">
+
+    {{- range .items -}}
+      {{- $item := . -}}
+      {{- $url := $item.url | default "#" -}}
+
+      <a
+        href="{{ $url }}"
+        class="official-service-card"
+        {{ if ne $url "#" }}target="_blank" rel="noopener noreferrer"{{ end }}
+      >
+
+        {{ with $item.badge }}
+          <span class="official-card-badge{{ with $item.badgeClass }} badge-{{ . }}{{ end }}">
+            {{ . }}
+          </span>
+        {{ end }}
+
+        <div class="official-svg-box">
+          <img
+            src="{{ $item.svgicon | default "/icons/default.svg" }}"
+            alt="{{ $item.title }}"
+            width="38"
+            height="38"
+            loading="lazy"
+          >
+        </div>
+
+        <span class="official-service-title">
+          {{ $item.title }}
+        </span>
+
+        <span class="official-service-desc">
+          {{ $item.description }}
+        </span>
+
+      </a>
+
+    {{- end -}}
+
+  </div>
+
+</section>
+
+{{- end -}}
+{{ partial "homepage/quick-links.html" . }}
+{{ end }}

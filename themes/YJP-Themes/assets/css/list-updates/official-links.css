@@ -1,0 +1,380 @@
+.official-links {
+  width: 100%;
+  margin: 25px 0;
+}
+
+/* =========================================
+   Curved Header Card Design
+   ========================================= */
+.official-links-header {
+  position: relative;
+  background: var(--background); /* आपके थीम का ग्रेडिएंट */
+  padding: 28px 26px 36px;
+  margin-bottom: 24px;
+  border-radius: 20px 20px 50% 50% / 20px 20px 28px 28px; /* नीचे की तरफ स्मूद कर्व */
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  text-align: center; /* सेंटर अलाइन कर्व के साथ ज्यादा अच्छा दिखता है */
+}
+
+/* हेडर के अंदर डेकोरेटिव कर्व्ड गोले */
+.official-links-header::before,
+.official-links-header::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.official-links-header::before {
+  width: 180px;
+  height: 180px;
+  top: -60px;
+  left: -40px;
+}
+
+.official-links-header::after {
+  width: 140px;
+  height: 140px;
+  bottom: -50px;
+  right: -20px;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.official-links-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+
+.official-links-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.official-links-header p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 auto;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* =========================================
+   Cards Grid & Items
+   ========================================= */
+.official-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.official-service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 18px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--bg-surface);
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.official-service-card::before {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  right: -45px;
+  top: -45px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  opacity: .45;
+  pointer-events: none;
+}
+
+.official-service-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--card-accent-hover);
+  box-shadow: var(--box-shadow);
+}
+
+.official-svg-box {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--card-icon-bg);
+  margin-bottom: 13px;
+}
+
+.official-svg-box img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.official-service-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.official-service-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.official-card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 7px;
+  border-radius: 20px;
+  color: var(--badge-text);
+  background: var(--badge-bg);
+}
+
+.official-card-badge.badge-mp {
+  color: var(--badge-mp-text);
+  background: var(--badge-mp-bg);
+}
+
+.official-card-badge.badge-new {
+  color: var(--badge-new-text);
+  background: var(--badge-new-bg);
+}
+
+.official-card-badge.badge-hot {
+  color: var(--badge-hot-text);
+  background: var(--badge-hot-bg);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .official-links-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .official-links-header {
+    padding: 22px 16px 28px;
+    border-radius: 16px 16px 50% 50% / 16px 16px 20px 20px;
+  }
+
+  .official-links-header h2 {
+    font-size: 19px;
+  }
+
+  .official-links-header p {
+    font-size: 12px;
+  }
+
+  .official-links-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .official-service-card {
+    padding: 14px 12px;
+    border-radius: 11px;
+  }
+
+  .official-service-title {
+    font-size: 13px;
+  }
+
+  .official-service-desc {
+    font-size: 11px;
+  }
+}
+
+/*=====================================================*/
+/*================quick links==========================*/
+    .main-wrapper-card * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* मुख्य बाहरी कार्ड कंटेनर */
+    .main-wrapper-card {
+        position: relative;
+        max-width: 1180px;
+        margin: 20px auto;
+        padding: 32px 24px;
+        font-family: 'Poppins', sans-serif;
+        font-size: var(--font-size, 16px);
+        background: var(--ql-wrapper-bg);
+        border-radius: var(--radius-wrapper-curved);
+        border: 1.5px solid var(--ql-wrapper-border);
+        box-shadow: var(--ql-wrapper-shadow);
+        overflow: hidden;
+        transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* सजावटी कर्व्ड शेप */
+    .main-wrapper-card::before {
+        content: '';
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(circle, var(--ql-decor-glow) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .main-wrapper-card::after {
+        content: '';
+        position: absolute;
+        bottom: -80px;
+        left: -40px;
+        width: 300px;
+        height: 180px;
+        background: var(--ql-decor-blob);
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        pointer-events: none;
+    }
+
+    /* ग्रिड लेआउट */
+    .quick-links-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+        gap: 16px;
+    }
+
+    /* अंदर के छोटे कार्ड्स */
+    .link-card {
+        position: relative;
+        background: var(--ql-card-bg);
+        backdrop-filter: blur(8px);
+        border: 1.5px solid var(--ql-card-border);
+        border-radius: var(--radius-card-curved);
+        padding: 20px 12px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--text-dark);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        box-shadow: var(--ql-card-shadow);
+        transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        overflow: hidden;
+    }
+
+    .link-card::before {
+        content: '';
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, var(--ql-decor-glow), transparent);
+        border-radius: 50%;
+        transition: transform 0.35s ease;
+    }
+
+    .link-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        background: var(--ql-card-hover-bg);
+        border-color: var(--ql-card-hover-border);
+        box-shadow: var(--ql-card-hover-shadow);
+    }
+
+    .link-card:focus-visible {
+        outline: var(--focus-ring);
+        outline-offset: 2px;
+    }
+
+    .link-card:hover::before {
+        transform: scale(1.6);
+    }
+
+    /* आइकन बॉक्स (डिफ़ॉल्ट रंग आपके --badge-mp वेरिएबल्स से लिए गए हैं) */
+    .icon-wrapper {
+        width: 56px;
+        height: 56px;
+        border-radius: var(--radius-icon-curved);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--badge-mp-bg, #ffedd5);
+        color: var(--badge-mp-text, #9a3412);
+        transition: all 0.35s ease;
+        box-shadow: inset 0 0 0 1px var(--border-subtle);
+    }
+
+    .icon-wrapper img,
+    .icon-wrapper svg {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        transition: transform 0.35s ease;
+    }
+
+    .link-card:hover .icon-wrapper {
+        transform: rotate(-4deg) scale(1.1);
+        border-radius: 50%;
+    }
+
+    .card-title {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--text-main);
+        letter-spacing: 0.2px;
+        transition: color 0.3s ease;
+    }
+
+    .link-card:hover .card-title {
+        color: var(--ql-title-hover);
+    }
+
+    /* मोबाइल स्क्रीन के लिए */
+    @media (max-width: 480px) {
+        .main-wrapper-card {
+            padding: 20px 14px;
+            border-radius: 24px 10px 24px 10px;
+        }
+        .quick-links-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .link-card {
+            padding: 16px 8px;
+        }
+    }
