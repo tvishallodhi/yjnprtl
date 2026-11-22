@@ -24,9 +24,9 @@
       {{- $url := $item.url | default "#" -}}
 
       <a
-        href="{{ $url }}"
+        href="{{ $url }}#links"
         class="official-service-card"
-        {{ if ne $url "#" }}target="_blank" rel="noopener noreferrer"{{ end }}
+        {{ if ne $url "#" }} rel="noopener noreferrer"{{ end }}
       >
 
         {{ with $item.badge }}
@@ -61,7 +61,7 @@
       href="/most-useful-links/"
       class="official-service-card"
     >
-      <span class="official-card-badge">More</span>
+      <span class="official-card-badge">More Links</span>
 
       <div class="official-svg-box">
         <img
@@ -74,11 +74,11 @@
       </div>
 
       <span class="official-service-title">
-        All Sarkari Update
+        More Sarkari Update →
       </span>
 
       <span class="official-service-desc">
-        सभी सरकारी अपडेट के लिए यहां क्लिक करें।
+        🔗अधिक लिंक के लिए यहां क्लिक करें ।
       </span>
     </a>
 

@@ -6,7 +6,7 @@ title = "Aadhaar Card"
 description = "डाउनलोड व अपडेट स्टेटस"
 badge = "UIDAI"
 badgeClass = "hot"
-url = "/aadhaar-card/#links"
+url = "/aadhaar-card/"
 svgicon = "/icons/aadhaar.svg"
 
 [[items]]
@@ -14,7 +14,7 @@ title = "Samagra ID"
 description = "परिवार व सदस्य आईडी"
 badge = "MP"
 badgeClass = "mp"
-url = "/samagra-portal-2-0/#links"
+url = "/samagra-portal-2-0/"
 svgicon = "/icons/samagra.svg"
 
 [[items]]
@@ -22,7 +22,7 @@ title = "Sambal Card"
 description = "जन कल्याण संबल कार्ड"
 badge = "योजना"
 badgeClass = "mp"
-url = "/sambal-card/#links"
+url = "/sambal-card/"
 svgicon = "/icons/sambal.svg"
 
 [[items]]
@@ -30,7 +30,7 @@ title = "PAN Card"
 description = "ई-पैन व आधार लिंकिंग"
 badge = "NSDL"
 badgeClass = ""
-url = "#"
+url = "https://www.incometax.gov.in/iec/foportal/"
 svgicon = "/icons/pan.svg"
 
 [[items]]
@@ -38,7 +38,7 @@ title = "Ayushman Card"
 description = "5 लाख मुफ्त इलाज कार्ड"
 badge = "PM-JAY"
 badgeClass = "new"
-url = "/ayushman-bharat-yojana/#links"
+url = "/ayushman-bharat-yojana/"
 svgicon = "/icons/ayushman.svg"
 
 [[items]]
@@ -46,7 +46,7 @@ title = "Voter ID Card"
 description = "मतदाता पहचान पत्र"
 badge = "NVSP"
 badgeClass = ""
-url = "/voter-id-card/#links"
+url = "/voter-id-card/"
 svgicon = "/icons/voter.svg"
 
 [[items]]
@@ -54,7 +54,7 @@ title = "Ration Card"
 description = "खाद्य सुरक्षा पर्ची व सूची"
 badge = "NFSA"
 badgeClass = ""
-url = "#"
+url = "https://nfsa.gov.in/portal/ration_card_state_portals_aa"
 svgicon = "/icons/ration.svg"
 
 [[items]]
@@ -62,7 +62,7 @@ title = "Ladli Behna"
 description = "आवेदन व किस्त की स्थिति"
 badge = "लोकप्रिय"
 badgeClass = "mp"
-url = "/cm-ladli-behna-yojna/#links"
+url = "/cm-ladli-behna-yojna/"
 svgicon = "/icons/ladli-behna.svg"
 
 [[items]]
@@ -70,7 +70,7 @@ title = "PM Kisan"
 description = "किसान सम्मान निधि स्टेटस"
 badge = "PM-KISAN"
 badgeClass = ""
-url = "/pm-kisan-samman-nidhi-yojana/#links"
+url = "/pm-kisan-samman-nidhi-yojana/"
 svgicon = "/icons/pm-kisan.svg"
 
 [[items]]
@@ -78,7 +78,7 @@ title = "E-Shram Card"
 description = "असंगठित श्रमिक कार्ड"
 badge = "श्रम"
 badgeClass = ""
-url = "#"
+url = "https://eshram.gov.in/"
 svgicon = "/icons/eshram.svg"
 
 [[items]]
@@ -86,7 +86,7 @@ title = "Driving License"
 description = "लर्निंग व परमानेंट DL"
 badge = "सारथी"
 badgeClass = ""
-url = "#"
+url = "https://parivahan.gov.in/"
 svgicon = "/icons/driving-license.svg"
 
 [[items]]
@@ -94,7 +94,7 @@ title = "Khasra / Bhulekh"
 description = "खसरा खतौनी व नक्शा"
 badge = "भू-अभिलेख"
 badgeClass = ""
-url = "#"
+url = "https://webgis2.mpbhulekh.gov.in/"
 svgicon = "/icons/bhulekh.svg"
 
 [[items]]
@@ -102,7 +102,7 @@ title = "आय / जाति प्रमाण"
 description = "डिजिटल प्रमाण पत्र डाउनलोड"
 badge = "लोकसेवा"
 badgeClass = ""
-url = "#"
+url = "https://mpedistrict.gov.in/"
 svgicon = "/icons/certificate.svg"
 
 [[items]]
@@ -126,7 +126,7 @@ title = "PF / EPFO Balance"
 description = "पासबुक व क्लेम स्टेटस"
 badge = "UAN"
 badgeClass = ""
-url = "#"
+url = "https://www.epfo.gov.in/"
 svgicon = "/icons/epfo.svg"
 
 [[items]]
@@ -134,7 +134,7 @@ title = "Electricity Bill"
 description = "बिजली बिल देखें व जमा करें"
 badge = "बिजली"
 badgeClass = ""
-url = "#"
+url = "https://mpeb.mponline.gov.in/mpebnew"
 svgicon = "/icons/electricity.svg"
 
 [[items]]
@@ -142,7 +142,7 @@ title = "PM Awas Yojana"
 description = "आवास योजना ग्रामीण/शहरी सूची"
 badge = "PMAY"
 badgeClass = ""
-url = "/pm-awas-yojana/#links"
+url = "/pm-awas-yojana/"
 svgicon = "/icons/pmay.svg"
 
 [[items]]

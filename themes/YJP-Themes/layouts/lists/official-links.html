@@ -23,7 +23,7 @@
       {{- $url := $item.url | default "#" -}}
 
       <a
-        href="{{ $url }}"
+        href="{{ $url }}#links"
         class="official-service-card"
         {{ if ne $url "#" }}target="_blank" rel="noopener noreferrer"{{ end }}
       >
