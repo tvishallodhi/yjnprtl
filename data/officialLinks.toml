@@ -108,10 +108,10 @@ svgicon = "/icons/ration.svg"
 
 [[items]]
 title = "PAN Card"
-description = "ई-पैन व आधार लिंकिंग"
-badge = "NSDL"
+description = "नया एवं सुधार "
+badge = "Income Tax"
 badgeClass = ""
-url = "https://www.incometax.gov.in/iec/foportal/"
+url = "/pan-card/"
 svgicon = "/icons/pan.svg"
 
 [[items]]
