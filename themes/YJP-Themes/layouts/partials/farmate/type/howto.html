@@ -57,6 +57,7 @@
     {{ if .Params.links }}
       <div class="yp-table-wrapper" id="links">
         {{ partial "farmate/link-table.html" . }}
+         {{ partial "imp-codes/pdfLinks.html" . }}
       </div>
     {{ end }}
 

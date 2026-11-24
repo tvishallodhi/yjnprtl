@@ -6,6 +6,7 @@
   {{ if .Content }}
   <div class="post-content">
     {{ .Content }}
+     {{ partial "imp-codes/pdfLinks.html" . }}
   </div>
   {{ end }}
-   {{ partial "imp-codes/pdfLinks.html" . }}
+ 
