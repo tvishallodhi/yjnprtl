@@ -125,9 +125,9 @@ svgicon = "/icons/eshram.svg"
 [[items]]
 title = "Driving License"
 description = "लर्निंग व परमानेंट DL"
-badge = "सारथी"
+badge = "सारथी परिवहन"
 badgeClass = ""
-url = "https://parivahan.gov.in/"
+url = "/learning-driving-licence/"
 svgicon = "/icons/driving-license.svg"
 
 [[items]]
