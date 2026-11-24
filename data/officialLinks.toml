@@ -33,7 +33,6 @@ badgeClass = "info"
 url = "/samagra-portal-2-0/"
 svgicon = "/icons/samagra.svg"
 
-
 [[items]]
 title = "Sambal Card"
 description = "जन कल्याण संबल कार्ड"
@@ -99,12 +98,12 @@ url = "/character-certificate-mp/"
 svgicon = "/icons/certificate.svg"
 
 [[items]]
-title = "Ration Card"
-description = "खाद्य सुरक्षा पर्ची व सूची"
-badge = "NFSA"
+title = "Driving License"
+description = "लर्निंग व परमानेंट DL"
+badge = "सारथी परिवहन"
 badgeClass = ""
-url = "https://nfsa.gov.in/portal/ration_card_state_portals_aa"
-svgicon = "/icons/ration.svg"
+url = "/learning-driving-licence/"
+svgicon = "/icons/driving-license.svg"
 
 [[items]]
 title = "PAN Card"
@@ -115,6 +114,57 @@ url = "/pan-card/"
 svgicon = "/icons/pan.svg"
 
 [[items]]
+title = "PM Awas Yojana"
+description = "आवास योजना ग्रामीण/शहरी सूची"
+badge = "PMAY"
+badgeClass = ""
+url = "/pm-awas-yojana/"
+svgicon = "/icons/pmay.svg"
+
+[[items]]
+title = "Latest Govt Jobs"
+description = "नई सरकारी भर्तियां व फॉर्म"
+badge = "भर्ती"
+badgeClass = "new"
+url = "/latest-jobs/"
+svgicon = "/icons/jobs.svg"
+
+[[items]]
+title = "Sarkari Yojana"
+description = "नई सरकारी योजनाएं अपडेट"
+badge = "योजना"
+badgeClass = "hot"
+url = "/latest-schemes/"
+svgicon = "/icons/result.svg"
+
+
+[[items]]
+title = "Registration Certificate (RC)"
+description = "वाहन रजिस्ट्रेशन सर्टिफिकेट और संबंधित सेवाएं"
+badge = "Vehicle RC"
+badgeClass = "info"
+url = "/vehicle-registration-certificate-rc/"
+svgicon = "/icons/vehicle.svg"
+
+
+
+
+
+
+
+
+
+
+[[items]]
+title = "Ration Card"
+description = "खाद्य सुरक्षा पर्ची व सूची"
+badge = "NFSA"
+badgeClass = ""
+url = "https://nfsa.gov.in/portal/ration_card_state_portals_aa"
+svgicon = "/icons/ration.svg"
+
+
+[[items]]
 title = "E-Shram Card"
 description = "असंगठित श्रमिक कार्ड"
 badge = "श्रम"
@@ -122,13 +172,6 @@ badgeClass = ""
 url = "https://eshram.gov.in/"
 svgicon = "/icons/eshram.svg"
 
-[[items]]
-title = "Driving License"
-description = "लर्निंग व परमानेंट DL"
-badge = "सारथी परिवहन"
-badgeClass = ""
-url = "/learning-driving-licence/"
-svgicon = "/icons/driving-license.svg"
 
 [[items]]
 title = "Khasra / Bhulekh"
@@ -172,29 +215,6 @@ badgeClass = ""
 url = "https://mpeb.mponline.gov.in/mpebnew"
 svgicon = "/icons/electricity.svg"
 
-[[items]]
-title = "PM Awas Yojana"
-description = "आवास योजना ग्रामीण/शहरी सूची"
-badge = "PMAY"
-badgeClass = ""
-url = "/pm-awas-yojana/"
-svgicon = "/icons/pmay.svg"
-
-[[items]]
-title = "Latest Govt Jobs"
-description = "नई सरकारी भर्तियां व फॉर्म"
-badge = "भर्ती"
-badgeClass = "new"
-url = "/latest-jobs/"
-svgicon = "/icons/jobs.svg"
-
-[[items]]
-title = "Sarkari Yojana"
-description = "नई सरकारी योजनाएं अपडेट"
-badge = "योजना"
-badgeClass = "hot"
-url = "/latest-schemes/"
-svgicon = "/icons/result.svg"
 
 [[items]]
 title = "MPTAAS Profile"
@@ -311,21 +331,6 @@ svgicon = "/icons/payment.svg"
 
 
 
-[[items]]
-title = "Driving Licence"
-description = "ड्राइविंग लाइसेंस आवेदन और संबंधित सेवाएं"
-badge = "Transport"
-badgeClass = "info"
-url = "https://sarathi.parivahan.gov.in/"
-svgicon = "/icons/driving.svg"
-
-[[items]]
-title = "Registration Certificate (RC)"
-description = "वाहन रजिस्ट्रेशन सर्टिफिकेट और संबंधित सेवाएं"
-badge = "Vehicle"
-badgeClass = "info"
-url = "https://vahan.parivahan.gov.in/"
-svgicon = "/icons/vehicle.svg"
 
 [[items]]
 title = "E-Challan"
