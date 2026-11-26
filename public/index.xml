@@ -1,4 +1,183 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yojana Portal</title><link>http://localhost:1313/</link><description>Recent content on Yojana Portal</description><generator>Hugo</generator><language>en</language><lastBuildDate>Thu, 26 Nov 2026 14:30:09 +0530</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>RRB NTPC Graduate Level Application Status – CEN 06/2026</title><link>http://localhost:1313/rrb-ntpc-graduate-level-2026/</link><pubDate>Thu, 26 Nov 2026 14:30:09 +0530</pubDate><guid>http://localhost:1313/rrb-ntpc-graduate-level-2026/</guid><description/></item><item><title>NTA UGC NET JRF December 2026 Exam City Details</title><link>http://localhost:1313/eligibility/nta-ugc-net-december-2026/</link><pubDate>Thu, 26 Nov 2026 14:27:12 +0530</pubDate><guid>http://localhost:1313/eligibility/nta-ugc-net-december-2026/</guid><description>&lt;div class="yp-table-wrapper"> &lt;/div></description></item><item><title>UPTET February 2027 Exam Online Form</title><link>http://localhost:1313/uptet-exam-2027-february/</link><pubDate>Wed, 25 Nov 2026 10:04:23 +0530</pubDate><guid>http://localhost:1313/uptet-exam-2027-february/</guid><description>&lt;div class="yp-table-wrapper"> 
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yojana Portal</title><link>http://localhost:1313/</link><description>Recent content on Yojana Portal</description><generator>Hugo</generator><language>en</language><lastBuildDate>Thu, 26 Nov 2026 16:49:47 +0530</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>ECIL Graduate / Diploma Apprentice Online Form 2026</title><link>http://localhost:1313/ecil-apprentice-recruitment-2026/</link><pubDate>Thu, 26 Nov 2026 16:49:47 +0530</pubDate><guid>http://localhost:1313/ecil-apprentice-recruitment-2026/</guid><description>&lt;div class="yp-table-wrapper"> &lt;/div></description></item><item><title>UKSSSC Constable and Other Post Online Form 2026</title><link>http://localhost:1313/uksssc-constable-and-other-posts-recruitment-2026/</link><pubDate>Thu, 26 Nov 2026 15:02:21 +0530</pubDate><guid>http://localhost:1313/uksssc-constable-and-other-posts-recruitment-2026/</guid><description>&lt;div class="yp-table-wrapper"> 
+ &lt;div class="table-responsive">
+ &lt;table class="yp-table">
+ &lt;thead class="table-dark">
+ &lt;tr>
+ &lt;th>Post Name&lt;/th>
+ &lt;th>Physical Standard&lt;/th>
+ &lt;th>Male&lt;/th>
+ &lt;th>Female&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td rowspan="4">Police Constable / PAC / IRB&lt;/td>
+ &lt;td>Height (General / SC / OBC)&lt;/td>
+ &lt;td>165 cm&lt;/td>
+ &lt;td>152 cm&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Height (ST)&lt;/td>
+ &lt;td>157.5 cm&lt;/td>
+ &lt;td>147 cm&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Height (Hill Area)&lt;/td>
+ &lt;td>160 cm&lt;/td>
+ &lt;td>147 cm&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Chest (Without / With Expansion)&lt;/td>
+ &lt;td>78.8 / 83.8 cm&lt;br>ST / Hill: 76.5 / 81.5 cm&lt;/td>
+ &lt;td>Not Required&lt;/td>
+ &lt;/tr>
+
+ &lt;tr>
+ &lt;td rowspan="4">Fireman&lt;/td>
+ &lt;td>Height (General / SC / OBC)&lt;/td>
+ &lt;td>165 cm&lt;/td>
+ &lt;td>152 cm&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Height (ST / Hill Area)&lt;/td>
+ &lt;td>157.5 / 160 cm&lt;/td>
+ &lt;td>147 cm&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Chest (Without Expansion)&lt;/td>
+ &lt;td>78.8 cm (General)&lt;br>76.5 cm (ST / Hill)&lt;/td>
+ &lt;td>Not Required&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Chest (With Expansion)&lt;/td>
+ &lt;td>84.3 cm (General)&lt;br>82 cm (ST / Hill)&lt;/td>
+ &lt;td>Not Required&lt;/td>
+ &lt;/tr>
+
+ &lt;tr>
+ &lt;td rowspan="4">Forest Guard / Special Tiger Guard&lt;/td>
+ &lt;td>Height (General / SC / OBC)&lt;/td>
+ &lt;td>163 cm&lt;/td>
+ &lt;td>150 cm&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Height (ST / Hill Area)&lt;/td>
+ &lt;td>152 cm&lt;/td>
+ &lt;td>145 cm&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Chest (Without Expansion)&lt;/td>
+ &lt;td>78.8 cm (General)&lt;br>76.5 cm (ST / Hill)&lt;/td>
+ &lt;td>Not Required&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Chest (With Expansion)&lt;/td>
+ &lt;td>83.8 cm (General)&lt;br>81.5 cm (ST / Hill)&lt;/td>
+ &lt;td>Not Required&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+ &lt;/table>
+&lt;/div>
+&lt;/div>
+&lt;div class="yp-table-wrapper">
+ &lt;div class="table-responsive">
+ &lt;table class="yp-table">
+ &lt;thead class="table-dark">
+ &lt;tr>
+ &lt;th>Post Name&lt;/th>
+ &lt;th>Physical Event&lt;/th>
+ &lt;th>Male&lt;/th>
+ &lt;th>Female&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td rowspan="5">Police Constable / PAC / IRB / Jail Guard / Secretariat Guard / Excise Constable / Transport Constable&lt;/td>
+ &lt;td>Cricket Ball Throw&lt;/td>
+ &lt;td>50–70+ Meters&lt;/td>
+ &lt;td>16–32+ Meters&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Long Jump&lt;/td>
+ &lt;td>13–18+ Feet&lt;/td>
+ &lt;td>8–13+ Feet&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Chin-ups (Beam)&lt;/td>
+ &lt;td>5–10 Times&lt;/td>
+ &lt;td>—&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Running&lt;/td>
+ &lt;td>5 KM&lt;/td>
+ &lt;td>2 KM&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Shuttle Race&lt;/td>
+ &lt;td>25 × 4 Meters&lt;/td>
+ &lt;td>25 × 4 Meters&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td rowspan="6">Fireman&lt;/td>
+ &lt;td>Cricket Ball Throw&lt;/td>
+ &lt;td>50–70+ Meters&lt;/td>
+ &lt;td>16–32+ Meters&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Long Jump&lt;/td>
+ &lt;td>13–18+ Feet&lt;/td>
+ &lt;td>8–13+ Feet&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Chin-ups (Beam)&lt;/td>
+ &lt;td>5–10 Times&lt;/td>
+ &lt;td>—&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Running&lt;/td>
+ &lt;td>90 Meters&lt;/td>
+ &lt;td>90 Meters&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Shuttle Race&lt;/td>
+ &lt;td>25 × 4 Meters&lt;/td>
+ &lt;td>25 × 4 Meters&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Rope Climbing&lt;/td>
+ &lt;td>10 Feet&lt;/td>
+ &lt;td>10 Feet&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td rowspan="5">Forest Guard / Special Tiger Guard&lt;/td>
+ &lt;td>Cricket Ball Throw&lt;/td>
+ &lt;td>50–70+ Meters&lt;/td>
+ &lt;td>16–32+ Meters&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Long Jump&lt;/td>
+ &lt;td>13–18+ Feet&lt;/td>
+ &lt;td>8–13+ Feet&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Chin-ups (Beam)&lt;/td>
+ &lt;td>5–10 Times&lt;/td>
+ &lt;td>—&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Walking&lt;/td>
+ &lt;td>25 KM (4 Hours)&lt;/td>
+ &lt;td>14 KM (4 Hours)&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>Shuttle Race&lt;/td>
+ &lt;td>25 × 4 Meters&lt;/td>
+ &lt;td>25 × 4 Meters&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+ &lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>RRB NTPC Graduate Level Application Status – CEN 06/2026</title><link>http://localhost:1313/rrb-ntpc-graduate-level-2026/</link><pubDate>Thu, 26 Nov 2026 14:30:09 +0530</pubDate><guid>http://localhost:1313/rrb-ntpc-graduate-level-2026/</guid><description/></item><item><title>NTA UGC NET JRF December 2026 Exam City Details</title><link>http://localhost:1313/eligibility/nta-ugc-net-december-2026/</link><pubDate>Thu, 26 Nov 2026 14:27:12 +0530</pubDate><guid>http://localhost:1313/eligibility/nta-ugc-net-december-2026/</guid><description>&lt;div class="yp-table-wrapper"> &lt;/div></description></item><item><title>UPTET February 2027 Exam Online Form</title><link>http://localhost:1313/uptet-exam-2027-february/</link><pubDate>Wed, 25 Nov 2026 10:04:23 +0530</pubDate><guid>http://localhost:1313/uptet-exam-2027-february/</guid><description>&lt;div class="yp-table-wrapper"> 
  
 &lt;/div></description></item><item><title>Vehicle RC Card Online Download, Status Check &amp; Details</title><link>http://localhost:1313/vehicle-registration-certificate-rc/</link><pubDate>Tue, 24 Nov 2026 18:49:47 +0530</pubDate><guid>http://localhost:1313/vehicle-registration-certificate-rc/</guid><description>&lt;div class="yp-table-wrapper"> 
 
@@ -807,185 +986,6 @@
  &lt;/div>
 &lt;/div>
 
-&lt;/div></description></item><item><title>UKSSSC Constable and Other Post Online Form 2026</title><link>http://localhost:1313/uksssc-constable-and-other-posts-recruitment-2026/</link><pubDate>Sat, 21 Nov 2026 15:31:42 +0530</pubDate><guid>http://localhost:1313/uksssc-constable-and-other-posts-recruitment-2026/</guid><description>&lt;div class="yp-table-wrapper"> 
- &lt;div class="table-responsive">
- &lt;table class="yp-table">
- &lt;thead class="table-dark">
- &lt;tr>
- &lt;th>Post Name&lt;/th>
- &lt;th>Physical Standard&lt;/th>
- &lt;th>Male&lt;/th>
- &lt;th>Female&lt;/th>
- &lt;/tr>
- &lt;/thead>
- &lt;tbody>
- &lt;tr>
- &lt;td rowspan="4">Police Constable / PAC / IRB&lt;/td>
- &lt;td>Height (General / SC / OBC)&lt;/td>
- &lt;td>165 cm&lt;/td>
- &lt;td>152 cm&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Height (ST)&lt;/td>
- &lt;td>157.5 cm&lt;/td>
- &lt;td>147 cm&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Height (Hill Area)&lt;/td>
- &lt;td>160 cm&lt;/td>
- &lt;td>147 cm&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Chest (Without / With Expansion)&lt;/td>
- &lt;td>78.8 / 83.8 cm&lt;br>ST / Hill: 76.5 / 81.5 cm&lt;/td>
- &lt;td>Not Required&lt;/td>
- &lt;/tr>
-
- &lt;tr>
- &lt;td rowspan="4">Fireman&lt;/td>
- &lt;td>Height (General / SC / OBC)&lt;/td>
- &lt;td>165 cm&lt;/td>
- &lt;td>152 cm&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Height (ST / Hill Area)&lt;/td>
- &lt;td>157.5 / 160 cm&lt;/td>
- &lt;td>147 cm&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Chest (Without Expansion)&lt;/td>
- &lt;td>78.8 cm (General)&lt;br>76.5 cm (ST / Hill)&lt;/td>
- &lt;td>Not Required&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Chest (With Expansion)&lt;/td>
- &lt;td>84.3 cm (General)&lt;br>82 cm (ST / Hill)&lt;/td>
- &lt;td>Not Required&lt;/td>
- &lt;/tr>
-
- &lt;tr>
- &lt;td rowspan="4">Forest Guard / Special Tiger Guard&lt;/td>
- &lt;td>Height (General / SC / OBC)&lt;/td>
- &lt;td>163 cm&lt;/td>
- &lt;td>150 cm&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Height (ST / Hill Area)&lt;/td>
- &lt;td>152 cm&lt;/td>
- &lt;td>145 cm&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Chest (Without Expansion)&lt;/td>
- &lt;td>78.8 cm (General)&lt;br>76.5 cm (ST / Hill)&lt;/td>
- &lt;td>Not Required&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Chest (With Expansion)&lt;/td>
- &lt;td>83.8 cm (General)&lt;br>81.5 cm (ST / Hill)&lt;/td>
- &lt;td>Not Required&lt;/td>
- &lt;/tr>
- &lt;/tbody>
- &lt;/table>
-&lt;/div>
-&lt;/div>
-&lt;div class="yp-table-wrapper">
- &lt;div class="table-responsive">
- &lt;table class="yp-table">
- &lt;thead class="table-dark">
- &lt;tr>
- &lt;th>Post Name&lt;/th>
- &lt;th>Physical Event&lt;/th>
- &lt;th>Male&lt;/th>
- &lt;th>Female&lt;/th>
- &lt;/tr>
- &lt;/thead>
- &lt;tbody>
- &lt;tr>
- &lt;td rowspan="5">Police Constable / PAC / IRB / Jail Guard / Secretariat Guard / Excise Constable / Transport Constable&lt;/td>
- &lt;td>Cricket Ball Throw&lt;/td>
- &lt;td>50–70+ Meters&lt;/td>
- &lt;td>16–32+ Meters&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Long Jump&lt;/td>
- &lt;td>13–18+ Feet&lt;/td>
- &lt;td>8–13+ Feet&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Chin-ups (Beam)&lt;/td>
- &lt;td>5–10 Times&lt;/td>
- &lt;td>—&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Running&lt;/td>
- &lt;td>5 KM&lt;/td>
- &lt;td>2 KM&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Shuttle Race&lt;/td>
- &lt;td>25 × 4 Meters&lt;/td>
- &lt;td>25 × 4 Meters&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td rowspan="6">Fireman&lt;/td>
- &lt;td>Cricket Ball Throw&lt;/td>
- &lt;td>50–70+ Meters&lt;/td>
- &lt;td>16–32+ Meters&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Long Jump&lt;/td>
- &lt;td>13–18+ Feet&lt;/td>
- &lt;td>8–13+ Feet&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Chin-ups (Beam)&lt;/td>
- &lt;td>5–10 Times&lt;/td>
- &lt;td>—&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Running&lt;/td>
- &lt;td>90 Meters&lt;/td>
- &lt;td>90 Meters&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Shuttle Race&lt;/td>
- &lt;td>25 × 4 Meters&lt;/td>
- &lt;td>25 × 4 Meters&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Rope Climbing&lt;/td>
- &lt;td>10 Feet&lt;/td>
- &lt;td>10 Feet&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td rowspan="5">Forest Guard / Special Tiger Guard&lt;/td>
- &lt;td>Cricket Ball Throw&lt;/td>
- &lt;td>50–70+ Meters&lt;/td>
- &lt;td>16–32+ Meters&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Long Jump&lt;/td>
- &lt;td>13–18+ Feet&lt;/td>
- &lt;td>8–13+ Feet&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Chin-ups (Beam)&lt;/td>
- &lt;td>5–10 Times&lt;/td>
- &lt;td>—&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Walking&lt;/td>
- &lt;td>25 KM (4 Hours)&lt;/td>
- &lt;td>14 KM (4 Hours)&lt;/td>
- &lt;/tr>
- &lt;tr>
- &lt;td>Shuttle Race&lt;/td>
- &lt;td>25 × 4 Meters&lt;/td>
- &lt;td>25 × 4 Meters&lt;/td>
- &lt;/tr>
- &lt;/tbody>
- &lt;/table>
-&lt;/div>
 &lt;/div></description></item><item><title>PM Gramin Shauchalay Yojana 2026: ₹12,000 सहायता के लिए ऑनलाइन आवेदन</title><link>http://localhost:1313/pm-shouchalay-yojana/</link><pubDate>Sat, 21 Nov 2026 12:29:02 +0530</pubDate><guid>http://localhost:1313/pm-shouchalay-yojana/</guid><description>व्यक्तिगत घरेलू शौचालय (IHHL) योजना स्वच्छ भारत मिशन का हिस्सा है। इसका उद्देश्य ऐसे परिवारों को शौचालय निर्माण के लिए सहायता देना है जिनके घर में यह सुविधा उपलब्ध नहीं है। ग्रामीण क्षेत्रों में पात्र परिवारों को ₹12,000 तक की सहायता मिल सकती है, जबकि शहरी क्षेत्रों में राशि अलग-अलग हो सकती है। यह पहल स्वच्छता, महिलाओं की गरिमा और जनस्वास्थ्य को बढ़ावा देने में सहयोग करती है।</description></item><item><title>NTA CSIR UGC NET December 2026 Exam Schedule</title><link>http://localhost:1313/nta-csir-ugc-net-december-2026/</link><pubDate>Sat, 21 Nov 2026 12:25:49 +0530</pubDate><guid>http://localhost:1313/nta-csir-ugc-net-december-2026/</guid><description>&lt;div class="yp-table-wrapper"> &lt;/div></description></item><item><title>NLC India Executive Online Form 2026</title><link>http://localhost:1313/nlc-india-executive-recruitment-2026/</link><pubDate>Wed, 18 Nov 2026 11:08:08 +0530</pubDate><guid>http://localhost:1313/nlc-india-executive-recruitment-2026/</guid><description>&lt;div class="yp-table-wrapper"> &lt;/div></description></item><item><title>Voter ID Card (Parichay Patra) 2026: Apply Online &amp; Download</title><link>http://localhost:1313/voter-id-card/</link><pubDate>Tue, 17 Nov 2026 16:43:37 +0530</pubDate><guid>http://localhost:1313/voter-id-card/</guid><description>&lt;div class="yp-table-wrapper"> &lt;/div></description></item><item><title>Samagra Portal 2.0: समग्र आईडी Download &amp; e-KYC</title><link>http://localhost:1313/samagra-portal-2-0/</link><pubDate>Tue, 17 Nov 2026 15:39:36 +0530</pubDate><guid>http://localhost:1313/samagra-portal-2-0/</guid><description/></item><item><title>Dr. Bhimrao Ambedkar Kamdhenu Yojana 2026</title><link>http://localhost:1313/kamdhenu-yojana/</link><pubDate>Tue, 17 Nov 2026 15:21:11 +0530</pubDate><guid>http://localhost:1313/kamdhenu-yojana/</guid><description>&lt;div class="yp-table-wrapper"> 
 
 &lt;div class="loan-table-wrapper">
