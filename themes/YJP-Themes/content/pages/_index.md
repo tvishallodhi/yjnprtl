@@ -1,7 +1,10 @@
----
-title: "Legal & Policy Pages"
-name: "Legal & Policy "
-icon: "🛡️"
-lang: ""
-url: "/Legal-and-Policy-pages/"
---- 
++++
+title= "Legal & Policy Pages"
+name= "Legal & Policy "
+icon= "🛡️"
+lang= ""
+url= "/Legal-and-Policy-pages/"
+aliases = [
+    "/pages/"
+    ]
++++
