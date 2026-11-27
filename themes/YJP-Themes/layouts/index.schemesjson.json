@@ -1,0 +1,79 @@
+{{- /* 1. Section "schemes" wali posts uthayein */ -}}
+{{- $secPages := where .Site.RegularPages "Section" "schemes" -}}
+
+{{- /* 2. Front Matter me post-type = "schemes" (ya post_type = "schemes") wali posts uthayein */ -}}
+{{- $typePages1 := where .Site.RegularPages "Params.post-type" "schemes" -}}
+{{- $typePages2 := where .Site.RegularPages "Params.post_type" "schemes" -}}
+
+{{- /* 3. Teeno ko merge karke duplicate pages hatayein aur date se sort karein */ -}}
+{{- $allSchemePages := ($secPages | union $typePages1 | union $typePages2).ByDate.Reverse -}}
+
+{{- $list := slice -}}
+
+{{- range $allSchemePages -}}
+  {{- /* seo_title ho to use lein, warna regular title */ -}}
+  {{- $finalTitle := .Params.seo_title | default .Title -}}
+
+  {{- /* Mandatory fields jo hamesha rahenge */ -}}
+  {{- $item := dict
+      "id" (md5 .RelPermalink)
+      "title" $finalTitle
+      "post_date" (.Date.Format "2006-01-02")
+      "url" .Permalink
+  -}}
+
+  {{- /* Optional: department (khali na ho tabhi add karein) */ -}}
+  {{- with .Params.department -}}
+    {{- $deptClean := trim (string .) " " -}}
+    {{- if ne $deptClean "" -}}
+      {{- $item = merge $item (dict "department" $deptClean) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* Optional: categories (khali na ho tabhi add karein) */ -}}
+  {{- $catStr := "" -}}
+  {{- with .Params.categories -}}
+    {{- if reflect.IsSlice . -}}
+      {{- $catStr = delimit . ", " -}}
+    {{- else -}}
+      {{- $catStr = string . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $catClean := trim $catStr " " -}}
+  {{- if ne $catClean "" -}}
+    {{- $item = merge $item (dict "catogories" $catClean) -}}
+  {{- end -}}
+
+  {{- /* Optional: State / state (khali na ho tabhi add karein) */ -}}
+  {{- $stateVal := .Params.State | default (.Params.state | default "") -}}
+  {{- $stateClean := trim (string $stateVal) " " -}}
+  {{- if ne $stateClean "" -}}
+    {{- $item = merge $item (dict "state" $stateClean) -}}
+  {{- end -}}
+
+  {{- /* Optional: begindate / begin_date (khali na ho tabhi add karein) */ -}}
+  {{- $beginDate := .Params.begindate | default (.Params.begin_date | default "") -}}
+  {{- $beginClean := trim (string $beginDate) " " -}}
+  {{- if ne $beginClean "" -}}
+    {{- $item = merge $item (dict "begin_date" $beginClean) -}}
+  {{- end -}}
+
+  {{- /* Optional: lastdate / last_date (khali na ho tabhi add karein) */ -}}
+  {{- $lastDate := .Params.lastdate | default (.Params.last_date | default "") -}}
+  {{- $lastClean := trim (string $lastDate) " " -}}
+  {{- if ne $lastClean "" -}}
+    {{- $item = merge $item (dict "lastdate" $lastClean) -}}
+  {{- end -}}
+
+  {{- /* Optional: icon (khali na ho tabhi add karein) */ -}}
+  {{- with .Params.icon -}}
+    {{- $iconClean := trim (string .) " " -}}
+    {{- if ne $iconClean "" -}}
+      {{- $item = merge $item (dict "icon" $iconClean) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $list = $list | append $item -}}
+{{- end -}}
+
+{{- $list | jsonify (dict "indent" "  ") -}}

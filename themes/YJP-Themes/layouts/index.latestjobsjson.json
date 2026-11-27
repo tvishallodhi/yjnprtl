@@ -14,7 +14,7 @@
     "post_date": {{ $job.Date.Format "2006-01-02" | jsonify }},
     "begin_date": {{ with $job.Params.begindate }}{{ . | jsonify }}{{ else }}{{ "" | jsonify }}{{ end }},
     "lastdate": {{ with $job.Params.lastdate }}{{ . | jsonify }}{{ else }}{{ "" | jsonify }}{{ end }},
-    "url": {{ printf "https://gajabjobs.com%s" $job.RelPermalink | jsonify }}
+    "url": {{ printf "https://yojanaportal.com%s" $job.RelPermalink | jsonify }}
 }
 {{- end -}}
 ]

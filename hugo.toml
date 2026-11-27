@@ -53,8 +53,14 @@ baseName = "latest-jobs"
 isPlainText = true
 notAlternative = true
 
+[outputFormats.SchemesJSON]
+    mediaType = "application/json"
+    baseName = "schemes"
+    isPlainText = true
+    notAlternative = true
+
 [outputs]
-   home = ["HTML", "RSS", "SitemapIndex", "SitemapPages", "SitemapJobs", "SitemapYojana", "SitemapEducation" , "LatestJobsJSON"]
+   home = ["HTML", "RSS", "SitemapIndex", "SitemapPages", "SitemapJobs", "SitemapYojana", "SitemapEducation" , "LatestJobsJSON", "SchemesJSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]
