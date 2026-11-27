@@ -55,7 +55,7 @@ notAlternative = true
 
 [outputFormats.SchemesJSON]
     mediaType = "application/json"
-    baseName = "schemes"
+    baseName = "latest-schemes"
     isPlainText = true
     notAlternative = true
 
