@@ -1,5 +1,8 @@
-{{- $pages := where site.RegularPages "post_type" "in" (slice "posts" "schemes" "latest-jobs") -}}
+{{- $excluded := slice "about" "contact" "privacy" "disclaimer" "terms" "search" "offline" -}}
+{{- $pages := where site.RegularPages.ByDate.Reverse "Section" "not in" $excluded -}}
 {{- $latest := first 15 $pages -}}
+{{- $today := now.Format "2006-01-02" -}}
+
 {{- $customList := slice -}}
 {{- with site.Data.notification -}}
   {{- with .items -}}
@@ -12,10 +15,14 @@
 {{- /* 1. Custom Notifications from data/notification.toml */ -}}
 {{- range $index, $item := $customList -}}
   {{- if not $first }},{{ end }}{{- $first = false }}
+  {{- $itemDate := "" -}}
+  {{- with $item.time -}}{{- $itemDate = substr (string .) 0 10 -}}{{- end -}}
+  {{- $impRaw := lower (printf "%v" ($item.important | default "")) -}}
+  {{- $isImp := or (eq $itemDate $today) (eq $impRaw "true") (eq $impRaw "yes") -}}
   {
     "id": {{ ($item.id | default (printf "toml_%d" $index)) | jsonify }},
     "type": {{ ($item.type | default "alert") | jsonify }},
-    "important": {{ if $item.important }}true{{ else }}false{{ end }},
+    "important": {{ if $isImp }}true{{ else }}false{{ end }},
     "title": {{ ($item.title | default "") | jsonify }},
     "hi_title": {{ ($item.hi_title | default $item.title | default "") | jsonify }},
     "body": {{ ($item.body | default $item.en_body | default "") | jsonify }},
@@ -28,14 +35,54 @@
 {{- /* 2. Automatic Latest Posts from RegularPages */ -}}
 {{- range $index, $page := $latest -}}
   {{- if not $first }},{{ end }}{{- $first = false }}
+
+  {{- /* A. Check Result & Admit Card Flags (handles both spellings: admitcard / admticard) */ -}}
+  {{- $resFlag := lower (printf "%v" ($page.Params.result | default "")) -}}
+  {{- $isResult := or (eq $resFlag "yes") (eq $resFlag "true") -}}
+
+  {{- $admRaw := $page.Params.admitcard | default $page.Params.admticard | default (index $page.Params "admit-card") | default "" -}}
+  {{- $admFlag := lower (printf "%v" $admRaw) -}}
+  {{- $isAdmit := or (eq $admFlag "yes") (eq $admFlag "true") -}}
+
+  {{- /* B. Determine "type" */ -}}
+  {{- $rawType := $page.Params.type | default (index $page.Params "post-type") | default $page.Params.post_type | default "" -}}
+  {{- $finalType := "alert" -}}
+  {{- if $isResult -}}
+    {{- $finalType = "result" -}}
+  {{- else if $isAdmit -}}
+    {{- $finalType = "Admitcard" -}}
+  {{- else if ne (printf "%v" $rawType) "" -}}
+    {{- $finalType = printf "%v" $rawType -}}
+  {{- end -}}
+
+  {{- /* C. Determine "title" */ -}}
+  {{- $resName := $page.Params.resultName | default $page.Params.result_name | default "" -}}
+  {{- $admName := $page.Params.admitcardName | default $page.Params.admticardName | default $page.Params.admitcard_name | default "" -}}
+  {{- $seoTitle := $page.Params.seo_title | default $page.Params.seoTitle | default "" -}}
+
+  {{- $finalTitle := $page.Title -}}
+  {{- if and $isResult (ne $resName "") -}}
+    {{- $finalTitle = $resName -}}
+  {{- else if and $isAdmit (ne $admName "") -}}
+    {{- $finalTitle = $admName -}}
+  {{- else if ne $seoTitle "" -}}
+    {{- $finalTitle = $seoTitle -}}
+  {{- end -}}
+
+  {{- /* D. Determine "important" (Today's post OR important = true / "yes") */ -}}
+  {{- $postDay := $page.Date.Format "2006-01-02" -}}
+  {{- $impParam := lower (printf "%v" ($page.Params.important | default "")) -}}
+  {{- $isImportant := or (eq $postDay $today) (eq $impParam "true") (eq $impParam "yes") -}}
+
+  {{- $uid := printf "%x" (md5 $page.RelPermalink) -}}
   {
-    "id": "web_{{ $page.File.UniqueID }}",
-    "type": "{{ if eq $page.Type "schemes" }}scheme{{ else }}job{{ end }}",
-    "important": {{ if $page.Params.important }}true{{ else }}false{{ end }},
-    "title": {{ $page.Title | jsonify }},
-    "hi_title": {{ ($page.Params.hi_title | default $page.Title) | jsonify }},
-    "body": {{ ($page.Params.hi_desc | default $page.Summary | plainify | truncate 130) | jsonify }},
-    "en_body": {{ ($page.Summary | plainify | truncate 130) | jsonify }},
+    "id": "web_{{ $uid }}",
+    "type": {{ $finalType | jsonify }},
+    "important": {{ if $isImportant }}true{{ else }}false{{ end }},
+    "title": {{ $finalTitle | jsonify }},
+    "hi_title": {{ ($page.Params.hi_title | default $finalTitle) | jsonify }},
+    "body": {{ ($page.Params.hi_desc | default $page.Description | default $page.Summary | plainify | truncate 130) | jsonify }},
+    "en_body": {{ ($page.Description | default $page.Summary | plainify | truncate 130) | jsonify }},
     "url": {{ $page.Permalink | jsonify }},
     "time": {{ $page.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }}
   }
