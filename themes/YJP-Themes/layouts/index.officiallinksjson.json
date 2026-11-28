@@ -1,0 +1,18 @@
+{{- $list := slice -}}
+{{- range $.Site.Data.officialLinks.items -}}
+  {{- $item := dict -}}
+  {{- with .title -}}
+    {{- $item = merge $item (dict "title" .) -}}
+  {{- end -}}
+  {{- with .hi_title -}}
+    {{- $item = merge $item (dict "hi_title" .) -}}
+  {{- end -}}
+  {{- with .url -}}
+    {{- $item = merge $item (dict "url" (. | absURL)) -}}
+  {{- end -}}
+  {{- with .svgicon -}}
+    {{- $item = merge $item (dict "svgicon" (. | absURL)) -}}
+  {{- end -}}
+  {{- $list = $list | append $item -}}
+{{- end -}}
+{{- dict "items" $list | jsonify (dict "indent" "  ") -}}

@@ -59,8 +59,21 @@ notAlternative = true
     isPlainText = true
     notAlternative = true
 
+[outputFormats.OfficialLinksJSON]
+mediaType = "application/json"
+  baseName = "official-links"
+  isPlainText = true
+  notAlternative = true
+
+[outputFormats]
+  [outputFormats.NotifJSON]
+    mediaType = "application/json"
+    baseName = "notification"
+    isPlainText = true
+    notAlternative = true
+
 [outputs]
-   home = ["HTML", "RSS", "SitemapIndex", "SitemapPages", "SitemapJobs", "SitemapYojana", "SitemapEducation" , "LatestJobsJSON", "SchemesJSON"]
+   home = ["HTML", "RSS", "SitemapIndex", "SitemapPages", "SitemapJobs", "SitemapYojana", "SitemapEducation" , "LatestJobsJSON", "SchemesJSON", "OfficialLinksJSON", "NotifJSON"]
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   term = ["HTML", "RSS"]

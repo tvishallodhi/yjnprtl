@@ -1,0 +1,43 @@
+{{- $pages := where site.RegularPages "post_type" "in" (slice "posts" "schemes" "latest-jobs") -}}
+{{- $latest := first 15 $pages -}}
+{{- $customList := slice -}}
+{{- with site.Data.notification -}}
+  {{- with .items -}}
+    {{- $customList = . -}}
+  {{- end -}}
+{{- end -}}
+[
+{{- $first := true -}}
+
+{{- /* 1. Custom Notifications from data/notification.toml */ -}}
+{{- range $index, $item := $customList -}}
+  {{- if not $first }},{{ end }}{{- $first = false }}
+  {
+    "id": {{ ($item.id | default (printf "toml_%d" $index)) | jsonify }},
+    "type": {{ ($item.type | default "alert") | jsonify }},
+    "important": {{ if $item.important }}true{{ else }}false{{ end }},
+    "title": {{ ($item.title | default "") | jsonify }},
+    "hi_title": {{ ($item.hi_title | default $item.title | default "") | jsonify }},
+    "body": {{ ($item.body | default $item.en_body | default "") | jsonify }},
+    "en_body": {{ ($item.en_body | default $item.body | default "") | jsonify }},
+    "url": {{ ($item.url | default site.BaseURL) | jsonify }},
+    "time": {{ ($item.time | default (now.Format "2006-01-02T15:04:05Z07:00")) | jsonify }}
+  }
+{{- end -}}
+
+{{- /* 2. Automatic Latest Posts from RegularPages */ -}}
+{{- range $index, $page := $latest -}}
+  {{- if not $first }},{{ end }}{{- $first = false }}
+  {
+    "id": "web_{{ $page.File.UniqueID }}",
+    "type": "{{ if eq $page.Type "schemes" }}scheme{{ else }}job{{ end }}",
+    "important": {{ if $page.Params.important }}true{{ else }}false{{ end }},
+    "title": {{ $page.Title | jsonify }},
+    "hi_title": {{ ($page.Params.hi_title | default $page.Title) | jsonify }},
+    "body": {{ ($page.Params.hi_desc | default $page.Summary | plainify | truncate 130) | jsonify }},
+    "en_body": {{ ($page.Summary | plainify | truncate 130) | jsonify }},
+    "url": {{ $page.Permalink | jsonify }},
+    "time": {{ $page.Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }}
+  }
+{{- end -}}
+]

@@ -1,0 +1,21 @@
+[[items]]
+id = "custom_01"
+type = "alert"          # "scheme", "job", "admit", या "alert"
+important = true
+title = "PM Kisan 19th Installment Date Announced"
+hi_title = "पीएम किसान 19वीं किस्त की तारीख जारी"
+body = "सभी किसान भाई अपना e-KYC और बैंक आधार सीडिंग तुरंत जांच लें।"
+en_body = "All farmers should verify their e-KYC and bank Aadhaar seeding immediately."
+url = "https://yojanaportal.com/pm-kisan-status/"
+time = "2026-11-28T18:30:00+05:30"
+
+[[items]]
+id = "custom_02"
+type = "admit"
+important = false
+title = "MP Police Constable Admit Card 2026 Out"
+hi_title = "एमपी पुलिस कांस्टेबल एडमिट कार्ड 2026 जारी"
+body = "अभ्यर्थी अपना एप्लीकेशन नंबर और जन्मतिथि डालकर प्रवेश पत्र डाउनलोड करें।"
+en_body = "Candidates can download their admit card using application number and DOB."
+url = "https://yojanaportal.com/mp-police-admit-card/"
+time = "2026-11-28T15:00:00+05:30"

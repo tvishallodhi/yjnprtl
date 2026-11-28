@@ -3,6 +3,7 @@ description = "सभी जरूरी सरकारी सेवाओं �
 
 [[items]]
 title = "Aadhaar Card"
+hi_title = "आधार कार्ड"
 description = "डाउनलोड व अपडेट स्टेटस"
 badge = "UIDAI"
 badgeClass = "hot"
@@ -11,6 +12,7 @@ svgicon = "/icons/aadhaar.svg"
 
 [[items]]
 title = "Samagra ID"
+hi_title = "समग्र आई डी"
 description = "परिवार व सदस्य आईडी"
 badge = "MP"
 badgeClass = "mp"
@@ -19,6 +21,7 @@ svgicon = "/icons/samagra.svg"
 
 [[items]]
 title = "PM Matru Vandana Yojana"
+hi_title = "पीएम मातृ वंदना योजना"
 description = "गर्भवती एवं स्तनपान कराने वाली महिलाओं के लिए योजना"
 badge = "Women"
 badgeClass = "hot"
